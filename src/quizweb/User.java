@@ -7,18 +7,21 @@ public class User {
 	public String username;
 	public String password; // TODO JACK
 	public String homepageURL;
+	
 	public boolean isAdmin;
+	public boolean isBlocked; // whether blocked by admin
+	public boolean isDead; // whether removed by admin
 	
-	public ArrayList<Integer> friendList;
-	public ArrayList<Integer> quizHistory;
-	public ArrayList<Integer> createdQuiz;
-	
-	// Achievement related stats
-	public ArrayList<Achievement> achievements;
-	public int quizTakenNumber;
-	public int createdQuizNumber;
+	// Achievement related stats	
 	public int practiceNumber;
 	public int highScoreNumber;
+
+	// Lazy instantiation
+	public ArrayList<User> friendList;
+	public ArrayList<QuizRecord> quizHistory;
+	public ArrayList<Quiz> createdQuiz;
+	public ArrayList<Achievement> achievements;
+	public ArrayList<Message> messages;
 	
 	static private int maxUserID = 0;
 	static public int totalUsers = 0;

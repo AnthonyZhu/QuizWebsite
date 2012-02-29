@@ -4,11 +4,15 @@ import java.util.*;
 
 public class Quiz {		
 	public int quizID;
+	
 	public String quizURL;	
 	public String description;
-	public User creator; // TODO JACK
-	public ArrayList<Integer> questions;
+	public int creator; 
+	public ArrayList<Question> questions;
 	public int userCount;
+	
+	public int raterNumber;
+	public double totalRating;
 	
 	static private int maxQuizID = 0;
 	

@@ -1,0 +1,4 @@
+ArrayList<Announcement> announcements; // All announcements 
+ArrayList<Quiz> recentCreatedQuiz;
+ArrayList<Quiz> popularQuiz;
+ArrayList<User> adminUser;
