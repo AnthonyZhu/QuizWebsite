@@ -3,45 +3,104 @@ package quizweb;
 import java.util.*;
 
 public class User {
-	public int userID;
-	public String username;
-	public String password; // TODO JACK
-	public String homepageURL;
+	private int userID;
+	private String username;
+	private String password; // TODO JACK
+	private String homepageURL;
 	
-	public boolean isAdmin;
-	public boolean isBlocked; // whether blocked by admin
-	public boolean isDead; // whether removed by admin
+	private boolean isAdmin;
+	private boolean isBlocked; // whether blocked by admin
+	private boolean isDead; // whether removed by admin
 	
 	// Achievement related stats	
-	public int practiceNumber;
-	public int highScoreNumber;
+	private int practiceNumber;
+	private int highScoreNumber;
 
 	// Lazy instantiation
-	public ArrayList<User> friendList;
-	public ArrayList<QuizRecord> quizHistory;
-	public ArrayList<Quiz> createdQuiz;
-	public ArrayList<Achievement> achievements;
-	public ArrayList<Message> messages;
+	private ArrayList<User> friendList;
+	private ArrayList<QuizRecord> quizHistory;
+	private ArrayList<Quiz> createdQuiz;
+	private ArrayList<Achievement> achievements;
+	private ArrayList<Message> messages;
 	
 	static private int maxUserID = 0;
 	static public int totalUsers = 0;
+	
+	public User(String username){
+		this.username = username;
+	}
+	
+	public String getHomePageURL(){
+		//TODO
+		return homepageURL;
+	}
+	
+	public boolean isUserAdmin(){
+		// TODO
+		return isAdmin;
+	}
+	
+	public boolean isUserBlocked(){
+		//TODO
+		return isBlocked;
+	}
+	
+	public boolean isUserRemoved(){
+		//TODO
+		return isDead;
+	}
+	
+	public int getPracticeNumber(){
+		//TODO
+	    return practiceNumber;
+	}
+	
+	public int getHighScore(){
+		//TODO
+		return highScoreNumber;
+	}
+	
+	public ArrayList<User> getUserFriendList(){
+		//TODO
+		return friendList;
+	}
+	
+	public ArrayList<QuizRecord> getUserQuizHistory(){
+		//TODO
+		return quizHistory;
+	}
+	
+	public ArrayList<Quiz> getUserCreatedQuiz(){
+		//TODO
+		return createdQuiz;
+	}
+	
+	public ArrayList<Achievement> getUserAchievement(){
+		//TODO
+		return achievements;
+	}
+	
+	public ArrayList<Message> getUserMessage(){
+		//TODO
+		return messages;
+	}
 	
 	/**
 	 * Assign next user ID for the user instance
 	 * @return
 	 */
-	static private synchronized int getNextUserID() {
+	private synchronized int getNextUserID() {
 		// TODO
-		return 0;
+		userID = 0;
+		return userID;
 	}
-	
 	
 	/** 
 	 * Find a particular user given the username
 	 * @param username
 	 * @return
 	 */
-	static public User findUser(String username) {
+	public User findUser(String username) {
 		// TODO
 		return null;
 	}
@@ -53,4 +112,5 @@ public class User {
 	public void promoteUser(User user) {
 		// TODO
 	}
+	
 }
