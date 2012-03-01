@@ -1,14 +1,37 @@
 package quizweb;
 
 public class Message {
-	public int messageID;
-	public double timestamp;
-	public User fromUser;
-	public User toUser;
-	public String content;
+	private int messageID;
+	private double timestamp;
+	private int fromUserID;
+	private int toUserID;
+	private String content;
 	
 	static int maxMessageID = 0;
 	
+	public Message(int messageID){
+		this.messageID = messageID;
+	}
+	
+	public double getTimeStamp(){
+		//TODO
+		return timestamp;
+	}
+	
+	public int getFromUserID(){
+		//TODO
+		return fromUserID;
+	}
+	
+	public int getToUserID(){
+		//TODO
+		return toUserID;
+	}
+	
+	public String getContent(){
+		//TODO
+		return content;
+	}
 	
 	/**
 	 * Assign a message ID for a message instance
