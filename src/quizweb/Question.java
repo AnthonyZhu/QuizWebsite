@@ -3,10 +3,32 @@ package quizweb;
 import java.util.*;
 
 public abstract class Question {
-	public int		questionID;
-	public double	totalScore;
-	static private int	maxQuestionID;
+	private int quizID;
+	private int questionID;
+	private String questionContent;
+	private String answer;
+	private double questionScore;
 	
+	private double totalScore;
+	static private int maxQuestionID;
+	
+	public Question(int quizID, int questionID){
+		this.quizID = quizID;
+		this.questionScore = questionID;
+	}
+	
+	public int getQuizID(){
+		return quizID;
+	}
+	
+	public int getQuestionID(){
+		return questionID;
+	}
+	
+	public abstract String getQuestionContent();
+	public abstract String getAnswer();
+	public abstract double getQuestionScore();
+	public abstract double getUserScore(String userAnswer);
 	
 	
 	/**
@@ -18,11 +40,4 @@ public abstract class Question {
 		return 0;
 	}
 	
-	/**
-	 * This is the method to be override by subclasses
-	 * Compute the score of a question given answer from the user
-	 * @param answer by the user
-	 * @return score
-	 */
-	abstract public double getScore(ArrayList<String> userAnswer);
 }
