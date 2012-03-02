@@ -21,4 +21,23 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 	}
+	
+	public ResultSet DBExecution(String statement) {
+		ResultSet rs = null;
+		try {
+			Statement stmt = con.createStatement();
+			rs = stmt.executeQuery(statement);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public void DBClose() {
+		try {
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
