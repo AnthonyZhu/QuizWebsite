@@ -1,0 +1,64 @@
+@CHARSET "UTF-8";
+
+/*******************************************/
+/************Container Features*************/
+/*******************************************/
+.three_column_left{
+	float: left;
+	width: 160px;
+	padding: 20px 20px 20px 20px;
+	margin-right:5px;
+	margin-bottom:5px;
+	min-height: 400px;
+	/*background-color: #d9ebf5;*/
+	background-color:#fff;
+}
+
+.three_column_left ul{
+	margin-top:0;
+	margin-bottom:10px;
+	padding: 0;
+}
+
+.three_column_left ul li{
+	margin-top:0;
+	margin-left: 10px;
+	padding: 0;
+	list-style-type: none;
+}
+
+
+.three_column_content{
+	float: left;
+	width: 510px;
+	padding: 20px 20px 20px 20px;
+	margin-right:5px;
+}
+
+.three_column_content ul li{
+	margin-top:0;
+	margin-left: 10px;
+	padding: 0;
+	list-style-type: none;
+}
+
+.three_column_right{
+	float: right;
+	width: 200px;
+	padding: 20px 20px;
+	background-color:#fff;
+	min-height: 400px;
+}
+
+.right_block{
+	/*border-style:solid;
+	border-width:1px;
+	border-color:black;*/
+	background-color:#fff;
+	float:top;
+	padding: 0 0 30px 0;
+}
+
+.right_block ol {
+	padding: 0 0 0 20px;
+}

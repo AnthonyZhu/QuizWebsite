@@ -1,0 +1,192 @@
+/*******************************************
+link color: #007cb3
+text color: #393939
+unimportant text: #c8c8c8
+blue background: #d9ebf5
+*******************************************/
+
+html{
+	background-color:#d9ebf5;
+}
+
+
+/*******************************************/
+/************Container Features*************/
+/*******************************************/
+.container {
+	margin-top:0;
+	padding-top:0;
+    margin-left: auto;
+    margin-right: auto;
+	width: 1000px;
+	clear: both;
+}
+
+.content-container{
+	float: left;
+	width: 1000px;
+	clear: both;
+}
+
+
+.header{
+	padding-top:5px;
+	padding-left:20px;
+	margin-top: 0;
+	margin-bottom:0;
+	position: center;
+	background-color: #666;
+	
+}
+.header h1,h2,h3,h4,h5,h6,body{
+	color:#fff;
+}
+
+
+.footer{
+	float:top;
+	clear:both;
+	background: #ccc;
+	text-align: right;
+	padding: 10px;
+	font-family: "Courier New", Arial;
+	height: 1%;
+}
+
+/*article,aside,figure,figure img,figcaption,hgroup,footer,header,nav,section,video,object,output{display:block}*/
+/*******************************************/
+/**************Text Features****************/
+/*******************************************/
+h1,h2,h3,h4,h5,h6,body{
+	font-family: Arial, Cambria;
+	margin-top:5px;
+	margin-bottom: 5px;
+	color: #393939;
+}
+
+p{
+	margin-left:10px;
+	margin-bottom:1px;
+	margin-top:1px;
+}
+
+a{
+	color: #393939;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #007cb3;
+	CURSOR: pointer; cursor: hand;
+	text-decoration:underline;
+}
+
+.link-style-dominant{
+	color: #007cb3;
+}
+
+.link-style-dominant:hover{
+	CURSOR: pointer; cursor: hand;
+	text-decoration: underline;
+}
+
+.title_style_minor {
+	color: #c8c8c8;
+}
+
+.dominant_text{
+	font-size: 20px;
+	color: #007cb3;
+	font-family: "Arial Black", Arial;
+}
+
+/*******************************************/
+/**************Line Features****************/
+/*******************************************/
+hr {
+	background-color: #c8c8c8;
+	color:#c8c8c8;
+	margin-top:0;
+	margin-bottom:0;
+	border-style:dashed;
+	height: 0.5px;
+}
+
+
+/*******************************************/
+/*************Frame Features****************/
+/*******************************************/
+iframe{
+	width: 500px;
+}
+
+
+
+/*******************************************/
+/*************Button Features***************/
+/*******************************************/
+
+button {
+	border-top: 1px solid #96d1f8;
+   	background: #65a9d7;
+   	background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   	background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   	background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   	background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   	background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   	-webkit-border-radius: 9px;
+   	-moz-border-radius: 9px;
+   	border-radius: 9px;
+   	-webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   	-moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   	box-shadow: rgba(0,0,0,1) 0 1px 0;
+   	text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   	color: white;
+   	text-decoration: none;
+   	horizontal-align: middle;
+   	margin:2px 2px 2px 2px;
+}
+
+
+button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   CURSOR: pointer; cursor: hand;
+ }
+ 
+button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+}
+
+button.button_grey{
+   background: -webkit-gradient(linear, left top, left bottom, from(#a6a6a6), to(#d6d6d6));
+   background: -webkit-linear-gradient(top, #a6a6a6, #d6d6d6);
+   background: -moz-linear-gradient(top, #a6a6a6, #d6d6d6);
+   background: -ms-linear-gradient(top, #a6a6a6, #d6d6d6);
+   background: -o-linear-gradient(top, #a6a6a6, #d6d6d6);
+   width: 200px;
+   padding: 12px 24px;
+   font-size: 20px;
+}
+botton.button_grey:hover {
+   border-top-color: #808080;
+   background: #808080;
+   color: #ccc;
+   }
+botton.button_grey:active {
+   border-top-color: #5a5b5c;
+   background: #5a5b5c;
+}
+
+
+button.button_large {
+	width: 200px;
+   	padding: 12px 24px;
+   	font-size: 20px;
+}
+
+
+
+

@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+/*******************************************/
+/************Container Features*************/
+/*******************************************/
+
+.one_column{
+	width: 800px;
+	float:top;
+	padding: 20px 20px 20px 20px;
+	margin-top:0;
+	margin-bottom: 5px;
+	background: #d9ebf5;
+}
+
+form ul{
+	margin:0;
+	padding:0;
+	list-style-type:none
+}
+
+form li{
+	margin:0;
+	padding:6px 1% 9px 1%;
+	clear:both;
+	background-color:transparent;
+	position:relative;
+	-webkit-transition:background-color 350ms ease-out;
+	-moz-transition:background-color 350ms ease-out;
+	-o-transition:background-color 350ms ease-out;
+	transition:background-color 350ms ease-out
+}
+
+form .quiz_title {
+	font-weight:bold;
+}
+
+input.large,select.large{width:100%}
+input.medium,select.medium{width:50%}
+input.small,select.small{width:25%}
+
+fieldset{display:block;border:none;margin:0;padding:0}
+
+.leftLabel p.instruct,.rightLabel p.instruct{width:28%;margin-left:5px}
+form li div label .currently{display:none}
+
+
+input.text,input.search,input.file,textarea.textarea,select.select{
+	font-size:100%;
+	color:#333;
+	margin:0;
+	padding:2px 0
+}
+
+input.text,input.search,textarea.textarea{
+	border-top:1px solid #7c7c7c;
+	border-left:1px solid #c3c3c3;
+	border-right:1px solid #c3c3c3;
+	border-bottom:1px solid #ddd;
+}
+
+textarea.textarea{width:293px;min-width:100%;max-width:100%}
+textarea.small{height:5.5em}
+textarea.medium{height:10em}
+textarea.large{height:20em}
+
+
+form li div label var{
+	font-weight:bold;
+	font-style:normal
+}
+
+form button input{font-size:100%;margin-right:5px}
+
+input.btTxt{padding:0 7px;width:auto;overflow:visible}
+
+.highlight_background {
+	background-color: rgb(255,247,192);
+}

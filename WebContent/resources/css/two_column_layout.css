@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+.two_column_left{
+	float: left;
+	width: 655px;
+	padding: 20px 20px 20px 20px;
+	margin-top:0;
+	margin-bottom: 5px;
+	/*background: #d9ebf5;*/
+	background-color:#fff;
+}
+
+
+.two_column_left ul{
+	margin-top:0;
+	margin-bottom:10px;
+	padding: 0;
+}
+
+.two_column_right{
+	float: right;
+	width: 260px;
+	padding: 20px 20px 20px 20px;	
+	margin-bottom: 5px;
+	margin-top:0;
+	/*background: #c8c8c8;*/
+}
+
+.
