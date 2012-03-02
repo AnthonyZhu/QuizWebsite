@@ -8,7 +8,7 @@ public class User {
 	private String password; // TODO JACK
 	private String homepageURL;
 	
-	private boolean isAdmin;
+	private boolean isAdmin;	// whether is admin
 	private boolean isBlocked; // whether blocked by admin
 	private boolean isDead; // whether removed by admin
 	
@@ -25,40 +25,6 @@ public class User {
 	
 	static private int maxUserID = 0;
 	static public int totalUsers = 0;
-	
-	public User(String username){
-		this.username = username;
-	}
-	
-	public String getHomePageURL(){
-		//TODO
-		return homepageURL;
-	}
-	
-	public boolean isUserAdmin(){
-		// TODO
-		return isAdmin;
-	}
-	
-	public boolean isUserBlocked(){
-		//TODO
-		return isBlocked;
-	}
-	
-	public boolean isUserRemoved(){
-		//TODO
-		return isDead;
-	}
-	
-	public int getPracticeNumber(){
-		//TODO
-	    return practiceNumber;
-	}
-	
-	public int getHighScore(){
-		//TODO
-		return highScoreNumber;
-	}
 	
 	public ArrayList<User> getUserFriendList(){
 		//TODO
