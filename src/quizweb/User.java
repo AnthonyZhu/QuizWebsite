@@ -2,17 +2,15 @@ package quizweb;
 
 import java.util.*;
 
-
-
-import quizweb.achievement.Achievement;
-import quizweb.message.Message;
-import quizweb.record.QuizCreatedRecord;
-import quizweb.record.QuizTakenRecord;
+import quizweb.achievement.*;
+import quizweb.message.*;
+import quizweb.record.*;
 
 public class User {
 	public int userID;
+	static private int maxUserID = 0;	
 	public String username;
-	public String password; // TODO JACK
+	public String password; // TODO JACK it should be a hash instead of clear text
 	public String homepageURL;
 	
 	public boolean isAdmin;	// whether is admin
@@ -27,10 +25,10 @@ public class User {
 	private ArrayList<User> friendList;
 	private ArrayList<QuizTakenRecord> quizHistory;
 	private ArrayList<QuizCreatedRecord> createdQuiz;
-	private ArrayList<Achievement> achievements;
+	private ArrayList<AchievementRecord> achievements;
 	private ArrayList<Message> messages;
 	
-	static private int maxUserID = 0;
+
 	static public int totalUsers = 0;
 	
 	public ArrayList<User> getFriendList(){
@@ -44,25 +42,25 @@ public class User {
 	
 	public ArrayList<QuizTakenRecord> getQuizHistory() {
 		if (quizHistory == null) {
-			// TODO Get user quiz history from database
+			// TODO Get user quiz taken history from database
 			return null;
 		} else {
 			return quizHistory;
 		}
 	}
 	
-	public ArrayList<Quiz> getCreatedQuiz() {
+	public ArrayList<QuizCreatedRecord> getCreatedQuiz() {
 		if (createdQuiz == null) {
-			// TODO Get created quiz list from database
+			// TODO Get created quiz record list from database
 			return null;
 		} else {
 			return createdQuiz;
 		}
 	}
 	
-	public ArrayList<Achievement> getAchievements() {
+	public ArrayList<AchievementRecord> getAchievements() {
 		if (achievements == null) {
-			// TODO Get user achievement list from database
+			// TODO Get user achievement record list from database
 			return null;
 		} else {
 			return achievements;
