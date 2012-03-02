@@ -2,63 +2,88 @@ package quizweb;
 
 import java.util.*;
 
+
+
+import quizweb.achievement.Achievement;
+import quizweb.message.Message;
+import quizweb.record.QuizCreatedRecord;
+import quizweb.record.QuizTakenRecord;
+
 public class User {
-	private int userID;
-	private String username;
-	private String password; // TODO JACK
-	private String homepageURL;
+	public int userID;
+	public String username;
+	public String password; // TODO JACK
+	public String homepageURL;
 	
-	private boolean isAdmin;	// whether is admin
-	private boolean isBlocked; // whether blocked by admin
-	private boolean isDead; // whether removed by admin
+	public boolean isAdmin;	// whether is admin
+	public boolean isBlocked; // whether blocked by admin
+	public boolean isDead; // whether removed by admin
 	
 	// Achievement related stats	
-	private int practiceNumber;
-	private int highScoreNumber;
+	public int practiceNumber;
+	public int highScoreNumber;
 
 	// Lazy instantiation
 	private ArrayList<User> friendList;
-	private ArrayList<QuizRecord> quizHistory;
-	private ArrayList<Quiz> createdQuiz;
+	private ArrayList<QuizTakenRecord> quizHistory;
+	private ArrayList<QuizCreatedRecord> createdQuiz;
 	private ArrayList<Achievement> achievements;
 	private ArrayList<Message> messages;
 	
 	static private int maxUserID = 0;
 	static public int totalUsers = 0;
 	
-	public ArrayList<User> getUserFriendList(){
-		//TODO
-		return friendList;
+	public ArrayList<User> getFriendList(){
+		if (friendList == null) {
+			//TODO Get user friend list from database
+			return null;
+		} else {
+			return friendList;
+		}
 	}
 	
-	public ArrayList<QuizRecord> getUserQuizHistory(){
-		//TODO
-		return quizHistory;
+	public ArrayList<QuizTakenRecord> getQuizHistory() {
+		if (quizHistory == null) {
+			// TODO Get user quiz history from database
+			return null;
+		} else {
+			return quizHistory;
+		}
 	}
 	
-	public ArrayList<Quiz> getUserCreatedQuiz(){
-		//TODO
-		return createdQuiz;
+	public ArrayList<Quiz> getCreatedQuiz() {
+		if (createdQuiz == null) {
+			// TODO Get created quiz list from database
+			return null;
+		} else {
+			return createdQuiz;
+		}
 	}
 	
-	public ArrayList<Achievement> getUserAchievement(){
-		//TODO
-		return achievements;
+	public ArrayList<Achievement> getAchievements() {
+		if (achievements == null) {
+			// TODO Get user achievement list from database
+			return null;
+		} else {
+			return achievements;
+		}
 	}
 	
-	public ArrayList<Message> getUserMessage(){
-		//TODO
-		return messages;
+	public ArrayList<Message> getUserMessages() {
+		if (messages == null) {
+			// TODO Get user message list from database
+			return null;
+		} else {
+			return messages;
+		}
 	}
 	
 	/**
 	 * Assign next user ID for the user instance
-	 * @return
+	 * @return user ID assigned
 	 */
 	private synchronized int getNextUserID() {
-		// TODO
-		userID = 0;
-		return userID;
+		return maxUserID++;
 	}
 	
 	/** 

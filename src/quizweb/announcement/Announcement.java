@@ -1,4 +1,4 @@
-package quizweb;
+package quizweb.announcement;
 
 public class Announcement {
 	public int announcementID;

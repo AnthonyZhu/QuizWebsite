@@ -1,9 +1,10 @@
-package quizweb;
+package quizweb.record;
 
-public class QuizRecord extends Record {
-	public User user;
+import quizweb.Quiz;
+
+public class QuizTakenRecord extends Record {
 	public Quiz quiz;
-	public double timeTaken;
+	public double timeSpan;
 	public double score;
 	
 	public boolean isRandom;

@@ -1,4 +1,6 @@
-package quizweb;
+package quizweb.achievement;
+
+import quizweb.User;
 
 public class HighScoreAchievement extends Achievement {
 	

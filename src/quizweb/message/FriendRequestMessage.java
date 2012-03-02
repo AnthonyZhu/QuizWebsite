@@ -1,4 +1,4 @@
-package quizweb;
+package quizweb.message;
 
 public class FriendRequestMessage extends Message {
 	

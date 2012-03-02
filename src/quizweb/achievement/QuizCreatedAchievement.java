@@ -1,6 +1,8 @@
-package quizweb;
+package quizweb.achievement;
 
-public class QuizTakenAchievement extends Achievement {
+import quizweb.User;
+
+public class QuizCreatedAchievement extends Achievement {
 	
 	@Override
 	public boolean isAccomplished(User user) {

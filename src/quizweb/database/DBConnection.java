@@ -1,4 +1,4 @@
-package database;
+package quizweb.database;
 import java.sql.*;
 
 public class DBConnection {

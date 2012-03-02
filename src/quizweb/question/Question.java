@@ -1,4 +1,4 @@
-package quizweb;
+package quizweb.question;
 
 import java.util.*;
 

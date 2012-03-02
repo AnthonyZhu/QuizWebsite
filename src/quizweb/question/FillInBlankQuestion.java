@@ -1,6 +1,7 @@
-package quizweb;
+package quizweb.question;
 
 import java.util.*;
+
 
 public class FillInBlankQuestion extends Question {
 	public String			question;

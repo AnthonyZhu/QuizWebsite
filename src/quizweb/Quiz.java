@@ -2,6 +2,8 @@ package quizweb;
 
 import java.util.*;
 
+import quizweb.question.Question;
+
 public class Quiz {		
 	public int quizID;
 	
