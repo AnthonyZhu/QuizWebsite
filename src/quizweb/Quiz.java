@@ -19,8 +19,36 @@ public class Quiz {
 	
 	// Lazy read
 	public ArrayList<Question> questions;
-	public HashMap<User, ArrayList<QuizTakenRecord>> history;
+	public ArrayList<QuizTakenRecord> history;
 	public ArrayList<QuizTakenRecord> topRecord;
+	
+	public ArrayList<Question> getQuestions() {
+		if (questions == null) {
+			// TODO get question from the database
+			return null;
+		} else {
+			return questions;
+		}
+	}
+	
+	public ArrayList<QuizTakenRecord> getHistory() {
+		if (history == null) {
+			// TODO Get quiz record history from database
+			return null;
+		} else {
+			return history;
+		}
+	}
+
+	public ArrayList<QuizTakenRecord> getTopRecord() {
+		if (topRecord == null) {
+			topRecord = new ArrayList<QuizTakenRecord>(getHistory());
+			Collections.sort(topRecord);
+			return null;
+		} else {
+			return topRecord;
+		}
+	}
 	
 	/**
 	 * Assign quiz ID to new quiz instance

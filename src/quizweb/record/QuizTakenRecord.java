@@ -20,15 +20,26 @@ public class QuizTakenRecord extends Record {
 	/**
 	 * Start the quiz, begin timing etc
 	 */
-	void quizStart() {
+	public void quizStart() {
 		// TODO assign beginning time to timestamp 
 	}
 	
 	/** 
 	 * End the quiz, compute time stats
 	 */
-	void quizEnd() {
+	public void quizEnd() {
 		// TODO compute timeTaken
 	}
 	
+	public int compareTo(QuizTakenRecord other) {
+		final int BEFORE = -1;
+		final int EQUAL = 0;
+		final int AFTER = 1;
+		if (this.score > other.score || (this.score == other.score && this.timeSpan < other.timeSpan))
+			return BEFORE;
+		else if (this.timestamp == other.timestamp && this.timeSpan == other.timeSpan)
+			return EQUAL;
+		else 
+			return AFTER;		
+	}
 }
