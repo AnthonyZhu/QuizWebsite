@@ -4,16 +4,17 @@ import java.util.*;
 
 
 public class MultipleChoiceQuestion extends Question {
-	public ArrayList<String>	question;
-	public String				answer;
-	
-	
+//	Cast Type Summary:
+//	ArrayList<String>	question;
+//	String				answer;
+//	String				userAnswer;
 	
 	@Override
-	public double getScore(ArrayList<String> userAnswer) {
-		// TODO Auto-generated method stub
-		assert(userAnswer.size() == 1);
-		
+	public double getScore(Object userAnswer) {
+		String ans = (String) userAnswer;
+		String trueAns = (String) answer;
+		if (ans.equals(trueAns)) 
+			return score;
 		return 0;
 	}
 

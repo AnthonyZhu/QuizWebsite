@@ -7,10 +7,13 @@ import quizweb.record.*;
 
 public class Quiz {
 	public int quizID;
-	static private int maxQuizID = 0;
 	public String quizURL;	
 	public String description;
 	public User creator; 
+	
+	public boolean isRandom;
+	public boolean opFeedback;
+	public boolean opPractice;	
 	
 	// Statistics
 	public int userNumber;	
@@ -44,19 +47,31 @@ public class Quiz {
 		if (topRecord == null) {
 			topRecord = new ArrayList<QuizTakenRecord>(getHistory());
 			Collections.sort(topRecord);
-			return null;
+			return topRecord;
 		} else {
 			return topRecord;
 		}
 	}
 	
-	/**
-	 * Assign quiz ID to new quiz instance
-	 * @return assigned quiz ID
-	 */
-	static private synchronized int getNextQuizID() {
-		return maxQuizID++;
+	public double getTotalScore() {
+		double sum = 0;
+		for (int i = 0; i < getQuestions().size(); i++) {
+			sum += getQuestions().get(i).score;
+		}
+		return sum;
 	}
+	
+	/**
+	 * Compute the score of the quiz
+	 * @return score
+	 */
+	public double getScore(ArrayList<Object> userAnswers) {
+		double sum = 0;
+		for (int i = 0; i < questions.size(); i++) {
+			sum += questions.get(i).getScore(userAnswers.get(i));
+		}
+		return sum;
+	}	
 	
 	/**
 	 * Get best score for a given user

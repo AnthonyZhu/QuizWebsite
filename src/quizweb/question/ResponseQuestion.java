@@ -2,18 +2,21 @@ package quizweb.question;
 
 import java.util.*;
 
-
 public class ResponseQuestion extends Question {
-	String			question;
-	ArrayList<String>	answer;
+//	Cast Type Summary:
+//	String 				question;
+//	ArrayList<String>	answer;
+//	String				userAnswer;
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public double getScore(ArrayList<String> userAnswer) {
-		// TODO 
-		assert(userAnswer.size() == 1);
-		
-		
+	public double getScore(Object userAnswer) {
+		String ans = (String) userAnswer;
+		ArrayList<String> trueAns = (ArrayList<String>) answer;
+		for (int i = 0; i < trueAns.size(); i++) {
+			if (trueAns.get(i).equals(ans))
+				return score;
+		}		
 		return 0;
 	}
-
 }

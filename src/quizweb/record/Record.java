@@ -4,18 +4,9 @@ import quizweb.*;
 
 public class Record implements Comparable<Record>{
 	public int recordID;
-	static int maxRecordID = 0;
 	
 	public User user;
-	public double timestamp;
-	
-	/**
-	 * Assign a record ID for next record instance
-	 * @return record ID assigned
-	 */
-	static private synchronized int getNextRecordID() {
-		return maxRecordID++;
-	}
+	public long timestamp;
 	
 	/**
 	 * Comparator function that enable sorting of record by timestamp

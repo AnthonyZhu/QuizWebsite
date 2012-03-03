@@ -1,13 +1,13 @@
 package quizweb.record;
 
-import quizweb.Quiz;
+import java.util.*;
+import quizweb.*;
 
 public class QuizTakenRecord extends Record {
 	public Quiz quiz;
-	public double timeSpan;
+	public long timeSpan;
 	public double score;
 	
-	public boolean isRandom;
 	public boolean isOnepage;
 	public boolean isFeedback;
 	public boolean isPractice;
@@ -15,21 +15,28 @@ public class QuizTakenRecord extends Record {
 	public int rating;
 	public String review;
 	
+	public ArrayList<Object> userAnswers;
+	
 	static public int totalQuizTaken = 0;
 
 	/**
 	 * Start the quiz, begin timing etc
 	 */
 	public void quizStart() {
-		// TODO assign beginning time to timestamp 
+		timestamp = new Date().getTime();
+		// TODO
 	}
 	
 	/** 
 	 * End the quiz, compute time stats
 	 */
 	public void quizEnd() {
-		// TODO compute timeTaken
+		long curTime = new Date().getTime();
+		timeSpan = curTime - timestamp;
+		score = quiz.getScore(userAnswers);
+		// TODO
 	}
+	
 	
 	public int compareTo(QuizTakenRecord other) {
 		final int BEFORE = -1;

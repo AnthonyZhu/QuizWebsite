@@ -8,7 +8,6 @@ import quizweb.record.*;
 
 public class User {
 	public int userID;
-	static private int maxUserID = 0;	
 	public String username;
 	public String password; // TODO JACK it should be encrypt instead of clear text
 	public String homepageURL;
@@ -73,14 +72,6 @@ public class User {
 		} else {
 			return messages;
 		}
-	}
-	
-	/**
-	 * Assign next user ID for the user instance
-	 * @return user ID assigned
-	 */
-	private synchronized int getNextUserID() {
-		return maxUserID++;
 	}
 	
 	/** 

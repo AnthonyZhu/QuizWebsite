@@ -4,14 +4,20 @@ import java.util.*;
 
 
 public class FillInBlankQuestion extends Question {
-	public String			question;
-	public ArrayList<String>	answer;
+//	Cast Type Summary:
+//	String 				question;
+//	ArrayList<String>	answer;
+//	String				userAnswer;
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public double getScore(ArrayList<String> userAnswer) {
-		// TODO 
-		assert(userAnswer.size() == 1);
-		
+	public double getScore(Object userAnswer) {
+		String ans = (String) userAnswer;
+		ArrayList<String> trueAns = (ArrayList<String>) answer;
+		for (int i = 0; i < trueAns.size(); i++) {
+			if (trueAns.get(i).equals(ans))
+				return score;
+		}		
 		return 0;
 	}
 
