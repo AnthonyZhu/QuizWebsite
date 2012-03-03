@@ -1,8 +1,8 @@
 package quizweb.record;
 
-import quizweb.User;
+import quizweb.*;
 
-public class Record {
+public class Record implements Comparable<Record>{
 	public int recordID;
 	static int maxRecordID = 0;
 	

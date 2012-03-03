@@ -10,7 +10,7 @@ public class User {
 	public int userID;
 	static private int maxUserID = 0;	
 	public String username;
-	public String password; // TODO JACK it should be a hash instead of clear text
+	public String password; // TODO JACK it should be encrypt instead of clear text
 	public String homepageURL;
 	
 	public boolean isAdmin;	// whether is admin
@@ -28,7 +28,6 @@ public class User {
 	private ArrayList<AchievementRecord> achievements;
 	private ArrayList<Message> messages;
 	
-
 	static public int totalUsers = 0;
 	
 	public ArrayList<User> getFriendList(){
@@ -67,7 +66,7 @@ public class User {
 		}
 	}
 	
-	public ArrayList<Message> getUserMessages() {
+	public ArrayList<Message> getMessages() {
 		if (messages == null) {
 			// TODO Get user message list from database
 			return null;
