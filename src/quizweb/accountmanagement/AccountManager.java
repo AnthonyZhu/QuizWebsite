@@ -2,21 +2,26 @@ package quizweb.accountmanagement;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import quizweb.database.DBConnection;
+import quizweb.database.*;
 
 
 public class AccountManager {
 	DBConnection db;
+	DBQueries query;
 
 	public AccountManager(){
 		db = new DBConnection();
+		query = new DBQueries();
 	};
 	
 	public void createNewAccount(String name, String password, String type){
 		Encryption e = new Encryption();
 		String hashedPassword = e.generateHashedPassword(password);
-		String statement = new String("insert into user (name, password, type) values (\""
-				+ name + "\",\"" + hashedPassword + "\",\"" + type + "\")");
+		String statement = query.InsertQueryByColumn("user", "name, password, type", 
+				"'" + name + "', '" + hashedPassword + "', '" + type + "'");
+		System.out.println(statement);
+//		String statement = new String("insert into user (name, password, type) values (\""
+//				+ name + "\",\"" + hashedPassword + "\",\"" + type + "\")");
 		db.DBUpdate(statement);
 	}
 	
@@ -25,7 +30,9 @@ public class AccountManager {
 			return false;
 		Encryption e = new Encryption();
 		String hashedPassword = e.generateHashedPassword(password);
-		String statement = new String("select password from user where name = \"" + name + "\"");
+		String statement = query.SelectQueryByColumn("password", "user", "name = \"" + name + "\""); 
+		System.out.println(statement);
+		//String statement = new String("select password from user where name = \"" + name + "\"");
 		ResultSet rs = db.DBQuery(statement);
 		try {
 			rs.beforeFirst();
@@ -41,7 +48,9 @@ public class AccountManager {
 	
 	public boolean isExisted(String name) {
 		boolean isExisted = false;
-		String statement = new String("select * from user where name = \"" + name + "\"");
+		String statement = query.SelectAllQuery("user", "name = \"" + name + "\"");
+		System.out.println(statement);
+		//String statement = new String("select * from user where name = \"" + name + "\"");
 		try {
 			if(db.DBQuery(statement).first())
 				isExisted = true;

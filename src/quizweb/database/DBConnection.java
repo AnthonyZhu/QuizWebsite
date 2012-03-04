@@ -43,7 +43,7 @@ public class DBConnection {
 		}
 		return rs;
 	}
-
+	
 	public void DBClose() {
 		try {
 			con.close();
