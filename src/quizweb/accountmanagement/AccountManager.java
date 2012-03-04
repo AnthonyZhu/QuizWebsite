@@ -39,7 +39,7 @@ public class AccountManager {
 		return false;
 	}
 	
-	public boolean isExisted(String name){
+	public boolean isExisted(String name) {
 		boolean isExisted = false;
 		String statement = new String("select * from user where name = \"" + name + "\"");
 		try {

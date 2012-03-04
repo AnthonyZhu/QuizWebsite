@@ -1,29 +1,23 @@
-package quizweb.accountmanagement;
+package quizweb.question;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import quizweb.User;
-
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class CreateQuestionServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/CreateQuestionServlet")
+public class CreateQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public CreateQuestionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,19 +33,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AccountManager am = (AccountManager)getServletContext().getAttribute("accunt manager");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		if(am.accountMatch(username, password)) {
-			HttpSession session = request.getSession();
-			User user = new User(username, "1");
-			session.setAttribute("user", user);
-			RequestDispatcher dispatch = request.getRequestDispatcher("Welcome.jsp");
-			dispatch.forward(request, response);
-		}
-		else {
-			RequestDispatcher dispatch = request.getRequestDispatcher("tryAgain.html");
-			dispatch.forward(request, response);
-		}
+		// TODO Auto-generated method stub
 	}
+
 }

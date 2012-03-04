@@ -36,6 +36,10 @@ public class User {
 	public final int PENDING_FRIEND = 2;
 	public final int REVERSE_PENDING = 3;
 	
+	public User(String name, String type) {
+		username = name;
+	}
+	
 	public ArrayList<User> getFriendList(){
 		if (friendList == null) {
 			//TODO Get user friend list from database
