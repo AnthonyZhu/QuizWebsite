@@ -8,7 +8,7 @@ public class Question implements Comparable<Question>{
 	public Object answer;
 	public double score;
 	public long timestamp;
-	
+		
 	static final Class<?>[] questionClass = {ResponseQuestion.class, FillInBlankQuestion.class,
 		MultiAnswerQuestion.class, PictureQuestion.class, MultiAnswerQuestion.class, 
 		MultiChoiceMultiAnswerQuestion.class, MatchingQuestion.class
