@@ -27,8 +27,8 @@ public class Quiz {
 	
 	public ArrayList<Question> getQuestions() {
 		if (questions == null) {
-			// TODO get question from the database
-			return null;
+			questions = Question.getQuestionsByQuizID(quizID);
+			return questions;
 		} else {
 			return questions;
 		}
@@ -36,8 +36,8 @@ public class Quiz {
 	
 	public ArrayList<QuizTakenRecord> getHistory() {
 		if (history == null) {
-			// TODO Get quiz record history from database
-			return null;
+			history = QuizTakenRecord.getQuizHistoryByQuizID(quizID);
+			return history;
 		} else {
 			return history;
 		}
@@ -83,4 +83,7 @@ public class Quiz {
 		return 0;
 	}
 	
+	public boolean equals(Quiz other) {
+		return quizID == other.quizID;
+	}
 }

@@ -1,19 +1,23 @@
 package quizweb.message;
 
+import java.util.ArrayList;
+
+import quizweb.*;
+
 public class Message {
 	private int messageID;
-	static int maxMessageID = 0;
 	
-	private double timestamp;
-	private int fromUserID;
-	private int toUserID;
-	private String content;
+	public long timestamp;
+	public User fromUser;
+	public User toUser;
+	public String content;
 	
-	/**
-	 * Assign a message ID for a message instance
-	 * @return assigned message ID
-	 */
-	static private synchronized int getNextMessgeID() {
-		return maxMessageID++;
+	public static ArrayList<Message> getMessagesByUserID(int userID) {
+		// TODO Get user message list from database
+		return null;
+	}
+	
+	public boolean equals(Message other) {
+		return messageID == other.messageID;
 	}
 }

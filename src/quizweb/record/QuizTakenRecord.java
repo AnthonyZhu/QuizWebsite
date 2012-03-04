@@ -17,8 +17,23 @@ public class QuizTakenRecord extends Record {
 	
 	public ArrayList<Object> userAnswers;
 	
-	static public int totalQuizTaken = 0;
+	public static int totalQuizTaken = 0;
 
+	public QuizTakenRecord(User user) {
+		super(user);
+		// TODO Auto-generated constructor stub
+	}	
+	
+	public static ArrayList<QuizTakenRecord> getQuizHistoryByUserID(int userID) {
+		// TODO Get user quiz taken history from database
+		return null;
+	}
+	
+	public static ArrayList<QuizTakenRecord> getQuizHistoryByQuizID(int quizID) {
+		// TODO Get quiz record history from database
+		return null;
+	}	
+	
 	/**
 	 * Start the quiz, begin timing etc
 	 */

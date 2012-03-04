@@ -1,5 +1,7 @@
 package quizweb.record;
 
+import java.util.*;
+
 import quizweb.*;
 
 public class Record implements Comparable<Record>{
@@ -7,6 +9,11 @@ public class Record implements Comparable<Record>{
 	
 	public User user;
 	public long timestamp;
+	
+	public Record(User user) {
+		this.user = user;
+		timestamp = new Date().getTime();
+	}
 	
 	/**
 	 * Comparator function that enable sorting of record by timestamp
