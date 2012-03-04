@@ -8,8 +8,28 @@ public class PictureQuestion extends Question {
 //	String 				question;
 //	ArrayList<String>	answer;
 //	String				userAnswer;
+	static final String DBTable = "";
 	
 	public String		questionURL;
+	
+	@SuppressWarnings("unchecked")
+	public PictureQuestion(Object question, Object answer, double score, String questionURL) {
+		super(question, answer, score);
+		this.questionURL = questionURL;
+		String questionStr = (String) question;
+		String answerStr = getConcatedString((ArrayList<String>) answer);
+		// TODO add to database
+	}
+	
+	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
+		// TODO get fill in blank questions from database
+		return null;
+	}
+	
+	public static PictureQuestion getQuestionByQuestionID(int questionID) {
+		// TODO get question by question ID
+		return null;
+	}	
 
 	@SuppressWarnings("unchecked")
 	@Override
