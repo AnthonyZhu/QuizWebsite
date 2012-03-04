@@ -16,7 +16,7 @@ public class AccountManager {
 		Encryption e = new Encryption();
 		String hashedPassword = e.generateHashedPassword(password);
 		String statement = new String("insert into user (name, password, type) values (\""
-				+ name + "\",\"" + hashedPassword + "\",\"" + type + "\"");
+				+ name + "\",\"" + hashedPassword + "\",\"" + type + "\")");
 		db.DBUpdate(statement);
 	}
 	
