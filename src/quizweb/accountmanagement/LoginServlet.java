@@ -1,4 +1,4 @@
-package servlet;
+package quizweb.accountmanagement;
 
 import java.io.IOException;
 
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import quizweb.AccountManager;
 
 /**
  * Servlet implementation class LoginServlet
@@ -41,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		if(am.accountMatch(username, password)) {
-			RequestDispatcher dispatch = request.getRequestDispatcher("welcome.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("Welcome.jsp");
 			dispatch.forward(request, response);
 		}
 		else {

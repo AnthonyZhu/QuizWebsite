@@ -5,7 +5,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import quizweb.AccountManager;
+import quizweb.accountmanagement.AccountManager;
 
 /**
  * Application Lifecycle Listener implementation class Setup
@@ -25,15 +25,14 @@ public class Setup implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent arg0) {
-        // TODO Auto-generated method stub
+    	AccountManager am = new AccountManager();
+    	ServletContext sc = arg0.getServletContext();
+    	sc.setAttribute("accunt manager", am);
     }
 
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
     public void contextDestroyed(ServletContextEvent arg0) {
-    	AccountManager am = new AccountManager();
-    	ServletContext sc = arg0.getServletContext();
-    	sc.setAttribute("accunt manager", am);
     }
 }
