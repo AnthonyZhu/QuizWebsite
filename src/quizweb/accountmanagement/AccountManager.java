@@ -2,6 +2,8 @@ package quizweb.accountmanagement;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+
 import quizweb.database.*;
 
 
@@ -17,11 +19,11 @@ public class AccountManager {
 	public void createNewAccount(String name, String password, String type){
 		Encryption e = new Encryption();
 		String hashedPassword = e.generateHashedPassword(password);
-		String statement = query.InsertQueryByColumn("user", "name, password, type", 
-				"'" + name + "', '" + hashedPassword + "', '" + type + "'");
-		System.out.println(statement);
-//		String statement = new String("insert into user (name, password, type) values (\""
-//				+ name + "\",\"" + hashedPassword + "\",\"" + type + "\")");
+		HashMap<String, String>valueMap = new HashMap<String, String>();
+		valueMap.put("name", name);
+		valueMap.put("password", hashedPassword);
+		valueMap.put("type", type);
+		String statement = query.InsertQueryByColumn("user", valueMap);
 		db.DBUpdate(statement);
 	}
 	
@@ -31,8 +33,6 @@ public class AccountManager {
 		Encryption e = new Encryption();
 		String hashedPassword = e.generateHashedPassword(password);
 		String statement = query.SelectQueryByColumn("password", "user", "name = \"" + name + "\""); 
-		System.out.println(statement);
-		//String statement = new String("select password from user where name = \"" + name + "\"");
 		ResultSet rs = db.DBQuery(statement);
 		try {
 			rs.beforeFirst();
@@ -49,8 +49,6 @@ public class AccountManager {
 	public boolean isExisted(String name) {
 		boolean isExisted = false;
 		String statement = query.SelectAllQuery("user", "name = \"" + name + "\"");
-		System.out.println(statement);
-		//String statement = new String("select * from user where name = \"" + name + "\"");
 		try {
 			if(db.DBQuery(statement).first())
 				isExisted = true;
