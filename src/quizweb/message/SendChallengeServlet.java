@@ -1,4 +1,4 @@
-package quizweb.accountmanagement;
+package quizweb.message;
 
 import java.io.IOException;
 
@@ -8,22 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import quizweb.User;
-
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class SendChallengeServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/SendChallengeServlet")
+public class SendChallengeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public SendChallengeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,19 +35,14 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AccountManager am = (AccountManager)getServletContext().getAttribute("accunt manager");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		if(am.accountMatch(username, password)) {
-			HttpSession session = request.getSession();
-			User user = new User(username, "1");
-			session.setAttribute("user", user);
-			RequestDispatcher dispatch = request.getRequestDispatcher("Welcome.jsp");
-			dispatch.forward(request, response);
-		}
-		else {
-			RequestDispatcher dispatch = request.getRequestDispatcher("tryAgain.html");
-			dispatch.forward(request, response);
-		}
+		String uid1 = request.getParameter("uid1");
+		String uid2 = request.getParameter("uid2");
+		String qid = request.getParameter("qid");
+		String bestScore = request.getParameter("bestScore");
+		ChallengeMessage cm = new ChallengeMessage(Integer.parseInt(uid1), Integer.parseInt(uid2), Integer.parseInt(qid), Double.parseDouble(bestScore));
+		cm.addMessageToDB();
+		RequestDispatcher dispatch = request.getRequestDispatcher("message.jsp");
+		dispatch.forward(request, response);
 	}
+
 }

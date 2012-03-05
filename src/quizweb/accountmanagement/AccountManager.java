@@ -7,10 +7,8 @@ import quizweb.database.*;
 
 
 public class AccountManager {
-	DBConnection db;
 	private static final String DBTable = "user";
 	public AccountManager(){
-		db = new DBConnection();
 	}
 	
 	public void createNewAccount(String name, String password, String type){
@@ -18,11 +16,11 @@ public class AccountManager {
 		String hashedPassword = e.generateHashedPassword(password);
 		String statement = new String("INSERT INTO " + DBTable +" (name, password, type) VALUES (?, ?, ?)");
 		try {
-			PreparedStatement stmt = db.con.prepareStatement(statement);
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setString(1, name);
 			stmt.setString(2, hashedPassword);
 			stmt.setString(3, type);
-			db.DBUpdate(stmt);
+			DBConnection.DBUpdate(stmt);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -35,9 +33,9 @@ public class AccountManager {
 		String hashedPassword = e.generateHashedPassword(password);
 		try {
 			String statement = new String("SELECT password FROM " + DBTable +" WHERE name = ?");
-			PreparedStatement stmt = db.con.prepareStatement(statement);
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setString(1, name);
-			ResultSet rs = db.DBQuery(stmt);
+			ResultSet rs = DBConnection.DBQuery(stmt);
 			rs.beforeFirst();
 			rs.next();
 			String storedPassword = rs.getString("password");
@@ -53,9 +51,9 @@ public class AccountManager {
 		boolean isExisted = false;
 		try {
 			String statement = new String("SELECT * FROM " + DBTable +" WHERE name = ?");
-			PreparedStatement stmt = db.con.prepareStatement(statement);
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setString(1, name);
-			if(db.DBQuery(stmt).first())
+			if(DBConnection.DBQuery(stmt).first())
 				isExisted = true;
 		} catch (SQLException e) {
 			e.printStackTrace();

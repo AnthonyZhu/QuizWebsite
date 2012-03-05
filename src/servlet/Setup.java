@@ -6,7 +6,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import quizweb.accountmanagement.AccountManager;
-import quizweb.database.DBConnection;
 
 /**
  * Application Lifecycle Listener implementation class Setup

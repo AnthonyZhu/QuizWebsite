@@ -10,15 +10,28 @@ public abstract class Message {
 	protected int toUser;
 	protected String content;
 	
-	public Message(Timestamp time, int uid1, int uid2, String c) {
-		timestamp = time;
+	public Message(int uid1, int uid2, String c) {
 		fromUser = uid1;
 		toUser = uid2;
 		content = c;
 	}
 	
-	public String getContent() {
-		return content;
+	public abstract void addMessageToDB();
+	
+	public int getMessageID() {
+		return messageID;
+	}
+	
+	public void setMessageID(int mid) {
+		messageID = mid;
+	}
+	
+	public Timestamp getTime() {
+		return timestamp;
+	}
+	
+	public void setTime(Timestamp time) {
+		timestamp = time;
 	}
 	
 	public int getSender() {
@@ -29,7 +42,7 @@ public abstract class Message {
 		return toUser;
 	}
 	
-	public abstract void addMessageToDB();
+	public abstract String getContent();
 	
 //	public boolean equals(Message other) {
 //		return messageID == other.messageID;
