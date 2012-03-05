@@ -6,12 +6,13 @@ public class DBConnection {
 	static String password = "aebaujei";
 	static String server = "mysql-user-master.stanford.edu";
 	static String database = "c_cs108_yzzhu";
-	public Connection con;
+	public static Connection con = initConnection();
 	
-	public DBConnection() {
+	private static Connection initConnection() {
+		Connection thisCon = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + server, account ,password);
+			thisCon = DriverManager.getConnection("jdbc:mysql://" + server, account ,password);
 			Statement stmt = con.createStatement();
 			stmt.executeQuery("USE " + database);
 		} catch (SQLException e) { 
@@ -20,9 +21,10 @@ public class DBConnection {
 		catch (ClassNotFoundException e) { 
 			e.printStackTrace();
 		}
+		return thisCon;
 	}
-	
-	public ResultSet DBQuery(PreparedStatement stmt) {
+
+	public static ResultSet DBQuery(PreparedStatement stmt) {
 		ResultSet rs = null;
 		try {
 			rs = stmt.executeQuery();
@@ -32,7 +34,7 @@ public class DBConnection {
 		return rs;
 	}
 
-	public int DBUpdate(PreparedStatement stmt) {
+	public static int DBUpdate(PreparedStatement stmt) {
 		int rs = 0;
 		try {
 			rs = stmt.executeUpdate();
@@ -42,7 +44,7 @@ public class DBConnection {
 		return rs;
 	}
 	
-	public void DBClose() {
+	public static void DBClose() {
 		try {
 			con.close();
 		} catch (SQLException e) {

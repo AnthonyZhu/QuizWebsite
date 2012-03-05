@@ -41,7 +41,6 @@ public class NoteMessage extends Message {
 			stmt.setInt(2, userID);
 			ResultSet rs = db.DBQuery(stmt);
 			rs.beforeFirst();
-			rs.next();
 			while(rs.next()) {
 				NoteMessage nm = new NoteMessage(
 						rs.getTimestamp("time"), rs.getInt("uid1"), rs.getInt("uid2"), rs.getString("note"));

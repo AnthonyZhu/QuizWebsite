@@ -2,23 +2,25 @@ package quizweb.question;
 
 import java.util.*;
 
-public class Question implements Comparable<Question>{
+public class Question {
 	public int questionID;
+	public int quizID;
+	public int position;
 	public Object question;
 	public Object answer;
 	public double score;
-	public long timestamp;
 		
 	static final Class<?>[] questionClass = {ResponseQuestion.class, FillInBlankQuestion.class,
 		MultiAnswerQuestion.class, PictureQuestion.class, MultiAnswerQuestion.class, 
 		MultiChoiceMultiAnswerQuestion.class, MatchingQuestion.class
 	};
 	
-	public Question(Object question, Object answer, double score) {
+	public Question(int quizID, int position, Object question, Object answer, double score) {
+		this.quizID = quizID;
+		this.position = position;
 		this.question = question;
 		this.answer = answer;
 		this.score = score;
-		this.timestamp = new Date().getTime();
 	}
 	
 	public double getScore(Object userAnswer) {
@@ -35,7 +37,7 @@ public class Question implements Comparable<Question>{
 		questions.addAll(MultiAnswerQuestion.getQuestionsByQuizID(quizID));
 		questions.addAll(MultiChoiceMultiAnswerQuestion.getQuestionsByQuizID(quizID));
 		questions.addAll(MatchingQuestion.getQuestionsByQuizID(quizID));
-		Collections.sort(questions);
+		Collections.sort(questions, new QuestionSortByPosition());
 		return questions;
 	}
 	
@@ -53,13 +55,5 @@ public class Question implements Comparable<Question>{
 		return retString;
 	}
 
-	@Override
-	public int compareTo(Question other) {
-		if (this.timestamp < other.timestamp)
-			return -1;
-		else if (this.timestamp == other.timestamp)
-			return 0;
-		else
-			return 1;
-	}
+
 }

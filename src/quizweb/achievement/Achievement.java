@@ -16,8 +16,8 @@ public class Achievement {
 	
 	
 	
-	//public double threshold;
-	//public static ArrayList<Achievement> allAchievements;
+	public double threshold;
+	public static ArrayList<Achievement> allAchievements;
 	
 	
 	

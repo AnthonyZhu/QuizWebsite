@@ -1,20 +1,40 @@
 package quizweb.question;
 
+import java.sql.*;
 import java.util.*;
+
+import quizweb.database.DBConnection;
 
 
 public class FillInBlankQuestion extends Question {
 //	Cast Type Summary:
-//	String 				question;
+//	ArrayList<String>	question;
 //	ArrayList<String>	answer;
 //	String				userAnswer;
-	static final String DBTable = "";
+	static final String DBTable = "fill_in_blank_question";
+	private DBConnection db; 
 
-	public FillInBlankQuestion(Object question, Object answer, double score) {
-		super(question, answer, score);
-		String questionStr = (String) question;
+	@SuppressWarnings("unchecked")
+	public FillInBlankQuestion(int quizID, int position, Object question, Object answer, double score) {
+		super(quizID, position, question, answer, score);
+		String questionStr = getConcatedString((ArrayList<String>) question);
 		String answerStr = getConcatedString((ArrayList<String>) answer);
-		// TODO add to database
+		// add to database
+		db = new DBConnection();
+		try {
+			String statement = new String("INSERT INTO " + DBTable 
+					+ " (quizid, position, question, answer, score) VALUES (?, ?, ?, ?, ?)");
+			PreparedStatement stmt = db.con.prepareStatement(statement, new String[] {"id"});
+			stmt.setInt(1, quizID);
+			stmt.setInt(2, position);
+			stmt.setString(3, questionStr);
+			stmt.setString(4, answerStr);
+			stmt.setDouble(5, score);
+			db.DBUpdate(stmt);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}	
 	
 	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
