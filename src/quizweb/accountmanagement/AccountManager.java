@@ -14,7 +14,7 @@ public class AccountManager {
 	public AccountManager(){
 		db = new DBConnection();
 		query = new DBQueries();
-	};
+	}
 	
 	public void createNewAccount(String name, String password, String type){
 		Encryption e = new Encryption();
