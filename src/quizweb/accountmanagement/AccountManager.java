@@ -11,10 +11,6 @@ public class AccountManager {
 	private static final String DBTable = "user";
 	public AccountManager(){
 		db = new DBConnection();
-<<<<<<< HEAD
-		query = new DBQueries();
-=======
->>>>>>> message module
 	}
 	
 	public void createNewAccount(String name, String password, String type){

@@ -13,13 +13,12 @@
 <body>
 	<% 
 	Date timestamp = new Date();
-	NoteMessage nm = new NoteMessage(timestamp,1,2,"");
-	ArrayList<Message> noteMessageQueue = nm.getMessagesByUserID(1);
+	ArrayList<Message> noteMessageQueue = NoteMessage.getMessagesByUserID(1);
 	for(int i =  0; i < noteMessageQueue.size(); i++) {
 		Message n = noteMessageQueue.get(i);
 		out.println(n.getContent());
 		out.println(n.getSender());
-		out.println(n.getSender());
+		out.println(n.getReceiver());
 	}
 	%>
 </body>

@@ -1,7 +1,7 @@
 package quizweb.message;
 
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import quizweb.CurrentTime;
 
 /**
  * Servlet implementation class SendMessageServlet
@@ -38,12 +36,11 @@ public class SendMessageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CurrentTime ct = new CurrentTime();
-		Date time = ct.GetFormatedTime();
+		Timestamp time = new Timestamp(0);
 		String uid1 = request.getParameter("uid1");
 		String uid2 = request.getParameter("uid2");
 		String note = request.getParameter("note");
-		NoteMessage nm = new NoteMessage(time, Integer.parseInt(uid1), Integer.parseInt(uid2), note);
+		NoteMessage nm = new NoteMessage(time, Integer.parseInt(uid1), Integer.parseInt(uid2), note, false);
 		nm.addMessageToDB();
 		RequestDispatcher dispatch = request.getRequestDispatcher("message.jsp");
 		dispatch.forward(request, response);
