@@ -2,22 +2,29 @@ package quizweb.message;
 
 import java.util.ArrayList;
 
-import quizweb.*;
-
-public class Message {
-	private int messageID;
+public abstract class Message {
 	
-	public long timestamp;
-	public User fromUser;
-	public User toUser;
-	public String content;
+	protected int messageID;
+	protected long timestamp;
+	protected int fromUser;
+	protected int toUser;
+	protected String content;
+	
+	public Message(long time, int uid1, int uid2, String c) {
+		timestamp = time;
+		fromUser = uid1;
+		toUser = uid2;
+		content = c;
+	}
 	
 	public static ArrayList<Message> getMessagesByUserID(int userID) {
 		// TODO Get user message list from database
 		return null;
 	}
 	
-	public boolean equals(Message other) {
-		return messageID == other.messageID;
-	}
+	public abstract void addMessageToDB();
+	
+//	public boolean equals(Message other) {
+//		return messageID == other.messageID;
+//	}
 }
