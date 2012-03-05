@@ -10,7 +10,11 @@
 	<h1>The Name 
 	<%
 	String username = request.getParameter("username");
+<<<<<<< HEAD
+	System.out.println(username); %> is Already In Use</h1>
+=======
 	out.println(username); %> is Already In Use</h1>
+>>>>>>> 35b9f4d7d3bf882aa11ee80aa8b6b86c2e218f44
 	<p>Please enter another name and password.</p>
 	<form action="NewAccountServlet" method="post">
 		User Name: <input type="text" name="username"><br />

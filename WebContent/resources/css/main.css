@@ -7,6 +7,8 @@ blue background: #d9ebf5
 
 html{
 	background-color:#d9ebf5;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
 }
 
 
@@ -53,6 +55,11 @@ html{
 	height: 1%;
 }
 
+.dynamicFrame {
+	width: 100%;
+	height: auto;
+	margin:0 0 0 0;
+}
 /*article,aside,figure,figure img,figcaption,hgroup,footer,header,nav,section,video,object,output{display:block}*/
 /*******************************************/
 /**************Text Features****************/
@@ -60,6 +67,8 @@ html{
 h1,h2,h3,h4,h5,h6,body{
 	font-family: Arial, Cambria;
 	margin-top:5px;
+	margin-left:0;
+	margin-right:0;
 	margin-bottom: 5px;
 	color: #393939;
 }

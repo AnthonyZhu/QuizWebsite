@@ -9,6 +9,9 @@
 	<!-- CSS -->
 	<link href="resources/css/main.css" type="text/css" rel="stylesheet" />
 	<link href="resources/css/quiz.css" rel="stylesheet">
+	<!-- JavaScript -->
+	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="resources/scripts/QuestionCreation.js"></script>
 </head>
 
 <body>
@@ -24,12 +27,13 @@
 		<hr />
 
 		<ul>
-		
 			<li id="foli7" class="highlight">
 				<label class="quiz_title" id="title7" for="Field7">Please choose a question type</label>
 				<div>
-					<select id="Field7" name="Field7" class="field select medium" tabindex="6" > 
-						<option value="Question-Response" selected="selected">Question-Response</option><option value="Fill in the Blank" >Fill in the Blank</option>
+					<select id="newQuestionType" name="newQuestionType" onchange="showQuestionFrame()" class="field select medium" tabindex="6"> 
+						<option value="" selected="selected"></option>
+						<option value="Question-Response" >Question-Response</option>
+						<option value="Fill in the Blank" >Fill in the Blank</option>
 						<option value="Multiple Choice" >Multiple Choice</option>
 						<option value="Picture-Response Questions" >Picture-Response Questions</option>
 						<option value="Multiple-Answer Questions" >Multiple-Answer Questions</option>
@@ -38,16 +42,11 @@
 					</select>
 				</div>
 			</li>
-			
-			<li id="foli8" class="highlight">
-				<label class="quiz_title" id="title8" for="Field8">Please input question text</label>
-				<div>
-					<textarea id="Field8" name="Field8" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
-					<label for="Field8">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp; 
-					<em class="currently" style="display: inline; ">Currently Used: <var id="rangeUsedMsg8">?</var> characters.</em></label>
-				</div>
-			</li>
-				
+			</ul>
+
+	<div><iframe id="QuestionFrame" frameborder=0  class="dynamicFrame"  src=""></iframe></div>
+
+		<ul>
 			<li>
 				<div><input id="saveForm" name="saveForm" class="btTxt submit" type="submit" value="Submit"/></div>
 			</li>
@@ -58,10 +57,6 @@
 	
 </body>
 
-<head>
-	<!-- JavaScript -->
-	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="resources/scripts/functions.js"></script>
-</head>
+
 
 </html>

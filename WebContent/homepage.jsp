@@ -24,7 +24,7 @@
 	<div class="content-container">
 		<div class="three_column_left">
 			<ul>
-				<h4 class="title_style_minor">FAVORITES </h4>
+				<h4 class="title_style_minor">FAVORITES</h4>
 				<li><a class="link-style-dominant" onclick="showNewsFeed()">News Feed</a></li>
 				<li><a class="link-style-dominant" onclick="showNotes()">Notes</a></li>
 			</ul>
@@ -42,7 +42,7 @@
 		</div>
 		
 		<div class="three_column_content">		
-			<iframe id="contentFrame" frameborder="0" src=""></iframe>
+			<iframe id="contentFrame" class="dynamicFrame" frameborder="0" src=""></iframe>
 		</div>
 	
 		<div class="three_column_right">

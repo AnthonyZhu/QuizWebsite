@@ -2,11 +2,11 @@
 	var contentShow = true;
 	global.toggleContent = function() {
 		if(contentShow == true) {
-			$('#content').fadeOut();
+			$('#contentFrame').fadeOut();
 			contentShow = false;
 		}
 		else {
-			$('#content').fadeIn();
+			$('#contentFrame').fadeIn();
 			contentShow = true;
 		}
 	};
@@ -38,6 +38,9 @@
 
 })(window);
 
+
+
+
 $(".highlight").focusin(function() {
 	if(!$(this).hasClass("highlight_background")) {
 		$(".highlight").removeClass("highlight_background");
@@ -48,3 +51,4 @@ $(".highlight").focusin(function() {
 $(".highlight").focusout(function() {
 	$(this).removeClass("highlight_background");
 });
+
