@@ -11,7 +11,7 @@ public class NoteMessage extends Message {
 	
 	private static final String DBTable = "note";
 	
-	private DBConnection db; 
+	private static DBConnection db; 
 	
 	public NoteMessage(Timestamp time, int uid1, int uid2, String c) {
 		super(time, uid1, uid2, c);
@@ -32,7 +32,7 @@ public class NoteMessage extends Message {
 		}
 	}
 
-	public ArrayList<Message> getMessagesByUserID(int userID) {
+	public static ArrayList<Message> getMessagesByUserID(int userID) {
 		ArrayList<Message> noteMessageQueue = new ArrayList<Message>();
 		try {
 			String statement = new String("SELECT * FROM " + DBTable +" WHERE uid1 = ? OR uid2 = ?");
@@ -41,7 +41,6 @@ public class NoteMessage extends Message {
 			stmt.setInt(2, userID);
 			ResultSet rs = db.DBQuery(stmt);
 			rs.beforeFirst();
-			rs.next();
 			while(rs.next()) {
 				NoteMessage nm = new NoteMessage(
 						rs.getTimestamp("time"), rs.getInt("uid1"), rs.getInt("uid2"), rs.getString("note"));

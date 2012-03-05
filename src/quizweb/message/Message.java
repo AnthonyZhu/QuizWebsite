@@ -1,7 +1,6 @@
 package quizweb.message;
 
 import java.sql.Timestamp;
-import java.util.*;
 
 public abstract class Message {
 	
