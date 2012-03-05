@@ -15,6 +15,12 @@
 		<form>
 		<ul>
 			<li class="highlight">
+				<label class="quiz_title" >Please input URL of image:</label>
+				<div>
+					<input id="imageURL" name="Field3" type="text" class="field text small" onkeyup="validateRange(8, 'character');">
+				</div>				
+			</li>
+			<li class="highlight">
 				<label class="quiz_title" >Please input question text below:</label>
 				<div>
 					<textarea id="questionText" name="Field1" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
@@ -23,7 +29,7 @@
 				</div>
 			</li>
 			<li class="highlight">
-				<label class="quiz_title">Please input your sample answer below:</label>
+				<label class="quiz_title">Please input correct answer below:</label>
 				<div>
 					<textarea id="questionAnswer" name="Field2" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
 					<label for="Field2">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp; 

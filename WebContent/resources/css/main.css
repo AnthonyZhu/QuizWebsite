@@ -57,8 +57,9 @@ html{
 
 .dynamicFrame {
 	width: 100%;
-	height: auto;
+	min-height: 350px;
 	margin:0 0 0 0;
+	
 }
 /*article,aside,figure,figure img,figcaption,hgroup,footer,header,nav,section,video,object,output{display:block}*/
 /*******************************************/

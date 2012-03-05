@@ -5,23 +5,28 @@
 	<!-- CSS -->
 	<link href="resources/css/main.css" type="text/css" rel="stylesheet" />
 	<link href="resources/css/quiz.css" rel="stylesheet">
+	
+	<!-- JavaScript -->
+	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="resources/scripts/QuestionCreation.js"></script>
+	<script type="text/javascript" src="resources/scripts/functions.js"></script>
 </head>
 
 		<form>
 		<ul>
-			<li id="foli8" class="highlight">
+			<li class="highlight">
 				<label class="quiz_title" >Please input question text below, and replace blank with [ ]:</label>
 				<div>
-					<textarea id="questionText" name="Field8" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
-					<label for="Field8">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp; 
+					<textarea id="questionText" name="Field1" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
+					<label for="Field1">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp; 
 					<em class="currently" style="display: inline; ">Currently Used: <var id="rangeUsedMsg8">?</var> characters.</em></label>
 				</div>
 			</li>
-			<li id="foli8" class="highlight">
+			<li class="highlight">
 				<label class="quiz_title">Please input answer (words to be filled in the blank) below:</label>
 				<div>
-					<textarea id="questionAnswer" name="Field8" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
-					<label for="Field8">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp; 
+					<textarea id="questionAnswer" name="Field2" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
+					<label for="Field2">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp; 
 					<em class="currently" style="display: inline; ">Currently Used: <var id="rangeUsedMsg8">?</var> characters.</em></label>
 				</div>
 			</li>

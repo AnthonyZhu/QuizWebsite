@@ -9,9 +9,11 @@
 	<!-- CSS -->
 	<link href="resources/css/main.css" type="text/css" rel="stylesheet" />
 	<link href="resources/css/quiz.css" rel="stylesheet">
+	
 	<!-- JavaScript -->
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="resources/scripts/QuestionCreation.js"></script>
+	<script type="text/javascript" src="resources/scripts/functions.js"></script>
 </head>
 
 <body>
@@ -25,12 +27,11 @@
 	<div class="one_column">
 		<h2>Create Quiz: Add Questions</h2>
 		<hr />
-
 		<ul>
 			<li id="foli7" class="highlight">
 				<label class="quiz_title" id="title7" for="Field7">Please choose a question type</label>
 				<div>
-					<select id="newQuestionType" name="newQuestionType" onchange="showQuestionFrame()" class="field select medium" tabindex="6"> 
+					<select id="newQuestionType" name="newQuestionType" onchange="showQuestionFrame()" class="field select medium"> 
 						<option value="" selected="selected"></option>
 						<option value="Question-Response" >Question-Response</option>
 						<option value="Fill in the Blank" >Fill in the Blank</option>
@@ -42,13 +43,16 @@
 					</select>
 				</div>
 			</li>
-			</ul>
+		</ul>
 
-	<div><iframe id="QuestionFrame" frameborder=0  class="dynamicFrame"  src=""></iframe></div>
+		<div>
+			<iframe id="QuestionFrame" frameborder=0  class="dynamicFrame"  src=""></iframe>
+		</div>
 
 		<ul>
 			<li>
-				<div><input id="saveForm" name="saveForm" class="btTxt submit" type="submit" value="Submit"/></div>
+				<div><input id="saveForm" name="saveForm" class="btTxt submit" type="submit" value="Save and Finish"/></div>
+				<div><input id="addNewQuestion" name="addNewQuestion" class="btTxt submit" type="submit" value="Add Another Question"/></div>
 			</li>
 		</ul>
 	</div>
