@@ -1,25 +1,33 @@
 package quizweb.message;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.util.*;
 
 public abstract class Message {
 	
 	protected int messageID;
-	protected long timestamp;
+	protected Timestamp timestamp;
 	protected int fromUser;
 	protected int toUser;
 	protected String content;
 	
-	public Message(long time, int uid1, int uid2, String c) {
+	public Message(Timestamp time, int uid1, int uid2, String c) {
 		timestamp = time;
 		fromUser = uid1;
 		toUser = uid2;
 		content = c;
 	}
 	
-	public static ArrayList<Message> getMessagesByUserID(int userID) {
-		// TODO Get user message list from database
-		return null;
+	public String getContent() {
+		return content;
+	}
+	
+	public int getSender() {
+		return fromUser;
+	}
+	
+	public int getReceiver() {
+		return toUser;
 	}
 	
 	public abstract void addMessageToDB();

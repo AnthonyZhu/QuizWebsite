@@ -15,8 +15,8 @@ public class CurrentTime {
 		time = dateFormat.format(date);	
 	}
 	
-	public String GetFormatedTime() {
-		return time;
+	public Date GetFormatedTime() {
+		return new Date();
 	}
 }
 

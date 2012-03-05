@@ -6,7 +6,7 @@ public class DBConnection {
 	static String password = "aebaujei";
 	static String server = "mysql-user-master.stanford.edu";
 	static String database = "c_cs108_yzzhu";
-	Connection con;
+	public Connection con;
 	
 	public DBConnection() {
 		try {
@@ -22,22 +22,20 @@ public class DBConnection {
 		}
 	}
 	
-	public ResultSet DBQuery(String statement) {
+	public ResultSet DBQuery(PreparedStatement stmt) {
 		ResultSet rs = null;
 		try {
-			Statement stmt = con.createStatement();
-			rs = stmt.executeQuery(statement);
+			rs = stmt.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return rs;
 	}
 
-	public int DBUpdate(String statement) {
+	public int DBUpdate(PreparedStatement stmt) {
 		int rs = 0;
 		try {
-			Statement stmt = con.createStatement();
-			rs = stmt.executeUpdate(statement);
+			rs = stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

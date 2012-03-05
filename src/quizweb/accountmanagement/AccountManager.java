@@ -1,30 +1,35 @@
 package quizweb.accountmanagement;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-
 import quizweb.database.*;
 
 
 public class AccountManager {
 	DBConnection db;
-	DBQueries query;
-
+	private static final String DBTable = "user";
 	public AccountManager(){
 		db = new DBConnection();
+<<<<<<< HEAD
 		query = new DBQueries();
+=======
+>>>>>>> message module
 	}
 	
 	public void createNewAccount(String name, String password, String type){
 		Encryption e = new Encryption();
 		String hashedPassword = e.generateHashedPassword(password);
-		HashMap<String, String>valueMap = new HashMap<String, String>();
-		valueMap.put("name", name);
-		valueMap.put("password", hashedPassword);
-		valueMap.put("type", type);
-		String statement = query.InsertQueryByColumn("user", valueMap);
-		db.DBUpdate(statement);
+		String statement = new String("INSERT INTO " + DBTable +" (name, password, type) VALUES (?, ?, ?)");
+		try {
+			PreparedStatement stmt = db.con.prepareStatement(statement);
+			stmt.setString(1, name);
+			stmt.setString(2, hashedPassword);
+			stmt.setString(3, type);
+			db.DBUpdate(stmt);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	public boolean accountMatch(String name, String password) {
@@ -32,9 +37,11 @@ public class AccountManager {
 			return false;
 		Encryption e = new Encryption();
 		String hashedPassword = e.generateHashedPassword(password);
-		String statement = query.SelectQueryByColumn("password", "user", "name = \"" + name + "\""); 
-		ResultSet rs = db.DBQuery(statement);
 		try {
+			String statement = new String("SELECT password FROM " + DBTable +" WHERE name = ?");
+			PreparedStatement stmt = db.con.prepareStatement(statement);
+			stmt.setString(1, name);
+			ResultSet rs = db.DBQuery(stmt);
 			rs.beforeFirst();
 			rs.next();
 			String storedPassword = rs.getString("password");
@@ -48,9 +55,11 @@ public class AccountManager {
 	
 	public boolean isExisted(String name) {
 		boolean isExisted = false;
-		String statement = query.SelectAllQuery("user", "name = \"" + name + "\"");
 		try {
-			if(db.DBQuery(statement).first())
+			String statement = new String("SELECT * FROM " + DBTable +" WHERE name = ?");
+			PreparedStatement stmt = db.con.prepareStatement(statement);
+			stmt.setString(1, name);
+			if(db.DBQuery(stmt).first())
 				isExisted = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
