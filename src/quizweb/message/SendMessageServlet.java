@@ -40,7 +40,7 @@ public class SendMessageServlet extends HttpServlet {
 		String uid1 = request.getParameter("uid1");
 		String uid2 = request.getParameter("uid2");
 		String note = request.getParameter("note");
-		NoteMessage nm = new NoteMessage(time, Integer.parseInt(uid1), Integer.parseInt(uid2), note);
+		NoteMessage nm = new NoteMessage(time, Integer.parseInt(uid1), Integer.parseInt(uid2), note, false);
 		nm.addMessageToDB();
 		RequestDispatcher dispatch = request.getRequestDispatcher("message.jsp");
 		dispatch.forward(request, response);
