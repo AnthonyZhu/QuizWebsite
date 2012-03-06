@@ -35,6 +35,18 @@
 	global.showChallenges = function() {
 		$('#contentFrame').attr('src', 'home_challenges.jsp');
 	};
+	
+	global.showMoreAnnouncements = function()  {
+		$('#contentFrame').attr('src', 'home_moreAnnouncements.jsp');
+	};
+	
+	global.showMorePopularQuizs = function()  {
+		$('#contentFrame').attr('src', 'home_morePopularQuizs.jsp');
+	};
+	
+	global.showMoreRecentlyQuizs = function()  {
+		$('#contentFrame').attr('src', 'home_moreRecentlyQuizs.jsp');
+	};
 
 })(window);
 
