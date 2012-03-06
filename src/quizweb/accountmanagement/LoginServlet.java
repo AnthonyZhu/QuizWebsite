@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			User user = new User(username, "1");
 			session.setAttribute("user", user);
-			RequestDispatcher dispatch = request.getRequestDispatcher("profile.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("homepage.jsp");
 			dispatch.forward(request, response);
 		}
 		else {
