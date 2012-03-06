@@ -12,38 +12,79 @@ public class FillInBlankQuestion extends Question {
 //	ArrayList<String>	answer;
 //	String				userAnswer;
 	static final String DBTable = "fill_in_blank_question";
-	private DBConnection db; 
 
+	// Create a new fill in blank question
 	@SuppressWarnings("unchecked")
 	public FillInBlankQuestion(int quizID, int position, Object question, Object answer, double score) {
 		super(quizID, position, question, answer, score);
 		String questionStr = getConcatedString((ArrayList<String>) question);
 		String answerStr = getConcatedString((ArrayList<String>) answer);
 		// add to database
-		db = new DBConnection();
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
 					+ " (quizid, position, question, answer, score) VALUES (?, ?, ?, ?, ?)");
-			PreparedStatement stmt = db.con.prepareStatement(statement, new String[] {"id"});
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"questionid"});
 			stmt.setInt(1, quizID);
 			stmt.setInt(2, position);
 			stmt.setString(3, questionStr);
 			stmt.setString(4, answerStr);
 			stmt.setDouble(5, score);
-			db.DBUpdate(stmt);
-			
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			questionID = rs.getInt("questionid");
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}	
-	
-	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
-		// TODO get fill in blank questions from database
-		return null;
 	}
 	
+	// Generate reference from database
+	public FillInBlankQuestion(int questionID, int quizID, int position, Object question, Object answer, double score) {
+		super(quizID, position, question, answer, score);
+		this.questionID = questionID;
+	}
+	
+	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
+		ArrayList<Question> questionList = new ArrayList<Question>();
+		try {
+			String statement = new String("SELECT * FROM " + DBTable + " WHERE quizid = ?");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, quizID);
+			ResultSet rs = stmt.executeQuery();
+			ArrayList<String> questionStringList = getParsedStrings(rs.getString("question"));
+			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
+			while (rs.next()) {
+				FillInBlankQuestion q = new FillInBlankQuestion(
+						rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
+						questionStringList, answerStringList, rs.getDouble("score"));
+				questionList.add(q);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return questionList;
+	}
+
 	public static FillInBlankQuestion getQuestionByQuestionID(int questionID) {
-		// TODO get question by question ID
+		try {
+			String statement = new String("SELECT * FROM " + DBTable + " WHERE questionid = ?");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, questionID);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			
+			ArrayList<String> questionStringList = getParsedStrings(rs.getString("question"));
+			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
+			FillInBlankQuestion q = new FillInBlankQuestion(
+					rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
+					questionStringList, answerStringList, rs.getDouble("score"));
+			rs.close();
+			return q;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 		return null;
 	}
 	

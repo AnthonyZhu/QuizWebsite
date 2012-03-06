@@ -1,9 +1,11 @@
 package quizweb.question;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
-import quizweb.database.DBConnection;
-import quizweb.database.DBQueries;
+import quizweb.database.*;
 
 public class ResponseQuestion extends Question {
 //	Cast Type Summary:
@@ -13,31 +15,76 @@ public class ResponseQuestion extends Question {
 	static final String DBTable = "question_response_question";
 	
 	@SuppressWarnings("unchecked")
-	public ResponseQuestion(Object question, Object answer, double score) {
-		super(question, answer, score);
+	public ResponseQuestion(int quizID, int position, Object question, Object answer, double score) {
+		super(quizID, position, question, answer, score);
 		String questionStr = (String) question;
-		String answerStr = getConcatedString((ArrayList<String>) answer);		
-		addToResponseQuestionDB();
+		String answerStr = getConcatedString((ArrayList<String>) answer);
+		// add to database		
+		try {
+			String statement = new String("INSERT INTO " + DBTable 
+					+ " (quizid, position, question, answer, score) VALUES (?, ?, ?, ?, ?)");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"questionid"});
+			stmt.setInt(1, quizID);
+			stmt.setInt(2, position);
+			stmt.setString(3, questionStr);
+			stmt.setString(4, answerStr);
+			stmt.setDouble(5, score);
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			questionID = rs.getInt("questionid");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-
-	public static void addToResponseQuestionDB() {
-		DBConnection db = new DBConnection();
-		DBQueries query = new DBQueries();
-		HashMap<String, String> conditionMap = new HashMap<String, String>();
-		// TODO JACK
-//		conditionMap.put(key, value)
-//		String statement = query.InsertQueryByColumn(DBTable, "", String.valueOf(type));
-//		db.DBUpdate(statement);
+	
+	public ResponseQuestion(int questionID, int quizID, int position, Object question, Object answer, double score) {
+		super(quizID, position, question, answer, score);
+		this.questionID = questionID;
 	}
 	
 	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
-		// TODO get fill in blank questions from database
-		return null;
+		ArrayList<Question> questionList = new ArrayList<Question>();
+		try {
+			String statement = new String("SELECT * FROM " + DBTable + " WHERE quizid = ?");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, quizID);
+			ResultSet rs = stmt.executeQuery();
+			String questionString = rs.getString("question");
+			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
+			while (rs.next()) {
+				ResponseQuestion q = new ResponseQuestion(
+						rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
+						questionString, answerStringList, rs.getDouble("score"));
+				questionList.add(q);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return questionList;
 	}
 
 	public static ResponseQuestion getQuestionByQuestionID(int questionID) {
-		// TODO get question by question ID
-		return null;
+		try {
+			String statement = new String("SELECT * FROM " + DBTable + " WHERE questionid = ?");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, questionID);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			
+			String questionString = rs.getString("question");
+			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
+			ResponseQuestion q = new ResponseQuestion(
+					rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
+					questionString, answerStringList, rs.getDouble("score"));
+			rs.close();
+			return q;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return null;	
 	}
 	
 	@SuppressWarnings("unchecked")

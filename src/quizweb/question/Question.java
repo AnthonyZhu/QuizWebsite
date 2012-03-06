@@ -54,6 +54,4 @@ public class Question {
 		}
 		return retString;
 	}
-
-
 }
