@@ -57,10 +57,4 @@ public class ChallengeMessage extends Message {
 		}
 		return ChallengMessageQueue;
 	}
-
-	@Override
-	public String getContent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

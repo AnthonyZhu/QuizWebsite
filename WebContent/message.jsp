@@ -13,7 +13,7 @@
 <body>
 	<% 
 	Date timestamp = new Date();
-	ArrayList<Message> noteMessageQueue = NoteMessage.getMessagesByUserID(1);
+	ArrayList<NoteMessage> noteMessageQueue = NoteMessage.getMessagesByUserID(1);
 	for(int i =  0; i < noteMessageQueue.size(); i++) {
 		Message n = noteMessageQueue.get(i);
 		out.println(n.getContent());
