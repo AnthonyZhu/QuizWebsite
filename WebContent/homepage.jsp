@@ -23,6 +23,15 @@
 	</div>
 	<div class="content-container">
 		<div class="three_column_left">
+		    <ul>
+				<h4>
+				<% 
+	               String username = request.getParameter("username");
+	               out.println("Hi, " + username);
+	            %>
+				</h4>
+				
+			</ul>
 			<ul>
 				<h4 class="title_style_minor">FAVORITES</h4>
 				<li><a class="link-style-dominant" onclick="showNewsFeed()">News Feed</a></li>
@@ -42,7 +51,7 @@
 		</div>
 		
 		<div class="three_column_content">		
-			<iframe id="contentFrame" class="dynamicFrame" frameborder="0" src=""></iframe>
+			<iframe id="contentFrame" class="dynamicFrame" frameborder="0" src="home_feed.jsp"></iframe>
 		</div>
 	
 		<div class="three_column_right">

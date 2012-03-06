@@ -13,7 +13,7 @@ public class DBConnection {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			thisCon = DriverManager.getConnection("jdbc:mysql://" + server, account ,password);
-			Statement stmt = con.createStatement();
+			Statement stmt = thisCon.createStatement();
 			stmt.executeQuery("USE " + database);
 		} catch (SQLException e) { 
 			e.printStackTrace();
