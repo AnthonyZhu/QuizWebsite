@@ -3,9 +3,13 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<% 
+session = request.getSession();
+User user = (User)session.getAttribute("user");
+%>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>User Name<!-- fetch username --></title>
+	<title><%out.println(user.username);%></title>
 	<meta name="Description" content="A smart quiz website" />
 	<meta name="robots" content="all, index, follow" />
 	<meta name="distribution" content="global" />
@@ -17,10 +21,6 @@
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="resources/scripts/functions.js"></script>
 </head>
-<% 
-session = request.getSession();
-User user = (User)session.getAttribute("user");
-%>
 <body>
 <div class="container" >
 	<div class="header">

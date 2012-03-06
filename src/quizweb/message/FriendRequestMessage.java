@@ -49,10 +49,4 @@ public class FriendRequestMessage extends Message {
 		}
 		return FriendRequestMessageQueue;
 	}
-
-	@Override
-	public String getContent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

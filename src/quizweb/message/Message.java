@@ -42,8 +42,6 @@ public abstract class Message {
 		return toUser;
 	}
 	
-	public abstract String getContent();
-	
 //	public boolean equals(Message other) {
 //		return messageID == other.messageID;
 //	}

@@ -51,10 +51,4 @@ public class NoteMessage extends Message {
 		}
 		return noteMessageQueue;
 	}
-
-	@Override
-	public String getContent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
