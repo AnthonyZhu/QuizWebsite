@@ -55,7 +55,7 @@ public class QuizTakenRecord extends Record {
 		// add to database
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
-					+ " (qid, uid, timespan, score, isonepage, isfeedback, ispractice)" 
+					+ " (qid, userid, timespan, score, isonepage, isfeedback, ispractice)" 
 					+ " VALUES (?, ?, ?, ?, ?, ?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"id"});
 			stmt.setInt(1, quiz.quizID);
@@ -78,7 +78,7 @@ public class QuizTakenRecord extends Record {
 	
 	public static ArrayList<QuizTakenRecord> getQuizHistoryByUserID(int userID) {
 		ArrayList<QuizTakenRecord> records = new ArrayList<QuizTakenRecord>();
-		String statement = new String("SELECT * FROM " + DBTable + " WHERE uid = ?");
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE userid = ?");
 		PreparedStatement stmt;
 		try {
 			stmt = DBConnection.con.prepareStatement(statement);
@@ -86,7 +86,7 @@ public class QuizTakenRecord extends Record {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));				
-				User user = User.getUserByUserID(rs.getInt("uid"));
+				User user = User.getUserByUserID(rs.getInt("userid"));
 				QuizTakenRecord record = new QuizTakenRecord(rs.getInt("id"), quiz,
 						user, rs.getLong("timespan"), rs.getDouble("score"), rs.getTimestamp("time"),
 						rs.getBoolean("isonepage"), rs.getBoolean("isfeedback"), rs.getBoolean("ispractice"));
@@ -111,7 +111,7 @@ public class QuizTakenRecord extends Record {
 			stmt.setTimestamp(2, time);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				User user = User.getUserByUserID(rs.getInt("uid"));
+				User user = User.getUserByUserID(rs.getInt("userid"));
 				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));
 				QuizTakenRecord record = new QuizTakenRecord(rs.getInt("id"), quiz,
 						user, rs.getLong("timespan"), rs.getDouble("score"), rs.getTimestamp("time"),
@@ -129,7 +129,7 @@ public class QuizTakenRecord extends Record {
 	
 	public static ArrayList<QuizTakenRecord> getQuizHistoryByQuizIDUserID(int quizID, int userID) {
 		ArrayList<QuizTakenRecord> records = new ArrayList<QuizTakenRecord>();
-		String statement = new String("SELECT * FROM " + DBTable + " WHERE qid = ? AND uid = ?");
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE qid = ? AND userid = ?");
 		PreparedStatement stmt;
 		try {
 			stmt = DBConnection.con.prepareStatement(statement);
@@ -137,7 +137,7 @@ public class QuizTakenRecord extends Record {
 			stmt.setInt(2, userID);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				User user = User.getUserByUserID(rs.getInt("uid"));
+				User user = User.getUserByUserID(rs.getInt("userid"));
 				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));
 				QuizTakenRecord record = new QuizTakenRecord(rs.getInt("id"), quiz,
 						user, rs.getLong("timespan"), rs.getDouble("score"), rs.getTimestamp("time"),

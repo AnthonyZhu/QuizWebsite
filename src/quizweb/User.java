@@ -45,7 +45,7 @@ public class User {
 	public final int REVERSE_PENDING = 3;
 	
 	// database table names
-	public static final String DBTable = "quiz";
+	public static final String DBTable = "users";
 	public static final String FriendDBTable = "friendship";
 	
 	public ArrayList<User> getFriendList(){
@@ -121,7 +121,7 @@ public class User {
 			String statement = new String("INSERT INTO " + DBTable 
 					+ " (username, password, url, permission, isblocked, isdead, practicenumber, highscorenumber)" 
 					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"uid"});
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"id"});
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			stmt.setString(3, homepageURL);
@@ -133,7 +133,7 @@ public class User {
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
-			userID = rs.getInt("uid");
+			userID = rs.getInt("userid");
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,7 +153,7 @@ public class User {
 			ResultSet rs = stmt.executeQuery();
 			User user = null;
 			if (rs.next()) {
-				user = new User(rs.getInt("uid"), rs.getString("username"), rs.getString("password"), rs.getString("url"), 
+				user = new User(rs.getInt("userid"), rs.getString("username"), rs.getString("password"), rs.getString("url"), 
 						rs.getInt("permission"), rs.getBoolean("isblocked"), rs.getBoolean("isdead"), 
 						rs.getInt("practicenumber"), rs.getInt("highscorenumber"));
 			}
@@ -167,12 +167,12 @@ public class User {
 	
 	public static User getUserByUserID(int userID) {
 		try {
-			String statement = new String("SELECT * FROM " + DBTable + " WHERE uid = ?");
+			String statement = new String("SELECT * FROM " + DBTable + " WHERE userid = ?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, userID);
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
-			User user = new User(rs.getInt("uid"), rs.getString("username"), rs.getString("password"), rs.getString("url"), 
+			User user = new User(rs.getInt("userid"), rs.getString("username"), rs.getString("password"), rs.getString("url"), 
 					rs.getInt("permission"), rs.getBoolean("isblocked"), rs.getBoolean("isdead"), 
 					rs.getInt("practicenumber"), rs.getInt("highscorenumber"));
 			rs.close();
@@ -187,7 +187,7 @@ public class User {
 		try {
 			String statement = new String("UPDATE " + DBTable + " SET "
 					+ "username=?, password=?, url=?, permission=?, isblocked=?, isdead=?, practicenumber=?, highscorenumber=?"
-					+ " WHERE uid=?");
+					+ " WHERE userid=?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setString(1, username);
 			stmt.setString(2, password);

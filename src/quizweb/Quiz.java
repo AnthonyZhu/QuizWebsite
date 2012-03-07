@@ -65,7 +65,7 @@ public class Quiz {
 	public void addQuizToDB() {
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
-					+ " (name, url, description, category, uid, israndom, opfeedback, oppractice, raternumber, rating)" 
+					+ " (name, url, description, category, userid, israndom, opfeedback, oppractice, raternumber, rating)" 
 					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"qid"});
 			stmt.setString(1, name);
@@ -97,7 +97,7 @@ public class Quiz {
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
 			Quiz quiz = new Quiz(rs.getInt("qid"), rs.getString("name"), rs.getString("url"), 
-					rs.getString("description"), rs.getString("category"), rs.getInt("uid"), 
+					rs.getString("description"), rs.getString("category"), rs.getInt("userid"), 
 					rs.getBoolean("israndom"), rs.getBoolean("opfeedback"), rs.getBoolean("oppractice"), 
 					rs.getInt("raternumber"), rs.getDouble("rating"));
 			rs.close();
@@ -112,7 +112,7 @@ public class Quiz {
 	public void updateCurrentQuiz() {
 		try {
 			String statement = new String("UPDATE " + DBTable + " SET "
-					+ "name=?, url=?, description=?, category=?, uid=?, israndom=?, opfeedback=?, oppractice=?, raternumber=?, rating=?"
+					+ "name=?, url=?, description=?, category=?, userid=?, israndom=?, opfeedback=?, oppractice=?, raternumber=?, rating=?"
 					+ " WHERE qid=?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setString(1, name);
