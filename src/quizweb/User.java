@@ -121,7 +121,7 @@ public class User {
 			String statement = new String("INSERT INTO " + DBTable 
 					+ " (username, password, url, permission, isblocked, isdead, practicenumber, highscorenumber)" 
 					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"id"});
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"userid"});
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			stmt.setString(3, homepageURL);
