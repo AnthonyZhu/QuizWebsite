@@ -3,6 +3,7 @@ package quizweb.message;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import quizweb.database.DBConnection;
 
@@ -14,6 +15,11 @@ public class NoteMessage extends Message {
 	public NoteMessage(int uid1, int uid2, String c) {
 		super(uid1, uid2, c);
 		isRead = false;
+	}
+	
+	public NoteMessage(int id, int uid1, int uid2, String c, Timestamp time, boolean isread) {
+		super(id, uid1, uid2, c, time);
+		isRead = isread;
 	}
 	
 	@Override
@@ -41,9 +47,9 @@ public class NoteMessage extends Message {
 			ResultSet rs = DBConnection.DBQuery(stmt);
 			rs.beforeFirst();
 			while(rs.next()) {
-				NoteMessage nm = new NoteMessage(rs.getInt("uid1"), rs.getInt("uid2"), rs.getString("note"));
-				nm.setMessageID(rs.getInt("mid"));
-				nm.setTime(rs.getTimestamp("time"));
+				NoteMessage nm = new NoteMessage(
+						rs.getInt("mid"), rs.getInt("uid1"), rs.getInt("uid2"), 
+						rs.getString("note"), rs.getTimestamp("time"), rs.getBoolean("isRead"));
 				noteMessageQueue.add(nm); 
 			}
 		} catch (SQLException e1) {
