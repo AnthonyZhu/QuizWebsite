@@ -40,7 +40,7 @@ public class NewAccountServlet extends HttpServlet {
 		AccountManager am = (AccountManager)getServletContext().getAttribute("accunt manager");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if(User.getUserByUsername(username) == null) {
+		if(User.getUserByUsername(username) != null) {
 			RequestDispatcher dispatch = request.getRequestDispatcher("nameInUse.jsp");
 			dispatch.forward(request, response);
 		}
