@@ -6,7 +6,6 @@ import java.util.*;
 
 import quizweb.*;
 import quizweb.database.DBConnection;
-import quizweb.database.DBQueries;
 import quizweb.record.AchievementRecord;
 
 public class Achievement {
