@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import quizweb.User;
+
 /**
  * Servlet implementation class NewAccountServlet
  */
@@ -38,12 +40,12 @@ public class NewAccountServlet extends HttpServlet {
 		AccountManager am = (AccountManager)getServletContext().getAttribute("accunt manager");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if(am.isExisted(username)) {
+		if(User.getUserByUsername(username) == null) {
 			RequestDispatcher dispatch = request.getRequestDispatcher("nameInUse.jsp");
 			dispatch.forward(request, response);
 		}
 		else {
-			am.createNewAccount(username, password, "1");
+			am.createNewAccount(username, password, 1);
 			RequestDispatcher dispatch = request.getRequestDispatcher("Welcome.jsp");
 			dispatch.forward(request, response);
 		}
