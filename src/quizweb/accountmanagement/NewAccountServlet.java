@@ -46,7 +46,7 @@ public class NewAccountServlet extends HttpServlet {
 		}
 		else {
 			am.createNewAccount(username, password, 1);
-			RequestDispatcher dispatch = request.getRequestDispatcher("Welcome.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("homepage.jsp");
 			dispatch.forward(request, response);
 		}
 	}
