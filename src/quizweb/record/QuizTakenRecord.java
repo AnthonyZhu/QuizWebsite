@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.*;
 import quizweb.*;
+import quizweb.achievement.HighScoreAchievement;
+import quizweb.achievement.PracticeAchievement;
+import quizweb.achievement.QuizTakenAchievement;
 import quizweb.database.DBConnection;
 
 public class QuizTakenRecord extends Record {
@@ -48,7 +51,7 @@ public class QuizTakenRecord extends Record {
 		this.isPractice = isPractice;
 	}
 	
-	public void addRecordToDatabase() {
+	public void addRecordToDB() {
 		// add to database
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
@@ -82,8 +85,8 @@ public class QuizTakenRecord extends Record {
 			stmt.setInt(1, userID);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
+				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));				
 				User user = User.getUserByUserID(rs.getInt("uid"));
-				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));
 				QuizTakenRecord record = new QuizTakenRecord(rs.getInt("id"), quiz,
 						user, rs.getLong("timespan"), rs.getDouble("score"), rs.getTimestamp("time"),
 						rs.getBoolean("isonepage"), rs.getBoolean("isfeedback"), rs.getBoolean("ispractice"));
@@ -164,15 +167,22 @@ public class QuizTakenRecord extends Record {
 		long curTime = new Date().getTime();
 		timeSpan = curTime - quizStartTime;
 		score = quiz.getScore(userAnswers);
-		addRecordToDatabase();
+		addRecordToDB();
 		// TODO
 		// Check if it is a practice
-		
+		if (isPractice) {
+			user.practiceNumber++;
+			user.updateCurrentUser();
+			PracticeAchievement.updateAchievement(user);
+		}
 		// Check if it is a highscore
-		
-		// Check achievement related stats
-	}
-	
+		if (score >= quiz.getBestScore()) {
+			user.highScoreNumber++;
+			user.updateCurrentUser();
+			HighScoreAchievement.updateAchievement(user);
+		}
+		QuizTakenAchievement.updateAchievement(user);
+	}	
 }
 
 

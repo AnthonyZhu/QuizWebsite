@@ -15,9 +15,13 @@ public class MatchingQuestion extends Question {
 //	ArrayList<String>	userAnswer;
 	static final String DBTable = "matching_question";
 	
-	@SuppressWarnings("unchecked")
 	public MatchingQuestion(int quizID, int position, Object question, Object answer, double score) {
 		super(quizID, position, question, answer, score);
+		addQustionToDB();		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void addQustionToDB() {
 		String questionStr = getConcatedString((ArrayList<String>) question);
 		String answerStr = getConcatedString((ArrayList<String>) answer);
 		// add to database
@@ -38,7 +42,6 @@ public class MatchingQuestion extends Question {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public MatchingQuestion(int questionID, int quizID, int position, Object question, Object answer, double score) {

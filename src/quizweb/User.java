@@ -75,8 +75,8 @@ public class User {
 		return QuizCreatedRecord.getCreatedQuizByUserID(userID);
 	}
 	
-	public ArrayList<AchievementRecord> getAchievements() {
-		return AchievementRecord.getAchievementsByUserID(userID);
+	public ArrayList<Achievement> getAchievements() {
+		return AchievementRecord.getAchievementsByUserID(userID, Achievement.ALL_TYPE);
 	}
 	
 	public ArrayList<NoteMessage> getNoteMessages() {
@@ -100,6 +100,23 @@ public class User {
 		this.isDead = false;
 		this.practiceNumber = 0;
 		this.highScoreNumber = 0;
+		addUserToDB();
+	}
+	
+	public User(int userID, String username, String password, String homepageURL, int permission, boolean isBlocked,
+			boolean isDead, int practiceNumber, int highScoreNumber) {
+		this.userID = userID;
+		this.username = username;
+		this.password = password;
+		this.homepageURL = homepageURL;
+		this.permission= permission;
+		this.isBlocked = isBlocked;
+		this.isDead = isDead;
+		this.practiceNumber = practiceNumber;
+		this.highScoreNumber = highScoreNumber;
+	}
+	
+	public void addUserToDB() {
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
 					+ " (username, password, url, permission, isblocked, isdead, practicenumber, highscorenumber)" 
@@ -120,20 +137,7 @@ public class User {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	public User(int userID, String username, String password, String homepageURL, int permission, boolean isBlocked,
-			boolean isDead, int practiceNumber, int highScoreNumber) {
-		this.userID = userID;
-		this.username = username;
-		this.password = password;
-		this.homepageURL = homepageURL;
-		this.permission= permission;
-		this.isBlocked = isBlocked;
-		this.isDead = isDead;
-		this.practiceNumber = practiceNumber;
-		this.highScoreNumber = highScoreNumber;
+		}		
 	}
 	
 	/** 
@@ -276,30 +280,8 @@ public class User {
 		// TODO
 	}	
 	
-	// Achievement
-	
-	public void updateAchievements() {
-		for (int i = 0; i < Achievement.allAchievements.size(); i++) {
-			Achievement achi = Achievement.allAchievements.get(i);
-			boolean isDone = false;
-			ArrayList<AchievementRecord> achievements = new ArrayList<AchievementRecord>();
-			for (int j = 0; j < achievements.size(); j++) {
-				if (achievements.get(j).achievement.equals(achi)) {
-					isDone = true;
-					break;
-				}				
-			}
-			if (!isDone && achi.isAccomplished(this))
-				addAchievement(achi);
-		}
-	}
-	
-	public void addAchievement(Achievement achievement) {
-		getAchievements().add(new AchievementRecord(this, achievement));		
-	}
 
 	// Admin 
-	
 	public void addAnnouncement(String title, String content) {
 		if (permission != IS_ADMIN) return;
 		new Announcement(title, content); // TODO JACK

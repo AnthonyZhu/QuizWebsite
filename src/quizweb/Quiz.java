@@ -42,30 +42,7 @@ public class Quiz {
 		this.opPractice = opPractice;
 		this.raterNumber = 0;
 		this.totalRating = 0;
-		// add to database
-		try {
-			String statement = new String("INSERT INTO " + DBTable 
-					+ " (name, url, description, category, uid, israndom, opfeedback, oppractice, raternumber, rating)" 
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"qid"});
-			stmt.setString(1, name);
-			stmt.setString(2, quizURL);
-			stmt.setString(3, description);
-			stmt.setString(4, category);
-			stmt.setInt(5, userID);
-			stmt.setBoolean(6, isRandom);
-			stmt.setBoolean(7, opFeedback);
-			stmt.setBoolean(8, opPractice);
-			stmt.setInt(9, raterNumber);
-			stmt.setDouble(10, totalRating);			
-			stmt.executeUpdate();
-			ResultSet rs = stmt.getGeneratedKeys();
-			rs.next();
-			quizID = rs.getInt("qid");
-			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		addQuizToDB();
 	}
 	
 	// Reference constructor
@@ -83,6 +60,32 @@ public class Quiz {
 		this.opPractice = opPractice;
 		this.raterNumber = raterNumber;
 		this.totalRating = totalRating;		
+	}
+	
+	public void addQuizToDB() {
+		try {
+			String statement = new String("INSERT INTO " + DBTable 
+					+ " (name, url, description, category, uid, israndom, opfeedback, oppractice, raternumber, rating)" 
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"qid"});
+			stmt.setString(1, name);
+			stmt.setString(2, quizURL);
+			stmt.setString(3, description);
+			stmt.setString(4, category);
+			stmt.setInt(5, creator.userID);
+			stmt.setBoolean(6, isRandom);
+			stmt.setBoolean(7, opFeedback);
+			stmt.setBoolean(8, opPractice);
+			stmt.setInt(9, raterNumber);
+			stmt.setDouble(10, totalRating);			
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			quizID = rs.getInt("qid");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	public static Quiz getQuizByQuizID(int quizID) {
@@ -193,6 +196,14 @@ public class Quiz {
 		return sum;
 	}	
 	
+	public double getBestScore() {
+		ArrayList<QuizTakenRecord> records = getAllTopRecord();
+		if (!records.isEmpty()) 
+			return records.get(0).score;
+		else 
+			return 0;
+	}
+	
 	/**
 	 * Get best score for a given user
 	 * @param user
@@ -238,5 +249,4 @@ public class Quiz {
 		}
 		return -1;
 	}
-
 }

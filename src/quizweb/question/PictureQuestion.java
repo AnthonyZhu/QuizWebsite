@@ -17,10 +17,14 @@ public class PictureQuestion extends Question {
 	
 	public String		questionURL;
 	
-	@SuppressWarnings("unchecked")
 	public PictureQuestion(int quizID, int position, Object question, Object answer, double score, String questionURL) {
 		super(quizID, position, question, answer, score);
 		this.questionURL = questionURL;
+		addQustionToDB();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void addQustionToDB() {
 		String questionStr = (String) question;
 		String answerStr = getConcatedString((ArrayList<String>) answer);
 		// add to database
@@ -41,8 +45,7 @@ public class PictureQuestion extends Question {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-
+		}		
 	}
 
 	public PictureQuestion(int questionID, int quizID, int position, Object question, Object answer, double score, String questionURL) {

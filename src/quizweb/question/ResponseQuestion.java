@@ -14,9 +14,13 @@ public class ResponseQuestion extends Question {
 //	String				userAnswer;
 	static final String DBTable = "question_response_question";
 	
-	@SuppressWarnings("unchecked")
 	public ResponseQuestion(int quizID, int position, Object question, Object answer, double score) {
 		super(quizID, position, question, answer, score);
+		addQustionToDB();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void addQustionToDB() {	
 		String questionStr = (String) question;
 		String answerStr = getConcatedString((ArrayList<String>) answer);
 		// add to database		
@@ -36,7 +40,7 @@ public class ResponseQuestion extends Question {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}		
 	}
 	
 	public ResponseQuestion(int questionID, int quizID, int position, Object question, Object answer, double score) {

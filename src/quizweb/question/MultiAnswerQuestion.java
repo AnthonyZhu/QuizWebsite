@@ -15,9 +15,13 @@ public class MultiAnswerQuestion extends Question {
 //	ArrayList<String>	userAnswer;
 	static final String DBTable = "multiple_answer_question";
 	
-	@SuppressWarnings("unchecked")
 	public MultiAnswerQuestion(int quizID, int position, Object question, Object answer, double score) {
 		super(quizID, position, question, answer, score);
+		addQustionToDB();	
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void addQustionToDB() {
 		String questionStr = (String) question;
 		String answerStr = getConcatedString((ArrayList<String>) answer);
 		// add to database
@@ -38,7 +42,6 @@ public class MultiAnswerQuestion extends Question {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public MultiAnswerQuestion(int questionID, int quizID, int position, Object question, Object answer, double score) {

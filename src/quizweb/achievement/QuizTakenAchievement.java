@@ -1,17 +1,48 @@
 package quizweb.achievement;
 
-import quizweb.User;
+import java.sql.*;
+import java.util.*;
+
+import quizweb.*;
+import quizweb.database.*;
+import quizweb.record.*;
 
 public class QuizTakenAchievement extends Achievement {
 	
-	public static final int aid = 2;
+	static ArrayList<QuizTakenAchievement> allAchievements = new ArrayList<QuizTakenAchievement>();
+	static {
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE type = ?");
+		PreparedStatement stmt;
+		try {
+			stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, QUIZ_TAKEN_TYPE);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				QuizTakenAchievement achievement = new QuizTakenAchievement(rs.getString("name"), 
+						rs.getString("description"), rs.getInt("threshold"));
+				allAchievements.add(achievement);
+			}
+			rs.close();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
 	
-	public QuizTakenAchievement(String name, String fileDirectory, String discription) {
-		super(name, fileDirectory, discription);
+	public QuizTakenAchievement(String name, String discription, int threshold) {
+		super(name, discription, threshold);
+		this.type = QUIZ_TAKEN_TYPE;
+		super.addAchievementToDB();
 	}
 
-	@Override
-	public boolean isAccomplished(User user) {
-		return user.getQuizHistory().size() >= threshold;
+	public static void updateAchievement(User user) {
+		ArrayList<Achievement> records = AchievementRecord.getAchievementsByUserID(user.userID, QUIZ_TAKEN_TYPE);
+		int totalTakenQuiz = QuizTakenRecord.getQuizHistoryByUserID(user.userID).size(); // TODO can be simplified using COUNT in database
+		for (int i = 0; i < allAchievements.size(); i++) {
+			Achievement achievement = allAchievements.get(i);
+			if (records.contains(achievement)) continue;
+			if (totalTakenQuiz >= achievement.threshold) {
+				new AchievementRecord(user, achievement);
+			}			
+		}
 	}
 }

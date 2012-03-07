@@ -1,94 +1,78 @@
 package quizweb.achievement;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
-import quizweb.*;
-import quizweb.database.DBConnection;
+import java.sql.*;
+
+import quizweb.database.*;
 
 public class Achievement {
-	private String description;
-	private String name;
-	private String fileDirectory;	
-	public double threshold;
-	public static ArrayList<Achievement> allAchievements;
-	private static final String DBTable1 = "achievement";
-	private static final String DBTable2 = "achievement_history";
-		
-	public Achievement(String name, String fileDirectory, String discription){
+	public int id;
+	public int type;
+	public String name;
+	public String description;
+	public int threshold;
+	
+	static final String DBTable = "achievement";
+
+	public static final int ALL_TYPE = 0;
+	public static final int QUIZ_TAKEN_TYPE = 1;
+	public static final int QUIZ_CREATED_TYPE = 2;
+	public static final int PRACTICE_TYPE = 3;
+	public static final int HIGHSCORE_TYPE = 4;
+	
+	public Achievement(String name, String discription, int threshold){
 		this.name = name;
-		this.fileDirectory = fileDirectory;
 		this.description = discription;
+		this.threshold = threshold;
 	}
 	
-	public String getName(){
-		return name;
+	public Achievement(int id, int type, String name, String discription, int threshold){
+		this.id = id;
+		this.type = type;
+		this.name = name;
+		this.description = discription;
+		this.threshold = threshold;
 	}
-	
-	public String getFileDirectory(){
-		return fileDirectory;
-	}
-	
-	public String getDescription(){
-		return description;
-	}
-	
-	//Create a new type of achievement into database
-	public static void addNewAchievement(String name, String file, String description){
+		
+	public void addAchievementToDB() {
 		try {
-			String statement = new String("INSERT INTO " + DBTable1 +" VALUES (?, ?, ?)");
-			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
-			stmt.setString(1, name);
-			stmt.setString(2, file);
+			String statement = new String("INSERT INTO " + DBTable 
+					+ " (type, name, description, threshold)" 
+					+ " VALUES (?, ?, ?, ?)");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"aid"});
+			stmt.setInt(1, type);
+			stmt.setString(2, name);
 			stmt.setString(3, description);
-			DBConnection.DBUpdate(stmt);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
+			stmt.setInt(4, threshold);
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			id = rs.getInt("aid");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
-	//Insert achievement history when a user accomplish an achievement.
-	public static void addAchievementHistory(int uid, int aid){
+	public static Achievement getAchievementByID(int aid) {
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE id = ?");
+		PreparedStatement stmt;
 		try {
-			String statement = new String("INSERT INTO " + DBTable2 +" VALUES (?, ?, NOW())");
-			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
-			stmt.setInt(1, uid);
-			stmt.setInt(2, aid);
-			DBConnection.DBUpdate(stmt);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	}
-	
-	public static ArrayList<Achievement> getAchievementsByUserID(int userID) {
-		ArrayList<Achievement> AllAchievements = new ArrayList<Achievement>();
-		try {
-			String statement1 = new String("SELECT * FROM " + DBTable2 +" WHERE uid = ?");
-			PreparedStatement stmt1 = DBConnection.con.prepareStatement(statement1);
-			stmt1.setInt(1, userID);
-			ResultSet rs1 = DBConnection.DBQuery(stmt1);
-			rs1.beforeFirst();
-			while(rs1.next()) {
-				int aid = rs1.getInt("aid");
-				String statement2 = new String("SELECT * FROM " + DBTable1 +" WHERE aid = ?");
-				PreparedStatement stmt2 = DBConnection.con.prepareStatement(statement2);
-				stmt2.setInt(1, aid);
-				ResultSet rs2 = DBConnection.DBQuery(stmt2);
-				Achievement a = new Achievement(rs2.getString("name"), rs2.getString("file"), rs2.getString("description"));
-				AllAchievements.add(a); 
+			stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, aid);
+			ResultSet rs = stmt.executeQuery();
+			Achievement achievement = null;
+			if (rs.next()) {
+				achievement = new Achievement(rs.getInt("aid"), rs.getInt("type"), 
+						rs.getString("name"), rs.getString("description"), rs.getInt("threshold"));				
 			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
+			rs.close();
+			return achievement;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return AllAchievements;
+		return null;
 	}
-	
-	public boolean isAccomplished(User user) {
-		System.out.println("THIS LINE SHOULD NEVER BE REACHED");
-		return false;
-	}
-	
+
 	public boolean equals(Achievement other) {
 		return name.equals(other.name);
 	}

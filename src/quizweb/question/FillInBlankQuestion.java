@@ -14,9 +14,13 @@ public class FillInBlankQuestion extends Question {
 	static final String DBTable = "fill_in_blank_question";
 
 	// Create a new fill in blank question
-	@SuppressWarnings("unchecked")
 	public FillInBlankQuestion(int quizID, int position, Object question, Object answer, double score) {
 		super(quizID, position, question, answer, score);
+		addQustionToDB();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void addQustionToDB() {
 		String questionStr = getConcatedString((ArrayList<String>) question);
 		String answerStr = getConcatedString((ArrayList<String>) answer);
 		// add to database
@@ -36,7 +40,7 @@ public class FillInBlankQuestion extends Question {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}	
 	}
 	
 	// Generate reference from database

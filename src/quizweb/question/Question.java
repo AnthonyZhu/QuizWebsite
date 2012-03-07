@@ -28,6 +28,10 @@ public class Question {
 		return -1;
 	}
 	
+	public void addQustionToDB() {
+		System.out.println("THIS LINE SHOULD NEVER BE REACHED");		
+	}
+	
 	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
 		ArrayList<Question> questions = new ArrayList<Question>();
 		questions.addAll(ResponseQuestion.getQuestionsByQuizID(quizID));
