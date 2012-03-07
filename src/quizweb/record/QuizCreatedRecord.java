@@ -31,7 +31,7 @@ public class QuizCreatedRecord extends Record {
 		// add to database
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
-					+ " (qid, uid)" 
+					+ " (qid, userid)" 
 					+ " VALUES (?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"id"});
 			stmt.setInt(1, quiz.quizID);
@@ -49,7 +49,7 @@ public class QuizCreatedRecord extends Record {
 	
 	public static ArrayList<QuizCreatedRecord> getCreatedQuizByUserID(int userID) {
 		ArrayList<QuizCreatedRecord> records = new ArrayList<QuizCreatedRecord>();
-		String statement = new String("SELECT * FROM " + DBTable + " WHERE uid = ?");
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE userid = ?");
 		PreparedStatement stmt;
 		try {
 			stmt = DBConnection.con.prepareStatement(statement);
@@ -57,7 +57,7 @@ public class QuizCreatedRecord extends Record {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));
-				User user = User.getUserByUserID(rs.getInt("uid"));
+				User user = User.getUserByUserID(rs.getInt("userid"));
 				QuizCreatedRecord record = new QuizCreatedRecord(rs.getInt("id"), quiz, user, rs.getTimestamp("time"));
 				records.add(record);
 			}
