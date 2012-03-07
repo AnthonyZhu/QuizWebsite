@@ -34,13 +34,27 @@ public class Achievement {
 		return description;
 	}
 	
-	public static void AddNewAchievement(String name, String file, String description){
+	//Create a new type of achievement into database
+	public static void addNewAchievement(String name, String file, String description){
 		try {
 			String statement = new String("INSERT INTO " + DBTable1 +" VALUES (?, ?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setString(1, name);
 			stmt.setString(2, file);
 			stmt.setString(3, description);
+			DBConnection.DBUpdate(stmt);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	//Insert achievement history when a user accomplish an achievement.
+	public static void addAchievementHistory(int uid, int aid){
+		try {
+			String statement = new String("INSERT INTO " + DBTable2 +" VALUES (?, ?, NOW())");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, uid);
+			stmt.setInt(2, aid);
 			DBConnection.DBUpdate(stmt);
 		} catch (SQLException e1) {
 			e1.printStackTrace();

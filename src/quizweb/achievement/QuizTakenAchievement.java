@@ -4,6 +4,8 @@ import quizweb.User;
 
 public class QuizTakenAchievement extends Achievement {
 	
+	public static final int aid = 2;
+	
 	public QuizTakenAchievement(String name, String fileDirectory, String discription) {
 		super(name, fileDirectory, discription);
 	}
