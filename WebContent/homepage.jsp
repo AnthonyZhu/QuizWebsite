@@ -37,6 +37,7 @@
 				<% 
 	               String username = request.getParameter("username");
 	               out.println("Hi, " + username);
+	               session.setAttribute("userName",username);
 	            %>
 				</h4>
 				
@@ -57,8 +58,8 @@
 				<li><a class="link-style-dominant" onclick="showQuizCreated()">Created</a></li>
 			</ul>
 			<hr >
-                <% 
-				    out.println("<a href=\"new_quiz_settings.jsp\"> + Create Quiz</a>");
+                <%
+				out.println("<a href=\"new_quiz_settings.jsp?userName=" + username + "\"> + Create Quiz</a>");
 				%>
 		</div>
 		
