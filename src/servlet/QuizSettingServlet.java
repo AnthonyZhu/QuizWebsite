@@ -56,7 +56,7 @@ public class QuizSettingServlet extends HttpServlet {
 
 		String quizURL = "";
 		
-		if(quizOrder.equals("Yes")){
+		if(quizOrder.equals("Allow randomization")){
 			isRandom = true;
 		}else{
 			isRandom = false;

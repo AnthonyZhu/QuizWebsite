@@ -71,7 +71,7 @@
 				<fieldset>
 				 	<legend id="title3" class="quiz_title">Allow auto-generation from question pool?</legend>
 					<div>
-						<input id="radioDefault_3" name="Field3" type="hidden" value="" />
+						
 						<span>
 							<input id="Field3_0" name="Field3" type="radio" class="field radio" value="Yes" tabindex="3" checked="checked"  />
 							<label class="choice" for="Field3_0" >Yes</label>
@@ -88,7 +88,7 @@
 				<fieldset>
 					<legend id="title4" class="quiz_title">Question order</legend>
 					<div>
-						<input id="radioDefault_4" name="Field4" type="hidden" value="" />
+						
 						<span>
 							<input id="Field4_0" name="Field4" type="radio" class="field radio" value="Allow randomization" tabindex="1" checked="checked"  />
 							<label class="choice" for="Field4_0" >Allow randomization</label>
@@ -104,7 +104,7 @@
 			<li id="foli5" class="highlight">
 				<fieldset><legend id="title5" class="quiz_title">Paging</legend>
 					<div>
-						<input id="radioDefault_5" name="Field5" type="hidden" value="" />
+						
 						<span>
 							<input id="Field5_0" name="Field5" type="radio" class="field radio" value="Show all questions on one page" tabindex="3" checked="checked"  />
 							<label class="choice" for="Field5_0" >Show all questions on one page</label>
@@ -121,7 +121,7 @@
 				<fieldset>
 				 	<legend id="title6" class="quiz_title">Immediate correction?</legend>
 					<div>
-						<input id="radioDefault_6" name="Field6" type="hidden" value="" />
+						
 						<span>
 							<input id="Field6_0" name="Field6" type="radio" class="field radio" value="Yes" tabindex="3" checked="checked"  />
 							<label class="choice" for="Field6_0" >Yes</label>
@@ -138,7 +138,7 @@
 				<fieldset>
 				 	<legend id="title7" class="quiz_title">Allow practice mode?</legend>
 					<div>
-						<input id="radioDefault_7" name="Field7" type="hidden" value="" />
+						
 						<span>
 							<input id="Field7_0" name="Field7" type="radio" class="field radio" value="Yes" tabindex="3" checked="checked"  />
 							<label class="choice" for="Field7_0" >Yes</label>
