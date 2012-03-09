@@ -39,7 +39,7 @@ public class QuizCreatedRecord extends Record {
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
-			recordID = rs.getInt("id");
+			recordID = rs.getInt("GENERATED_KEY");
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

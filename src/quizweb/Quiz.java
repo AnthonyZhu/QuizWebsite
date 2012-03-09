@@ -81,7 +81,7 @@ public class Quiz {
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
-			quizID = rs.getInt("qid");
+			quizID = rs.getInt("GENERATED_KEY");
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
