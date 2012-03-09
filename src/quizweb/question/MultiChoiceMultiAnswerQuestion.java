@@ -37,7 +37,7 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
-			questionID = rs.getInt("questionid");
+			questionID = rs.getInt("GENERATED_KEY");
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

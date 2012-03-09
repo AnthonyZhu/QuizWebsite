@@ -46,7 +46,7 @@ public class Achievement {
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
-			id = rs.getInt("aid");
+			id = rs.getInt("GENERATED_KEY");
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

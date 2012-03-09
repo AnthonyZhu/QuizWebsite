@@ -31,7 +31,7 @@ public class Announcement {
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
-			announcementID = rs.getInt("aid");
+			announcementID = rs.getInt("GENERATED_KEY");
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
