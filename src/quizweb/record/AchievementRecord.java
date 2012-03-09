@@ -24,7 +24,7 @@ public class AchievementRecord extends Record {
 		// add to database
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
-					+ " (uid, aid)" 
+					+ " (userid, aid)" 
 					+ " VALUES (?, ?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"id"});
 			stmt.setInt(1, user.userID);
@@ -41,7 +41,7 @@ public class AchievementRecord extends Record {
 
 	public static ArrayList<Achievement> getAchievementsByUserID(int userID, int type) {
 		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
-		String statement = new String("SELECT * FROM " + DBTable + " WHERE uid = ?");
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE userid = ?");
 		PreparedStatement stmt;
 		try {
 			stmt = DBConnection.con.prepareStatement(statement);

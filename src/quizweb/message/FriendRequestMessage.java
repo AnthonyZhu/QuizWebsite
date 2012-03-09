@@ -31,7 +31,8 @@ public class FriendRequestMessage extends Message {
 	@Override
 	public void addMessageToDB() {
 		try {
-			String statement = new String("INSERT INTO " + DBTable +" VALUES (?, ?, NOW(), ?, ?)");
+			String statement = new String("INSERT INTO " + DBTable +"" +
+					"(uid1, uid2, time, isConfirmed, isRejected) VALUES (?, ?, NOW(), ?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, fromUser);
 			stmt.setInt(2, toUser);

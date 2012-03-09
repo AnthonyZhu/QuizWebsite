@@ -37,6 +37,7 @@
 				<% 
 	               String username = request.getParameter("username");
 	               out.println("Hi, " + username);
+	               session.setAttribute("userName",username);
 	            %>
 				</h4>
 				
@@ -56,7 +57,10 @@
 				<li><a class="link-style-dominant" onclick="showQuizTaken()">Took</a></li>
 				<li><a class="link-style-dominant" onclick="showQuizCreated()">Created</a></li>
 			</ul>
-
+			<hr >
+                <%
+				out.println("<a href=\"new_quiz_settings.jsp?userName=" + username + "\"> + Create Quiz</a>");
+				%>
 		</div>
 		
 		<div class="three_column_content">		
@@ -70,9 +74,13 @@
 				<ol>
 				<%
 				if(Announcement.allAnnouncements == null){
-					out.print("no announcement.");
-				}else{
+					out.println("no announcement.");
+				}else if(Announcement.allAnnouncements.size()==0){
+					out.println("no announcement.");
+				}
+				else{
 					if(Announcement.allAnnouncements.size()<=2){
+						out.println(Announcement.allAnnouncements.size());
 						for(int i=0;i<Announcement.allAnnouncements.size();i++){
 							out.println("<li>" + Announcement.allAnnouncements.get(i).title + ": " + Announcement.allAnnouncements.get(i).content + "</li>");
 				        }
@@ -89,44 +97,18 @@
 				<h4 class="title-style-minor">Popular Quizzes</h4>
 				<hr />
 				<ol>
-				<%-- do not delete
-				Quiz quiz = new Quiz();
-				if(quiz.getTopRecord() == null){
-					out.print("no popular quiz.");
-				}else{
-					if(quiz.getTopRecord().size()<=2){
-						for(int i=0;i<quiz.getTopRecord().size();i++){
-							out.println("<li>" + quiz.getTopRecord().get(i).quiz.quizID + "</li>");
-				        }
-				    }else{  
-				    	out.println("<li>" + quiz.getTopRecord().get(0).quiz.quizID + "</li>");
-				    	out.println("<li>" + quiz.getTopRecord().get(1).quiz.quizID + "</li>");
-				    	out.println("<a class=\"link-style-dominant\" onclick=\"showMorePopularQuizs()\">More popular quizzes</a>");
-				    }
-				}
-				--%>
+				<%
+				
+				%>
 				</ol>
 			</div>
 			<div class="right_block">
 				<h4 class="title-style-minor">Recently Created</h4>
 				<hr />
 				<ol>
-				<%-- do not delete
-				Quiz quiz = new Quiz();
-				if(quiz.getHistory() == null){
-					out.print("no popular quiz.");
-				}else{
-					if(quiz.getHistory().size()<=2){
-						for(int i=0;i<quiz.getHistory().size();i++){
-							out.println("<li>" + quiz.getHistory().get(i).quiz.quizID + "</li>");
-				        }
-				    }else{  
-				    	out.println("<li>" + quiz.getHistory().get(0).quiz.quizID + "</li>");
-				    	out.println("<li>" + quiz.getHistory().get(1).quiz.quizID + "</li>");
-				    	out.println("<a class=\"link-style-dominant\" onclick=\"showMoreRecentlyQuizs()\">More recently quizzes</a>");
-				    }
-				}
-				--%>
+				<%
+				
+				%>
 				</ol>
 			</div>
 		</div>

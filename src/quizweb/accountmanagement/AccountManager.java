@@ -9,7 +9,7 @@ import quizweb.database.*;
 
 
 public class AccountManager {
-	private static final String DBTable = "user";
+	private static final String DBTable = "users";
 	public AccountManager(){
 	}
 	
@@ -25,7 +25,7 @@ public class AccountManager {
 		Encryption e = new Encryption();
 		String hashedPassword = e.generateHashedPassword(password);
 		try {
-			String statement = new String("SELECT password FROM " + DBTable +" WHERE name = ?");
+			String statement = new String("SELECT password FROM " + DBTable +" WHERE username = ?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setString(1, name);
 			ResultSet rs = DBConnection.DBQuery(stmt);
