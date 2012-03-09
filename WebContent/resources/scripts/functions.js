@@ -39,8 +39,6 @@
 })(window);
 
 
-
-
 $(".highlight").focusin(function() {
 	if(!$(this).hasClass("highlight_background")) {
 		$(".highlight").removeClass("highlight_background");

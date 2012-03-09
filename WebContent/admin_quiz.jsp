@@ -7,11 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>
-	<% 
-	String username = request.getParameter("username");
-	out.println("Welcome " + username);
-	%>
-	</h1>
+	show quiz
 </body>
 </html>
