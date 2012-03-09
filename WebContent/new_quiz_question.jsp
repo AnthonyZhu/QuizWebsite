@@ -73,16 +73,15 @@
 				<label class="quiz_title" >Please input question text below:</label>
 				<div>
 					<textarea id="questionText" name="Field1" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
-					<label for="Field1">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp; 
-					<em class="currently" style="display: inline; ">Currently Used: <var id="rangeUsedMsg8">?</var> characters.</em></label>
+					<label for="Field1">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp;</label>
+					
 				</div>
 			</li>
 			<li class="highlight">
-				<label class="quiz_title">Please input your sample answer below:</label>
+				<label class="quiz_title">Please input your sample answer below: (use comma "," at the end of each answer to specify one answer)</label>
 				<div>
 					<textarea id="questionAnswer" name="Field2" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
-					<label for="Field2">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp; 
-					<em class="currently" style="display: inline; ">Currently Used: <var id="rangeUsedMsg8">?</var> characters.</em></label>
+					<label for="Field2">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp;</label>
 				</div>
 			</li>
 		</ul>

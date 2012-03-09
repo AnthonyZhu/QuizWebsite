@@ -1,10 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="quizweb.*"%>
+<%@ page import="quizweb.accountmanagement.*"%>
+<%@ page import="quizweb.achievement.*"%>
+<%@ page import="quizweb.announcement.*"%>
+<%@ page import="quizweb.database.*"%>
+<%@ page import="quizweb.message.*"%>
+<%@ page import="quizweb.question.*"%>
+<%@ page import="quizweb.record.*"%>
+<%@ page import="servlet.*"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Quiz Summary<!-- fetch quiz title --></title>
+	<title>
+	<%
+	int quizID = (Integer) session.getAttribute("quizID");
+	Quiz quiz = Quiz.getQuizByQuizID(quizID);
+	String quizName = quiz.name;
+	out.println("Quiz Summary of " + quizName);
+	%>
+	</title>
 	<meta name="Description" content="A smart quiz website" />
 	<meta name="robots" content="all, index, follow" />
 	<meta name="distribution" content="global" />
@@ -24,9 +40,19 @@
 	
 	<div class="content-container">
 		<div class="two_column_left">
-			<h1>Quiz Title</h1>
-			<p>Creator: <a class="link-style-dominant" href="http://toquiz.me/username=anthony">Anthony</a>
-				<br>Created on Dec 12, 2012</p>
+			<h1>
+			<%
+			out.println(quizName);
+			%>
+			</h1>
+			<p>Creator: <a class="link-style-dominant" href="http://toquiz.me/username=anthony"><%
+			String creator = quiz.creator.username;
+			out.println(creator);
+			%></a>
+				<br><%
+				double score = quiz.getTotalScore();
+				out.println("Total score: " + score);
+				%></p>
 		</div>
 		<div class="two_column_right">
 			<h2>Rate This Quiz</h2>
@@ -36,7 +62,10 @@
 	
 	<div class="content-container">
 		<div class="two_column_left">
-			<p>Text description of quiz</p>
+			<p><%
+			String description = quiz.description;
+			out.println("Description of quiz is: " + description);
+			%></p>
 		</div>
 		<div class="two_column_right">
 			<button type="submit" class="button_large" name="start_quiz">

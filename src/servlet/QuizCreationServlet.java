@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,15 +52,18 @@ public class QuizCreationServlet extends HttpServlet {
 		session.setAttribute("newQuiz", newQuiz);
 		int quizID = newQuiz.quizID;
 		double score = Double.parseDouble(request.getParameter("score"));
-		Object content = request.getParameter("Field1");
-		Object answer = request.getParameter("Field2");
-		
-		System.out.println(quizID + " " + posistion + " " + content + " " + answer + " " + score);
-		
+		String content = request.getParameter("Field1");
+		String answer = request.getParameter("Field2");
 		
 		String questionType = request.getParameter("newQuestionType");
 		if(questionType.equals("Question-Response")){
-			ResponseQuestion newQuestion = new ResponseQuestion(quizID,posistion,content,answer,score);
+			ArrayList<String> answerList = new ArrayList();
+			String[] answerSplit = answer.split(",");
+		    for(int i=0;i<answerSplit.length;i++){
+		    	answerList.add(answerSplit[i]);
+		    	System.out.println(answerList.get(i));
+		    }
+			ResponseQuestion newQuestion = new ResponseQuestion(quizID,posistion,content,answerList,score);
 		}else if(questionType.equals("Fill in the Blank")){
 			FillInBlankQuestion newQuestion = new FillInBlankQuestion(quizID,posistion,content,answer,score);
 		}else if(questionType.equals("Multiple Choice")){
@@ -68,6 +72,7 @@ public class QuizCreationServlet extends HttpServlet {
 		
 		if(submit != null){
 			if(submit.equals("Save and Finish")){
+				session.setAttribute("quizID", quizID);
 				RequestDispatcher dispatch = request.getRequestDispatcher("quiz_summary.jsp");
 				dispatch.forward(request, response);
 		    }
