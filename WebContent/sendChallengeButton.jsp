@@ -13,14 +13,14 @@
 	session = request.getSession();
 	User user = (User)session.getAttribute("user");
 	%>
-	<div id="note_form">
+	<div id="challenge_form">
 	<form name="note" action="">
-		<input type="text" id="note"/>
 		<input type="hidden" id="sender" value="<%out.print(user.userID);%>"/>
 		<input type="hidden" id="receiver" value="2"/>
+		<input type="hidden" id="quizID" value="1"/>
+		<input type="hidden" id="bestScore" value="100"/>
 		<input type="submit" id="submit_btn" value="send note"/>
 	</form>
-	<span class="error" style="display:none"> empty note!</span>
 	</div>
 </body>
 </html>

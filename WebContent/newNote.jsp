@@ -4,6 +4,6 @@
 	String note = request.getParameter("note");
 	String sender = request.getParameter("sender");
 	String receiver = request.getParameter("receiver");
-	NoteMessage newNote = new NoteMessage(Integer.parseInt(sender), Integer.parseInt(receiver),note);
+	NoteMessage newNote = new NoteMessage(Integer.parseInt(sender), Integer.parseInt(receiver), note);
 	newNote.addMessageToDB();
 %>

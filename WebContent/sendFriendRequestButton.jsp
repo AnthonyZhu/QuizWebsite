@@ -6,21 +6,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="resources/scripts/sendNote.js"></script>
+<script type="text/javascript" src="resources/scripts/sendFriendRequest.js"></script>
 </head>
 <body>
 	<% 
 	session = request.getSession();
 	User user = (User)session.getAttribute("user");
 	%>
-	<div id="note_form">
-	<form name="note" action="">
-		<input type="text" id="note"/>
-		<input type="hidden" id="sender" value="<%out.print(user.userID);%>"/>
+	<div id="friend_request_form">
+	<form name="friend_request" action="">
+		<input type="hidden" id="sender" value="1"/>
 		<input type="hidden" id="receiver" value="2"/>
-		<input type="submit" id="submit_btn" value="send note"/>
+		<input type="submit" id="submit_btn" value="add as friend"/>
 	</form>
-	<span class="error" style="display:none"> empty note!</span>
 	</div>
 </body>
 </html>
