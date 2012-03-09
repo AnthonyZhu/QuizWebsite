@@ -9,11 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<div class="admin_area">
-			<ul>
-				<li>write</li>
-			</ul>
-			</div>
-			
+	<div><%= request.getParameter("keyword") %></div>
+	<table class="adminTable">
+		<tr><td>Id</td><td>Username</td><td>Type</td></tr>
+		<tr><td>1</td><td>Anthony Zhu</td><td>Normal student</td></tr>
+		<tr><td>2</td><td>Yiye Jin</td><td>Artistic student</td></tr>
+		<tr><td>3</td><td>Jack Guo</td><td>?? student</td></tr>
+	</table>
 </body>
 </html>

@@ -17,9 +17,6 @@
 	
 	<link rel="stylesheet" href="resources/css/main.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/admin_layout.css" type="text/css" />
-	
-	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="resources/scripts/AdminFrame.js"></script>
 </head>
 <body>
 <div class="container">
@@ -35,7 +32,16 @@
 			</ul>
 		</div>
 		
-		<div class="admin_area">		
+		<div class="admin_area">
+			<div id="searchArea">
+				<span>Keyword </span>
+				<input type="box"  id="inputBox" onkeydown="if(event.keyCode==13) search()" />
+				<input type="submit" value="Search" onclick="search()"/>
+			</div>
+			<div id="createAncmt">
+				<input type="button" id="createButton" value="Create" onclick="createAnnouncement()" />
+				<input type="button" id="submitButton" value="Submit" onclick="submitAnnouncement()" />
+			</div>
 			<iframe id="adminFrame" class="adminFrame" frameborder="0" src="admin_user.jsp"></iframe>
 		</div>
 		
@@ -45,3 +51,10 @@
 	</div>
 </div>
 </body>
+
+<head>
+	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="resources/scripts/AdminFrame.js"></script>
+</head>
+
+</html>
