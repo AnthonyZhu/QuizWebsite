@@ -15,7 +15,7 @@
 	%>
 	<div id="note_form">
 	<form name="note" action="">
-		<input type="text" id="note"/>
+		<textarea id="note">Your note.</textarea>
 		<input type="hidden" id="sender" value="<%out.print(user.userID);%>"/>
 		<input type="hidden" id="receiver" value="2"/>
 		<input type="submit" id="submit_btn" value="send note"/>

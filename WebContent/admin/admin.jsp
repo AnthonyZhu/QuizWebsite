@@ -15,8 +15,8 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>Administration</title>
 	
-	<link rel="stylesheet" href="resources/css/main.css" type="text/css" />
-	<link rel="stylesheet" href="resources/css/admin_layout.css" type="text/css" />
+	<link rel="stylesheet" href="../resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="../resources/css/admin_layout.css" type="text/css" />
 </head>
 <body>
 <div class="container">
@@ -35,12 +35,18 @@
 		<div class="admin_area">
 			<div id="searchArea">
 				<span>Keyword </span>
-				<input type="box"  id="inputBox" onkeydown="if(event.keyCode==13) search()" />
+				<input type="text"  id="inputBox" onkeydown="if(event.keyCode==13) search()" />
 				<input type="submit" value="Search" onclick="search()"/>
 			</div>
 			<div id="createAncmt">
-				<input type="button" id="createButton" value="Create" onclick="createAnnouncement()" />
-				<input type="button" id="submitButton" value="Submit" onclick="submitAnnouncement()" />
+				<form id="create_announcement" action="">
+					title: <input type="text" id="title" />
+					<textarea id="new_announcement" rows="10" cols="30"></textarea>
+					<span id="error1" style="display:none"> title cannot be empty.</span>
+					<span id="error2" style="display:none"> announcement cannot be empty.</span>
+					<input type="submit" id="createButton" value="Create" onclick="createAnnouncement()" /><!--
+					<input type="button" id="submitButton" value="Submit" onclick="submitAnnouncement()" />
+				--></form>
 			</div>
 			<iframe id="adminFrame" class="adminFrame" frameborder="0" src="admin_user.jsp"></iframe>
 		</div>
@@ -53,8 +59,8 @@
 </body>
 
 <head>
-	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="resources/scripts/AdminFrame.js"></script>
+	<script type="text/javascript" src="../resources/scripts/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="../resources/scripts/AdminFrame.js"></script>
 </head>
 
 </html>

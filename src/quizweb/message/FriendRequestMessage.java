@@ -26,6 +26,12 @@ public class FriendRequestMessage extends Message {
 		isRejected = isrejected;
 	}
 	
+	public boolean isPending() {
+		if(isConfirmed == false && isRejected == false)
+			return true;
+		else 
+			return false;
+	}
 	//static public void removeFriendRequest(Message)
 
 	@Override

@@ -46,7 +46,7 @@ public class Announcement {
 		this.timestamp = timestamp;
 	}
 	
-	private static ArrayList<Announcement> getAllAnnouncements() {
+	public static ArrayList<Announcement> getAllAnnouncements() {
 		ArrayList<Announcement> announcements = new ArrayList<Announcement>();
 		String statement = new String("SELECT * FROM " + DBTable);
 		PreparedStatement stmt;
