@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import quizweb.User;
 
@@ -46,6 +47,9 @@ public class NewAccountServlet extends HttpServlet {
 		}
 		else {
 			am.createNewAccount(username, password, 1);
+			HttpSession session = request.getSession();
+			User user = User.getUserByUsername(username);
+			session.setAttribute("user", user);
 			RequestDispatcher dispatch = request.getRequestDispatcher("homepage.jsp");
 			dispatch.forward(request, response);
 		}

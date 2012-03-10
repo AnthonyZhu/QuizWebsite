@@ -15,8 +15,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>
 	<%
-	int quizID = (Integer) session.getAttribute("quizID");
-	Quiz quiz = Quiz.getQuizByQuizID(quizID);
+	Quiz quiz = (Quiz) session.getAttribute("newQuiz");
 	String quizName = quiz.name;
 	out.println("Quiz Summary of " + quizName);
 	%>
@@ -45,14 +44,15 @@
 			out.println(quizName);
 			%>
 			</h1>
-			<p>Creator: <a class="link-style-dominant" href="http://toquiz.me/username=anthony"><%
+			<p>Creator: 
+			<%
 			String creator = quiz.creator.username;
-			out.println(creator);
-			%></a>
-				<br><%
+			out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + quiz.creator.userID + "\">" + creator + "</a>");
+			%>
+				<br><%--
 				double score = quiz.getTotalScore();
 				out.println("Total score: " + score);
-				%></p>
+				--%></p>
 		</div>
 		<div class="two_column_right">
 			<h2>Rate This Quiz</h2>

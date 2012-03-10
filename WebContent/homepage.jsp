@@ -35,9 +35,8 @@
 		    <ul>
 				<h4>
 				<% 
-	               String username = request.getParameter("username");
-	               out.println("Hi, " + username);
-	               session.setAttribute("userName",username);
+				User homeUser = (User) session.getAttribute("user");
+	            out.println("Hi, " + homeUser.username);
 	            %>
 				</h4>
 				
@@ -59,8 +58,13 @@
 			</ul>
 			<hr >
                 <%
-				out.println("<a href=\"new_quiz_settings.jsp?userName=" + username + "\"> + Create Quiz</a>");
+				out.println("<a href=\"new_quiz_settings.jsp\">+ Create Quiz</a>");
 				%>
+			<hr >
+                <%
+				out.println("<a href=\"userpage.jsp?id=" + homeUser.userID + "\">My Profile</a>");
+				%>	
+				
 		</div>
 		
 		<div class="three_column_content">		

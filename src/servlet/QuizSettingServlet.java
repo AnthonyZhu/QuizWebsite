@@ -51,8 +51,10 @@ public class QuizSettingServlet extends HttpServlet {
 		boolean opPractice;
 		String quizTag = request.getParameter("Field8");
 		String quizDescription = request.getParameter("Field9");
-		String userName = request.getParameter("userName");
-		int userID = User.getUserByUsername(userName).userID;
+		
+		HttpSession session = request.getSession();
+		User homeUser = (User) session.getAttribute("user");
+		int userID = homeUser.userID;
 
 		String quizURL = "";
 		
@@ -75,7 +77,6 @@ public class QuizSettingServlet extends HttpServlet {
 		}
 		
 		Quiz newQuiz = new Quiz(quizName,quizURL,quizDescription,quizCategory,userID,isRandom,opFeedback,opPractice);
-		HttpSession session = request.getSession();
 		session.setAttribute("newQuiz", newQuiz);
 		session.setAttribute("questionPosistion", 1);
 		RequestDispatcher dispatch = request.getRequestDispatcher("new_quiz_question.jsp");

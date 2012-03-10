@@ -34,14 +34,12 @@
 	<form id="form1" name="form1" action="QuizCreationServlet" method="post" >
     <%
     Quiz newQuiz = (Quiz) session.getAttribute("newQuiz");
-    out.println("<input name=\"newQuiz\" type=\"hidden\" value=\"" + newQuiz + "\" />");
     %>
 	<div class="one_column">
 		<%
 		String creatorName = newQuiz.creator.username;
 		String quizName = newQuiz.name;
 		Integer posistion = (Integer)session.getAttribute("questionPosistion");
-		out.println("<input name=\"questionPosistion\" type=\"hidden\" value=\"" + posistion + "\" />");
 		out.println("<h2>Hi, " + creatorName + ", please add question No." + posistion + " to \"" + quizName + "\"</h2>");
 		%>
 		<hr />

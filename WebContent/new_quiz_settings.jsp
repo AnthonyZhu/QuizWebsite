@@ -35,9 +35,8 @@
 	<div class="one_column">
 		<h2>
 		<% 
-		String username = request.getParameter("userName");
-		out.println("Welcome " + username + " to create a new Quiz: Quiz Settings");
-		out.println("<input name=\"userName\" type=\"hidden\" value=\"" + username + "\" />");
+		User homeUser = (User) session.getAttribute("user");
+		out.println("Welcome " + homeUser.username + " to create a new Quiz: Quiz Settings");
 		%>
 		</h2>
 		<hr />

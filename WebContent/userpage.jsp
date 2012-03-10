@@ -5,7 +5,14 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>User Name<!-- fetch username --></title>
+	<title><%
+	int visitUserID = Integer.parseInt(request.getParameter("id"));
+	User visitUser = User.getUserByUserID(visitUserID);
+	out.println(visitUser.username);
+	
+	User homeUser = (User) session.getAttribute("user");
+	
+	%></title>
 	<meta name="Description" content="A smart quiz website" />
 	<meta name="robots" content="all, index, follow" />
 	<meta name="distribution" content="global" />
@@ -17,10 +24,7 @@
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="resources/scripts/functions.js"></script>
 </head>
-<% 
-session = request.getSession();
-User user = (User)session.getAttribute("user");
-%>
+
 <body>
 <div class="container" >
 	<div class="header">
@@ -40,8 +44,12 @@ User user = (User)session.getAttribute("user");
 						Send Note
 				</button>
 			</span>
-			<h1><%out.println(user.username);%></h1>
-			<p><span class="dominant_text">33</span> friends | <span class="dominant_text">1</span> quiz created | <span class="dominant_text">55</span> quizzes taken</p>
+			<h1>
+			<%
+			out.println(visitUser.username);
+			%>
+			</h1>
+			<p><span class="dominant_text"><%-- out.println(visitUser.getFriendList().size()); --%></span> friends | <span class="dominant_text"><%-- out.println(visitUser.getCreatedQuiz().size()); --%></span> quiz created | <span class="dominant_text"><%-- out.println(visitUser.getQuizHistory().size()); --%></span> quizzes taken</p>
 		</div>
 		<div class="two_column_right">
 			<h2>Badges</h2>
