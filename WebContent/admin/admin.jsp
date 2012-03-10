@@ -44,11 +44,10 @@
 					<textarea id="new_announcement" rows="10" cols="30"></textarea>
 					<span id="error1" style="display:none"> title cannot be empty.</span>
 					<span id="error2" style="display:none"> announcement cannot be empty.</span>
-					<input type="submit" id="createButton" value="Create" onclick="createAnnouncement()" /><!--
-					<input type="button" id="submitButton" value="Submit" onclick="submitAnnouncement()" />
-				--></form>
+					<input type="submit" id="createButton" value="Create" />
+				</form>
 			</div>
-			<iframe id="adminFrame" class="adminFrame" frameborder="0" src="admin_user.jsp"></iframe>
+			<iframe id="adminFrame" class="adminFrame" frameborder="0" src=""></iframe>
 		</div>
 		
 		<div class="footer">

@@ -32,7 +32,14 @@
 //		$('#submitButton').show();
 //	};
 	
-	global.createAnnouncement = function() {
+//	global.deleteAnnouncement = function(id) {
+//		$('#row' + id).remove();
+//	};
+	
+})(window);
+
+$(function() {
+	$("#createButton").click(function() {
 		var title = $("#title").val();
 		var announcement = $("#new_announcement").val();
 		var dataString = 'title='+ title + '&announcement=' + announcement;
@@ -54,17 +61,7 @@
 					$('#adminFrame').attr('src', 'admin_announcement.jsp');
 				}
 			});
-//			$('#adminFrame').attr('src', 'admin_announcement.jsp');
-//			$('#submitButton').hide();
-//			$('#createButton').show();
 		}
 		return false;
-	};
-	
-//	global.deleteAnnouncement = function(id) {
-//		$('#row' + id).remove();
-//	};
-	
-})(window);
-
-
+	});
+});

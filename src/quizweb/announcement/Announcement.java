@@ -19,12 +19,12 @@ public class Announcement {
 	public Announcement(String title, String content) {
 		this.title = title;
 		this.content = content;
-		this.timestamp = new Timestamp(new Date().getTime());	
+		//this.timestamp = new Timestamp(new Date().getTime());	
 		// add to database
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
-					+ " (title, content)" 
-					+ " VALUES (?, ?)");
+					+ " (title, content, time)" 
+					+ " VALUES (?, ?, NOW())");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"aid"});
 			stmt.setString(1, title);
 			stmt.setString(2, content);
