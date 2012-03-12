@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import quizweb.Quiz;
 import quizweb.question.FillInBlankQuestion;
+import quizweb.question.MatchingQuestion;
+import quizweb.question.MultiAnswerQuestion;
+import quizweb.question.MultiChoiceMultiAnswerQuestion;
 import quizweb.question.MultipleChoiceQuestion;
 import quizweb.question.PictureQuestion;
 import quizweb.question.ResponseQuestion;
@@ -57,11 +60,12 @@ public class QuizCreationServlet extends HttpServlet {
 			String content = request.getParameter("Field1");
 			String answer = request.getParameter("Field2");
 			
-			ArrayList<String> answerList = new ArrayList();
+			ArrayList<String> answerList = new ArrayList<String>();
 			String[] answerSplit = answer.split(",");
 		    for(int i=0;i<answerSplit.length;i++){
 		    	answerList.add(answerSplit[i]);
 		    }
+		    
 			ResponseQuestion newQuestion = new ResponseQuestion(quizID,posistion,content,answerList,score);
 			
 		}else if(questionType.equals("Fill in the Blank")){
@@ -69,14 +73,102 @@ public class QuizCreationServlet extends HttpServlet {
 			String content = request.getParameter("Field1");
 			String answer = request.getParameter("Field2");
 			
-			FillInBlankQuestion newQuestion = new FillInBlankQuestion(quizID,posistion,content,answer,score);
+			ArrayList<String> contentList = new ArrayList<String>();
+			String[] contentSplit = content.split("_");
+		    for(int i=0;i<contentSplit.length;i++){
+		    	contentList.add(contentSplit[i]);
+		    }
+			ArrayList<String> answerList = new ArrayList<String>();
+			String[] answerSplit = answer.split(",");
+		    for(int i=0;i<answerSplit.length;i++){
+		    	answerList.add(answerSplit[i]);
+		    }
+			
+			FillInBlankQuestion newQuestion = new FillInBlankQuestion(quizID,posistion,contentList,answerList,score);
 			
 		}else if(questionType.equals("Multiple Choice")){
 			double score = Double.parseDouble(request.getParameter("score"));
 			String content = request.getParameter("Field1");
+			String choice = request.getParameter("Field2");
+			String answer = request.getParameter("Field3");
+			
+			ArrayList<String> contentList = new ArrayList<String>();
+			contentList.add(content);
+			String[] contentSplit = choice.split(";");
+		    for(int i=0;i<contentSplit.length;i++){
+		    	contentList.add(contentSplit[i]);
+		    }
+			
+			MultipleChoiceQuestion newQuestion = new MultipleChoiceQuestion(quizID,posistion,contentList,answer,score);
+			
+		}else if(questionType.equals("Picture-Response Questions")){
+			double score = Double.parseDouble(request.getParameter("score"));
+			String content = request.getParameter("Field1");
+			String answer = request.getParameter("Field2");
+			String URL = request.getParameter("Field3");
+			
+			ArrayList<String> answerList = new ArrayList<String>();
+			String[] answerSplit = answer.split(",");
+		    for(int i=0;i<answerSplit.length;i++){
+		    	answerList.add(answerSplit[i]);
+		    }
+		    
+		    PictureQuestion newQuestion = new PictureQuestion(quizID,posistion,content,answerList,score,URL);
+			
+		}else if(questionType.equals("Multiple-Answer Questions")){
+			double score = Double.parseDouble(request.getParameter("score"));
+			String content = request.getParameter("Field1");
 			String answer = request.getParameter("Field2");
 			
-			MultipleChoiceQuestion newQuestion = new MultipleChoiceQuestion(quizID,posistion,content,answer,score);
+			ArrayList<String> answerList = new ArrayList<String>();
+			String[] answerSplit = answer.split(",");
+		    for(int i=0;i<answerSplit.length;i++){
+		    	answerList.add(answerSplit[i]);
+		    }
+		    
+			MultiAnswerQuestion newQuestion = new MultiAnswerQuestion(quizID,posistion,content,answerList,score);
+			
+		}else if(questionType.equals("Multiple Choice with Multiple Answers")){
+			double score = Double.parseDouble(request.getParameter("score"));
+			String content = request.getParameter("Field1");
+			String choice = request.getParameter("Field2");
+			String answer = request.getParameter("Field3");
+			
+			ArrayList<String> contentList = new ArrayList<String>();
+			contentList.add(content);
+			String[] contentSplit = choice.split(";");
+		    for(int i=0;i<contentSplit.length;i++){
+		    	contentList.add(contentSplit[i]);
+		    }
+			
+		    ArrayList<String> answerList = new ArrayList<String>();
+			String[] answerSplit = answer.split(",");
+		    for(int i=0;i<answerSplit.length;i++){
+		    	answerList.add(answerSplit[i]);
+		    }
+		    
+		    MultiChoiceMultiAnswerQuestion newQuestion = new MultiChoiceMultiAnswerQuestion(quizID,posistion,contentList,answerList,score);
+			
+		}else if(questionType.equals("Matching")){
+			double score = Double.parseDouble(request.getParameter("score"));
+			String content = request.getParameter("Field1");
+			String choice = request.getParameter("Field2");
+			String answer = request.getParameter("Field3");
+			
+			ArrayList<String> contentList = new ArrayList<String>();
+			contentList.add(content);
+			String[] contentSplit = choice.split(";");
+		    for(int i=0;i<contentSplit.length;i++){
+		    	contentList.add(contentSplit[i]);
+		    }
+			
+		    ArrayList<String> answerList = new ArrayList<String>();
+			String[] answerSplit = answer.split(",");
+		    for(int i=0;i<answerSplit.length;i++){
+		    	answerList.add(answerSplit[i]);
+		    }
+		    
+		    MatchingQuestion newQuestion = new MatchingQuestion(quizID,posistion,contentList,answerList,score);
 			
 		}
 		

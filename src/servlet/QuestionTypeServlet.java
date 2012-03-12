@@ -44,17 +44,17 @@ public class QuestionTypeServlet extends HttpServlet {
 		if(questionType.equals("Question-Response")){
 			pageString = "new_quiz_question.jsp";
 		}else if(questionType.equals("Fill in the Blank")){
-			pageString = "new_quiz_question.jsp";
+			pageString = "new_quiz_question_fillInBlank.jsp";
 		}else if(questionType.equals("Multiple Choice")){
-			pageString = "new_quiz_question.jsp";
+			pageString = "new_quiz_question_multiChoice.jsp";
 		}else if(questionType.equals("Picture-Response Questions")){
-			pageString = "new_quiz_question.jsp";
+			pageString = "new_quiz_question_picture.jsp";
 		}else if(questionType.equals("Multiple-Answer Questions")){
-			pageString = "new_quiz_question.jsp";
+			pageString = "new_quiz_question_multiAnswer.jsp";
 		}else if(questionType.equals("Multiple Choice with Multiple Answers")){
-			pageString = "new_quiz_question.jsp";
+			pageString = "new_quiz_question_multiChoiceAndAnswer.jsp";
 		}else if(questionType.equals("Matching")){
-			pageString = "new_quiz_question.jsp";
+			pageString = "new_quiz_question_matching.jsp";
 		}
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher(pageString);
