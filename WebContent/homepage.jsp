@@ -89,9 +89,9 @@
 							out.println("<li>" + Announcement.allAnnouncements.get(i).title + ": " + Announcement.allAnnouncements.get(i).content + "</li>");
 				        }
 				    }else{  
-				    	out.println(Announcement.allAnnouncements.get(0).title + ": " + Announcement.allAnnouncements.get(0).content);
-					    out.println(Announcement.allAnnouncements.get(1).title + ": " + Announcement.allAnnouncements.get(1).content);
-					    out.println("<a class=\"link-style-dominant\" onclick=\"showMoreAnnouncements()\">More Announcements</a>");
+				    	out.println("<li>" + Announcement.allAnnouncements.get(0).title + ": " + Announcement.allAnnouncements.get(0).content + "</li>");
+					    out.println("<li>" + Announcement.allAnnouncements.get(1).title + ": " + Announcement.allAnnouncements.get(1).content + "</li>");
+					    out.println("<hr ><a class=\"link-style-dominant\" onclick=\"showMoreAnnouncements()\">More Announcements</a>");
 				    }
 				}
 				%>

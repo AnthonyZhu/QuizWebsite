@@ -35,6 +35,10 @@
 	global.showChallenges = function() {
 		$('#contentFrame').attr('src', 'home_challenges.jsp');
 	};
+	
+	global.showMoreAnnouncements = function() {
+		$('#contentFrame').attr('src', 'home_moreAnnouncements.jsp');
+	};
 
 })(window);
 

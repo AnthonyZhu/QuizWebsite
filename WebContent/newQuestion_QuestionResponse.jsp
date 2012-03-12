@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="resources/scripts/functions.js"></script>
 </head>
 
-		<form>
+		
 		<ul>
 			<li class="highlight">
 				<label class="quiz_title" >Please input question text below:</label>
@@ -31,4 +31,4 @@
 				</div>
 			</li>
 		</ul>
-		</form>
+		

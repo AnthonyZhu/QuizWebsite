@@ -23,6 +23,8 @@
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="resources/scripts/QuestionCreation.js"></script>
 	<script type="text/javascript" src="resources/scripts/functions.js"></script>
+	<script type="text/javascript" src="resources/scripts/readFromIframe.js"></script>
+	
 </head>
 
 <body>
@@ -31,7 +33,7 @@
 		<h1>toQuiz.Me</h1>
 	</div>
 	
-	<form id="form1" name="form1" action="QuizCreationServlet" method="post" >
+	<form id="form1" name="form1" action="QuizCreationServlet" method="post">
     <%
     Quiz newQuiz = (Quiz) session.getAttribute("newQuiz");
     %>
@@ -39,33 +41,14 @@
 		<%
 		String creatorName = newQuiz.creator.username;
 		String quizName = newQuiz.name;
-		Integer posistion = (Integer)session.getAttribute("questionPosistion");
+		Integer posistion = (Integer) session.getAttribute("questionPosistion");
+		String questionType = (String) session.getAttribute("QuestionType"); 
 		out.println("<h2>Hi, " + creatorName + ", please add question No." + posistion + " to \"" + quizName + "\"</h2>");
+		out.println("<h3>This question is \"" + questionType + "\" type</h2>");
+		
 		%>
 		<hr />
-		<ul>
-			<li id="foli7" class="highlight">
-				<label class="quiz_title" id="title7" for="Field7">Please choose a question type</label>
-				<div>
-					<select id="newQuestionType" name="newQuestionType" onchange="showQuestionFrame()" class="field select medium"> 
-						<option value="" selected="selected"></option>
-						<option value="Question-Response" >Question-Response</option>
-						<option value="Fill in the Blank" >Fill in the Blank</option>
-						<option value="Multiple Choice" >Multiple Choice</option>
-						<option value="Picture-Response Questions" >Picture-Response Questions</option>
-						<option value="Multiple-Answer Questions" >Multiple-Answer Questions</option>
-						<option value="Multiple Choice with Multiple Answers" >Multiple Choice with Multiple Answers</option>
-						<option value="Matching" >Matching</option>
-					</select>
-				</div>
-			</li>
-		</ul>
-
-		<!--  <div>
-			<iframe id="QuestionFrame" frameborder=0  class="dynamicFrame"  src="newQuestion_QuestionResponse.jsp"></iframe>
-		</div>
-        -->
-        
+         
         <ul>
 			<li class="highlight">
 				<label class="quiz_title" >Please input question text below:</label>

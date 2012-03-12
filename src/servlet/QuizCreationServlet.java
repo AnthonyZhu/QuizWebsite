@@ -50,23 +50,34 @@ public class QuizCreationServlet extends HttpServlet {
 		Integer posistion = (Integer) session.getAttribute("questionPosistion");
 		Quiz newQuiz = (Quiz) session.getAttribute("newQuiz");
 		int quizID = newQuiz.quizID;
-		
-		double score = Double.parseDouble(request.getParameter("score"));
-		String content = request.getParameter("Field1");
-		String answer = request.getParameter("Field2");
-		String questionType = request.getParameter("newQuestionType");
+		String questionType = (String) session.getAttribute("QuestionType");
 		
 		if(questionType.equals("Question-Response")){
+			double score = Double.parseDouble(request.getParameter("score"));
+			String content = request.getParameter("Field1");
+			String answer = request.getParameter("Field2");
+			
 			ArrayList<String> answerList = new ArrayList();
 			String[] answerSplit = answer.split(",");
 		    for(int i=0;i<answerSplit.length;i++){
 		    	answerList.add(answerSplit[i]);
 		    }
 			ResponseQuestion newQuestion = new ResponseQuestion(quizID,posistion,content,answerList,score);
+			
 		}else if(questionType.equals("Fill in the Blank")){
+			double score = Double.parseDouble(request.getParameter("score"));
+			String content = request.getParameter("Field1");
+			String answer = request.getParameter("Field2");
+			
 			FillInBlankQuestion newQuestion = new FillInBlankQuestion(quizID,posistion,content,answer,score);
+			
 		}else if(questionType.equals("Multiple Choice")){
+			double score = Double.parseDouble(request.getParameter("score"));
+			String content = request.getParameter("Field1");
+			String answer = request.getParameter("Field2");
+			
 			MultipleChoiceQuestion newQuestion = new MultipleChoiceQuestion(quizID,posistion,content,answer,score);
+			
 		}
 		
 		if(submit != null){
@@ -79,12 +90,11 @@ public class QuizCreationServlet extends HttpServlet {
 			if(addAnotherQuestion.equals("Add Another Question")){
 				posistion += 1;
 				session.setAttribute("questionPosistion", posistion);
-				RequestDispatcher dispatch = request.getRequestDispatcher("new_quiz_question.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher("chooseQuestionType.jsp");
 				dispatch.forward(request, response);
 	    	}
 		}
 	
-		// TODO Auto-generated method stub
 	}
 
 }
