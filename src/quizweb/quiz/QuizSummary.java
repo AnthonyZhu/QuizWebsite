@@ -8,10 +8,10 @@ import quizweb.record.*;
 
 public class QuizSummary {
 	Quiz quiz;
-	double totalScore;
-	double averageScore;
-	double averageTimespan;
-	int totalUser;
+	public double totalScore;
+	public double averageScore;
+	public double averageTimespan;
+	public int totalUser;
 	
 	public QuizSummary(Quiz quiz) {
 		this.quiz = quiz;
