@@ -18,7 +18,7 @@ public class PracticeAchievement extends Achievement {
 			stmt.setInt(1, PRACTICE_TYPE);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				PracticeAchievement achievement = new PracticeAchievement(rs.getString("name"), 
+				PracticeAchievement achievement = new PracticeAchievement(rs.getString("name"), rs.getString("url"),
 						rs.getString("description"), rs.getInt("threshold"));
 				allAchievements.add(achievement);
 			}
@@ -28,8 +28,8 @@ public class PracticeAchievement extends Achievement {
 		}	
 	}
 	
-	public PracticeAchievement(String name, String discription, int threshold) {
-		super(name, discription, threshold);
+	public PracticeAchievement(String name, String url, String discription, int threshold) {
+		super(name, url, discription, threshold);
 		this.type = PRACTICE_TYPE;
 		super.addAchievementToDB();
 	}
