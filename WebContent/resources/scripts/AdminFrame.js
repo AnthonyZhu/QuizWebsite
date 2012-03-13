@@ -25,17 +25,6 @@
 	global.search = function() {
 		$('#adminFrame').attr('src', 'admin_user.jsp?keyword=' + $('#inputBox').val());
 	};
-	
-//	global.createAnnouncement = function() {
-//		$('#adminFrame').attr('src', 'admin_createAnnouncement.jsp');
-//		$('#createButton').hide();
-//		$('#submitButton').show();
-//	};
-	
-//	global.deleteAnnouncement = function(id) {
-//		$('#row' + id).remove();
-//	};
-	
 })(window);
 
 $(function() {
@@ -46,8 +35,10 @@ $(function() {
 
 		if(title=='') {
 			$('#error1').fadeOut(200).show();
+			$('#error2').fadeOut(200).hide();
 		}
 		else if(announcement=='') {
+			$('#error1').fadeOut(200).hide();
 			$('#error2').fadeOut(200).show();
 		}
 		else {
