@@ -61,7 +61,7 @@
 			</ul>
 			<hr >
                 <%
-				out.println("<a href=\"new_quiz_settings.jsp\">+ Create Quiz</a>");
+				out.println("<a href=\"createQuiz/new_quiz_settings.jsp\">+ Create Quiz</a>");
 				%>
 			<hr >
                 <%

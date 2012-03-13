@@ -71,12 +71,12 @@
 			%></p>
 		</div>
 		<div class="two_column_right">
-			<button type="submit" class="button_large" name="start_quiz">
-					Start Quiz
-			</button>
-			<button type="submit" class="button_grey" name="start_quiz">
-					Practice Mode
-			</button>
+			<form action="StartQuiz" method="post">
+			<input type="submit" value="Start Quiz"><br />
+			<% 
+			out.println("<input name =\"quizID\" type=\"hidden\" value=\"" + quiz.quizID + "\">");
+			%>
+			</form>
 		</div>
 	</div>
 	

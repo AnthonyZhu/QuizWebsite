@@ -9,11 +9,12 @@
 <%@ page import="quizweb.question.*"%>
 <%@ page import="quizweb.record.*"%>
 <%@ page import="servlet.*"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8856-1">
-	<title>Create Your Own Quiz</title>
+	<title>Start Quiz</title>
 	
 	<!-- CSS -->
 	<link href="resources/css/main.css" type="text/css" rel="stylesheet"/>
@@ -33,14 +34,26 @@
 	<form id="form1" action="QuizSettingServlet" name="form1" method="post" >
 
 	<div class="one_column">
-		You are taking the quiz <b><!-- get quiz title --></b> created by <a><!-- creator name --></a>
+		You are taking the quiz <b>
+		<% 
+		int quizID = Integer.parseInt(request.getParameter("id"));
+		Quiz quiz = Quiz.getQuizByQuizID(quizID);
+		String quizName = quiz.name;
+		out.println(quizName);
+		%></b> created by <a>
+		<%
+		String creator = Quiz.getQuizByQuizID(quizID).creator.username;
+		out.println(creator);
+		%></a>
 		<span style="float: right"> 
 			Time spent: <!-- show time spent -->
 		</span>
 		<hr />
 		<ul>
 			<li id="foli1" class="highlight">
-				<span><!-- get question id --> </span>
+				<span><%
+			
+				%> </span>
 				<span class="quiz_title">Question description</span>
 				<div>
 					<input id="Field1" name="Field1" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />

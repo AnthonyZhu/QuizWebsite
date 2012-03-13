@@ -182,7 +182,7 @@ public class QuizCreationServlet extends HttpServlet {
 			if(addAnotherQuestion.equals("Add Another Question")){
 				posistion += 1;
 				session.setAttribute("questionPosistion", posistion);
-				RequestDispatcher dispatch = request.getRequestDispatcher("chooseQuestionType.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/chooseQuestionType.jsp");
 				dispatch.forward(request, response);
 	    	}
 		}

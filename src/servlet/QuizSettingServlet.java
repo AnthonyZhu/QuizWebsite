@@ -79,7 +79,7 @@ public class QuizSettingServlet extends HttpServlet {
 		Quiz newQuiz = new Quiz(quizName,quizURL,quizDescription,quizCategory,userID,isRandom,opFeedback,opPractice);
 		session.setAttribute("newQuiz", newQuiz);
 		session.setAttribute("questionPosistion", 1);
-		RequestDispatcher dispatch = request.getRequestDispatcher("chooseQuestionType.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/chooseQuestionType.jsp");
 		dispatch.forward(request, response);
 		
 		
