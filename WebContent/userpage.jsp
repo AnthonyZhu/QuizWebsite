@@ -92,17 +92,31 @@
 		</div>
 		<div class="two_column_right">
 			<h2>Achievement</h2>
+			<p><ul>
+			<%
+			if(AchievementRecord.getAchievementsByUserID(visitUserID,0) == null){
+				out.println("no achievement yet");
+			}else if(AchievementRecord.getAchievementsByUserID(visitUserID,0).size() == 0){
+				out.println("no achievement yet");
+			}else{
+				if(AchievementRecord.getAchievementsByUserID(visitUserID,0).size()<=10){
+					for(int i=0;i<AchievementRecord.getAchievementsByUserID(visitUserID,0).size();i++){
+						out.println("<li>" + AchievementRecord.getAchievementsByUserID(visitUserID,0).get(i).name + "</li>");
+					}
+				}else{
+					for(int i=0;i<=10;i++){
+						out.println("<li>" + AchievementRecord.getAchievementsByUserID(visitUserID,0).get(i).name + "</li>");
+					}
+				}
+			}
+			%>
+			</ul></p>
 		</div>
 	</div>
 	
 	
 	<div class="content-container">
-		<div class="two_column_left">
-			<h2>Recent Activities</h2>
-			<p><% 
-			
-			%></p>
-		</div>
+		
 		<div class="two_column_right">
 			<h2></h2>
 			
@@ -131,9 +145,9 @@
 			<h2>Quizzes Taken</h2>
 			<p><ul><% 
 			if(QuizTakenRecord.getQuizHistoryByUserID(visitUserID) == null){
-				out.println("I haven't created any quiz so far");
+				out.println("I haven't taken any quiz so far");
 			}else if(QuizTakenRecord.getQuizHistoryByUserID(visitUserID).size() == 0){
-				out.println("I haven't created any quiz so far");
+				out.println("I haven't taken any quiz so far");
 			}else{
 				if(QuizTakenRecord.getQuizHistoryByUserID(visitUserID).size() <= 10){
 					for(int i=0;i<QuizTakenRecord.getQuizHistoryByUserID(visitUserID).size();i++){
