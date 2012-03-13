@@ -31,19 +31,20 @@
 		<h1>toQuiz.Me</h1>
 	</div>
 	
-	<form id="form1" action="QuizSettingServlet" name="form1" method="post" >
+	<form id="form1" action="TakingQuizServlet" name="form1" method="post" >
 
 	<div class="one_column">
 		You are taking the quiz <b>
 		<% 
-		int quizID = Integer.parseInt(request.getParameter("id"));
+		int quizID = (Integer) session.getAttribute("quizID");
+		int posistion = (Integer) session.getAttribute("question_posistion");
 		Quiz quiz = Quiz.getQuizByQuizID(quizID);
 		String quizName = quiz.name;
 		out.println(quizName);
 		%></b> created by <a>
 		<%
 		String creator = Quiz.getQuizByQuizID(quizID).creator.username;
-		out.println(creator);
+		out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + quiz.creator.userID + "\">" + creator + "</a>");
 		%></a>
 		<span style="float: right"> 
 			Time spent: <!-- show time spent -->
@@ -52,18 +53,21 @@
 		<ul>
 			<li id="foli1" class="highlight">
 				<span><%
-			
-				%> </span>
-				<span class="quiz_title">Question description</span>
+			    out.println("This is No." + posistion + " question.");
+				%></span>
+				<hr >
+				<span class="quiz_title"><%
+				
+				%></span>
 				<div>
 					<input id="Field1" name="Field1" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
 				</div>
 			</li>
 			<li style="float:right">
-				<!-- get current question id --> of <!-- get total number of questions --> questions
+				<% out.println(posistion); %> of <% out.println(quiz.getQuestions().size()); %> questions
 			</li>
 			<li>
-				<span><input id="lastQuestion" name="lastQuestion" class="btTxt submit" type="submit" value="<<back"/></span>
+				<!-- <span><input id="lastQuestion" name="lastQuestion" class="btTxt submit" type="submit" value="<<back"/></span> -->
 				<span style="float:right"><input id="nextQuestion" name="nextQuestion" class="btTxt submit" type="submit" value="next>>"/></span>
 			</li>
 		</ul>
