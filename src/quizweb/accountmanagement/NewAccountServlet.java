@@ -50,7 +50,7 @@ public class NewAccountServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			User user = User.getUserByUsername(username);
 			session.setAttribute("user", user);
-			RequestDispatcher dispatch = request.getRequestDispatcher("home_feed.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("homepage.jsp");
 			dispatch.forward(request, response);
 		}
 	}
