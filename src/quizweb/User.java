@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import quizweb.accountmanagement.Encryption;
 import quizweb.achievement.*;
 import quizweb.announcement.Announcement;
 import quizweb.database.DBConnection;
@@ -34,15 +35,15 @@ public class User {
 //	public static int totalUsers = 0;
 	
 	// permission type for permission
-	public final int IS_NORMAL = 0;
-	public final int IS_ADMIN = 1;	
-	public final int IS_TEMP = 2;
+	public static final int IS_NORMAL = 0;
+	public static final int IS_ADMIN = 1;	
+	public static final int IS_TEMP = 2;
 	
 	// relationship status
-	public final int IS_FRIEND = 1;
-	public final int NOT_FRIEND = 0;
-	public final int PENDING_FRIEND = 2;
-	public final int REVERSE_PENDING = 3;
+	public static final int IS_FRIEND = 1;
+	public static final int NOT_FRIEND = 0;
+	public static final int PENDING_FRIEND = 2;
+	public static final int REVERSE_PENDING = 3;
 	
 	// database table names
 	public static final String DBTable = "users";
@@ -100,7 +101,6 @@ public class User {
 		this.isDead = false;
 		this.practiceNumber = 0;
 		this.highScoreNumber = 0;
-		addUserToDB();
 	}
 	
 	public User(int userID, String username, String password, String homepageURL, int permission, boolean isBlocked,
@@ -312,5 +312,33 @@ public class User {
 	 */
 	public boolean equals(User other) {
 		return userID == other.userID;
+	}
+
+	public static User getUserByXMLElem(XMLElement root) {
+		String username = new String("Username Not Specified");
+		String password = new String("Password Not Set");
+		String url = new String("URL missing");
+		int permission = IS_NORMAL;
+		
+		if (root.attributeMap.containsKey("permission")) {
+			String permissionStr = root.attributeMap.get("permission");
+			if (permissionStr == "admin")
+				permission = IS_ADMIN;
+			else if (permissionStr == "temp")
+				permission = IS_TEMP;
+		}
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name == "username") {
+				username = elem.content;
+			} else if (elem.name == "password") {
+				password = new Encryption().generateHashedPassword(elem.content);
+			} else if (elem.name == "homepageURL") {
+				url = elem.content;
+			} else {
+				System.out.println("Field not recognized in user : " + elem.name);
+			}				
+		}
+		return new User(username, password, url, permission);
 	}
 }

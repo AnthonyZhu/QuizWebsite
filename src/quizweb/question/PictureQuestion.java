@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import quizweb.Quiz;
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 
@@ -20,7 +22,6 @@ public class PictureQuestion extends Question {
 	public PictureQuestion(int quizID, int position, Object question, Object answer, double score, String questionURL) {
 		super(quizID, position, question, answer, score);
 		this.questionURL = questionURL;
-		addQustionToDB();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -107,6 +108,32 @@ public class PictureQuestion extends Question {
 				return score;
 		}		
 		return 0;
+	}
+
+	public static PictureQuestion getPictureQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
+		int quizID = quiz.quizID;
+		int position = pos;
+		Object question = new String();
+		Object answer = null;
+		double score = 10;
+		String url = null;
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name == "image-location") {
+				question = (String) elem.content;
+			} else if (elem.name == "answer") {
+				ArrayList<String> answerList = new ArrayList<String>();
+				answerList.add(elem.content);
+				answer = answerList;
+			} else if (elem.name == "answer-list") {
+				answer = Question.getAnswerListByXMLElem(elem);
+			} else if (elem.name == "score") {
+				score = Double.parseDouble(elem.content);
+			} else {
+				System.out.println("Unexpected field in picture question : " + elem.name);
+			}
+		}
+		return new PictureQuestion(quizID, position, question, answer, score, url);
 	}
 
 }

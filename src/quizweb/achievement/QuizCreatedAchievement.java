@@ -31,7 +31,6 @@ public class QuizCreatedAchievement extends Achievement {
 	public QuizCreatedAchievement(String name, String url, String discription, int threshold) {
 		super(name, url, discription, threshold);
 		this.type = QUIZ_CREATED_TYPE;
-		super.addAchievementToDB();
 	}
 
 	public static void updateAchievement(User user) {

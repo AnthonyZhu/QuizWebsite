@@ -18,7 +18,6 @@ public class QuizCreatedRecord extends Record {
 	public QuizCreatedRecord(Quiz quiz, User user) {
 		this.quiz = quiz;
 		this.user = user;
-		addRecordToDB();
 	}	
 	public QuizCreatedRecord(int recordID, Quiz quiz, User user, Timestamp timeStamp) {
 		this.recordID = recordID;

@@ -31,7 +31,6 @@ public class PracticeAchievement extends Achievement {
 	public PracticeAchievement(String name, String url, String discription, int threshold) {
 		super(name, url, discription, threshold);
 		this.type = PRACTICE_TYPE;
-		super.addAchievementToDB();
 	}
 
 	public static void updateAchievement(User user) {

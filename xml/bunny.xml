@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<quiz random="true" one-page="false" feedback-mode="true" practice-mode="true">
+<title>Bunny Quiz</title>
+<category>Animals</category>
+<description>An homage to the departed, legendary Bunny World project.</description>
+
+<question type="question-response">
+  <query>What is the Biological Family for Bunnies?</query>
+  <answer>Leporidae</answer>
+</question>
+
+<question type="fill-in-blank">
+  <blank-query><pre>The book</pre><blank /><post>Down, about a bunch of rabbits, won the 1972 Carnegie Medal</post></blank-query>
+  <answer>Watership</answer>
+</question>
+
+<question type="multiple-choice">
+  <query>Which of the following statements is false</query>
+  <option>Aztec mythology includes a rabbit pantheon.</option>
+  <option>In Japanese folklore, rabbits live on the moon.</option>
+  <option answer="answer">In Stanford tradition, rubbing the nose of a rabbit guarantees an A on the CS108 class project</option>
+</question>
+
+<question type="picture-response">
+  <image-location>http://upload.wikimedia.org/wikipedia/en/b/b9/Bugs_Bunny_Pose.PNG</image-location>
+  <answer-list>
+    <answer preferred="preferred">Bugs Bunny</answer>
+	<answer>Bugs</answer>
+  </answer-list>
+</question>
+
+</quiz>

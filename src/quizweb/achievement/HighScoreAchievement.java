@@ -31,7 +31,6 @@ public class HighScoreAchievement extends Achievement {
 	public HighScoreAchievement(String name, String url, String discription, int threshold) {
 		super(name, url, discription, threshold);
 		this.type = HIGHSCORE_TYPE;
-		super.addAchievementToDB();
 	}
 
 	public static void updateAchievement(User user) {

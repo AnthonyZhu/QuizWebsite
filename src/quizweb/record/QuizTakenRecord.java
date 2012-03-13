@@ -16,7 +16,6 @@ public class QuizTakenRecord extends Record {
 	public long timeSpan;
 	public double score;
 	
-	public boolean isOnepage;
 	public boolean isFeedback;
 	public boolean isPractice;
 	
@@ -28,25 +27,23 @@ public class QuizTakenRecord extends Record {
 	public static String DBTable = "quiz_taken_record";
 
 	public QuizTakenRecord(Quiz quiz, User user,  
-			boolean isOnepage, boolean isFeedback, boolean isPractice) {
+			boolean isFeedback, boolean isPractice) {
 		this.quiz = quiz;
 		this.user = user;
 		this.timeSpan = 0;
 		this.score = 0;
-		this.isOnepage = isOnepage;
 		this.isFeedback = isFeedback;
 		this.isPractice = isPractice;
 		this.quizStartTime = 0;
 	}	
 	public QuizTakenRecord(int recordID, Quiz quiz, User user, long timeSpan, double score, 
-			Timestamp timeStamp, boolean isOnepage, boolean isFeedback, boolean isPractice) {
+			Timestamp timeStamp,  boolean isFeedback, boolean isPractice) {
 		this.recordID = recordID;
 		this.quiz = quiz;
 		this.user = user;
 		this.timeSpan = timeSpan;
 		this.score = score;
 		this.timestamp = timeStamp;
-		this.isOnepage = isOnepage;
 		this.isFeedback = isFeedback;
 		this.isPractice = isPractice;
 	}
@@ -55,16 +52,15 @@ public class QuizTakenRecord extends Record {
 		// add to database
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
-					+ " (qid, userid, timespan, score, isonepage, isfeedback, ispractice)" 
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?)");
+					+ " (qid, userid, timespan, score, isfeedback, ispractice)" 
+					+ " VALUES (?, ?, ?, ?, ?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"id"});
 			stmt.setInt(1, quiz.quizID);
 			stmt.setInt(2, user.userID);
 			stmt.setLong(3, timeSpan);
 			stmt.setDouble(4, score);
-			stmt.setBoolean(5, isOnepage);
-			stmt.setBoolean(6, isFeedback);
-			stmt.setBoolean(7, isPractice);
+			stmt.setBoolean(5, isFeedback);
+			stmt.setBoolean(6, isPractice);
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
@@ -89,7 +85,7 @@ public class QuizTakenRecord extends Record {
 				User user = User.getUserByUserID(rs.getInt("userid"));
 				QuizTakenRecord record = new QuizTakenRecord(rs.getInt("id"), quiz,
 						user, rs.getLong("timespan"), rs.getDouble("score"), rs.getTimestamp("time"),
-						rs.getBoolean("isonepage"), rs.getBoolean("isfeedback"), rs.getBoolean("ispractice"));
+						rs.getBoolean("isfeedback"), rs.getBoolean("ispractice"));
 				records.add(record);
 			}
 			rs.close();
@@ -115,7 +111,7 @@ public class QuizTakenRecord extends Record {
 				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));
 				QuizTakenRecord record = new QuizTakenRecord(rs.getInt("id"), quiz,
 						user, rs.getLong("timespan"), rs.getDouble("score"), rs.getTimestamp("time"),
-						rs.getBoolean("isonepage"), rs.getBoolean("isfeedback"), rs.getBoolean("ispractice"));
+						rs.getBoolean("isfeedback"), rs.getBoolean("ispractice"));
 				records.add(record);
 			}
 			rs.close();
@@ -141,7 +137,7 @@ public class QuizTakenRecord extends Record {
 				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));
 				QuizTakenRecord record = new QuizTakenRecord(rs.getInt("id"), quiz,
 						user, rs.getLong("timespan"), rs.getDouble("score"), rs.getTimestamp("time"),
-						rs.getBoolean("isonepage"), rs.getBoolean("isfeedback"), rs.getBoolean("ispractice"));
+						rs.getBoolean("isfeedback"), rs.getBoolean("ispractice"));
 				records.add(record);
 			}
 			rs.close();
@@ -167,8 +163,6 @@ public class QuizTakenRecord extends Record {
 		long curTime = new Date().getTime();
 		timeSpan = curTime - quizStartTime;
 		score = quiz.getScore(userAnswers);
-		addRecordToDB();
-		// TODO
 		// Check if it is a practice
 		if (isPractice) {
 			user.practiceNumber++;

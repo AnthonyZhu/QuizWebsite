@@ -17,7 +17,6 @@ public class AchievementRecord extends Record {
 	public AchievementRecord(User user, Achievement achievement) {
 		this.user = user;
 		this.achievement = achievement;
-		addRecordToDB(); 
 	}
 	
 	public void addRecordToDB() {

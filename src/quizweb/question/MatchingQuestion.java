@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import quizweb.Quiz;
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 
@@ -17,7 +19,6 @@ public class MatchingQuestion extends Question {
 	
 	public MatchingQuestion(int quizID, int position, Object question, Object answer, double score) {
 		super(quizID, position, question, answer, score);
-		addQustionToDB();		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -120,6 +121,27 @@ public class MatchingQuestion extends Question {
 			if (ans.get(i).equals(trueAns.get(i))) 
 					matches++;
 		return score * matches / ques.size();
+	}
+
+	public static MatchingQuestion getMatchingQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
+		int quizID = quiz.quizID;
+		int position = pos;
+		Object question = null;
+		Object answer = null;
+		double score = 10;
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name == "query-list") {
+				question = Question.getQuestionListByXMLElem(elem);
+			} else if (elem.name == "answer-list") {
+				answer = Question.getAnswerListByXMLElem(elem);
+			} else if (elem.name == "score") {
+				score = Double.parseDouble(elem.content);
+			} else {
+				System.out.println("Unexpected field in response question : " + elem.name);
+			}
+		}
+		return new MatchingQuestion(quizID, position, question, answer, score);		
 	}
 
 }

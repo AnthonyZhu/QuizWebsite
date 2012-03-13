@@ -2,6 +2,9 @@ package quizweb.question;
 
 import java.util.*;
 
+import quizweb.Quiz;
+import quizweb.XMLElement;
+
 public class Question {
 	public int questionID;
 	public int quizID;
@@ -58,4 +61,48 @@ public class Question {
 		}
 		return retString;
 	}
+
+	public static Question getQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
+		String type = root.attributeMap.get("type");		
+		if (type == "question-response") {
+			return ResponseQuestion.getResponseQuestionByXMLElem(root, quiz, pos);
+		} else if (type == "fill-in-blank") {
+			return FillInBlankQuestion.getFillInBlankQuestionByXMLElem(root, quiz, pos);
+		} else if (type == "multiple-choice") {
+			return MultipleChoiceQuestion.getMultipleChoiceQuestionByXMLElem(root, quiz, pos);
+		} else if (type == "picture-response") {
+			return PictureQuestion.getPictureQuestionByXMLElem(root, quiz, pos);
+		} else if (type == "matching-question") {
+			return MatchingQuestion.getMatchingQuestionByXMLElem(root, quiz, pos);
+		} else if (type == "multi-answer-question") {
+			return MultiAnswerQuestion.getMultiAnswerQuestionByXMLElem(root, quiz, pos);
+		} else if (type == "multi-choice-multi-answer-question") {
+			return MultiChoiceMultiAnswerQuestion.getMultiChoiceMultiAnswerQuestionByXMLElem(root, quiz, pos);
+		} else {
+			System.out.println("Question Type " + type + " Not Recognized.");
+			return null;
+		}
+	}
+
+	public static ArrayList<String> getAnswerListByXMLElem(XMLElement root) {
+		ArrayList<String> answerList = new ArrayList<String>();
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name != "answer") 
+				System.out.println("Answer list unexpected name " + elem.name);
+			answerList.add(elem.content);
+		}
+		return answerList;
+	}
+	
+	public static ArrayList<String> getQuestionListByXMLElem(XMLElement root) {
+		ArrayList<String> questionList = new ArrayList<String>();
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name != "query") 
+				System.out.println("Question list unexpected name " + elem.name);
+			questionList.add(elem.content);
+		}
+		return questionList;
+	}	
 }

@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import quizweb.Quiz;
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 
@@ -17,7 +19,6 @@ public class MultipleChoiceQuestion extends Question {
 	
 	public MultipleChoiceQuestion(int quizID, int position, Object question, Object answer, double score) {
 		super(quizID, position, question, answer, score);
-		addQustionToDB();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -97,7 +98,7 @@ public class MultipleChoiceQuestion extends Question {
 		ArrayList<String> questionList = (ArrayList<String>) question;
 		for (int i = 0; i < questionList.size(); i++) {
 			if (questionList.get(i).equals((String)answer))
-				return i;
+				return i-1;
 		}
 		System.out.println("Cannot find correct choice index");
 		return -1;
@@ -110,6 +111,31 @@ public class MultipleChoiceQuestion extends Question {
 		if (ans.equals(trueAns)) 
 			return score;
 		return 0;
+	}
+
+	public static MultipleChoiceQuestion getMultipleChoiceQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
+		int quizID = quiz.quizID;
+		int position = pos;
+		Object question = null;
+		Object answer = null;
+		double score = 10;
+		ArrayList<String> questionList = new ArrayList<String>();		
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name == "query") {
+				questionList.add(elem.content);
+			} else if (elem.name == "option") {
+				questionList.add(elem.content);
+				if (elem.attributeMap.containsKey("answer")) 
+					answer = elem.content;
+			} else if (elem.name == "score") {
+				score = Double.parseDouble(elem.content);
+			} else {
+				System.out.println("Unexpected field in multiple choice question : " + elem.name);
+			}
+		}
+		question = questionList;
+		return new MultipleChoiceQuestion(quizID, position, question, answer, score);
 	}
 
 }

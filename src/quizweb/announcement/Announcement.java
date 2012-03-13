@@ -19,8 +19,17 @@ public class Announcement {
 	public Announcement(String title, String content) {
 		this.title = title;
 		this.content = content;
-		//this.timestamp = new Timestamp(new Date().getTime());	
-		// add to database
+		allAnnouncements.add(this);
+	}
+	
+	public Announcement(int announcementID, String title, String content, Timestamp timestamp) {
+		this.announcementID = announcementID;
+		this.title = title;
+		this.content = content;
+		this.timestamp = timestamp;
+	}
+	
+	public void addAnnouncementToDB() {
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
 					+ " (title, content, time)" 
@@ -35,15 +44,7 @@ public class Announcement {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		allAnnouncements.add(this);
-	}
-	
-	public Announcement(int announcementID, String title, String content, Timestamp timestamp) {
-		this.announcementID = announcementID;
-		this.title = title;
-		this.content = content;
-		this.timestamp = timestamp;
+		}		
 	}
 	
 	public static ArrayList<Announcement> getAllAnnouncements() {

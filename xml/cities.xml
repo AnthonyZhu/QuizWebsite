@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<quiz random="true" one-page="false" practice-mode="true" immediate-correction="true">
+<title>Cities</title>
+<description>See how well you recognize these famous cities.</description>
+
+<question type="picture-response">
+  <image-location>http://upload.wikimedia.org/wikipedia/commons/4/48/TE-Collage_London.png</image-location>
+  <answer-list>
+    <answer preferred="preferred">London</answer>
+	<answer>London, England</answer>
+	<answer>London, UK</answer>
+	<answer>London, United Kingdom</answer>
+  </answer-list>
+</question>
+
+<question type="picture-response">
+  <image-location>http://upload.wikimedia.org/wikipedia/en/thumb/4/40/Paris_Collage.png/280px-Paris_Collage.png</image-location>
+  <answer-list>
+    <answer preferred="preferred">Paris</answer>
+	<answer>Paris, France</answer>
+  </answer-list>
+</question>
+
+<question type="picture-response">
+  <image-location>http://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Collage_Rome.jpg/315px-Collage_Rome.jpg</image-location>
+  <answer-list>
+    <answer preferred="preferred">Rome</answer>
+	<answer>Rome, Italy</answer>
+  </answer-list>
+</question>
+
+<question type="picture-response">
+  <image-location>http://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Japan_Tokyo3.png/250px-Japan_Tokyo3.png</image-location>
+  <answer-list>
+    <answer preferred="preferred">Tokyo</answer>
+	<answer>Tokyo, Japan</answer>
+  </answer-list>
+</question>
+
+<question type="picture-response">
+  <image-location>http://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Hong_Kong_Skyline_Restitch_-_Dec_2007.jpg/800px-Hong_Kong_Skyline_Restitch_-_Dec_2007.jpg</image-location>
+  <answer>Hong Kong</answer>
+</question>
+
+<question type="picture-response">
+  <image-location>http://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Stanford_University_campus_from_above.jpg/800px-Stanford_University_campus_from_above.jpg</image-location>
+  <answer-list>
+    <answer preferred="preferred">Stanford</answer>
+	<answer>Stanford, California</answer>
+  </answer-list>
+</question>
+
+</quiz>

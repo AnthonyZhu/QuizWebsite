@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<user permission="admin">
+	<username>jack</username>
+	<password>123</password>
+	<homepageURL>http://www.stanford.edu/</homepageURL>
+</user>
+
+<user>
+	<username>google</username>
+	<password>1234</password>
+	<homepageURL>http://www.google.com/</homepageURL>
+</user>
+
+<user>
+	<username>microsoft</username>
+	<password>1234</password>
+	<homepageURL>http://www.microsoft.com/</homepageURL>
+</user>
+
+<user>
+	<username>facebook</username>
+	<password>1234</password>
+	<homepageURL>http://www.facebook.com/</homepageURL>
+</user>
