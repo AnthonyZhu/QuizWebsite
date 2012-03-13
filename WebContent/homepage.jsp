@@ -22,6 +22,9 @@
 	<link rel="stylesheet" href="resources/css/main.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/three_column_layout.css" type="text/css" />
 	
+	<script type="text/javascript" src="resources/scripts/sendFriendRequest.js"></script>
+	<script type="text/javascript" src="resources/scripts/sendNote.js"></script>
+	<script type="text/javascript" src="resources/scripts/sendChallenge.js"></script>	
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="resources/scripts/functions.js"></script>
 </head>

@@ -40,6 +40,10 @@
 		$('#contentFrame').attr('src', 'home_moreAnnouncements.jsp');
 	};
 
+	global.sendNotePopup = function() {
+		window.open('sendNoteButton.jsp');
+	};
+		
 })(window);
 
 
