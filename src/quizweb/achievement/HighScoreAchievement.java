@@ -18,7 +18,7 @@ public class HighScoreAchievement extends Achievement {
 			stmt.setInt(1, HIGHSCORE_TYPE);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				HighScoreAchievement achievement = new HighScoreAchievement(rs.getString("name"), 
+				HighScoreAchievement achievement = new HighScoreAchievement(rs.getString("name"), rs.getString("url"),
 						rs.getString("description"), rs.getInt("threshold"));
 				allAchievements.add(achievement);
 			}
@@ -28,8 +28,8 @@ public class HighScoreAchievement extends Achievement {
 		}	
 	}
 	
-	public HighScoreAchievement(String name, String discription, int threshold) {
-		super(name, discription, threshold);
+	public HighScoreAchievement(String name, String url, String discription, int threshold) {
+		super(name, url, discription, threshold);
 		this.type = HIGHSCORE_TYPE;
 		super.addAchievementToDB();
 	}

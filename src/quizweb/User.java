@@ -14,7 +14,7 @@ import quizweb.record.*;
 public class User {
 	public int userID;
 	public String username;
-	public String password; // TODO JACK it should be encrypt instead of clear text
+	public String password; 
 	public String homepageURL;
 	
 	public int permission;	// whether is admin

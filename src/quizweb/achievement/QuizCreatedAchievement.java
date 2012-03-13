@@ -18,7 +18,7 @@ public class QuizCreatedAchievement extends Achievement {
 			stmt.setInt(1, QUIZ_CREATED_TYPE);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				QuizCreatedAchievement achievement = new QuizCreatedAchievement(rs.getString("name"), 
+				QuizCreatedAchievement achievement = new QuizCreatedAchievement(rs.getString("name"), rs.getString("url"), 
 						rs.getString("description"), rs.getInt("threshold"));
 				allAchievements.add(achievement);
 			}
@@ -28,8 +28,8 @@ public class QuizCreatedAchievement extends Achievement {
 		}	
 	}
 	
-	public QuizCreatedAchievement(String name, String discription, int threshold) {
-		super(name, discription, threshold);
+	public QuizCreatedAchievement(String name, String url, String discription, int threshold) {
+		super(name, url, discription, threshold);
 		this.type = QUIZ_CREATED_TYPE;
 		super.addAchievementToDB();
 	}
