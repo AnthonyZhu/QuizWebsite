@@ -19,12 +19,12 @@ public class AchievementRecord extends Record {
 		this.achievement = achievement;
 	}
 	
+	@Override
 	public void addRecordToDB() {
-		// add to database
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
 					+ " (userid, aid)" 
-					+ " VALUES (?, ?");
+					+ " VALUES (?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"id"});
 			stmt.setInt(1, user.userID);
 			stmt.setInt(2, achievement.id);
@@ -58,5 +58,29 @@ public class AchievementRecord extends Record {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static Record getAchievementRecordByXMLElem(XMLElement root) {
+		User user = null;
+		Achievement achievement = null;
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("user")) {
+				user = User.getUserByUsername(elem.content);
+			} else if (elem.name.equals("achievement")) {
+				achievement = Achievement.getAchievementByName(elem.content);
+			} else {
+				System.out.println("Unrecognized achievement record field " + elem.name);
+			}
+		}
+		if (user == null) {
+			System.out.println("User in achievement record not found");
+			return null;
+		}
+		if (achievement == null) {
+			System.out.println("Quiz in achievement record not found");
+			return null;
+		}
+		return new AchievementRecord(user, achievement);
 	}
 }

@@ -119,15 +119,17 @@ public class PictureQuestion extends Question {
 		String url = null;
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name == "image-location") {
-				question = (String) elem.content;
-			} else if (elem.name == "answer") {
+			if (elem.name.equals("image-location")) {
+				url = elem.content;
+			} else if (elem.name.equals("query")) {
+				question = elem.content;
+			} else if (elem.name.equals("answer")) {
 				ArrayList<String> answerList = new ArrayList<String>();
 				answerList.add(elem.content);
 				answer = answerList;
-			} else if (elem.name == "answer-list") {
+			} else if (elem.name.equals("answer-list")) {
 				answer = Question.getAnswerListByXMLElem(elem);
-			} else if (elem.name == "score") {
+			} else if (elem.name.equals("score")) {
 				score = Double.parseDouble(elem.content);
 			} else {
 				System.out.println("Unexpected field in picture question : " + elem.name);

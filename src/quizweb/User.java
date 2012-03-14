@@ -146,6 +146,7 @@ public class User {
 	 * @return
 	 */
 	public static User getUserByUsername(String username) {
+		username = username.trim();
 		try {
 			String statement = new String("SELECT * FROM " + DBTable + " WHERE username = ?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
@@ -210,6 +211,8 @@ public class User {
 	}
 	
 	public void addFriend(User user) {
+		if (isFriend(user) == IS_FRIEND) 
+			return;
 		try {
 			String statement = new String("INSERT INTO " + FriendDBTable 
 					+ " (uid1, uid2)" 
@@ -229,8 +232,19 @@ public class User {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}		
+	}
+	
+	public static void addFriendship(String username1, String username2) {
+		User user1 = getUserByUsername(username1.trim());
+		if (user1 == null) {
+			System.out.println("User " + username1 + " NOT FOUND");
 		}
-		
+		User user2 = getUserByUsername(username2.trim());
+		if (user2 == null) {
+			System.out.println("User " + username2 + " NOT FOUND");
+		}
+		user1.addFriend(user2);
 	}
 	
 	public void removeFriend(User user) {
@@ -322,18 +336,18 @@ public class User {
 		
 		if (root.attributeMap.containsKey("permission")) {
 			String permissionStr = root.attributeMap.get("permission");
-			if (permissionStr == "admin")
+			if (permissionStr.equals("admin"))
 				permission = IS_ADMIN;
-			else if (permissionStr == "temp")
+			else if (permissionStr.equals("temp"))
 				permission = IS_TEMP;
 		}
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name == "username") {
+			if (elem.name.equals("username")) {
 				username = elem.content;
-			} else if (elem.name == "password") {
+			} else if (elem.name.equals("password")) {
 				password = new Encryption().generateHashedPassword(elem.content);
-			} else if (elem.name == "homepageURL") {
+			} else if (elem.name.equals("homepageURL")) {
 				url = elem.content;
 			} else {
 				System.out.println("Field not recognized in user : " + elem.name);

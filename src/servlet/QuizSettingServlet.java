@@ -76,7 +76,9 @@ public class QuizSettingServlet extends HttpServlet {
 			opPractice = false;
 		}
 		
-		Quiz newQuiz = new Quiz(quizName,quizURL,quizDescription,quizCategory,userID,isRandom,opFeedback,opPractice);
+		// TODO isOnepage to be added 
+		boolean isOnepage = false;
+		Quiz newQuiz = new Quiz(quizName,quizURL,quizDescription,quizCategory,userID,isRandom,isOnepage,opFeedback,opPractice);
 		session.setAttribute("newQuiz", newQuiz);
 		session.setAttribute("questionPosistion", 1);
 		RequestDispatcher dispatch = request.getRequestDispatcher("chooseQuestionType.jsp");

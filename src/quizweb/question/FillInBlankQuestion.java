@@ -116,26 +116,26 @@ public class FillInBlankQuestion extends Question {
 		
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name == "blank-query") {
+			if (elem.name.equals("blank-query")) {
 				for (int j = 0; j < elem.childList.size(); j++) {
 					XMLElement subElem = elem.childList.get(j);
-					if (subElem.name == "pre") {
+					if (subElem.name.equals("pre")) {
 						questionList.add(subElem.content);
-					} else if (subElem.name == "post") {
+					} else if (subElem.name.equals("post")) {
 						questionList.add(subElem.content);
-					} else if (subElem.name == "blank") {
+					} else if (subElem.name.equals("blank")) {
 						// do nothing
 					} else {
 						System.out.println("blank-query unknown field : " + subElem.name);
 					}
 				}
 				question = questionList;
-			} else if (elem.name == "answer") {
+			} else if (elem.name.equals("answer")) {
 				answerList.add(elem.content);
 				answer = answerList;
-			} else if (elem.name == "answer-list") {
+			} else if (elem.name.equals("answer-list")) {
 				answer = Question.getAnswerListByXMLElem(elem);
-			} else if (elem.name == "score") {
+			} else if (elem.name.equals("score")) {
 				score = Double.parseDouble(elem.content);
 			} else {
 				System.out.println("Unexpected field in fill in blank question : " + elem.name);

@@ -28,8 +28,8 @@ public class HighScoreAchievement extends Achievement {
 		}	
 	}
 	
-	public HighScoreAchievement(String name, String url, String discription, int threshold) {
-		super(name, url, discription, threshold);
+	public HighScoreAchievement(String name, String url, String description, int threshold) {
+		super(name, url, description, threshold);
 		this.type = HIGHSCORE_TYPE;
 	}
 

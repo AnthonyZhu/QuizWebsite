@@ -8,6 +8,7 @@ import java.util.*;
 
 import quizweb.Quiz;
 import quizweb.User;
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 public class QuizCreatedRecord extends Record {
@@ -26,6 +27,7 @@ public class QuizCreatedRecord extends Record {
 		this.timestamp = timeStamp;
 	}
 	
+	@Override
 	public void addRecordToDB() {
 		// add to database
 		try {
@@ -67,5 +69,28 @@ public class QuizCreatedRecord extends Record {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public static Record getQuizCreatedRecordByXMLElem(XMLElement root) {
+		User user = null;
+		Quiz quiz = null;
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("user")) {
+				user = User.getUserByUsername(elem.content);
+			} else if (elem.name.equals("quiz")) {
+				quiz = Quiz.getQuizByQuizName(elem.content);
+			} else {
+				System.out.println("Unrecognized quiz created record field " + elem.name);
+			}
+		}
+		if (user == null) {
+			System.out.println("User in quiz created record not found");
+			return null;
+		}
+		if (quiz == null) {
+			System.out.println("Quiz in quiz created record not found");
+			return null;
+		}
+		return new QuizCreatedRecord(quiz, user);
 	}
 }

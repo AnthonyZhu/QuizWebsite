@@ -48,6 +48,7 @@ public class QuizTakenRecord extends Record {
 		this.isPractice = isPractice;
 	}
 	
+	@Override
 	public void addRecordToDB() {
 		// add to database
 		try {
@@ -176,6 +177,37 @@ public class QuizTakenRecord extends Record {
 			HighScoreAchievement.updateAchievement(user);
 		}
 		QuizTakenAchievement.updateAchievement(user);
+	}
+	
+	public static Record getQuizTakenRecordByXMLElem(XMLElement root) {
+		User user = null;
+		Quiz quiz = null;
+		long timeSpan = -1;
+		double score = -1;
+		boolean isFeedback = false;
+		boolean isPractice = false;
+		if (root.attributeMap.containsKey("feedback") && root.attributeMap.get("feedback").equals("true"))
+			isFeedback = true;
+		if (root.attributeMap.containsKey("practice") && root.attributeMap.get("practice").equals("true"))
+			isPractice = true;
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("user")) {
+				user = User.getUserByUsername(elem.content);
+			} else if (elem.name.equals("quiz")) {
+				quiz = Quiz.getQuizByQuizName(elem.content);
+			} else if (elem.name.equals("score")) {
+				score = Double.parseDouble(elem.content);
+			} else if (elem.name.equals("time")) {
+				timeSpan = Long.parseLong(elem.content);
+			} else {
+				System.out.println("Unrecognized quiz taken record field " + elem.name);
+			}			
+		}
+		QuizTakenRecord record = new QuizTakenRecord(quiz, user, isFeedback, isPractice);
+		record.timeSpan = timeSpan;
+		record.score = score;
+		return record;
 	}	
 }
 

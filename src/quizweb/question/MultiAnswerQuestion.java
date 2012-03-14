@@ -16,9 +16,13 @@ public class MultiAnswerQuestion extends Question {
 //	ArrayList<String>	answer;
 //	ArrayList<String>	userAnswer;
 	static final String DBTable = "multiple_answer_question";
+	int answerNumber;
+	boolean isOrdered;
 	
-	public MultiAnswerQuestion(int quizID, int position, Object question, Object answer, double score) {
+	public MultiAnswerQuestion(int quizID, int position, Object question, Object answer, double score, int answerNumber, boolean isOrdered) {
 		super(quizID, position, question, answer, score);
+		this.answerNumber = answerNumber;
+		this.isOrdered = isOrdered;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -28,13 +32,15 @@ public class MultiAnswerQuestion extends Question {
 		// add to database
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
-					+ " (quizid, position, question, answer, score) VALUES (?, ?, ?, ?, ?)");
+					+ " (quizid, position, question, answer, score, answernumber, isordered) VALUES (?, ?, ?, ?, ?, ?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"questionid"});
 			stmt.setInt(1, quizID);
 			stmt.setInt(2, position);
 			stmt.setString(3, questionStr);
 			stmt.setString(4, answerStr);
 			stmt.setDouble(5, score);
+			stmt.setInt(6, answerNumber);
+			stmt.setBoolean(7, isOrdered);
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
@@ -45,9 +51,11 @@ public class MultiAnswerQuestion extends Question {
 		}
 	}
 	
-	public MultiAnswerQuestion(int questionID, int quizID, int position, Object question, Object answer, double score) {
+	public MultiAnswerQuestion(int questionID, int quizID, int position, Object question, Object answer, double score, int answerNumber, boolean isOrdered) {
 		super(quizID, position, question, answer, score);
 		this.questionID = questionID;
+		this.answerNumber = answerNumber;
+		this.isOrdered = isOrdered;
 	}	
 
 	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
@@ -62,7 +70,7 @@ public class MultiAnswerQuestion extends Question {
 			while (rs.next()) {
 				MultiAnswerQuestion q = new MultiAnswerQuestion(
 						rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
-						questionString, answerStringList, rs.getDouble("score"));
+						questionString, answerStringList, rs.getDouble("score"), rs.getInt("answernumber"), rs.getBoolean("isordered"));
 				questionList.add(q);
 			}
 			rs.close();
@@ -84,7 +92,7 @@ public class MultiAnswerQuestion extends Question {
 			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
 			MultiAnswerQuestion q = new MultiAnswerQuestion(
 					rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
-					questionString, answerStringList, rs.getDouble("score"));
+					questionString, answerStringList, rs.getDouble("score"), rs.getInt("answernumber"), rs.getBoolean("isordered"));
 			rs.close();
 			return q;
 		} catch (SQLException e) {
@@ -98,17 +106,23 @@ public class MultiAnswerQuestion extends Question {
 	public double getScore(Object userAnswer) {
 		ArrayList<String> ans = (ArrayList<String>) userAnswer;
 		ArrayList<String> trueAns = (ArrayList<String>) answer;
-		ArrayList<String> ques = (ArrayList<String>) question;		
-		int matches = 0;
-		for (int i = 0; i < ans.size(); i++) {
-			for (int j = 0; j < trueAns.size(); j++) {
-				if (ans.get(i).equals(trueAns.get(j))) {
+		int matches = 0;		
+		if (isOrdered) {
+			for (int i = 0; i < ans.size(); i++) {
+				if (ans.get(i).equals(trueAns.get(i)))
 					matches++;
-					break;
+			}
+		} else {
+			for (int i = 0; i < ans.size(); i++) {
+				for (int j = 0; j < trueAns.size(); j++) {
+					if (ans.get(i).equals(trueAns.get(j))) {
+						matches++;
+						break;
+					}
 				}
 			}
 		}
-		return score * matches / ques.size();
+		return score * matches / answerNumber;		
 	}
 
 	public static MultiAnswerQuestion getMultiAnswerQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
@@ -117,18 +131,24 @@ public class MultiAnswerQuestion extends Question {
 		Object question = null;
 		Object answer = null;
 		double score = 10;
+		int answerNumber = 0;
+		boolean isOrdered = false;
+		if (root.attributeMap.containsKey("isordered") && root.attributeMap.get("isordered").equals("true"))
+			isOrdered = true;
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name == "query") {
+			if (elem.name.equals("query")) {
 				question = (String) elem.content;
-			} else if (elem.name == "answer-list") {
+			} else if (elem.name.equals("answer-list")) {
 				answer = Question.getAnswerListByXMLElem(elem);
-			} else if (elem.name == "score") {
+			} else if (elem.name.equals("score")) {
 				score = Double.parseDouble(elem.content);
+			} else if (elem.name.equals("answer-number")){
+				answerNumber = Integer.parseInt(elem.content);
 			} else {
 				System.out.println("Unexpected field in response question : " + elem.name);
 			}
 		}
-		return new MultiAnswerQuestion(quizID, position, question, answer, score);
+		return new MultiAnswerQuestion(quizID, position, question, answer, score, answerNumber, isOrdered);
 	}
 }

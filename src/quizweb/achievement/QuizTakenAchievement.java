@@ -28,8 +28,8 @@ public class QuizTakenAchievement extends Achievement {
 		}	
 	}
 	
-	public QuizTakenAchievement(String name, String url, String discription, int threshold) {
-		super(name, url, discription, threshold);
+	public QuizTakenAchievement(String name, String url, String description, int threshold) {
+		super(name, url, description, threshold);
 		this.type = QUIZ_TAKEN_TYPE;
 	}
 

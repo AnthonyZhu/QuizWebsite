@@ -28,8 +28,8 @@ public class PracticeAchievement extends Achievement {
 		}	
 	}
 	
-	public PracticeAchievement(String name, String url, String discription, int threshold) {
-		super(name, url, discription, threshold);
+	public PracticeAchievement(String name, String url, String description, int threshold) {
+		super(name, url, description, threshold);
 		this.type = PRACTICE_TYPE;
 	}
 

@@ -2,6 +2,7 @@
 <quiz random="true" one-page="false" practice-mode="true" immediate-correction="true">
 <title>Cities</title>
 <description>See how well you recognize these famous cities.</description>
+<author>microsoft</author>
 
 <question type="picture-response">
   <image-location>http://upload.wikimedia.org/wikipedia/commons/4/48/TE-Collage_London.png</image-location>

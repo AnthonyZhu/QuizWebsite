@@ -36,7 +36,7 @@ public class Question {
 	}
 	
 	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
-		ArrayList<Question> questions = new ArrayList<Question>();
+		ArrayList<Question> questions = new ArrayList<Question>();	
 		questions.addAll(ResponseQuestion.getQuestionsByQuizID(quizID));
 		questions.addAll(FillInBlankQuestion.getQuestionsByQuizID(quizID));
 		questions.addAll(MultiAnswerQuestion.getQuestionsByQuizID(quizID));
@@ -64,19 +64,19 @@ public class Question {
 
 	public static Question getQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
 		String type = root.attributeMap.get("type");		
-		if (type == "question-response") {
+		if (type.equals("question-response")) {
 			return ResponseQuestion.getResponseQuestionByXMLElem(root, quiz, pos);
-		} else if (type == "fill-in-blank") {
+		} else if (type.equals("fill-in-blank")) {
 			return FillInBlankQuestion.getFillInBlankQuestionByXMLElem(root, quiz, pos);
-		} else if (type == "multiple-choice") {
+		} else if (type.equals("multiple-choice")) {
 			return MultipleChoiceQuestion.getMultipleChoiceQuestionByXMLElem(root, quiz, pos);
-		} else if (type == "picture-response") {
+		} else if (type.equals("picture-response")) {
 			return PictureQuestion.getPictureQuestionByXMLElem(root, quiz, pos);
-		} else if (type == "matching-question") {
+		} else if (type.equals("matching-question")) {
 			return MatchingQuestion.getMatchingQuestionByXMLElem(root, quiz, pos);
-		} else if (type == "multi-answer-question") {
+		} else if (type.equals("multi-answer-question")) {
 			return MultiAnswerQuestion.getMultiAnswerQuestionByXMLElem(root, quiz, pos);
-		} else if (type == "multi-choice-multi-answer-question") {
+		} else if (type.equals("multi-choice-multi-answer-question")) {
 			return MultiChoiceMultiAnswerQuestion.getMultiChoiceMultiAnswerQuestionByXMLElem(root, quiz, pos);
 		} else {
 			System.out.println("Question Type " + type + " Not Recognized.");
@@ -88,7 +88,7 @@ public class Question {
 		ArrayList<String> answerList = new ArrayList<String>();
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name != "answer") 
+			if (!elem.name.equals("answer")) 
 				System.out.println("Answer list unexpected name " + elem.name);
 			answerList.add(elem.content);
 		}
@@ -99,7 +99,7 @@ public class Question {
 		ArrayList<String> questionList = new ArrayList<String>();
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name != "query") 
+			if (!elem.name.equals("query")) 
 				System.out.println("Question list unexpected name " + elem.name);
 			questionList.add(elem.content);
 		}

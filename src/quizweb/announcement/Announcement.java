@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 public class Announcement {
@@ -68,7 +69,23 @@ public class Announcement {
 		return null;
 	}
 	
+	public static Announcement getAnnouncementByXMLElem(XMLElement root) {
+		String title = new String("Untitled");
+		String content = new String("This announcement has no content.");
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("title")) {
+				title = elem.content;
+			} else if (elem.name.equals("content")) {
+				content = elem.content;
+			} else {
+				System.out.println("Unrecognized announcement field " + elem.name);
+			}
+		}
+		return new Announcement(title, content);
+	}
+	
 	public boolean equals(Announcement other) {
 		return announcementID == other.announcementID;
-	}
+	}	
 }

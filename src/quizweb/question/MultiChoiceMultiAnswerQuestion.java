@@ -135,18 +135,26 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 		Object answer = null;
 		double score = 10;
 		ArrayList<String> answerList = new ArrayList<String>();
+		ArrayList<String> questionList = new ArrayList<String>();
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name == "query-list") {
-				question = Question.getQuestionListByXMLElem(elem);
-				if (elem.attributeMap.containsKey("answer"))
-					answerList.add(elem.content);
-			} else if (elem.name == "score") {
+			if (elem.name.equals("query-list")) {
+				for (int j = 0; j < elem.childList.size(); j++) {
+					XMLElement subElem = elem.childList.get(j);
+					if (!subElem.name.equals("query")) 
+						System.out.println("Question list unexpected name " + subElem.name);
+					questionList.add(subElem.content);
+					if (subElem.attributeMap.containsKey("answer"))
+						answerList.add(subElem.content);
+				}
+				
+			} else if (elem.name.equals("score")) {
 				score = Double.parseDouble(elem.content);
 			} else {
 				System.out.println("Unexpected field in response question : " + elem.name);
 			}
 		}
+		question = questionList;
 		answer = answerList;
 		return new MultiChoiceMultiAnswerQuestion(quizID, position, question, answer, score);
 	}

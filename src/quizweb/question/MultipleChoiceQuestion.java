@@ -122,13 +122,13 @@ public class MultipleChoiceQuestion extends Question {
 		ArrayList<String> questionList = new ArrayList<String>();		
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name == "query") {
+			if (elem.name.equals("query")) {
 				questionList.add(elem.content);
-			} else if (elem.name == "option") {
+			} else if (elem.name.equals("option")) {
 				questionList.add(elem.content);
 				if (elem.attributeMap.containsKey("answer")) 
 					answer = elem.content;
-			} else if (elem.name == "score") {
+			} else if (elem.name.equals("score")) {
 				score = Double.parseDouble(elem.content);
 			} else {
 				System.out.println("Unexpected field in multiple choice question : " + elem.name);

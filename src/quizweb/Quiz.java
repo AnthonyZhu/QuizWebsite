@@ -99,7 +99,10 @@ public class Quiz {
 			stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, quizID);
 			ResultSet rs = stmt.executeQuery();
-			rs.next();
+			if (!rs.next()) {
+				System.out.println("Quiz " + quizID + " NOT FOUND");
+				return null;
+			}
 			Quiz quiz = new Quiz(rs.getInt("qid"), rs.getString("name"), rs.getString("url"), 
 					rs.getString("description"), rs.getString("category"), rs.getInt("userid"), 
 					rs.getBoolean("israndom"), rs.getBoolean("isonepage"), rs.getBoolean("opfeedback"), rs.getBoolean("oppractice"), 
@@ -110,6 +113,30 @@ public class Quiz {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static Quiz getQuizByQuizName(String quizName) {
+		quizName = quizName.trim();
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE name = ?");
+		PreparedStatement stmt;
+		try {
+			stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setString(1, quizName);
+			ResultSet rs = stmt.executeQuery();
+			if (!rs.next()) {
+				System.out.println("Quiz " + quizName + " NOT FOUND");
+				return null;
+			}
+			Quiz quiz = new Quiz(rs.getInt("qid"), rs.getString("name"), rs.getString("url"), 
+					rs.getString("description"), rs.getString("category"), rs.getInt("userid"), 
+					rs.getBoolean("israndom"), rs.getBoolean("isonepage"), rs.getBoolean("opfeedback"), rs.getBoolean("oppractice"), 
+					rs.getInt("raternumber"), rs.getDouble("rating"));
+			rs.close();
+			return quiz;			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;		
 	}
 	
 	// Update current quiz record in database;
@@ -256,68 +283,50 @@ public class Quiz {
 	}
 
 
-	public static Quiz getQuizByXMLElem(XMLElement root) {
-		ArrayList<XMLElement> questionElems = new ArrayList<XMLElement>();
-		
+	public static Quiz getQuizByXMLElem(XMLElement root, ArrayList<XMLElement> questionElems) {
 		String name = new String("Quiz Name Missing");
 		String description = new String("Quiz Description Missing");
 		String category = new String("Uncategorized");
-		int userID = 0;
+		int userID = -1;
 		boolean isRandom = false;
 		boolean isOnepage = false;
 		boolean opFeedback = false;
 		boolean opPractice = false;
-		if (root.attributeMap.containsKey("random") && root.attributeMap.get("random") == "true") {
+		if (root.attributeMap.containsKey("random") && root.attributeMap.get("random").equals("true")) 
 			isRandom = true;
-		} else {
-			isRandom = false;
-		}
-		if (root.attributeMap.containsKey("one-page") && root.attributeMap.get("one-page") == "true") {
-			isOnepage = true;
-		} else {
-			isOnepage = false;
-		}
-		
-		if (root.attributeMap.containsKey("feedback-mode") && root.attributeMap.get("feedback-mode") == "true") {
-			opFeedback = true;
-		} else {
-			opFeedback = false;
-		}
-			
-		
-		if (root.attributeMap.containsKey("practice-mode") && root.attributeMap.get("practice-mode") == "true") {
+		if (root.attributeMap.containsKey("one-page") && root.attributeMap.get("one-page").equals("true")) 
+			isOnepage = true;	
+		if (root.attributeMap.containsKey("feedback-mode") && root.attributeMap.get("feedback-mode").equals("true")) 
+			opFeedback = true;				
+		if (root.attributeMap.containsKey("practice-mode") && root.attributeMap.get("practice-mode").equals("true")) 
 			opPractice = true;
-		} else {
-			opPractice = false;
-		}
 			
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name == "title") {
+			if (elem.name.equals("title")) {
 				name = elem.content;
-			} else if (elem.name == "description") {
+			} else if (elem.name.equals("description")) {
 				description = elem.content;
-			} else if (elem.name == "category") {
-				description = elem.content;
-			} else if (elem.name == "author") {
+			} else if (elem.name.equals("category")) {
+				category = elem.content;
+			} else if (elem.name.equals("author")) {
 				User user = User.getUserByUsername(elem.content);
 				if (user != null)
 					userID = user.userID;
-			} else if (elem.name == "question") {
+			} else if (elem.name.equals("question")) {
 				questionElems.add(elem);
 			} else {
 				System.out.println("Unknown Quiz XML field " + elem.name);
 			}
 		}
-		String quizURL = new String("URL NOT IMPLEMENTED"); // TODO fill in the quizURL		
-		Quiz quiz = new Quiz(name, quizURL, description, category, userID, isRandom, isOnepage, opFeedback, opPractice);
-		
-		for (int i = 0; i < questionElems.size(); i++) {
-			XMLElement elem = questionElems.get(i);
-			Question question = Question.getQuestionByXMLElem(elem, quiz, i);
-			question.addQustionToDB();
+		String quizURL = new String("URL NOT IMPLEMENTED"); // TODO fill in the quizURL
+		if (userID == -1) {
+			System.out.println("Author for quiz " + name + " must be specified!");
 		}
-		
+		Quiz quiz = new Quiz(name, quizURL, description, category, userID, isRandom, isOnepage, opFeedback, opPractice);		
 		return quiz;
 	}
+
+
+
 }

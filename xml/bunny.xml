@@ -3,6 +3,7 @@
 <title>Bunny Quiz</title>
 <category>Animals</category>
 <description>An homage to the departed, legendary Bunny World project.</description>
+<author>stanford</author>
 
 <question type="question-response">
   <query>What is the Biological Family for Bunnies?</query>
@@ -27,6 +28,45 @@
     <answer preferred="preferred">Bugs Bunny</answer>
 	<answer>Bugs</answer>
   </answer-list>
+</question>
+
+<question type="matching-question">
+  <score>12</score>
+  <query-list>
+	<query answer="3">Bunny query 1</query>
+	<query answer="4">Bunny query 2</query>
+	<query answer="1">Bunny query 3</query>
+	<query answer="2">Bunny query 4</query>
+  </query-list>
+  <answer-list>
+    <answer>Bunny answer 3</answer>
+	<answer>Bunny answer 4</answer>
+	<answer>Bunny answer 1</answer>
+	<answer>Bunny answer 2</answer>
+  </answer-list>
+</question>
+
+<question type="multi-answer-question" isordered="false">
+  <query>What are 3 letters appear in the word "BUNNY", please write capital letters.</query>
+  <answer-list>
+    <answer>B</answer>
+	<answer>U</answer>
+	<answer>N</answer>
+	<answer>Y</answer>
+  </answer-list>
+  <answer-number>3</answer-number>
+  <score>5</score>
+</question>
+
+<question type="multi-choice-multi-answer-question">
+  <query-list> 
+    <query answer="yes">This is a correct answer about Bunny.</query>
+	<query>This is a wrong answer about Bunny.</query>
+	<query>This is another wrong answer about Bunny.</query>
+	<query>This is a third wrong answer about Bunny.</query>
+	<query answer="yes">This is another correct answer about Bunny.</query>
+  </query-list>
+  <score>15</score>
 </question>
 
 </quiz>
