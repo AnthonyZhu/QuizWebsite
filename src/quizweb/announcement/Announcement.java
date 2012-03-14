@@ -2,7 +2,6 @@ package quizweb.announcement;
 
 import java.sql.*;
 import java.util.*;
-import java.util.Date;
 
 import quizweb.XMLElement;
 import quizweb.database.DBConnection;

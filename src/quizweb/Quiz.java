@@ -27,10 +27,6 @@ public class Quiz {
 	
 	public static final String DBTable = "quiz";
 	
-	public Quiz() {
-	}
-	
-	
 	// Creation constructor
 	public Quiz(String name, String quizURL, String description, String category,
 			int userID, boolean isRandom, boolean isOnepage, boolean opFeedback, boolean opPractice) {
@@ -201,8 +197,12 @@ public class Quiz {
 	
 	
 	// Summary statistics
-	public QuizSummary computeSummaryStats() {
+	public QuizSummary getQuizSummary() {
 		return new QuizSummary(this);
+	}
+	
+	public QuizSummary getQuizSummary(User user) {
+		return new QuizSummary(this, user);
 	}
 
 	// Score
@@ -252,6 +252,8 @@ public class Quiz {
 	
 	// Rating
 	public void addQuizRating(double rating) {
+		raterNumber++;
+		totalRating += rating;
 		try {
 			String statement = new String("UPDATE " + DBTable + " SET "
 					+ "raternumber=raternumber+1, rating=rating+?"

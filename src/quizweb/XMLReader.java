@@ -163,8 +163,16 @@ public class XMLReader {
 		// Load records
 		new XMLReader("./xml/records.xml");
 		
-		//new XMLReader("./xml/announcements.xml");
+		new XMLReader("./xml/announcements.xml");
 		
+	}
+	
+	public void pause(int millisec) {
+		try {
+			Thread.sleep(millisec);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {

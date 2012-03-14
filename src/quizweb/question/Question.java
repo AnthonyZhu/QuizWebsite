@@ -1,6 +1,5 @@
 package quizweb.question;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import quizweb.Quiz;

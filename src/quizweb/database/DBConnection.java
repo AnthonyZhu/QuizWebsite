@@ -26,8 +26,7 @@ public class DBConnection {
 			stmt.executeQuery("USE " + database);
 		} catch (SQLException e) { 
 			e.printStackTrace();
-			} 
-		catch (ClassNotFoundException e) { 
+		} catch (ClassNotFoundException e) { 
 			e.printStackTrace();
 		}
 		return thisCon;
