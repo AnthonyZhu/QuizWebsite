@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<announcement>
+  <title>Announcement 1</title>
+  <content>A1 content</content>
+</announcement>
+
+<announcement>
+  <title>Announcement 2</title>
+  <content>A2 content</content>
+</announcement>
+
+<announcement>
+  <title>Announcement 3</title>
+  <content>A3 content</content>
+</announcement>
+
+<announcement>
+  <title>Announcement 4</title>
+  <content>A4 content</content>
+</announcement>
+
+<announcement>
+  <title>Announcement 5</title>
+  <content>A5 content</content>
+</announcement>
+
+<announcement>
+  <title>Announcement 6</title>
+  <content>A6 content</content>
+</announcement>

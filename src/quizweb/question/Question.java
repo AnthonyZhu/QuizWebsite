@@ -1,5 +1,6 @@
 package quizweb.question;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import quizweb.Quiz;
@@ -36,10 +37,10 @@ public class Question {
 	}
 	
 	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
-		ArrayList<Question> questions = new ArrayList<Question>();	
+		ArrayList<Question> questions = new ArrayList<Question>();
 		questions.addAll(ResponseQuestion.getQuestionsByQuizID(quizID));
 		questions.addAll(FillInBlankQuestion.getQuestionsByQuizID(quizID));
-		questions.addAll(MultiAnswerQuestion.getQuestionsByQuizID(quizID));
+		questions.addAll(MultipleChoiceQuestion.getQuestionsByQuizID(quizID));
 		questions.addAll(PictureQuestion.getQuestionsByQuizID(quizID));
 		questions.addAll(MultiAnswerQuestion.getQuestionsByQuizID(quizID));
 		questions.addAll(MultiChoiceMultiAnswerQuestion.getQuestionsByQuizID(quizID));

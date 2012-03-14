@@ -56,9 +56,9 @@ public class ResponseQuestion extends Question {
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, quizID);
 			ResultSet rs = stmt.executeQuery();
-			String questionString = rs.getString("question");
-			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
 			while (rs.next()) {
+				String questionString = rs.getString("question");
+				ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));				
 				ResponseQuestion q = new ResponseQuestion(
 						rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
 						questionString, answerStringList, rs.getDouble("score"));

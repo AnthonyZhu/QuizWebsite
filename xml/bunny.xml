@@ -47,7 +47,7 @@
 </question>
 
 <question type="multi-answer-question" isordered="false">
-  <query>What are 3 letters appear in the word "BUNNY", please write capital letters.</query>
+  <query>Please write 3 capital letters letters that appear in the word "BUNNY".</query>
   <answer-list>
     <answer>B</answer>
 	<answer>U</answer>

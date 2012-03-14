@@ -57,9 +57,9 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, quizID);
 			ResultSet rs = stmt.executeQuery();
-			ArrayList<String> questionStringList = getParsedStrings(rs.getString("question"));
-			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
 			while (rs.next()) {
+				ArrayList<String> questionStringList = getParsedStrings(rs.getString("question"));
+				ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));				
 				MultiChoiceMultiAnswerQuestion q = new MultiChoiceMultiAnswerQuestion(
 						rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
 						questionStringList, answerStringList, rs.getDouble("score"));

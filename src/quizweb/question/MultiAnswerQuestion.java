@@ -65,9 +65,9 @@ public class MultiAnswerQuestion extends Question {
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, quizID);
 			ResultSet rs = stmt.executeQuery();
-			String questionString = rs.getString("question");
-			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
-			while (rs.next()) {
+			while (rs.next()) {		
+				String questionString = rs.getString("question");
+				ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));					
 				MultiAnswerQuestion q = new MultiAnswerQuestion(
 						rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
 						questionString, answerStringList, rs.getDouble("score"), rs.getInt("answernumber"), rs.getBoolean("isordered"));

@@ -146,8 +146,13 @@ public class XMLReader {
 	}
 
 	public static void loadAllXML() {
-		if (isLoaded) return;
+		if (isLoaded) {
+			System.out.println("XML already loaded");
+			return;
+		}
 		isLoaded = true;
+		DBConnection.resetDatabase();
+		
 		// Load users
 		new XMLReader("./xml/users.xml");
 		// Load quizzes
@@ -163,7 +168,6 @@ public class XMLReader {
 	}
 	
 	public static void main(String[] args) {
-		DBConnection.resetDatabase();
 		XMLReader.loadAllXML();
 		System.out.println("ALL DONE");
 	}
