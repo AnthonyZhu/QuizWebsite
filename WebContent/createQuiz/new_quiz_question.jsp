@@ -78,7 +78,12 @@
         
 		<ul>
 			<li>
-				<div><input id="saveForm" name="saveForm" class="btTxt submit" type="submit" value="Save and Finish"/></div>
+				<div>
+				<input id="saveForm" name="saveForm" class="btTxt submit" type="submit" value="Save and Finish"/>
+				<% 
+			    out.println("<input name =\"quizID\" type=\"hidden\" value=\"" + newQuiz.quizID + "\">");
+			    %>
+				</div>
 				<div><input id="addNewQuestion" name="addNewQuestion" class="btTxt submit" type="submit" value="Add Another Question"/></div>
 			</li>
 		</ul>
