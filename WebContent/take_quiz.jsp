@@ -56,8 +56,57 @@
 			    out.println("This is No." + posistion + " question.");
 				%></span>
 				<hr >
-				<span class="quiz_title"><%
-				
+				<span class="quiz_title">
+				<%
+				out.println("The question is: ");
+				ArrayList<Question> questionList = Question.getQuestionsByQuizID(quiz.quizID);
+			    Question question = questionList.get(posistion-1);
+				if(question instanceof ResponseQuestion){
+					ResponseQuestion newQuestion = (ResponseQuestion) question;
+					String questionWhole = (String) newQuestion.question;
+					out.println(questionWhole);
+				}else if(question instanceof FillInBlankQuestion){
+					FillInBlankQuestion newQuestion = (FillInBlankQuestion) question;
+					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
+					String questionContent ="";
+					for(int i=0;i<questionWhole.size();i++){
+						questionContent += questionWhole.get(i);
+                        if(i<questionWhole.size()-1){
+                        	questionContent += "_";
+                        }
+					}
+					out.println(questionContent);
+				}else if(question instanceof PictureQuestion){
+					PictureQuestion newQuestion = (PictureQuestion) question;
+					String questionWhole = (String) newQuestion.question;
+					out.println(questionWhole);
+					out.println("Picture link: <a href=" + newQuestion.questionURL + ">picture</a>");
+				}else if(question instanceof MultipleChoiceQuestion){
+					MultipleChoiceQuestion newQuestion = (MultipleChoiceQuestion) question;
+					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
+					out.println(questionWhole.get(0));
+					for(int i=1;i<questionWhole.size();i++){
+						out.println(i + ". " + questionWhole.get(i) + "; ");
+					}
+				}else if(question instanceof MultiAnswerQuestion){
+					MultiAnswerQuestion newQuestion = (MultiAnswerQuestion) question;
+					String questionWhole = (String) newQuestion.question;
+					out.println(questionWhole);
+				}else if(question instanceof MatchingQuestion){
+					MatchingQuestion newQuestion = (MatchingQuestion) question;
+					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
+					out.println(questionWhole.get(0));
+					for(int i=1;i<questionWhole.size();i++){
+						out.println(i + ". " + questionWhole.get(i) + "; ");
+					}
+				}else if(question instanceof MultiChoiceMultiAnswerQuestion){
+					MultiChoiceMultiAnswerQuestion newQuestion = (MultiChoiceMultiAnswerQuestion) question;
+					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
+					out.println(questionWhole.get(0));
+					for(int i=1;i<questionWhole.size();i++){
+						out.println(i + ". " + questionWhole.get(i) + "; ");
+					}
+				}
 				%></span>
 				<div>
 					<input id="Field1" name="Field1" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />

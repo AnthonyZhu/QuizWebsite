@@ -96,7 +96,11 @@
 			<h2>My Statistics</h2>
 			<p><%
 			if(QuizTakenRecord.getQuizHistoryByQuizIDUserID(quiz.quizID,homeUser.userID) != null){
-				out.println("I have taken this quiz");
+				if(QuizTakenRecord.getQuizHistoryByQuizIDUserID(quiz.quizID,homeUser.userID).size() != 0){
+					out.println("I have taken this quiz");
+				}else{
+					out.println("I have not taken this quiz yet");
+				}
 			}else{
 				out.println("I have not taken this quiz yet");
 			}
