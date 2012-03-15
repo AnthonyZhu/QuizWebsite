@@ -38,7 +38,7 @@ public class NewAccountServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AccountManager am = (AccountManager)getServletContext().getAttribute("accunt manager");
+		AccountManager am = (AccountManager)getServletContext().getAttribute("account manager");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		if(User.getUserByUsername(username) != null) {
