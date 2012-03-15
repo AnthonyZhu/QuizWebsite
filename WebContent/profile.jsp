@@ -23,14 +23,19 @@ User user = (User)session.getAttribute("user");
 </head>
 <body>
 <div class="container" >
-	<div class="header">
-		<h1>toQuiz.me</h1>
-	</div>
+<jsp:include page="/modules/head.jsp" />
 	
 	<div class="content-container">
 		<div class="two_column_left">
 			<span style="float:right">
-				<button type="submit" name="addAsFriend">
+			
+			<jsp:include page="/modules/head.jsp" />
+			<jsp:include page="/modules/head.jsp" />
+			<jsp:include page="/modules/head.jsp" />
+			
+			
+			
+			<!-- <button type="submit" name="addAsFriend">
 						Send Friend Request
 				</button>
 				<button type="submit" name="addAsFriend">
@@ -38,7 +43,8 @@ User user = (User)session.getAttribute("user");
 				</button>
 				<button type="submit" name="addAsFriend">
 						Send Note
-				</button>
+				</button> -->
+				
 			</span>
 			<h1><%out.println(user.username);%></h1>
 			<p><span class="dominant_text">33</span> friends | <span class="dominant_text">1</span> quiz created | <span class="dominant_text">55</span> quizzes taken</p>
@@ -70,9 +76,7 @@ User user = (User)session.getAttribute("user");
 
 	</div>
 	
-	<div class="footer">
-			Copyright © toQuiz.me, 2012
-	</div>
+<jsp:include page="/modules/foot.html" />
 	
 </div>
 </body>
