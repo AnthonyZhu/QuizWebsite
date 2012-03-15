@@ -15,10 +15,12 @@
 	%>
 	<div id="note_form">
 	<form name="note" action="">
-		<textarea id="note">Your note.</textarea>
+		<textarea id="note"></textarea>
 		<input type="hidden" id="sender" value="<%out.print(user.userID);%>"/>
-		<input type="hidden" id="receiver" value="2"/>
-		<input type="submit" id="submit_btn" value="send note"/>
+		<!--
+		<input type="hidden" id="receiver" value="<%//out.print(senderID); %>"/>
+		-->
+		<input type="submit" id="note_btn" value="send note"/>
 	</form>
 	<span class="error" style="display:none"> empty note!</span>
 	</div>
