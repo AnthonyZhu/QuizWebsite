@@ -210,6 +210,11 @@ public class User {
 		user.updateCurrentUser();
 	}
 	
+	public static void promoteUser(User user) {
+		user.permission = IS_ADMIN;
+		user.updateCurrentUser();
+	}	
+	
 	public void addFriend(User user) {
 		if (isFriend(user) == IS_FRIEND) 
 			return;
@@ -283,34 +288,18 @@ public class User {
 			e.printStackTrace();
 		}
 		// if the user has sent a friend request previously, return pending_friend
-		// TODO
+		// TODO JACK
 		// otherwise return not_friend
 		return NOT_FRIEND;
 	}
-	
-	public void addMessage(Message message) {
-		// add message to database
-		// update global user list instance
-		// TODO
-	}	
-	
 
 	// Admin 
 	public void addAnnouncement(String title, String content) {
 		if (permission != IS_ADMIN) return;
-		new Announcement(title, content); // TODO JACK
+		Announcement announcement = new Announcement(title, content);
+		announcement.addAnnouncementToDB();
 	}
-	
-	/**
-	 * Promote a particular user to administration privilege 
-	 * @param user
-	 */
-	public void promoteUser(User user) {
-		if (permission == IS_ADMIN) {
-			user.permission = IS_ADMIN;
-			user.updateCurrentUser();
-		}
-	}
+
 	
 	// Quiz
 	// Editing is done in servelet in quiz
