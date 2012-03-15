@@ -41,7 +41,20 @@
 	};
 	
 	global.sendNotePopup = function() {
-		window.open('sendNoteButton.jsp');
+		session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		var popup = window.open('','newWindow','width=400,height=200');
+		popup.focus();
+		popup.document.open();
+		popup.document.writeln("<div id='note_form'>");
+		popup.document.writeln("<form name='note' action=''>");
+		popup.document.writeln("<textarea id='note'></textarea>");
+		popup.document.writeln("<input type='hidden' id='sender' value='"+ user.userID +"'/>");
+		popup.document.writeln("<input type='hidden' id='receiver' value='"+ senderID +"'/>");
+		popup.document.writeln("<input type='submit' id='note_btn' value='send note'/>");
+		popup.document.writeln("</form>");
+		popup.document.writeln("<span class='error' style='display:none'> empty note!</span>");
+		popup.document.writeln("</div>");
 	};
 	
 })(window);
