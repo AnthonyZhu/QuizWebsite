@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import quizweb.Quiz;
-import quizweb.User;
+import quizweb.*;
+import quizweb.record.*;
 
 /**
  * Servlet implementation class QuizSettingServlet
@@ -79,6 +79,9 @@ public class QuizSettingServlet extends HttpServlet {
 		// TODO isOnepage to be added 
 		boolean isOnepage = false;
 		Quiz newQuiz = new Quiz(quizName,quizURL,quizDescription,quizCategory,userID,isRandom,isOnepage,opFeedback,opPractice);
+		newQuiz.addQuizToDB();
+		QuizCreatedRecord record = new QuizCreatedRecord(newQuiz, homeUser);
+		record.addRecordToDB();
 		session.setAttribute("newQuiz", newQuiz);
 		session.setAttribute("questionPosistion", 1);
 		RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/chooseQuestionType.jsp");

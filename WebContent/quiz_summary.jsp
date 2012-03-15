@@ -112,11 +112,13 @@
 			}else{
 				if(topRecords.size()<=3){
 					for(int i=0;i<topRecords.size();i++){
-						out.println("<li>" + (i+1) + ": " + topRecords.get(i).user.username + "</li>");
+						User oneUser = topRecords.get(i).user;
+						out.println("<li>" + (i+1) + ": <a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a></li>");
 					}
 				}else{
 					for(int i=0;i<3;i++){
-						out.println("<li>" + (i+1) + ": " + topRecords.get(i).user.username + "</li>");
+						User oneUser = topRecords.get(i).user;
+						out.println("<li>" + (i+1) + ": <a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a></li>");
 					}
 				}
 			}
@@ -131,7 +133,7 @@
 				if(records.size() != 0){
 					QuizSummary mySummary = quiz.getQuizSummary(homeUser);
 					out.println("<ul>");
-					out.println("<li>My average score: " + Math.round(mySummary.averageScore*100)/100.0 + ". Average time: " + Math.round(mySummary.averageTimespan/60000*100)/100.0 + "mins</li>");
+					out.println("<li>My average score: " + Math.round(mySummary.averageScore*100)/100.0 + ". Average time: " + Math.round(mySummary.averageTimespan/60000*100)/100.0 + " mins</li>");
 					out.println("<li>My best score: " + Math.round(100*mySummary.bestScore)/100.0 + ". My fastest time: " + Math.round(100*mySummary.bestTimespan/60000)/100.0 + " mins</li>");
 					out.println("</ul>");
 				}else{
@@ -153,7 +155,7 @@
 				out.println("No one has taken this quiz yet.");
 			}else{
 				QuizTakenRecord pastHistory = quizHistory.get(0);
-				out.println(pastHistory.user.username + " took this question. Score: " + pastHistory.score + " in " + Math.round(pastHistory.timeSpan/60000*100)/100.0 + " mins");
+				out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + pastHistory.user.userID + "\">"+ pastHistory.user.username + "</a>" + " took this question. Score: " + pastHistory.score + " in " + Math.round(pastHistory.timeSpan/60000.0*100)/100.0 + " mins");
 			}
 			%>
 			

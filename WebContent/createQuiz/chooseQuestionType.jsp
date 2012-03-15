@@ -55,7 +55,7 @@
 		</ul>
        <ul>
 			<li>
-				<div><input id="createQuestion" name="createQuestion" class="btTxt submit" type="submit" value="cCreate question"/></div>
+				<div><input id="createQuestion" name="createQuestion" class="btTxt submit" type="submit" value="Create question"/></div>
 			</li>
 		</ul>
 		

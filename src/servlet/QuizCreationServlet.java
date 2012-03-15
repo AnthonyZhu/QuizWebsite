@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -46,6 +47,9 @@ public class QuizCreationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
 		String submit = request.getParameter("saveForm");
 		String addAnotherQuestion = request.getParameter("addNewQuestion");
 		
@@ -67,6 +71,7 @@ public class QuizCreationServlet extends HttpServlet {
 		    }
 		    
 			ResponseQuestion newQuestion = new ResponseQuestion(quizID,posistion,content,answerList,score);
+			newQuestion.addQustionToDB();
 			
 		}else if(questionType.equals("Fill in the Blank")){
 			double score = Double.parseDouble(request.getParameter("score"));
@@ -85,6 +90,7 @@ public class QuizCreationServlet extends HttpServlet {
 		    }
 			
 			FillInBlankQuestion newQuestion = new FillInBlankQuestion(quizID,posistion,contentList,answerList,score);
+			newQuestion.addQustionToDB();
 			
 		}else if(questionType.equals("Multiple Choice")){
 			double score = Double.parseDouble(request.getParameter("score"));
@@ -100,6 +106,7 @@ public class QuizCreationServlet extends HttpServlet {
 		    }
 			
 			MultipleChoiceQuestion newQuestion = new MultipleChoiceQuestion(quizID,posistion,contentList,answer,score);
+			newQuestion.addQustionToDB();
 			
 		}else if(questionType.equals("Picture-Response Questions")){
 			double score = Double.parseDouble(request.getParameter("score"));
@@ -114,11 +121,20 @@ public class QuizCreationServlet extends HttpServlet {
 		    }
 		    
 		    PictureQuestion newQuestion = new PictureQuestion(quizID,posistion,content,answerList,score,URL);
-			
+		    newQuestion.addQustionToDB();
+		    
 		}else if(questionType.equals("Multiple-Answer Questions")){
 			double score = Double.parseDouble(request.getParameter("score"));
 			String content = request.getParameter("Field1");
 			String answer = request.getParameter("Field2");
+			int answerNum = Integer.parseInt(request.getParameter("Field3"));
+			String order = request.getParameter("Field4");
+			boolean isOrder;
+			if(order.equals("yes")){
+				isOrder = true;
+			}else{
+				isOrder = false;
+			}
 			
 			ArrayList<String> answerList = new ArrayList<String>();
 			String[] answerSplit = answer.split(",");
@@ -126,7 +142,8 @@ public class QuizCreationServlet extends HttpServlet {
 		    	answerList.add(answerSplit[i]);
 		    }
 		    
-			MultiAnswerQuestion newQuestion = new MultiAnswerQuestion(quizID,posistion,content,answerList,score);
+			MultiAnswerQuestion newQuestion = new MultiAnswerQuestion(quizID,posistion,content,answerList,score,answerNum,isOrder);
+			newQuestion.addQustionToDB();
 			
 		}else if(questionType.equals("Multiple Choice with Multiple Answers")){
 			double score = Double.parseDouble(request.getParameter("score"));
@@ -148,7 +165,8 @@ public class QuizCreationServlet extends HttpServlet {
 		    }
 		    
 		    MultiChoiceMultiAnswerQuestion newQuestion = new MultiChoiceMultiAnswerQuestion(quizID,posistion,contentList,answerList,score);
-			
+		    newQuestion.addQustionToDB();
+		    
 		}else if(questionType.equals("Matching")){
 			double score = Double.parseDouble(request.getParameter("score"));
 			String content = request.getParameter("Field1");
@@ -169,12 +187,12 @@ public class QuizCreationServlet extends HttpServlet {
 		    }
 		    
 		    MatchingQuestion newQuestion = new MatchingQuestion(quizID,posistion,contentList,answerList,score);
-			
+		    newQuestion.addQustionToDB();
 		}
 		
 		if(submit != null){
 			if(submit.equals("Save and Finish")){
-				RequestDispatcher dispatch = request.getRequestDispatcher("quiz_summary.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher("quiz_summary.jsp?id=" + newQuiz.quizID);
 				dispatch.forward(request, response);
 		    }
 		}
