@@ -53,7 +53,7 @@
 		popup.document.writeln("<input type='hidden' id='receiver' value='"+ senderID +"'/>");
 		popup.document.writeln("<input type='submit' id='note_btn' value='send note'/>");
 		popup.document.writeln("</form>");
-		popup.document.writeln("<span class='error' style='display:none'> empty note!</span>");
+		popup.document.writeln("<span class='error' style='display:none'>empty note!</span>");
 		popup.document.writeln("</div>");
 	};
 	

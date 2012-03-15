@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import quizweb.Quiz;
+import quizweb.User;
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 public class ChallengeMessage extends Message {
@@ -67,5 +70,43 @@ public class ChallengeMessage extends Message {
 			e1.printStackTrace();
 		}
 		return ChallengMessageQueue;
+	}
+
+	public static Message getChallengeMessageByXMLElem(XMLElement root) {
+		User toUser = null;
+		User fromUser = null;
+		Quiz quiz = null;
+		boolean isRead = false;
+		double bestScore = 0;
+		if (root.attributeMap.containsKey("isread") && root.attributeMap.get("isread").equals("true")) 
+			isRead = true;
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("to")) {
+				toUser = User.getUserByUsername(elem.content);
+			} else if (elem.name.equals("from")) {
+				fromUser = User.getUserByUsername(elem.content);
+			} else if (elem.name.equals("content")) {
+				// pass
+			} else if (elem.name.equals("quiz")) {
+				quiz = Quiz.getQuizByQuizName(elem.content);
+			} else {
+				System.out.println("Unrecognized field in challenge message " + elem.name);
+			}
+		}
+		if (fromUser == null) {
+			System.out.println("Unrecognized from user");
+			return null;
+		} else if (toUser == null) {
+			System.out.println("Unrecognized to user");
+			return null;
+		} else if (quiz == null) {
+			System.out.println("Unrecognized quiz name");
+			return null;
+		}
+		bestScore = quiz.getUserBestScore(fromUser);
+		ChallengeMessage message = new ChallengeMessage(fromUser.userID, toUser.userID, quiz.quizID, bestScore);
+		message.isRead = isRead;
+		return message;
 	}
 }

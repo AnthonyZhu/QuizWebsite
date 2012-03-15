@@ -12,6 +12,14 @@ public class Question {
 	public Object question;
 	public Object answer;
 	public double score;
+	
+	public static final int TYPE_RESPONSE = 0;
+	public static final int TYPE_BLANK = 1;
+	public static final int TYPE_CHOICE = 2;
+	public static final int TYPE_PICTURE = 3;
+	public static final int TYPE_MULTIANSWER = 4;
+	public static final int TYPE_MULTICHOICEMULTIANSWER = 5;
+	public static final int TYPE_MATCHING = 6;
 		
 	static final Class<?>[] questionClass = {ResponseQuestion.class, FillInBlankQuestion.class,
 		MultiAnswerQuestion.class, PictureQuestion.class, MultiAnswerQuestion.class, 
@@ -60,6 +68,26 @@ public class Question {
 			retString = retString + strings.get(i);
 		}
 		return retString;
+	}
+	
+	public static ArrayList<String> getParsedDisplayStrings(String str) {
+		String[] strings = str.split("\n");
+		ArrayList<String> retList = new ArrayList<String>();
+		for (int i = 0; i < strings.length; i++) {
+			if (!strings[i].trim().isEmpty())
+				retList.add(strings[i].trim());
+		}
+		return retList;
+	}	
+	
+	public static String getConcatedDisplayString(ArrayList<String> strings) {
+		String retString = new String();
+		for (int i = 0; i < strings.size(); i++) {
+			if (i > 0)
+				retString = retString + "\n";
+			retString = retString + strings.get(i);
+		}
+		return retString;		
 	}
 
 	public static Question getQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {

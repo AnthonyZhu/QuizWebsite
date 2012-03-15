@@ -275,7 +275,12 @@ public class Quiz {
 			stmt.setInt(1, quizID);
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
-			double averageRating = rs.getDouble("rating") / rs.getInt("raternumber");
+			double averageRating;
+			if(rs.getInt("raternumber")==0){
+				averageRating = 0;
+			}else{
+				averageRating = rs.getDouble("rating") / rs.getInt("raternumber");
+			}
 			rs.close();
 			return averageRating;		
 		} catch (SQLException e) {

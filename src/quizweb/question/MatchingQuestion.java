@@ -101,7 +101,7 @@ public class MatchingQuestion extends Question {
 		ArrayList<String> answerList = (ArrayList<String>) answer;
 		int N = questionList.size() / 2;
 		for (int j = 0; j < answerList.size(); j++) 
-			for (int i = N; i < questionList.size(); i++) {
+			for (int i = N+1; i < questionList.size(); i++) {
 				if (answerList.get(j).equals(questionList.get(i))) {
 					indexList.add(new Integer(i-N+1));
 					break;
@@ -134,7 +134,9 @@ public class MatchingQuestion extends Question {
 		ArrayList<Integer> answerIndex = new ArrayList<Integer>();
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name.equals("query-list")) {
+			if (elem.name.equals("query")) {
+				questionList.add(elem.content);
+			} else if (elem.name.equals("query-list")) {
 				for (int j = 0; j < elem.childList.size(); j++) {
 					XMLElement subElem = elem.childList.get(j);
 					if (!subElem.name.equals("query")) 

@@ -25,8 +25,11 @@
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/sendFriendRequest.js"></script>
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/sendNote.js"></script>
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/sendChallenge.js"></script>	
+<<<<<<< HEAD
 	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
 	<link rel="stylesheet" href="/QuizWebsite/resources/css/three_column_layout.css" type="text/css" />	
+=======
+>>>>>>> 837bbcebff7e0f923fb1e5ff866e4e931732de7e
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/functions.js"></script>
 </head>

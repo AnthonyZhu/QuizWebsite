@@ -63,6 +63,27 @@
 					<label for="Field2">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp;</label>
 				</div>
 			</li>
+			<li class="highlight">
+				<div>
+				    <label class="quiz_title">How many right questions need for full credit</label>
+					<input id="answerNum" name="Field3" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
+				</div>
+			</li>
+			<li id="foli3" class="highlight">
+				<fieldset>
+				 	<legend id="title3" class="quiz_title">Should all answers be in order?</legend>
+					<div>
+						<span>
+							<input id="Field4_0" name="Field4" type="radio" class="field radio" value="Yes" tabindex="3" checked="checked"  />
+							<label class="choice" for="Field4_0" >Yes</label>
+						</span>
+						<span>
+							<input id="Field4_1" name="Field4" type="radio" class="field radio" value="No" tabindex="4" />
+							<label class="choice" for="Field4_1" >No</label>
+						</span>
+					</div>
+				</fieldset>
+			</li>
 		</ul>
 		
         <ul>

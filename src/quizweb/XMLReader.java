@@ -6,6 +6,7 @@ import java.util.*;
 import quizweb.achievement.*;
 import quizweb.announcement.*;
 import quizweb.database.*;
+import quizweb.message.Message;
 import quizweb.question.*;
 import quizweb.record.Record;
 
@@ -59,7 +60,8 @@ public class XMLReader {
 				Record record = Record.getRecordByXMLElem(elem);
 				record.addRecordToDB();
 			} else if (elem.name.equals("message")) {
-				
+				Message message = Message.getMessageByXMLElem(elem);
+				message.addMessageToDB();
 			} else if (elem.name.equals("friendship")) {
 				if (!elem.attributeMap.containsKey("user"))
 					System.out.println("Must contain user attribute");
@@ -162,9 +164,10 @@ public class XMLReader {
 		new XMLReader("./xml/achievements.xml");
 		// Load records
 		new XMLReader("./xml/records.xml");
-		
+		// Load announcements
 		new XMLReader("./xml/announcements.xml");
-		
+		// Load messages
+		new XMLReader("./xml/messages.xml");
 	}
 	
 	public void pause(int millisec) {
