@@ -16,8 +16,8 @@
 	<title>Create Your Own Quiz</title>
 	
 	<!-- CSS -->
-	<link href="resources/css/main.css" type="text/css" rel="stylesheet"/>
-	<link href="resources/css/quiz.css" rel="stylesheet">
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/quiz.css" type="text/css" />
 	
 	<!-- JavaScript -->
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
@@ -26,18 +26,12 @@
 
 <body>
 <div class="container">
-	<div class="header">
-		<h1>toQuiz.Me</h1>
-	</div>
-	
+	<jsp:include page="/modules/head.jsp" />
 	<form id="form1" action="../QuizSettingServlet" name="form1" method="post" >
 
 	<div class="one_column">
 		<h2>
-		<% 
-		User homeUser = (User) session.getAttribute("user");
-		out.println("Welcome " + homeUser.username + " to create a new Quiz: Quiz Settings");
-		%>
+			Please complete settings of your new quiz:
 		</h2>
 		<hr />
 		<ul>
@@ -161,8 +155,10 @@
 				<div><input id="saveSettings" name="saveSettings" class="btTxt submit" type="submit" value="Next"/></div>
 			</li>
 		</ul>
+		
 	</div>
 	</form>
+	<jsp:include page="/modules/foot.html" />
 </div><!--container-->
 	
 </body>

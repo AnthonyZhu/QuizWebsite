@@ -6,35 +6,17 @@
 
 .one_column{
 	width: 800px;
-	float:top;
-	padding: 20px 20px 20px 20px;
+	padding: 20px 100px 20px 100px;
 	margin-top:0;
-	margin-bottom: 5px;
-	background: #d9ebf5;
-}
-
-form ul{
-	margin:0;
-	padding:0;
-	list-style-type:none
-}
-
-form li{
-	margin:0;
-	padding:6px 1% 9px 1%;
-	clear:both;
-	background-color:transparent;
-	position:relative;
-	-webkit-transition:background-color 350ms ease-out;
-	-moz-transition:background-color 350ms ease-out;
-	-o-transition:background-color 350ms ease-out;
-	transition:background-color 350ms ease-out
+	margin-bottom: 0px;
+	background: #fff;
 }
 
 form .quiz_title {
 	font-weight:bold;
 }
 
+input.app, select.app{width:80%}
 input.large,select.large{width:100%}
 input.medium,select.medium{width:50%}
 input.small,select.small{width:25%}

@@ -19,8 +19,8 @@
 	<meta name="distribution" content="global" />
 	<link rel="shortcut icon" href="/favicon.ico" />
 	
-	<link rel="stylesheet" href="resources/css/main.css" type="text/css" />
-	<link rel="stylesheet" href="resources/css/three_column_layout.css" type="text/css" />
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/three_column_layout.css" type="text/css" />
 	
 	<script type="text/javascript" src="resources/scripts/sendFriendRequest.js"></script>
 	<script type="text/javascript" src="resources/scripts/sendNote.js"></script>
@@ -30,22 +30,24 @@
 </head>
 <body>
 <div class="container" >
-	<div class="header">
-		<h1>toQuiz.Me</h1>
-	</div>
-	<div class="content-container">
+	<jsp:include page="/modules/head.jsp" />
+	
+	<div class="top_container">
 		<div class="three_column_left">
-		    <ul>
-				<h4>
-				<% 
-				User homeUser = (User) session.getAttribute("user");
-	            out.println("Hi, " + homeUser.username);
-	            %>
-				</h4>
-				
+		    <ul>	
+		    	<li>	
+					<h4>
+					<% 
+						User homeUser = (User) session.getAttribute("user");
+			            out.println("Hi, " + homeUser.username);
+		            %>
+					</h4>
+				</li>
 			</ul>
 			<ul>
+				<li>
 				<h4 class="title_style_minor">FAVORITES</h4>
+				</li>
 				<li><a class="link-style-dominant" onclick="showNewsFeed()">News Feed</a></li>
 				<li><a class="link-style-dominant" onclick="showNotes()">Notes</a></li>
 			</ul>
@@ -71,7 +73,7 @@
 		</div>
 		
 		<div class="three_column_content">		
-			<iframe id="contentFrame" class="dynamicFrame" frameborder="0" src="home_feed.jsp"></iframe>
+			<iframe id="contentFrame" class="dynamicFrame" frameborder="0" src="homepage/home_feed.jsp"></iframe>
 		</div>
 	
 		<div class="three_column_right">
@@ -119,9 +121,7 @@
 				</ol>
 			</div>
 		</div>
-		<div class="footer">
-			Copyright © toQuiz.me, 2012
-		</div>
+	<jsp:include page="/modules/foot.html" />
 	</div>
 </div>
 </body>

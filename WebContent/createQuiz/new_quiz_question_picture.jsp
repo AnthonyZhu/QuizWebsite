@@ -29,9 +29,7 @@
 
 <body>
 <div class="container">
-	<div class="header">
-		<h1>toQuiz.Me</h1>
-	</div>
+<jsp:include page="/modules/head.jsp" />
 	
 	<form id="form1" name="form1" action="QuizCreationServlet" method="post">
     <%
@@ -92,6 +90,7 @@
 		</ul>
 	</div>
 	</form>
+	<jsp:include page="/modules/foot.html" />
 </div><!--container-->
 	
 </body>

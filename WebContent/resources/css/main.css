@@ -3,6 +3,7 @@ link color: #007cb3
 text color: #393939
 unimportant text: #c8c8c8
 blue background: #d9ebf5
+yellow: #feff84
 *******************************************/
 
 html{
@@ -34,10 +35,12 @@ html{
 .header{
 	padding-top:5px;
 	padding-left:20px;
+	padding-right:20px;
 	margin-top: 0;
 	margin-bottom:0;
 	position: center;
 	background-color: #666;
+	height: 47px;
 	
 }
 .header h1,h2,h3,h4,h5,h6,body{
@@ -110,6 +113,25 @@ a:hover {
 	font-family: "Arial Black", Arial;
 }
 
+ul{
+	margin:0;
+	padding:0;
+	list-style-type:none
+}
+
+li{
+	margin:0;
+	padding:6px 1% 9px 1%;
+	clear:both;
+	background-color:transparent;
+	position:relative;
+	-webkit-transition:background-color 350ms ease-out;
+	-moz-transition:background-color 350ms ease-out;
+	-o-transition:background-color 350ms ease-out;
+	transition:background-color 350ms ease-out
+}
+
+
 /*******************************************/
 /**************Line Features****************/
 /*******************************************/
@@ -136,7 +158,7 @@ iframe{
 /*************Button Features***************/
 /*******************************************/
 
-button {
+submit button {
 	border-top: 1px solid #96d1f8;
    	background: #65a9d7;
    	background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));

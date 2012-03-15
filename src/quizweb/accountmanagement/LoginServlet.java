@@ -46,11 +46,11 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			User user = User.getUserByUsername(username);
 			session.setAttribute("user", user);
-			RequestDispatcher dispatch = request.getRequestDispatcher("homepage.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("homepage/homepage.jsp");
 			dispatch.forward(request, response);
 		}
 		else {
-			RequestDispatcher dispatch = request.getRequestDispatcher("tryAgain.html");
+			RequestDispatcher dispatch = request.getRequestDispatcher("login/tryAgain.html");
 			dispatch.forward(request, response);
 		}
 	}

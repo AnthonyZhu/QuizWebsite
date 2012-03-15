@@ -42,7 +42,7 @@ public class NewAccountServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		if(User.getUserByUsername(username) != null) {
-			RequestDispatcher dispatch = request.getRequestDispatcher("nameInUse.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("login/nameInUse.jsp");
 			dispatch.forward(request, response);
 		}
 		else {
@@ -50,7 +50,7 @@ public class NewAccountServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			User user = User.getUserByUsername(username);
 			session.setAttribute("user", user);
-			RequestDispatcher dispatch = request.getRequestDispatcher("homepage.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("homepage/homepage.jsp");
 			dispatch.forward(request, response);
 		}
 	}

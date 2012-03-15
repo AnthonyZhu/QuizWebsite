@@ -29,9 +29,7 @@
 
 <body>
 <div class="container">
-	<div class="header">
-		<h1>toQuiz.Me</h1>
-	</div>
+	<jsp:include page="/modules/head.jsp" />
 	
 	<form id="form1" name="form1" action="QuizCreationServlet" method="post">
     <%
@@ -43,7 +41,7 @@
 		String quizName = newQuiz.name;
 		Integer posistion = (Integer) session.getAttribute("questionPosistion");
 		String questionType = (String) session.getAttribute("QuestionType"); 
-		out.println("<h2>Hi, " + creatorName + ", please add question No." + posistion + " to \"" + quizName + "\"</h2>");
+		out.println("<h2>Please add question No." + posistion + " to \"" + quizName + "\"</h2>");
 		out.println("<h3>This question is \"" + questionType + "\" type</h2>");
 		
 		%>
@@ -86,12 +84,13 @@
         
 		<ul>
 			<li>
-				<div><input id="saveForm" name="saveForm" class="btTxt submit" type="submit" value="Save and Finish"/></div>
-				<div><input id="addNewQuestion" name="addNewQuestion" class="btTxt submit" type="submit" value="Add Another Question"/></div>
+				<span><input id="saveForm" name="saveForm" class="btTxt submit" type="submit" value="Save and Finish"/></span>
+				<span><input id="addNewQuestion" name="addNewQuestion" class="btTxt submit" type="submit" value="Add Another Question"/></span>
 			</li>
 		</ul>
 	</div>
 	</form>
+	<jsp:include page="/modules/foot.html" />
 </div><!--container-->
 	
 </body>
