@@ -131,11 +131,11 @@
 			}else{
 				if(QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).size() <= 10){
 					for(int i=0;i<QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).size();i++){
-						out.println("<li><a class=\"link-style-dominant\" href=\"startQuiz.jsp?id=" + QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).get(i).quiz.quizID + "\">" + QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).get(i).quiz.name + "</a></li>");
+						out.println("<li><a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=" + QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).get(i).quiz.quizID + "\">" + QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).get(i).quiz.name + "</a></li>");
 					}
 				}else{
 					for(int i=0;i<=10;i++){
-						out.println("<li><a class=\"link-style-dominant\" href=\"startQuiz.jsp?id=" + QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).get(i).quiz.quizID + "\">" + QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).get(i).quiz.name + "</a></li>");
+						out.println("<li><a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=" + QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).get(i).quiz.quizID + "\">" + QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).get(i).quiz.name + "</a></li>");
 					}
 				}
 			}
@@ -151,11 +151,11 @@
 			}else{
 				if(QuizTakenRecord.getQuizHistoryByUserID(visitUserID).size() <= 10){
 					for(int i=0;i<QuizTakenRecord.getQuizHistoryByUserID(visitUserID).size();i++){
-						out.println("<li><a class=\"link-style-dominant\" href=\"startQuiz.jsp?id=" + QuizTakenRecord.getQuizHistoryByUserID(visitUserID).get(i).quiz.quizID + "\">" + QuizTakenRecord.getQuizHistoryByUserID(visitUserID).get(i).quiz.name + "</a></li>");
+						out.println("<li><a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=" + QuizTakenRecord.getQuizHistoryByUserID(visitUserID).get(i).quiz.quizID + "\">" + QuizTakenRecord.getQuizHistoryByUserID(visitUserID).get(i).quiz.name + "</a></li>");
 					}
 				}else{
 					for(int i=0;i<=10;i++){
-						out.println("<li><a class=\"link-style-dominant\" href=\"startQuiz.jsp?id=" + QuizTakenRecord.getQuizHistoryByUserID(visitUserID).get(i).quiz.quizID + "\">" + QuizTakenRecord.getQuizHistoryByUserID(visitUserID).get(i).quiz.name + "</a></li>");
+						out.println("<li><a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=" + QuizTakenRecord.getQuizHistoryByUserID(visitUserID).get(i).quiz.quizID + "\">" + QuizTakenRecord.getQuizHistoryByUserID(visitUserID).get(i).quiz.name + "</a></li>");
 					}
 				}
 			}

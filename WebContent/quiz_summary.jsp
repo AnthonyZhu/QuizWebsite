@@ -10,18 +10,19 @@
 <%@ page import="quizweb.record.*"%>
 <%@ page import="servlet.*"%>  
 <%@ page import="quizweb.quiz.*"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>
 	<%
-	int quizID = Integer.parseInt(request.getParameter("quizID"));
+	int quizID = Integer.parseInt(request.getParameter("id"));
 	Quiz quiz = Quiz.getQuizByQuizID(quizID);
 	String quizName = quiz.name;
 	User homeUser = (User) session.getAttribute("user");
 	out.println("Quiz Summary of " + quizName);
-	//QuizSummary summary = quiz.computeSummaryStats();
+	QuizSummary summary = quiz.getQuizSummary();
 	%>
 	</title>
 	<meta name="Description" content="A smart quiz website" />
@@ -54,12 +55,17 @@
 			out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + quiz.creator.userID + "\">" + creator + "</a>");
 			%>
 			<br>
-			<%--
+			<%
 		    out.println("Total score: " + summary.totalScore);
-			--%></p>
+			%></p>
 		</div>
 		<div class="two_column_right">
-			<h2>Rate This Quiz</h2>
+			<h2>Rating of this Quiz</h2>
+			<p>
+			<%
+			double rating = quiz.getQuizRating();
+			out.println(rating);
+			%></p>
 		</div>
 
 	</div>
@@ -85,26 +91,49 @@
 		<div class="two_column_left">
 			<h2>Quiz Summary</h2>
 			<p><span class="dominant_text">
-			<%-- out.println(summary.totalUser); --%>
+			<% out.println(summary.totalUser); %>
 			</span> users have taken this quiz</p>
 			<p>They spend an average of <span class="dominant_text">
-			<%-- out.println(summary.averageTimespan + " mins"); --%>
+			<% out.println(Math.round(summary.averageTimespan/60000 * 100)/100.0 + " mins"); %>
 			</span> on the quiz</p>
 			<p>Average score is <span class="dominant_text">
-			<%-- out.println(summary.averageScore); --%>
+			<% out.println(Math.round(summary.averageScore*100)/100.0); %>
 			</span></p>
 		</div>
 		<div class="two_column_right">
-			<h2>Top Performers</h2>
-			<ol>
-			</ol>
+			<h2>Top Three Performers</h2>
+			<ul>
+			<%
+			ArrayList<QuizTakenRecord> topRecords= quiz.getAllTopRecord();
+			if(topRecords == null){
+				out.println("<li>No one has taken it yet.</li>");
+			}else if(topRecords.size() == 0){
+				out.println("<li>No one has taken it yet.</li>");
+			}else{
+				if(topRecords.size()<=3){
+					for(int i=0;i<topRecords.size();i++){
+						out.println("<li>" + (i+1) + ": " + topRecords.get(i).user.username + "</li>");
+					}
+				}else{
+					for(int i=0;i<3;i++){
+						out.println("<li>" + (i+1) + ": " + topRecords.get(i).user.username + "</li>");
+					}
+				}
+			}
+			%>
+			</ul>
 		</div>
 		<div class="two_column_left">
 			<h2>My Statistics</h2>
 			<p><%
-			if(QuizTakenRecord.getQuizHistoryByQuizIDUserID(quiz.quizID,homeUser.userID) != null){
-				if(QuizTakenRecord.getQuizHistoryByQuizIDUserID(quiz.quizID,homeUser.userID).size() != 0){
-					out.println("I have taken this quiz");
+			ArrayList<QuizTakenRecord> records = QuizTakenRecord.getQuizHistoryByQuizIDUserID(quiz.quizID,homeUser.userID);
+			if(records != null){
+				if(records.size() != 0){
+					QuizSummary mySummary = quiz.getQuizSummary(homeUser);
+					out.println("<ul>");
+					out.println("<li>My average score: " + Math.round(mySummary.averageScore*100)/100.0 + ". Average time: " + Math.round(mySummary.averageTimespan/60000*100)/100.0 + "mins</li>");
+					out.println("<li>My best score: " + Math.round(100*mySummary.bestScore)/100.0 + ". My fastest time: " + Math.round(100*mySummary.bestTimespan/60000)/100.0 + " mins</li>");
+					out.println("</ul>");
 				}else{
 					out.println("I have not taken this quiz yet");
 				}

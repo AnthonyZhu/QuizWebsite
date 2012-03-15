@@ -37,7 +37,7 @@
 		You are taking the quiz <b>
 		<% 
 		int quizID = (Integer) session.getAttribute("quizID");
-		int posistion = (Integer) session.getAttribute("question_posistion");
+		int posistion = (Integer) session.getAttribute("question_position");
 		Quiz quiz = Quiz.getQuizByQuizID(quizID);
 		String quizName = quiz.name;
 		out.println(quizName);

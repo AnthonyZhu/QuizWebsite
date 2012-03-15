@@ -40,15 +40,15 @@ public class TakingQuizServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int quizID = (Integer) session.getAttribute("quizID");
-		int posistion = (Integer) session.getAttribute("question_posistion");
+		int position = (Integer) session.getAttribute("question_position");
 		int size = Question.getQuestionsByQuizID(quizID).size();
 		
-		if(posistion == size){
+		if(position == size){
 			RequestDispatcher dispatch = request.getRequestDispatcher("quiz_over.jsp");
 			dispatch.forward(request, response);
-		}else if(posistion < size){
-			posistion +=1;
-			session.setAttribute("question_posistion",posistion);
+		}else if(position < size){
+			position +=1;
+			session.setAttribute("question_position",position);
 			RequestDispatcher dispatch = request.getRequestDispatcher("take_quiz.jsp");
 			dispatch.forward(request, response);
 		}else{

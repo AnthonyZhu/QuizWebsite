@@ -39,7 +39,7 @@ public class StartQuiz extends HttpServlet {
 		int quizID = Integer.parseInt(request.getParameter("quizID"));
 		HttpSession session = request.getSession();
 		session.setAttribute("quizID", quizID);
-		session.setAttribute("question_posistion",1);
+		session.setAttribute("question_position",1);
 		RequestDispatcher dispatch = request.getRequestDispatcher("take_quiz.jsp");
 		dispatch.forward(request, response);
 		
