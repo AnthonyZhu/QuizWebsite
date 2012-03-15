@@ -33,13 +33,6 @@ public class RecordTest {
 		
 		QuizTakenAchievement.updateAchievement(facebook);
 		quiz = Quiz.getQuizByQuizName("Cities");
-		QuizTakenRecord record = new QuizTakenRecord(quiz, facebook, true, true);
-		record.quizStart();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		ArrayList<Object> userAnswer = new ArrayList<Object>();
 		userAnswer.add(new String("London"));
 		userAnswer.add(new String("Paris"));
@@ -47,9 +40,7 @@ public class RecordTest {
 		userAnswer.add(new String("Tokyo"));
 		userAnswer.add(new String("Hong Kong"));
 		userAnswer.add(new String("Stanford, California"));
-		record.quizEnd(userAnswer);
-		record.addRecordToDB();
-		assertEquals(record.score, 60, 1e-6);
+		assertEquals(quiz.getScore(userAnswer), 60, 1e-6);
 		
 		ArrayList<Achievement> achievements = facebook.getAchievements();
 		assertEquals(achievements.size(), 2);

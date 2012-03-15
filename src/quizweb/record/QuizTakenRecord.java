@@ -6,9 +6,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.*;
 import quizweb.*;
-import quizweb.achievement.HighScoreAchievement;
-import quizweb.achievement.PracticeAchievement;
-import quizweb.achievement.QuizTakenAchievement;
 import quizweb.database.DBConnection;
 
 public class QuizTakenRecord extends Record {
@@ -19,22 +16,16 @@ public class QuizTakenRecord extends Record {
 	public boolean isFeedback;
 	public boolean isPractice;
 	
-	public long quizStartTime;
-	
-//	public ArrayList<Object> userAnswers;
-//	public static int totalQuizTaken = 0;
-	
 	public static String DBTable = "quiz_taken_record";
 
-	public QuizTakenRecord(Quiz quiz, User user,  
+	public QuizTakenRecord(Quiz quiz, User user, long timeSpan, double score,  
 			boolean isFeedback, boolean isPractice) {
 		this.quiz = quiz;
 		this.user = user;
-		this.timeSpan = 0;
-		this.score = 0;
+		this.timeSpan = timeSpan;
+		this.score = score;
 		this.isFeedback = isFeedback;
 		this.isPractice = isPractice;
-		this.quizStartTime = 0;
 	}	
 	public QuizTakenRecord(int recordID, Quiz quiz, User user, long timeSpan, double score, 
 			Timestamp timeStamp,  boolean isFeedback, boolean isPractice) {
@@ -150,34 +141,24 @@ public class QuizTakenRecord extends Record {
 		return null;
 	}
 	
-	/**
-	 * Start the quiz, begin timing etc
-	 */
-	public void quizStart() {
-		quizStartTime = new Date().getTime();
-	}
-	
-	/** 
-	 * End the quiz, compute time stats
-	 */
-	public void quizEnd(ArrayList<Object> userAnswers) {
-		long curTime = new Date().getTime();
-		timeSpan = curTime - quizStartTime;
-		score = quiz.getScore(userAnswers);
-		// Check if it is a practice
-		if (isPractice) {
-			user.practiceNumber++;
-			user.updateCurrentUser();
-			PracticeAchievement.updateAchievement(user);
-		}
-		// Check if it is a highscore
-		if (score >= quiz.getBestScore()) {
-			user.highScoreNumber++;
-			user.updateCurrentUser();
-			HighScoreAchievement.updateAchievement(user);
-		}
-		QuizTakenAchievement.updateAchievement(user);
-	}
+//	public void quizEnd(ArrayList<Object> userAnswers) {
+//		long curTime = new Date().getTime();
+//		timeSpan = curTime - quizStartTime;
+//		score = quiz.getScore(userAnswers);
+//		// Check if it is a practice
+//		if (isPractice) {
+//			user.practiceNumber++;
+//			user.updateCurrentUser();
+//			PracticeAchievement.updateAchievement(user);
+//		}
+//		// Check if it is a highscore
+//		if (score >= quiz.getBestScore()) {
+//			user.highScoreNumber++;
+//			user.updateCurrentUser();
+//			HighScoreAchievement.updateAchievement(user);
+//		}
+//		QuizTakenAchievement.updateAchievement(user);
+//	}
 	
 	public static Record getQuizTakenRecordByXMLElem(XMLElement root) {
 		User user = null;
@@ -204,9 +185,7 @@ public class QuizTakenRecord extends Record {
 				System.out.println("Unrecognized quiz taken record field " + elem.name);
 			}			
 		}
-		QuizTakenRecord record = new QuizTakenRecord(quiz, user, isFeedback, isPractice);
-		record.timeSpan = timeSpan;
-		record.score = score;
+		QuizTakenRecord record = new QuizTakenRecord(quiz, user, timeSpan, score, isFeedback, isPractice);
 		return record;
 	}	
 }
