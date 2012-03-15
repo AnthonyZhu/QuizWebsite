@@ -35,28 +35,31 @@
 
 <body>
 <div class="container" >
+<<<<<<< HEAD
+	<jsp:include page="/modules/head.jsp" />
+=======
 	<div class="header">
 		<h1><a href="homepage/homepage.jsp">toQuiz.me</a></h1>
 	</div>
+>>>>>>> 837bbcebff7e0f923fb1e5ff866e4e931732de7e
 	
 	<div class="content-container">
 		<div class="two_column_left">
-			<span style="float:right">
+			<span style="float:right; margin-top:10px">
 			<%
 			if(homeUser.userID == visitUserID){
 			}else{
-				out.println("<button type=\"submit\" name=\"addAsFriend\">Send Friend Request</button>" +
-						"<button type=\"submit\" name=\"addAsFriend\">Challenge</button>" +
-						"<button type=\"submit\" name=\"addAsFriend\">Send Note</button>");
+			
+				//out.println("<button type=\"submit\" name=\"addAsFriend\">Send Friend Request</button>" +
+					//	"<button type=\"submit\" name=\"addAsFriend\">Challenge</button>" +
+						//"<button type=\"submit\" name=\"addAsFriend\">Send Note</button>");
+				out.println("<jsp:include page=\"/sendFriendRequestButton.jsp\"/>");
+
 			}
 			%>
 			</span>
-			<h1>
-			<%
-			out.println(visitUser.username);
-			%>
-			</h1>
-			<p><span class="dominant_text">
+			<h1><%=visitUser.username%></h1>
+			<span class="dominant_text">
 			<% 
 			if(visitUser.getFriendList() == null){
 				out.println("0");
@@ -125,9 +128,9 @@
 			<h2>Quizzes Created</h2>
 			<p><ul><%
 			if(QuizCreatedRecord.getCreatedQuizByUserID(visitUserID) == null){
-				out.println("I haven't created any quiz so far");
+				out.println("This user hasn't created any quiz so far");
 			}else if(QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).size() == 0){
-				out.println("I haven't created any quiz so far");
+				out.println("This user hasn't created any quiz so far");
 			}else{
 				if(QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).size() <= 10){
 					for(int i=0;i<QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).size();i++){
@@ -145,9 +148,9 @@
 			<h2>Quizzes Taken</h2>
 			<p><ul><% 
 			if(QuizTakenRecord.getQuizHistoryByUserID(visitUserID) == null){
-				out.println("I haven't taken any quiz so far");
+				out.println("This user hasn't taken any quiz so far");
 			}else if(QuizTakenRecord.getQuizHistoryByUserID(visitUserID).size() == 0){
-				out.println("I haven't taken any quiz so far");
+				out.println("This user hasn't taken any quiz so far");
 			}else{
 				if(QuizTakenRecord.getQuizHistoryByUserID(visitUserID).size() <= 10){
 					for(int i=0;i<QuizTakenRecord.getQuizHistoryByUserID(visitUserID).size();i++){
@@ -165,9 +168,7 @@
 
 	</div>
 	
-	<div class="footer">
-			Copyright © toQuiz.me, 2012
-	</div>
+<jsp:include page="/modules/foot.html" />
 	
 </div>
 </body>

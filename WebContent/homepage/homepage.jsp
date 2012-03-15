@@ -25,6 +25,11 @@
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/sendFriendRequest.js"></script>
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/sendNote.js"></script>
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/sendChallenge.js"></script>	
+<<<<<<< HEAD
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/three_column_layout.css" type="text/css" />	
+=======
+>>>>>>> 837bbcebff7e0f923fb1e5ff866e4e931732de7e
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="/QuizWebsite/resources/scripts/functions.js"></script>
 </head>
@@ -34,42 +39,31 @@
 	
 	<div class="top_container">
 		<div class="three_column_left">
-		    <ul>	
-		    	<li>	
-					<h4>
-					<% 
-						User homeUser = (User) session.getAttribute("user");
-			            out.println("Hi, " + homeUser.username);
-		            %>
-					</h4>
-				</li>
-			</ul>
 			<ul>
-				<li>
 				<h4 class="title_style_minor">FAVORITES</h4>
-				</li>
 				<li><a class="link-style-dominant" onclick="showNewsFeed()">News Feed</a></li>
 				<li><a class="link-style-dominant" onclick="showNotes()">Notes</a></li>
-			</ul>
-			<ul>
+				<br />
 				<h4 class="title_style_minor">NOTIFICATIONS</h4>
 				<li><a class="link-style-dominant" onclick="showFriendRequests()">Friend Requests</a></li>
 				<li><a class="link-style-dominant" onclick="showChallenges()">Challenges</a></li>
-			</ul>
-			<ul>
+				<br />
 				<h4 class="title_style_minor">MY QUIZZES</h4>
 				<li><a class="link-style-dominant" onclick="showQuizTaken()">Took</a></li>
 				<li><a class="link-style-dominant" onclick="showQuizCreated()">Created</a></li>
-			</ul>
-			<hr >
+				<br /> <br />
+				<li>
                 <%
-				out.println("<a href=\"createQuiz/new_quiz_settings.jsp\">+ Create Quiz</a>");
+				out.println("<a class=\"link-style-dominant\" href=\"createQuiz/new_quiz_settings.jsp\">+ Create Quiz</a>");
 				%>
-			<hr >
+				</li>
+				<br />
+				<li>
                 <%
-				out.println("<a href=\"userpage.jsp?id=" + homeUser.userID + "\">My Profile</a>");
+				//out.println("<a href=\"userpage.jsp?id=" + homeUser.userID + "\">My Profile</a>");
 				%>	
-				
+				</li>
+				</ul>
 		</div>
 		
 		<div class="three_column_content">		
