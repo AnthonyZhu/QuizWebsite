@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<achievement type="quiz-created">
+  <name>Amateur Author</name>
+  <url>http://path-to-image.img</url>
+  <description>The user created a quiz.</description>
+  <threshold>1</threshold>
+</achievement>  
+
+<achievement type="quiz-created">
+  <name>Prolific Author</name>
+  <url>http://path-to-image.img</url>
+  <description>The user created three quizzes.</description>
+  <threshold>3</threshold>
+</achievement>  
+
+<achievement type="quiz-created">
+  <name>Prodigious Author</name>
+  <url>http://path-to-image.img</url>
+  <description>The user created ten quizzes.</description>
+  <threshold>10</threshold>
+</achievement>  
+
+<achievement type="quiz-taken">
+  <name>Amateur Quiz Taker</name>
+  <url>http://path-to-image.img</url>
+  <description>The user took a quiz.</description>
+  <threshold>1</threshold>
+</achievement>  
+
+<achievement type="quiz-taken">
+  <name>Prolific Quiz Taker</name>
+  <url>http://path-to-image.img</url>
+  <description>The user took three quizzes.</description>
+  <threshold>3</threshold>
+</achievement>  
+
+<achievement type="quiz-taken">
+  <name>Prodigious Quiz Taker</name>
+  <url>http://path-to-image.img</url>
+  <description>The user took ten quizzes.</description>
+  <threshold>10</threshold>
+</achievement>  
+
+<achievement type="highscore">
+  <name>I am the Greatest</name>
+  <url>http://path-to-image.img</url>
+  <description>The user had the highest score on a quiz.</description>
+  <threshold>1</threshold>
+</achievement>  
+
+<achievement type="highscore">
+  <name>Stanford Graduate</name>
+  <url>http://path-to-image.img</url>
+  <description>The user had the highest score on three quizzes.</description>
+  <threshold>3</threshold>
+</achievement>  
+
+<achievement type="highscore">
+  <name>Unbeatable</name>
+  <url>http://path-to-image.img</url>
+  <description>The user had the highest score on one hundred quizzes.</description>
+  <threshold>100</threshold>
+</achievement>
+
+<achievement type="practice">
+  <name>Practice Makes Perfect</name>
+  <url>http://path-to-image.img</url>
+  <description>The user took a quiz in practice mode.</description>
+  <threshold>1</threshold>
+</achievement>  
+
+<achievement type="practice">
+  <name>Practice Machine</name>
+  <url>http://path-to-image.img</url>
+  <description>The user took quiz in practice mode for three times.</description>
+  <threshold>3</threshold>
+</achievement>  
+
+

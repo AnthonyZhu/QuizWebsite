@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import quizweb.accountmanagement.Encryption;
 import quizweb.achievement.*;
 import quizweb.announcement.Announcement;
 import quizweb.database.DBConnection;
@@ -34,15 +35,15 @@ public class User {
 //	public static int totalUsers = 0;
 	
 	// permission type for permission
-	public final int IS_NORMAL = 0;
-	public final int IS_ADMIN = 1;	
-	public final int IS_TEMP = 2;
+	public static final int IS_NORMAL = 0;
+	public static final int IS_ADMIN = 1;	
+	public static final int IS_TEMP = 2;
 	
 	// relationship status
-	public final int IS_FRIEND = 1;
-	public final int NOT_FRIEND = 0;
-	public final int PENDING_FRIEND = 2;
-	public final int REVERSE_PENDING = 3;
+	public static final int IS_FRIEND = 1;
+	public static final int NOT_FRIEND = 0;
+	public static final int PENDING_FRIEND = 2;
+	public static final int REVERSE_PENDING = 3;
 	
 	// database table names
 	public static final String DBTable = "users";
@@ -100,7 +101,6 @@ public class User {
 		this.isDead = false;
 		this.practiceNumber = 0;
 		this.highScoreNumber = 0;
-		addUserToDB();
 	}
 	
 	public User(int userID, String username, String password, String homepageURL, int permission, boolean isBlocked,
@@ -146,6 +146,7 @@ public class User {
 	 * @return
 	 */
 	public static User getUserByUsername(String username) {
+		username = username.trim();
 		try {
 			String statement = new String("SELECT * FROM " + DBTable + " WHERE username = ?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
@@ -209,7 +210,14 @@ public class User {
 		user.updateCurrentUser();
 	}
 	
+	public static void promoteUser(User user) {
+		user.permission = IS_ADMIN;
+		user.updateCurrentUser();
+	}	
+	
 	public void addFriend(User user) {
+		if (isFriend(user) == IS_FRIEND) 
+			return;
 		try {
 			String statement = new String("INSERT INTO " + FriendDBTable 
 					+ " (uid1, uid2)" 
@@ -229,8 +237,19 @@ public class User {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}		
+	}
+	
+	public static void addFriendship(String username1, String username2) {
+		User user1 = getUserByUsername(username1.trim());
+		if (user1 == null) {
+			System.out.println("User " + username1 + " NOT FOUND");
 		}
-		
+		User user2 = getUserByUsername(username2.trim());
+		if (user2 == null) {
+			System.out.println("User " + username2 + " NOT FOUND");
+		}
+		user1.addFriend(user2);
 	}
 	
 	public void removeFriend(User user) {
@@ -269,34 +288,18 @@ public class User {
 			e.printStackTrace();
 		}
 		// if the user has sent a friend request previously, return pending_friend
-		// TODO
+		// TODO JACK
 		// otherwise return not_friend
 		return NOT_FRIEND;
 	}
-	
-	public void addMessage(Message message) {
-		// add message to database
-		// update global user list instance
-		// TODO
-	}	
-	
 
 	// Admin 
 	public void addAnnouncement(String title, String content) {
 		if (permission != IS_ADMIN) return;
-		new Announcement(title, content); // TODO JACK
+		Announcement announcement = new Announcement(title, content);
+		announcement.addAnnouncementToDB();
 	}
-	
-	/**
-	 * Promote a particular user to administration privilege 
-	 * @param user
-	 */
-	public void promoteUser(User user) {
-		if (permission == IS_ADMIN) {
-			user.permission = IS_ADMIN;
-			user.updateCurrentUser();
-		}
-	}
+
 	
 	// Quiz
 	// Editing is done in servelet in quiz
@@ -312,5 +315,33 @@ public class User {
 	 */
 	public boolean equals(User other) {
 		return userID == other.userID;
+	}
+
+	public static User getUserByXMLElem(XMLElement root) {
+		String username = new String("Username Not Specified");
+		String password = new String("Password Not Set");
+		String url = new String("URL missing");
+		int permission = IS_NORMAL;
+		
+		if (root.attributeMap.containsKey("permission")) {
+			String permissionStr = root.attributeMap.get("permission");
+			if (permissionStr.equals("admin"))
+				permission = IS_ADMIN;
+			else if (permissionStr.equals("temp"))
+				permission = IS_TEMP;
+		}
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("username")) {
+				username = elem.content;
+			} else if (elem.name.equals("password")) {
+				password = new Encryption().generateHashedPassword(elem.content);
+			} else if (elem.name.equals("homepageURL")) {
+				url = elem.content;
+			} else {
+				System.out.println("Field not recognized in user : " + elem.name);
+			}				
+		}
+		return new User(username, password, url, permission);
 	}
 }

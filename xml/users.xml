@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<user permission="admin">
+	<username>stanford</username>
+	<password>1234</password>
+	<homepageURL>http://www.stanford.edu/</homepageURL>
+</user>
+
+<user>
+	<username>berkeley</username>
+	<password>1234</password>
+	<homepageURL>http://www.berkeley.edu/</homepageURL>
+</user>
+
+<user>
+	<username>mit</username>
+	<password>1234</password>
+	<homepageURL>http://www.mit.edu/</homepageURL>
+</user>
+
+<user>
+	<username>google</username>
+	<password>1234</password>
+	<homepageURL>http://www.google.com/</homepageURL>
+</user>
+
+<user>
+	<username>microsoft</username>
+	<password>1234</password>
+	<homepageURL>http://www.microsoft.com/</homepageURL>
+</user>
+
+<user>
+	<username>facebook</username>
+	<password>1234</password>
+	<homepageURL>http://www.facebook.com/</homepageURL>
+</user>
+
+<friendship user="stanford">
+	<friend>berkeley</friend>
+	<friend>mit</friend>
+	<friend>google</friend>
+</friendship>
+
+<friendship user="berkeley">
+	<friend>stanford</friend>
+	<friend>mit</friend>
+	<friend>microsoft</friend>
+</friendship>
+
+<friendship user="mit">
+	<friend>stanford</friend>
+	<friend>berkeley</friend>
+	<friend>facebook</friend>
+</friendship>
+
+<friendship user="google">
+	<friend>stanford</friend>
+	<friend>facebook</friend>
+	<friend>microsoft</friend>
+</friendship>
+
+<friendship user="facebook">
+	<friend>mit</friend>
+	<friend>google</friend>
+	<friend>microsoft</friend>
+</friendship>
+
+<friendship user="microsoft">
+	<friend>berkeley</friend>
+	<friend>google</friend>
+	<friend>facebook</friend>
+</friendship>

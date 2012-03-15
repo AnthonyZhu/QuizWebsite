@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<quiz random="true" one-page="false" feedback-mode="true" practice-mode="true">
+<title>Bunny Quiz</title>
+<category>Animals</category>
+<description>An homage to the departed, legendary Bunny World project.</description>
+<author>stanford</author>
+
+<question type="question-response">
+  <query>What is the Biological Family for Bunnies?</query>
+  <answer>Leporidae</answer>
+</question>
+
+<question type="fill-in-blank">
+  <blank-query><pre>The book</pre><blank /><post>Down, about a bunch of rabbits, won the 1972 Carnegie Medal</post></blank-query>
+  <answer>Watership</answer>
+</question>
+
+<question type="multiple-choice">
+  <query>Which of the following statements is false</query>
+  <option>Aztec mythology includes a rabbit pantheon.</option>
+  <option>In Japanese folklore, rabbits live on the moon.</option>
+  <option answer="answer">In Stanford tradition, rubbing the nose of a rabbit guarantees an A on the CS108 class project</option>
+</question>
+
+<question type="picture-response">
+  <image-location>http://upload.wikimedia.org/wikipedia/en/b/b9/Bugs_Bunny_Pose.PNG</image-location>
+  <answer-list>
+    <answer preferred="preferred">Bugs Bunny</answer>
+	<answer>Bugs</answer>
+  </answer-list>
+</question>
+
+<question type="matching-question">
+  <score>12</score>
+  <query-list>
+	<query answer="3">Bunny query 1</query>
+	<query answer="4">Bunny query 2</query>
+	<query answer="1">Bunny query 3</query>
+	<query answer="2">Bunny query 4</query>
+  </query-list>
+  <answer-list>
+    <answer>Bunny answer 3</answer>
+	<answer>Bunny answer 4</answer>
+	<answer>Bunny answer 1</answer>
+	<answer>Bunny answer 2</answer>
+  </answer-list>
+</question>
+
+<question type="multi-answer-question" isordered="false">
+  <query>Please write 3 capital letters letters that appear in the word "BUNNY".</query>
+  <answer-list>
+    <answer>B</answer>
+	<answer>U</answer>
+	<answer>N</answer>
+	<answer>Y</answer>
+  </answer-list>
+  <answer-number>3</answer-number>
+  <score>5</score>
+</question>
+
+<question type="multi-choice-multi-answer-question">
+  <query-list> 
+    <query answer="yes">This is a correct answer about Bunny.</query>
+	<query>This is a wrong answer about Bunny.</query>
+	<query>This is another wrong answer about Bunny.</query>
+	<query>This is a third wrong answer about Bunny.</query>
+	<query answer="yes">This is another correct answer about Bunny.</query>
+  </query-list>
+  <score>15</score>
+</question>
+
+</quiz>

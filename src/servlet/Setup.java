@@ -27,7 +27,7 @@ public class Setup implements ServletContextListener {
     public void contextInitialized(ServletContextEvent arg0) {
     	AccountManager am = new AccountManager();
     	ServletContext sc = arg0.getServletContext();
-    	sc.setAttribute("accunt manager", am);
+    	sc.setAttribute("account manager", am);
     }
 
 	/**

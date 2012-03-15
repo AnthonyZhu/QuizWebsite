@@ -4,7 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="quizweb.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="resources/scripts/functions.js"></script>
+
 <h4 class="title-style-minor">Notes</h4>
 <hr />
 <div class=".three_column_content">
@@ -14,9 +16,12 @@
 		ArrayList<NoteMessage> allNotes = NoteMessage.getMessagesByUserID(homeUser.userID);
 		for(int i = 0; i < allNotes.size(); i++) {
 			NoteMessage note = allNotes.get(i);
-			out.println("<li>" + note.fromUser + "\t" + note.content+ "</li>");
+			out.println("<li>" + User.getUserByUserID(note.fromUser).username + "\t" + note.content+ "</li>");
+			out.println("<form name='note_reply' action=''>");
+			out.println("<input type='hidden' id='senderID' value='"+ note.fromUser +"'/>");
+			out.println("<input type='submit' id='sendNote' onclick='sendNotePopup()' value='reply'/>");
+			out.println("</form>");
 		}
-		out.println("<button id='sendNote' onclick='sendNotePopup()'>reply</button>");
 		out.println("</ul>");
 	%>
 </div>	

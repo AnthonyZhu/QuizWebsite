@@ -1,14 +1,11 @@
 package quizweb;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.*;
 
-import quizweb.database.DBConnection;
+import quizweb.database.*;
 import quizweb.question.*;
-import quizweb.quiz.QuizSummary;
+import quizweb.quiz.*;
 import quizweb.record.*;
 
 public class Quiz {
@@ -20,6 +17,7 @@ public class Quiz {
 	public User creator; 
 	
 	public boolean isRandom;
+	public boolean isOnepage;
 	public boolean opFeedback;
 	public boolean opPractice;	
 	
@@ -31,23 +29,23 @@ public class Quiz {
 	
 	// Creation constructor
 	public Quiz(String name, String quizURL, String description, String category,
-			int userID, boolean isRandom, boolean opFeedback, boolean opPractice) {
+			int userID, boolean isRandom, boolean isOnepage, boolean opFeedback, boolean opPractice) {
 		this.name= name;
 		this.quizURL = quizURL;
 		this.description = description;
 		this.category = category;
 		this.creator = User.getUserByUserID(userID);
 		this.isRandom = isRandom;
+		this.isOnepage = isOnepage;
 		this.opFeedback = opFeedback;
 		this.opPractice = opPractice;
 		this.raterNumber = 0;
 		this.totalRating = 0;
-		addQuizToDB();
 	}
 	
 	// Reference constructor
 	public Quiz(int quizID, String name, String quizURL, String description, String category,
-			int userID, boolean isRandom, boolean opFeedback, boolean opPractice, 
+			int userID, boolean isRandom, boolean isOnepage, boolean opFeedback, boolean opPractice, 
 			int raterNumber, double totalRating) {
 		this.quizID = quizID;
 		this.name= name;
@@ -56,6 +54,7 @@ public class Quiz {
 		this.category = category;
 		this.creator = User.getUserByUserID(userID);
 		this.isRandom = isRandom;
+		this.isOnepage = isOnepage;
 		this.opFeedback = opFeedback;
 		this.opPractice = opPractice;
 		this.raterNumber = raterNumber;
@@ -65,8 +64,8 @@ public class Quiz {
 	public void addQuizToDB() {
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
-					+ " (name, url, description, category, userid, israndom, opfeedback, oppractice, raternumber, rating)" 
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					+ " (name, url, description, category, userid, israndom, isonepage, opfeedback, oppractice, raternumber, rating)" 
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement, new String[] {"qid"});
 			stmt.setString(1, name);
 			stmt.setString(2, quizURL);
@@ -74,10 +73,11 @@ public class Quiz {
 			stmt.setString(4, category);
 			stmt.setInt(5, creator.userID);
 			stmt.setBoolean(6, isRandom);
-			stmt.setBoolean(7, opFeedback);
-			stmt.setBoolean(8, opPractice);
-			stmt.setInt(9, raterNumber);
-			stmt.setDouble(10, totalRating);			
+			stmt.setBoolean(7, isOnepage);
+			stmt.setBoolean(8, opFeedback);
+			stmt.setBoolean(9, opPractice);
+			stmt.setInt(10, raterNumber);
+			stmt.setDouble(11, totalRating);			
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
@@ -95,10 +95,13 @@ public class Quiz {
 			stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, quizID);
 			ResultSet rs = stmt.executeQuery();
-			rs.next();
+			if (!rs.next()) {
+				System.out.println("Quiz " + quizID + " NOT FOUND");
+				return null;
+			}
 			Quiz quiz = new Quiz(rs.getInt("qid"), rs.getString("name"), rs.getString("url"), 
 					rs.getString("description"), rs.getString("category"), rs.getInt("userid"), 
-					rs.getBoolean("israndom"), rs.getBoolean("opfeedback"), rs.getBoolean("oppractice"), 
+					rs.getBoolean("israndom"), rs.getBoolean("isonepage"), rs.getBoolean("opfeedback"), rs.getBoolean("oppractice"), 
 					rs.getInt("raternumber"), rs.getDouble("rating"));
 			rs.close();
 			return quiz;			
@@ -108,11 +111,35 @@ public class Quiz {
 		return null;
 	}
 	
+	public static Quiz getQuizByQuizName(String quizName) {
+		quizName = quizName.trim();
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE name = ?");
+		PreparedStatement stmt;
+		try {
+			stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setString(1, quizName);
+			ResultSet rs = stmt.executeQuery();
+			if (!rs.next()) {
+				System.out.println("Quiz " + quizName + " NOT FOUND");
+				return null;
+			}
+			Quiz quiz = new Quiz(rs.getInt("qid"), rs.getString("name"), rs.getString("url"), 
+					rs.getString("description"), rs.getString("category"), rs.getInt("userid"), 
+					rs.getBoolean("israndom"), rs.getBoolean("isonepage"), rs.getBoolean("opfeedback"), rs.getBoolean("oppractice"), 
+					rs.getInt("raternumber"), rs.getDouble("rating"));
+			rs.close();
+			return quiz;			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;		
+	}
+	
 	// Update current quiz record in database;
 	public void updateCurrentQuiz() {
 		try {
 			String statement = new String("UPDATE " + DBTable + " SET "
-					+ "name=?, url=?, description=?, category=?, userid=?, israndom=?, opfeedback=?, oppractice=?, raternumber=?, rating=?"
+					+ "name=?, url=?, description=?, category=?, userid=?, israndom=?, isonepage=?, opfeedback=?, oppractice=?, raternumber=?, rating=?"
 					+ " WHERE qid=?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setString(1, name);
@@ -121,11 +148,12 @@ public class Quiz {
 			stmt.setString(4, category);
 			stmt.setInt(5, creator.userID);
 			stmt.setBoolean(6, isRandom);
-			stmt.setBoolean(7, opFeedback);
-			stmt.setBoolean(8, opPractice);
-			stmt.setInt(9, raterNumber);
-			stmt.setDouble(10, totalRating);	
-			stmt.setInt(11, quizID);
+			stmt.setBoolean(7, isOnepage);
+			stmt.setBoolean(8, opFeedback);
+			stmt.setBoolean(9, opPractice);
+			stmt.setInt(10, raterNumber);
+			stmt.setDouble(11, totalRating);	
+			stmt.setInt(12, quizID);
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -169,8 +197,12 @@ public class Quiz {
 	
 	
 	// Summary statistics
-	public QuizSummary computeSummaryStats() {
+	public QuizSummary getQuizSummary() {
 		return new QuizSummary(this);
+	}
+	
+	public QuizSummary getQuizSummary(User user) {
+		return new QuizSummary(this, user);
 	}
 
 	// Score
@@ -220,6 +252,8 @@ public class Quiz {
 	
 	// Rating
 	public void addQuizRating(double rating) {
+		raterNumber++;
+		totalRating += rating;
 		try {
 			String statement = new String("UPDATE " + DBTable + " SET "
 					+ "raternumber=raternumber+1, rating=rating+?"
@@ -249,4 +283,52 @@ public class Quiz {
 		}
 		return -1;
 	}
+
+
+	public static Quiz getQuizByXMLElem(XMLElement root, ArrayList<XMLElement> questionElems) {
+		String name = new String("Quiz Name Missing");
+		String description = new String("Quiz Description Missing");
+		String category = new String("Uncategorized");
+		int userID = -1;
+		boolean isRandom = false;
+		boolean isOnepage = false;
+		boolean opFeedback = false;
+		boolean opPractice = false;
+		if (root.attributeMap.containsKey("random") && root.attributeMap.get("random").equals("true")) 
+			isRandom = true;
+		if (root.attributeMap.containsKey("one-page") && root.attributeMap.get("one-page").equals("true")) 
+			isOnepage = true;	
+		if (root.attributeMap.containsKey("feedback-mode") && root.attributeMap.get("feedback-mode").equals("true")) 
+			opFeedback = true;				
+		if (root.attributeMap.containsKey("practice-mode") && root.attributeMap.get("practice-mode").equals("true")) 
+			opPractice = true;
+			
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("title")) {
+				name = elem.content;
+			} else if (elem.name.equals("description")) {
+				description = elem.content;
+			} else if (elem.name.equals("category")) {
+				category = elem.content;
+			} else if (elem.name.equals("author")) {
+				User user = User.getUserByUsername(elem.content);
+				if (user != null)
+					userID = user.userID;
+			} else if (elem.name.equals("question")) {
+				questionElems.add(elem);
+			} else {
+				System.out.println("Unknown Quiz XML field " + elem.name);
+			}
+		}
+		String quizURL = new String("URL NOT IMPLEMENTED"); // TODO fill in the quizURL
+		if (userID == -1) {
+			System.out.println("Author for quiz " + name + " must be specified!");
+		}
+		Quiz quiz = new Quiz(name, quizURL, description, category, userID, isRandom, isOnepage, opFeedback, opPractice);		
+		return quiz;
+	}
+
+
+
 }

@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import quizweb.Quiz;
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 
@@ -17,7 +19,6 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 	
 	public MultiChoiceMultiAnswerQuestion(int quizID, int position, Object question, Object answer, double score) {
 		super(quizID, position, question, answer, score);
-		addQustionToDB();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -56,9 +57,9 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, quizID);
 			ResultSet rs = stmt.executeQuery();
-			ArrayList<String> questionStringList = getParsedStrings(rs.getString("question"));
-			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
 			while (rs.next()) {
+				ArrayList<String> questionStringList = getParsedStrings(rs.getString("question"));
+				ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));				
 				MultiChoiceMultiAnswerQuestion q = new MultiChoiceMultiAnswerQuestion(
 						rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
 						questionStringList, answerStringList, rs.getDouble("score"));
@@ -124,6 +125,38 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 			}
 		}
 		return score * (ques.size() - ans.size() - trueAns.size() + 2*matches) / ques.size();
+	}
+
+	public static MultiChoiceMultiAnswerQuestion getMultiChoiceMultiAnswerQuestionByXMLElem(
+			XMLElement root, Quiz quiz, int pos) {
+		int quizID = quiz.quizID;
+		int position = pos;
+		Object question = null;
+		Object answer = null;
+		double score = 10;
+		ArrayList<String> answerList = new ArrayList<String>();
+		ArrayList<String> questionList = new ArrayList<String>();
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("query-list")) {
+				for (int j = 0; j < elem.childList.size(); j++) {
+					XMLElement subElem = elem.childList.get(j);
+					if (!subElem.name.equals("query")) 
+						System.out.println("Question list unexpected name " + subElem.name);
+					questionList.add(subElem.content);
+					if (subElem.attributeMap.containsKey("answer"))
+						answerList.add(subElem.content);
+				}
+				
+			} else if (elem.name.equals("score")) {
+				score = Double.parseDouble(elem.content);
+			} else {
+				System.out.println("Unexpected field in response question : " + elem.name);
+			}
+		}
+		question = questionList;
+		answer = answerList;
+		return new MultiChoiceMultiAnswerQuestion(quizID, position, question, answer, score);
 	}
 
 }

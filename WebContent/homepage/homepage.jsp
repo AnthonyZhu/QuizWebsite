@@ -19,12 +19,17 @@
 	<meta name="distribution" content="global" />
 	<link rel="shortcut icon" href="/favicon.ico" />
 	
+<<<<<<< HEAD:WebContent/homepage/homepage.jsp
 	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
 	<link rel="stylesheet" href="/QuizWebsite/resources/css/three_column_layout.css" type="text/css" />
 	
 	<script type="text/javascript" src="resources/scripts/sendFriendRequest.js"></script>
 	<script type="text/javascript" src="resources/scripts/sendNote.js"></script>
 	<script type="text/javascript" src="resources/scripts/sendChallenge.js"></script>	
+=======
+	<link rel="stylesheet" href="resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="resources/css/three_column_layout.css" type="text/css" />	
+>>>>>>> 609838267dacc30cc58a62f8cad1234dab7e37ec:WebContent/homepage.jsp
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="resources/scripts/functions.js"></script>
 </head>

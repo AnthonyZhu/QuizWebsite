@@ -2,8 +2,8 @@ package quizweb.announcement;
 
 import java.sql.*;
 import java.util.*;
-import java.util.Date;
 
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 public class Announcement {
@@ -19,8 +19,17 @@ public class Announcement {
 	public Announcement(String title, String content) {
 		this.title = title;
 		this.content = content;
-		//this.timestamp = new Timestamp(new Date().getTime());	
-		// add to database
+		allAnnouncements.add(this);
+	}
+	
+	public Announcement(int announcementID, String title, String content, Timestamp timestamp) {
+		this.announcementID = announcementID;
+		this.title = title;
+		this.content = content;
+		this.timestamp = timestamp;
+	}
+	
+	public void addAnnouncementToDB() {
 		try {
 			String statement = new String("INSERT INTO " + DBTable 
 					+ " (title, content, time)" 
@@ -35,15 +44,7 @@ public class Announcement {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		allAnnouncements.add(this);
-	}
-	
-	public Announcement(int announcementID, String title, String content, Timestamp timestamp) {
-		this.announcementID = announcementID;
-		this.title = title;
-		this.content = content;
-		this.timestamp = timestamp;
+		}		
 	}
 	
 	public static ArrayList<Announcement> getAllAnnouncements() {
@@ -67,7 +68,23 @@ public class Announcement {
 		return null;
 	}
 	
+	public static Announcement getAnnouncementByXMLElem(XMLElement root) {
+		String title = new String("Untitled");
+		String content = new String("This announcement has no content.");
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("title")) {
+				title = elem.content;
+			} else if (elem.name.equals("content")) {
+				content = elem.content;
+			} else {
+				System.out.println("Unrecognized announcement field " + elem.name);
+			}
+		}
+		return new Announcement(title, content);
+	}
+	
 	public boolean equals(Announcement other) {
 		return announcementID == other.announcementID;
-	}
+	}	
 }

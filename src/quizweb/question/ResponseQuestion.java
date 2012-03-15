@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import quizweb.Quiz;
+import quizweb.XMLElement;
 import quizweb.database.*;
 
 public class ResponseQuestion extends Question {
@@ -16,7 +18,6 @@ public class ResponseQuestion extends Question {
 	
 	public ResponseQuestion(int quizID, int position, Object question, Object answer, double score) {
 		super(quizID, position, question, answer, score);
-		addQustionToDB();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -55,9 +56,9 @@ public class ResponseQuestion extends Question {
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, quizID);
 			ResultSet rs = stmt.executeQuery();
-			String questionString = rs.getString("question");
-			ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));
 			while (rs.next()) {
+				String questionString = rs.getString("question");
+				ArrayList<String> answerStringList = getParsedStrings(rs.getString("answer"));				
 				ResponseQuestion q = new ResponseQuestion(
 						rs.getInt("questionid"), rs.getInt("quizid"), rs.getInt("position"), 
 						questionString, answerStringList, rs.getDouble("score"));
@@ -101,5 +102,30 @@ public class ResponseQuestion extends Question {
 				return score;
 		}		
 		return 0;
+	}
+
+	public static ResponseQuestion getResponseQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
+		int quizID = quiz.quizID;
+		int position = pos;
+		Object question = null;
+		Object answer = null;
+		double score = 10;
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("query")) {
+				question = (String) elem.content;
+			} else if (elem.name.equals("answer")) {
+				ArrayList<String> answerList = new ArrayList<String>();
+				answerList.add(elem.content);
+				answer = answerList;
+			} else if (elem.name.equals("answer-list")) {
+				answer = Question.getAnswerListByXMLElem(elem);
+			} else if (elem.name.equals("score")) {
+				score = Double.parseDouble(elem.content);
+			} else {
+				System.out.println("Unexpected field in response question : " + elem.name);
+			}
+		}
+		return new ResponseQuestion(quizID, position, question, answer, score);
 	}
 }

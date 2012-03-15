@@ -16,7 +16,8 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>
 	<%
-	Quiz quiz = (Quiz) session.getAttribute("newQuiz");
+	int quizID = Integer.parseInt(request.getParameter("quizID"));
+	Quiz quiz = Quiz.getQuizByQuizID(quizID);
 	String quizName = quiz.name;
 	User homeUser = (User) session.getAttribute("user");
 	out.println("Quiz Summary of " + quizName);
@@ -83,9 +84,15 @@
 	<div class="content-container">
 		<div class="two_column_left">
 			<h2>Quiz Summary</h2>
-			<p><span class="dominant_text"><%-- out.println(summary.totalUser); --%></span> users have taken this quiz</p>
-			<p>They spend an average of <span class="dominant_text"><%-- out.println(summary.averageTimespan + " mins"); --%></span> on the quiz</p>
-			<p>Average score is <span class="dominant_text"><%-- out.println(summary.averageScore); --%></span></p>
+			<p><span class="dominant_text">
+			<%-- out.println(summary.totalUser); --%>
+			</span> users have taken this quiz</p>
+			<p>They spend an average of <span class="dominant_text">
+			<%-- out.println(summary.averageTimespan + " mins"); --%>
+			</span> on the quiz</p>
+			<p>Average score is <span class="dominant_text">
+			<%-- out.println(summary.averageScore); --%>
+			</span></p>
 		</div>
 		<div class="two_column_right">
 			<h2>Top Performers</h2>
