@@ -37,8 +37,8 @@ public class FriendRequestMessage extends Message {
 	@Override
 	public void addMessageToDB() {
 		try {
-			String statement = new String("INSERT INTO " + DBTable +"" +
-					"(uid1, uid2, time, isConfirmed, isRejected) VALUES (?, ?, NOW(), ?, ?)");
+			String statement = new String("INSERT INTO " + DBTable +
+					" (uid1, uid2, time, isConfirmed, isRejected) VALUES (?, ?, NOW(), ?, ?)");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, fromUser);
 			stmt.setInt(2, toUser);
@@ -50,13 +50,38 @@ public class FriendRequestMessage extends Message {
 		}
 	}
 	
+	public static void rejectFriendRequest(int senderID, int receiverID) {
+		try {
+			String statement = new String("UPDATE " + DBTable + " SET isRejected = true " +
+					"WHERE uid1 = ? and uid2 = ? and isConfirmed = false and isRejected = false");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, senderID);
+			stmt.setInt(2, receiverID);
+			DBConnection.DBUpdate(stmt);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public static void confirmFriendRequest(int senderID, int receiverID) {
+		try {
+			String statement = new String("UPDATE " + DBTable + " SET isConfirmed = true " +
+					"WHERE uid1 = ? and uid2 = ? and isConfirmed = false and isRejected = false");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, senderID);
+			stmt.setInt(2, receiverID);
+			DBConnection.DBUpdate(stmt);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 	public static ArrayList<FriendRequestMessage> getMessagesByUserID(int userID) {
 		ArrayList<FriendRequestMessage> FriendRequestMessageQueue = new ArrayList<FriendRequestMessage>();
 		try {
-			String statement = new String("SELECT * FROM " + DBTable +" WHERE uid1 = ? OR uid2 = ?");
+			String statement = new String("SELECT * FROM " + DBTable +" WHERE uid2 = ?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, userID);
-			stmt.setInt(2, userID);
 			ResultSet rs = DBConnection.DBQuery(stmt);
 			rs.beforeFirst();
 			while(rs.next()) {

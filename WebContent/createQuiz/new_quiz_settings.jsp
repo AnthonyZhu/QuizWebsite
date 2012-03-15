@@ -30,7 +30,7 @@
 		<h1>toQuiz.Me</h1>
 	</div>
 	
-	<form id="form1" action="QuizSettingServlet" name="form1" method="post" >
+	<form id="form1" action="../QuizSettingServlet" name="form1" method="post" >
 
 	<div class="one_column">
 		<h2>

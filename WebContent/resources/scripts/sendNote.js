@@ -1,5 +1,5 @@
 $(function() {
-	$("#submit_btn").click(function() {
+	$("#note_btn").click(function() {
 		var note = $("#note").val();
 		var sender = $("#sender").val();
 		var receiver = $("#receiver").val();
@@ -18,10 +18,12 @@ $(function() {
 				success: function(){
 					$('#note').hide();
 					$('.error').fadeOut(200).hide();
-					$('#submit_btn').html("<input type='submit' id='submit_btn' value='note sent'/>");
+					$('#note_btn').attr('value', 'node sent');
 				}
 			});
 		}
 		return false;
 	});
 });
+
+	

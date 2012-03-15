@@ -16,7 +16,8 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>
 	<%
-	Quiz quiz = (Quiz) session.getAttribute("newQuiz");
+	int quizID = Integer.parseInt(request.getParameter("quizID"));
+	Quiz quiz = Quiz.getQuizByQuizID(quizID);
 	String quizName = quiz.name;
 	User homeUser = (User) session.getAttribute("user");
 	out.println("Quiz Summary of " + quizName);
@@ -71,21 +72,27 @@
 			%></p>
 		</div>
 		<div class="two_column_right">
-			<button type="submit" class="button_large" name="start_quiz">
-					Start Quiz
-			</button>
-			<button type="submit" class="button_grey" name="start_quiz">
-					Practice Mode
-			</button>
+			<form action="StartQuiz" method="post">
+			<input type="submit" value="Start Quiz"><br />
+			<% 
+			out.println("<input name =\"quizID\" type=\"hidden\" value=\"" + quiz.quizID + "\">");
+			%>
+			</form>
 		</div>
 	</div>
 	
 	<div class="content-container">
 		<div class="two_column_left">
 			<h2>Quiz Summary</h2>
-			<p><span class="dominant_text"><%-- out.println(summary.totalUser); --%></span> users have taken this quiz</p>
-			<p>They spend an average of <span class="dominant_text"><%-- out.println(summary.averageTimespan + " mins"); --%></span> on the quiz</p>
-			<p>Average score is <span class="dominant_text"><%-- out.println(summary.averageScore); --%></span></p>
+			<p><span class="dominant_text">
+			<%-- out.println(summary.totalUser); --%>
+			</span> users have taken this quiz</p>
+			<p>They spend an average of <span class="dominant_text">
+			<%-- out.println(summary.averageTimespan + " mins"); --%>
+			</span> on the quiz</p>
+			<p>Average score is <span class="dominant_text">
+			<%-- out.println(summary.averageScore); --%>
+			</span></p>
 		</div>
 		<div class="two_column_right">
 			<h2>Top Performers</h2>
@@ -96,7 +103,11 @@
 			<h2>My Statistics</h2>
 			<p><%
 			if(QuizTakenRecord.getQuizHistoryByQuizIDUserID(quiz.quizID,homeUser.userID) != null){
-				out.println("I have taken this quiz");
+				if(QuizTakenRecord.getQuizHistoryByQuizIDUserID(quiz.quizID,homeUser.userID).size() != 0){
+					out.println("I have taken this quiz");
+				}else{
+					out.println("I have not taken this quiz yet");
+				}
 			}else{
 				out.println("I have not taken this quiz yet");
 			}
