@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import quizweb.User;
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 public class FriendRequestMessage extends Message {
@@ -94,5 +96,38 @@ public class FriendRequestMessage extends Message {
 			e1.printStackTrace();
 		}
 		return FriendRequestMessageQueue;
+	}
+
+	public static Message getFriendRequestByXMLElem(XMLElement root) {
+		User toUser = null;
+		User fromUser = null;
+		boolean isConfirmed = false;
+		boolean isRejected = false;
+		if (root.attributeMap.containsKey("isconfirmed") && root.attributeMap.get("isconfirmed").equals("true")) 
+			isConfirmed = true;
+		if (root.attributeMap.containsKey("isrejected") && root.attributeMap.get("isrejected").equals("true")) 
+			isRejected = true;
+		
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("to")) {
+				toUser = User.getUserByUsername(elem.content);
+			} else if (elem.name.equals("from")) {
+				fromUser = User.getUserByUsername(elem.content);
+			} else {
+				System.out.println("Unrecognized field in challenge message " + elem.name);
+			}
+		}
+		if (fromUser == null) {
+			System.out.println("Unrecognized from user");
+			return null;
+		} else if (toUser == null) {
+			System.out.println("Unrecognized to user");
+			return null;
+		}
+		FriendRequestMessage message = new FriendRequestMessage(fromUser.userID, toUser.userID);
+		message.isConfirmed = isConfirmed;
+		message.isRejected = isRejected;
+		return message;
 	}
 }

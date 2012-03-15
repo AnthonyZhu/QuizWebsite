@@ -6,6 +6,7 @@ import java.util.*;
 import quizweb.achievement.*;
 import quizweb.announcement.*;
 import quizweb.database.*;
+import quizweb.message.Message;
 import quizweb.question.*;
 import quizweb.record.Record;
 
@@ -72,6 +73,9 @@ public class XMLReader {
 						System.out.println("Unrecognized friendship field " + subElem.name);
 					}
 				}				
+			} else if (elem.name.equals("message")) {
+				Message message = Message.getMessageByXMLElem(elem);
+				message.addMessageToDB();
 			} else {
 				System.out.println("Unrecognized field " + elem.name);
 			}
@@ -162,8 +166,10 @@ public class XMLReader {
 		new XMLReader("./xml/achievements.xml");
 		// Load records
 		new XMLReader("./xml/records.xml");
-		
+		// Load announcements
 		new XMLReader("./xml/announcements.xml");
+		// Load messages
+		new XMLReader("./xml/messages.xml");
 		
 	}
 	

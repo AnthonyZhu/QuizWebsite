@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import quizweb.User;
+import quizweb.XMLElement;
 import quizweb.database.DBConnection;
 
 public class NoteMessage extends Message {
@@ -56,5 +59,36 @@ public class NoteMessage extends Message {
 			e1.printStackTrace();
 		}
 		return noteMessageQueue;
+	}
+
+	public static Message getNoteMessageByXMLElem(XMLElement root) {
+		User toUser = null;
+		User fromUser = null;
+		String content = new String("This message has no content.");
+		boolean isRead = false;
+		if (root.attributeMap.containsKey("isread") && root.attributeMap.get("isread").equals("true")) 
+			isRead = true;
+		for (int i = 0; i < root.childList.size(); i++) {
+			XMLElement elem = root.childList.get(i);
+			if (elem.name.equals("to")) {
+				toUser = User.getUserByUsername(elem.content);
+			} else if (elem.name.equals("from")) {
+				fromUser = User.getUserByUsername(elem.content);
+			} else if (elem.name.equals("content")) {
+				content  = elem.content;
+			} else {
+				System.out.println("Unrecognized field in challenge message " + elem.name);
+			}
+		}
+		if (fromUser == null) {
+			System.out.println("Unrecognized from user");
+			return null;
+		} else if (toUser == null) {
+			System.out.println("Unrecognized to user");
+			return null;
+		}
+		NoteMessage message = new NoteMessage(fromUser.userID, toUser.userID, content);
+		message.isRead = isRead;
+		return message;
 	}
 }
