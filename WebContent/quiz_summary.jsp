@@ -57,16 +57,16 @@
 			<br>
 			<%
 		    out.println("Total score: " + summary.totalScore);
-			%></p>
-		</div>
-		<div class="two_column_right">
-			<h2>Rating of this Quiz</h2>
-			<p>
+			%>
+			<br>
 			<%
 			double rating = quiz.getQuizRating();
-			out.println(rating);
+			out.println("Quiz rating: " + rating);
 			%></p>
 		</div>
+		<!-- <div class="two_column_right">
+			
+		</div> -->
 
 	</div>
 	
@@ -144,7 +144,20 @@
 		</div>
 		<div class="two_column_left">
 			<h2>Past Performances</h2>
-			<p></p>
+			<p>
+			<%
+			ArrayList<QuizTakenRecord> quizHistory = quiz.getAllHistory();
+			if(quizHistory == null){
+				out.println("No one has taken this quiz yet.");
+			}else if(quizHistory.size() == 0){
+				out.println("No one has taken this quiz yet.");
+			}else{
+				QuizTakenRecord pastHistory = quizHistory.get(0);
+				out.println(pastHistory.user.username + " took this question. Score: " + pastHistory.score + " in " + Math.round(pastHistory.timeSpan/60000*100)/100.0 + " mins");
+			}
+			%>
+			
+			</p>
 		</div>
 		
 
