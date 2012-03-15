@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.sql.*;
 
 public class DBConnection {
-//	static String account = "ccs108yzzhu";
-//	static String password = "aebaujei";
-//	static String server = "mysql-user-master.stanford.edu";
-//	static String database = "c_cs108_yzzhu";
-	static String account = "ccs108gxj";
-	static String password = "aehifinu";
+	static String account = "ccs108yzzhu";
+	static String password = "aebaujei";
 	static String server = "mysql-user-master.stanford.edu";
-	static String database = "c_cs108_gxj";	
+	static String database = "c_cs108_yzzhu";
+//	static String account = "ccs108gxj";
+//	static String password = "aehifinu";
+//	static String server = "mysql-user-master.stanford.edu";
+//	static String database = "c_cs108_gxj";	
 	
 	public static Connection con = initConnection();
 	

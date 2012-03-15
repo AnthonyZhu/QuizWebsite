@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<message type="challenge" isread="false">
+	<from>stanford</from>
+	<to>berkeley</to>
+	<content>Can you do this better?</content>
+	<quiz>Bunny Quiz</quiz>
+</message>
+
+<message type="friend-request" isconfirmed="false" isrejected="false">
+	<from>stanford</from>
+	<to>facebook</to>
+</message>
+
+<message type="note" isread="false">
+	<from>stanford</from>
+	<to>berkeley</to>
+	<content>Beat Cal!</content>
+</message>
+
+<message type="challenge" isread="false">
+	<from>berkeley</from>
+	<to>stanford</to>
+	<content>Come on, try this.</content>
+	<quiz>Bunny Quiz</quiz>
+</message>
+
+<message type="friend-request" isconfirmed="false" isrejected="false">
+	<from>microsoft</from>
+	<to>stanford</to>
+</message>
+
+<message type="note" isread="false">
+	<from>berkeley</from>
+	<to>stanford</to>
+	<content>Fear the tree!</content>
+</message>
