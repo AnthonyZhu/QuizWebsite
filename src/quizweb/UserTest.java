@@ -7,8 +7,7 @@ import java.util.*;
 
 import org.junit.*;
 
-import quizweb.record.QuizCreatedRecord;
-import quizweb.record.QuizTakenRecord;
+import quizweb.record.*;
 
 public class UserTest {
 
