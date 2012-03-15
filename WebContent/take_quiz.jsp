@@ -36,90 +36,119 @@
 	<div class="one_column">
 		You are taking the quiz <b>
 		<% 
-		int quizID = (Integer) session.getAttribute("quizID");
-		int posistion = (Integer) session.getAttribute("question_position");
-		Quiz quiz = Quiz.getQuizByQuizID(quizID);
+		int position = (Integer) session.getAttribute("position");
+		Quiz quiz = (Quiz) session.getAttribute("quiz");
+		ArrayList<Question> questions = (ArrayList<Question>) session.getAttribute("questions");
+		Object userAnswer = (Object) session.getAttribute("userAnswer");
+		
 		String quizName = quiz.name;
 		out.println(quizName);
 		%></b> created by <a>
 		<%
-		String creator = Quiz.getQuizByQuizID(quizID).creator.username;
+		String creator = quiz.creator.username;
 		out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + quiz.creator.userID + "\">" + creator + "</a>");
 		%></a>
 		<span style="float: right"> 
-			Time spent: <!-- show time spent -->
+			Time spent: <%
+				long startTime = (Long) session.getAttribute("start_time");
+				long endTime = new Date().getTime();
+				long duration = endTime - startTime;
+				if (duration > 3600000)
+					out.println("More than 1 hour");
+				else {
+					long min = duration / 60000;
+					long sec = (duration % 60000) / 1000;
+					out.println(min + "min " + sec + "sec");
+				}
+			%>
 		</span>
 		<hr />
 		<ul>
 			<li id="foli1" class="highlight">
 				<span><%
-			    out.println("This is No." + posistion + " question.");
+			    out.println("This is No." + position + " question.");
 				%></span>
 				<hr >
 				<span class="quiz_title">
 				<%
 				out.println("The question is: ");
-				ArrayList<Question> questionList = Question.getQuestionsByQuizID(quiz.quizID);
-				if(questionList == null){
-					
-				}else if(questionList.size() == 0){
-					
-				}else{
-					Question question = questionList.get(posistion-1);
-					if(question instanceof ResponseQuestion){
-						ResponseQuestion newQuestion = (ResponseQuestion) question;
-						String questionWhole = (String) newQuestion.question;
-						out.println(questionWhole);
-					}else if(question instanceof FillInBlankQuestion){
-						FillInBlankQuestion newQuestion = (FillInBlankQuestion) question;
-						ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
-						String questionContent ="";
-						for(int i=0;i<questionWhole.size();i++){
-							questionContent += questionWhole.get(i);
-	                        if(i<questionWhole.size()-1){
-	                        	questionContent += "_";
-	                        }
-						}
-						out.println(questionContent);
-					}else if(question instanceof PictureQuestion){
-						PictureQuestion newQuestion = (PictureQuestion) question;
-						String questionWhole = (String) newQuestion.question;
-						out.println(questionWhole);
-						out.println("Picture link: <a href=" + newQuestion.questionURL + ">picture</a>");
-					}else if(question instanceof MultipleChoiceQuestion){
-						MultipleChoiceQuestion newQuestion = (MultipleChoiceQuestion) question;
-						ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
-						out.println(questionWhole.get(0));
-						for(int i=1;i<questionWhole.size();i++){
-							out.println(i + ". " + questionWhole.get(i) + "; ");
-						}
-					}else if(question instanceof MultiAnswerQuestion){
-						MultiAnswerQuestion newQuestion = (MultiAnswerQuestion) question;
-						String questionWhole = (String) newQuestion.question;
-						out.println(questionWhole);
-					}else if(question instanceof MatchingQuestion){
-						MatchingQuestion newQuestion = (MatchingQuestion) question;
-						ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
-						out.println(questionWhole.get(0));
-						for(int i=1;i<questionWhole.size();i++){
-							out.println(i + ". " + questionWhole.get(i) + "; ");
-						}
-					}else if(question instanceof MultiChoiceMultiAnswerQuestion){
-						MultiChoiceMultiAnswerQuestion newQuestion = (MultiChoiceMultiAnswerQuestion) question;
-						ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
-						out.println(questionWhole.get(0));
-						for(int i=1;i<questionWhole.size();i++){
-							out.println(i + ". " + questionWhole.get(i) + "; ");
-						}
+				Question question = (Question) session.getAttribute("question");
+				int type = -1;
+				if (question instanceof ResponseQuestion) {
+					type = Question.TYPE_RESPONSE;
+					ResponseQuestion newQuestion = (ResponseQuestion) question;
+					String questionWhole = (String) newQuestion.question;
+					out.println(questionWhole);
+				} else if (question instanceof FillInBlankQuestion) {
+					type = Question.TYPE_BLANK;
+					FillInBlankQuestion newQuestion = (FillInBlankQuestion) question;
+					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
+					String questionContent = "";
+					for (int i = 0; i < questionWhole.size(); i++) {
+						questionContent += questionWhole.get(i);
+                        if (i<questionWhole.size()-1) {
+                        	questionContent += "_______________";
+                        }
 					}
+					out.println(questionContent);
+				} else if (question instanceof PictureQuestion) {
+					type = Question.TYPE_PICTURE;
+					PictureQuestion newQuestion = (PictureQuestion) question;
+					String questionWhole = (String) newQuestion.question;
+					if (!questionWhole.isEmpty())
+						out.println(questionWhole);
+					out.println("<img src=\"" + newQuestion.questionURL + "\"" + " />");
+				} else if (question instanceof MultipleChoiceQuestion) {
+					type = Question.TYPE_CHOICE;
+					MultipleChoiceQuestion newQuestion = (MultipleChoiceQuestion) question;
+					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
+					out.println(questionWhole.get(0));
+					out.println("<ol>");
+					for (int i=1;i<questionWhole.size();i++){
+						out.println("<li>" + i + ". " + questionWhole.get(i) + "</li>");
+					}
+					out.println("</ol>");
+				} else if (question instanceof MultiAnswerQuestion) {
+					type = Question.TYPE_MULTIANSWER;
+					MultiAnswerQuestion newQuestion = (MultiAnswerQuestion) question;
+					String questionWhole = (String) newQuestion.question;
+					out.println(questionWhole);
+				} else if (question instanceof MatchingQuestion){
+					type = Question.TYPE_MATCHING;
+					MatchingQuestion newQuestion = (MatchingQuestion) question;
+					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
+					out.println(questionWhole.get(0));
+					out.println("<ol>");
+					for (int i = 1; i < questionWhole.size() / 2 + 1; i++) {
+						out.println("<li>" + i + ". " + questionWhole.get(i) + "</li>");
+					}
+					out.println("</ol>");
+					out.println("<br />");
+					out.println("<ol>");
+					for (int i = questionWhole.size() / 2 + 1; i < questionWhole.size(); i++) {
+						out.println("<li>" + (i-questionWhole.size()/2) + ". " + questionWhole.get(i) + "</li>");
+					}
+					out.println("/ol>");
+				} else if (question instanceof MultiChoiceMultiAnswerQuestion){
+					type = Question.TYPE_MULTICHOICEMULTIANSWER;
+					MultiChoiceMultiAnswerQuestion newQuestion = (MultiChoiceMultiAnswerQuestion) question;
+					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
+					out.println(questionWhole.get(0));
+					out.println("<ol>");
+					for(int i = 1; i < questionWhole.size(); i++) {
+						out.println("<li>" + i + ". " + questionWhole.get(i) + "</li>");
+					}
+					out.println("</ol>");
 				}
+				session.setAttribute("question_type", type);
+				
 				%></span>
 				<div>
-					<input id="Field1" name="Field1" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
+					<input id="Field1" name="user_answer" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
 				</div>
 			</li>
 			<li style="float:right">
-				<% out.println(posistion); %> of <% out.println(quiz.getQuestions().size()); %> questions
+				<% out.println(position); %> of <% out.println(questions.size()); %> questions
 			</li>
 			<li>
 				<!-- <span><input id="lastQuestion" name="lastQuestion" class="btTxt submit" type="submit" value="<<back"/></span> -->

@@ -60,7 +60,8 @@ public class XMLReader {
 				Record record = Record.getRecordByXMLElem(elem);
 				record.addRecordToDB();
 			} else if (elem.name.equals("message")) {
-				
+				Message message = Message.getMessageByXMLElem(elem);
+				message.addMessageToDB();
 			} else if (elem.name.equals("friendship")) {
 				if (!elem.attributeMap.containsKey("user"))
 					System.out.println("Must contain user attribute");
@@ -73,9 +74,6 @@ public class XMLReader {
 						System.out.println("Unrecognized friendship field " + subElem.name);
 					}
 				}				
-			} else if (elem.name.equals("message")) {
-				Message message = Message.getMessageByXMLElem(elem);
-				message.addMessageToDB();
 			} else {
 				System.out.println("Unrecognized field " + elem.name);
 			}
@@ -170,7 +168,6 @@ public class XMLReader {
 		new XMLReader("./xml/announcements.xml");
 		// Load messages
 		new XMLReader("./xml/messages.xml");
-		
 	}
 	
 	public void pause(int millisec) {

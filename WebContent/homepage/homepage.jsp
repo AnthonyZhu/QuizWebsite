@@ -67,7 +67,7 @@
 				%>
 			<hr >
                 <%
-				out.println("<a href=\"/userpage.jsp?id=" + homeUser.userID + "\">My Profile</a>");
+				out.println("<a href=\"userpage.jsp?id=" + homeUser.userID + "\">My Profile</a>");
 				%>	
 				
 		</div>

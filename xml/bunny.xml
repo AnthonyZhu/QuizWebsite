@@ -31,6 +31,7 @@
 </question>
 
 <question type="matching-question">
+  <query>Match the following items</query>
   <score>12</score>
   <query-list>
 	<query answer="3">Bunny query 1</query>
@@ -59,6 +60,7 @@
 </question>
 
 <question type="multi-choice-multi-answer-question">
+  <query>Please choose the ones that are FALSE.</query>
   <query-list> 
     <query answer="yes">This is a correct answer about Bunny.</query>
 	<query>This is a wrong answer about Bunny.</query>
