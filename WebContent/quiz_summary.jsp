@@ -39,7 +39,7 @@
 <body>
 <div class="container" >
 	<div class="header">
-		<h1>toQuiz.Me</h1>
+		<h1><a href="homepage/homepage.jsp">toQuiz.me</a></h1>
 	</div>
 	
 	<div class="content-container">
