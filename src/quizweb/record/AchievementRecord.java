@@ -48,7 +48,8 @@ public class AchievementRecord extends Record {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Achievement achievement = Achievement.getAchievementByID(rs.getInt("aid"));
-				if (achievement.type != type && type != Achievement.ALL_TYPE) continue;
+				if (achievement.type != type && type != Achievement.ALL_TYPE) 
+					continue;
 				achievements.add(achievement);
 			}
 			rs.close();

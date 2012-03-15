@@ -59,7 +59,7 @@ public class Achievement {
 	}
 	
 	public static Achievement getAchievementByID(int aid) {
-		String statement = new String("SELECT * FROM " + DBTable + " WHERE id = ?");
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE aid = ?");
 		PreparedStatement stmt;
 		try {
 			stmt = DBConnection.con.prepareStatement(statement);

@@ -9,8 +9,15 @@ import quizweb.record.*;
 
 public class PracticeAchievement extends Achievement {
 	
-	static ArrayList<PracticeAchievement> allAchievements = new ArrayList<PracticeAchievement>();
-	static {
+	private static ArrayList<PracticeAchievement> allAchievements = new ArrayList<PracticeAchievement>();
+
+	public static ArrayList<PracticeAchievement> getAllAchievements() {
+		if (allAchievements.isEmpty())
+			loadAllAchievements();
+		return allAchievements;
+	}	
+	
+	public static void loadAllAchievements() {
 		String statement = new String("SELECT * FROM " + DBTable + " WHERE type = ?");
 		PreparedStatement stmt;
 		try {
@@ -18,28 +25,41 @@ public class PracticeAchievement extends Achievement {
 			stmt.setInt(1, PRACTICE_TYPE);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				PracticeAchievement achievement = new PracticeAchievement(rs.getString("name"), rs.getString("url"),
+				PracticeAchievement achievement = new PracticeAchievement(rs.getInt("aid"), rs.getString("name"), rs.getString("url"),
 						rs.getString("description"), rs.getInt("threshold"));
 				allAchievements.add(achievement);
 			}
 			rs.close();			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}			
 	}
 	
 	public PracticeAchievement(String name, String url, String description, int threshold) {
 		super(name, url, description, threshold);
 		this.type = PRACTICE_TYPE;
+	}	
+	
+	public PracticeAchievement(int id, String name, String url, String description, int threshold) {
+		super(name, url, description, threshold);
+		this.id = id;
+		this.type = PRACTICE_TYPE;
 	}
 
 	public static void updateAchievement(User user) {
 		ArrayList<Achievement> records = AchievementRecord.getAchievementsByUserID(user.userID, PRACTICE_TYPE);
-		for (int i = 0; i < allAchievements.size(); i++) {
-			Achievement achievement = allAchievements.get(i);
-			if (records.contains(achievement)) continue;
+		for (int i = 0; i < getAllAchievements().size(); i++) {
+			Achievement achievement = (Achievement) getAllAchievements().get(i);
+			boolean found = false;
+			for (int j = 0; j < records.size(); j++) 
+				if (records.get(j).name.equals(achievement.name)) {
+					found = true;
+					break;
+				}
+			if (found) continue;
 			if (user.practiceNumber >= achievement.threshold) {
-				new AchievementRecord(user, achievement);
+				AchievementRecord record = new AchievementRecord(user, achievement);
+				record.addRecordToDB();
 			}			
 		}
 	}
