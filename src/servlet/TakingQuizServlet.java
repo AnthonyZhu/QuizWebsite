@@ -53,8 +53,8 @@ public class TakingQuizServlet extends HttpServlet {
 		} 
 		
 		// Record last question
-		if (position > 1) {
-			int lastIndex = indices.get(position-2);
+		if (position >= 1) {
+			int lastIndex = indices.get(position-1);
 			String answerEntry = request.getParameter("user_answer");
 			int type = (Integer) session.getAttribute("question_type");
 			if (type == Question.TYPE_RESPONSE || type == Question.TYPE_BLANK || type == Question.TYPE_PICTURE) {
@@ -62,15 +62,28 @@ public class TakingQuizServlet extends HttpServlet {
 			} else if (type == Question.TYPE_MULTIANSWER) {
 				userAnswers.set(lastIndex, Question.getParsedDisplayStrings(answerEntry));
 			} else if (type == Question.TYPE_CHOICE) {
-				ArrayList<String> queries = (ArrayList<String>) questions.get(lastIndex).question;
-				int choice = Integer.parseInt(answerEntry);
-				userAnswers.set(lastIndex, queries.get(choice));
+				try {
+					ArrayList<String> queries = (ArrayList<String>) questions.get(lastIndex).question;
+					int choice = Integer.parseInt(answerEntry);
+					if (choice >= 1 && choice <= queries.size()-1)
+						userAnswers.set(lastIndex, queries.get(choice));
+				} catch (NumberFormatException e) {
+					// pass
+				}
 			} else if (type == Question.TYPE_MATCHING) {
 				ArrayList<String> queries = (ArrayList<String>) questions.get(lastIndex).question;
-				ArrayList<String> choices = Question.getParsedDisplayStrings(answerEntry);
+				ArrayList<String> choices = Question.getParsedDisplayStrings(answerEntry.trim());
 				ArrayList<String> answerList = new ArrayList<String>(); 
 				for (int i = 0; i < choices.size(); i++) {
-					answerList.add(queries.get(queries.size()/2 + Integer.parseInt(choices.get(i))));
+					try {
+						int choice = Integer.parseInt(choices.get(i));
+						if (choice >= 1 && choice <= queries.size()/2)
+							answerList.add(queries.get(queries.size()/2 + choice));
+					} catch (NumberFormatException e) {
+						break;
+					}
+					if (answerList.size() >= queries.size() / 2)
+						break;
 				}
 				userAnswers.set(lastIndex, answerList);
 			} else if (type == Question.TYPE_MULTICHOICEMULTIANSWER) {
@@ -78,13 +91,19 @@ public class TakingQuizServlet extends HttpServlet {
 				ArrayList<String> choices = Question.getParsedDisplayStrings(answerEntry);
 				ArrayList<String> answerList = new ArrayList<String>(); 
 				for (int i = 0; i < choices.size(); i++) {
-					answerList.add(queries.get(Integer.parseInt(choices.get(i))));
+					try {
+						int choice = Integer.parseInt(choices.get(i));
+						if (choice >= 1 && choice <= queries.size()-1)
+							answerList.add(queries.get(choice));
+					} catch (NumberFormatException e) {
+						break;
+					}
 				}	
 				userAnswers.set(lastIndex, answerList);
 			}
 		}
 		
-		int index = indices.get(position-1).intValue();
+		int index = indices.get(position).intValue();
 		Question question = questions.get(index);
 		Object userAnswer = userAnswers.get(index);
 		

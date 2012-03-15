@@ -20,7 +20,7 @@ public class AccountManager {
 	}
 	
 	public boolean accountMatch(String name, String password) {
-		if(User.getUserByUsername(name) == null)
+		if (User.getUserByUsername(name) == null)
 			return false;
 		Encryption e = new Encryption();
 		String hashedPassword = e.generateHashedPassword(password);

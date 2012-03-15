@@ -96,6 +96,8 @@ public class FillInBlankQuestion extends Question {
 	@SuppressWarnings("unchecked")
 	@Override
 	public double getScore(Object userAnswer) {
+		if (userAnswer == null)
+			return 0;
 		String ans = (String) userAnswer;
 		ArrayList<String> trueAns = (ArrayList<String>) answer;
 		for (int i = 0; i < trueAns.size(); i++) {

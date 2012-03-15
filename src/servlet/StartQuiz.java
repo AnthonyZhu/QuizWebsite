@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.*;
 
 import javax.servlet.RequestDispatcher;
@@ -44,16 +43,18 @@ public class StartQuiz extends HttpServlet {
 		int quizID = Integer.parseInt(request.getParameter("quizID"));
 		HttpSession session = request.getSession();
 		
-		int position = 1;
+		int position = 0;
 		Quiz quiz = Quiz.getQuizByQuizID(quizID);
 		ArrayList<Question> questions = quiz.getQuestions();
 		ArrayList<Integer> indices = new ArrayList<Integer>();	
-		ArrayList<Object> userAnswers = new ArrayList<Object>(questions.size());
+		ArrayList<Object> userAnswers = new ArrayList<Object>();
+		for (int i = 0; i < questions.size(); i++)
+			userAnswers.add(null);
 
 		for (int i = 0; i < questions.size(); i++)
 			indices.add(new Integer(i));
 		if (quiz.isRandom) {
-			Random random = new Random();
+			Random random = new Random(0);
 			for (int i = 0; i < questions.size(); i++) {
 				int j = (int) Math.floor(random.nextDouble() * (questions.size() - i));
 				Integer temp = indices.get(i);
@@ -61,7 +62,7 @@ public class StartQuiz extends HttpServlet {
 				indices.set(j, temp);
 			}
 		}
-		
+		position++;
 		session.setAttribute("quiz", quiz);
 		session.setAttribute("position", position);
 		session.setAttribute("questions", questions);
@@ -69,10 +70,15 @@ public class StartQuiz extends HttpServlet {
 		session.setAttribute("userAnswers", userAnswers);
 		session.setAttribute("start_time", new Date().getTime());
 		
+		int index = indices.get(0).intValue();
+		Question question = questions.get(index);
+		Object userAnswer = userAnswers.get(index);
+		
+		session.setAttribute("index", index);
+		session.setAttribute("question", question);
+		session.setAttribute("userAnswer", userAnswer);
+		
 		RequestDispatcher dispatch = request.getRequestDispatcher("take_quiz.jsp");
 		dispatch.forward(request, response);
-		
-		// TODO Auto-generated method stub
 	}
-
 }

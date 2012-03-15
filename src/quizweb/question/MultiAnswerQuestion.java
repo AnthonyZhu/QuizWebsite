@@ -104,6 +104,8 @@ public class MultiAnswerQuestion extends Question {
 	@SuppressWarnings("unchecked")
 	@Override
 	public double getScore(Object userAnswer) {
+		if (userAnswer == null)
+			return 0;
 		ArrayList<String> ans = (ArrayList<String>) userAnswer;
 		ArrayList<String> trueAns = (ArrayList<String>) answer;
 		int matches = 0;		

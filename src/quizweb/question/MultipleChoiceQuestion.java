@@ -106,6 +106,8 @@ public class MultipleChoiceQuestion extends Question {
 	
 	@Override
 	public double getScore(Object userAnswer) {
+		if (userAnswer == null)
+			return 0;
 		String ans = (String) userAnswer;
 		String trueAns = (String) answer;
 		if (ans.equals(trueAns)) 

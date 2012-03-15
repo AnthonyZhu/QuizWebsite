@@ -71,7 +71,7 @@ public class Question {
 	}
 	
 	public static ArrayList<String> getParsedDisplayStrings(String str) {
-		String[] strings = str.split("\n");
+		String[] strings = str.split(";");
 		ArrayList<String> retList = new ArrayList<String>();
 		for (int i = 0; i < strings.length; i++) {
 			if (!strings[i].trim().isEmpty())

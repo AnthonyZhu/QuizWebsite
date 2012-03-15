@@ -7,9 +7,7 @@ import java.util.*;
 import org.junit.*;
 
 import quizweb.*;
-import quizweb.achievement.Achievement;
-import quizweb.achievement.QuizTakenAchievement;
-import quizweb.record.*;
+import quizweb.achievement.*;
 
 public class RecordTest {
 	User stanford;

@@ -103,11 +103,11 @@
 					MultipleChoiceQuestion newQuestion = (MultipleChoiceQuestion) question;
 					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
 					out.println(questionWhole.get(0));
-					out.println("<ol>");
+					out.println("<ul>");
 					for (int i=1;i<questionWhole.size();i++){
 						out.println("<li>" + i + ". " + questionWhole.get(i) + "</li>");
 					}
-					out.println("</ol>");
+					out.println("</ul>");
 				} else if (question instanceof MultiAnswerQuestion) {
 					type = Question.TYPE_MULTIANSWER;
 					MultiAnswerQuestion newQuestion = (MultiAnswerQuestion) question;
@@ -118,27 +118,27 @@
 					MatchingQuestion newQuestion = (MatchingQuestion) question;
 					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
 					out.println(questionWhole.get(0));
-					out.println("<ol>");
+					out.println("<ul>");
 					for (int i = 1; i < questionWhole.size() / 2 + 1; i++) {
 						out.println("<li>" + i + ". " + questionWhole.get(i) + "</li>");
 					}
-					out.println("</ol>");
+					out.println("</ul>");
 					out.println("<br />");
-					out.println("<ol>");
+					out.println("<ul>");
 					for (int i = questionWhole.size() / 2 + 1; i < questionWhole.size(); i++) {
 						out.println("<li>" + (i-questionWhole.size()/2) + ". " + questionWhole.get(i) + "</li>");
 					}
-					out.println("/ol>");
+					out.println("</ul>");
 				} else if (question instanceof MultiChoiceMultiAnswerQuestion){
 					type = Question.TYPE_MULTICHOICEMULTIANSWER;
 					MultiChoiceMultiAnswerQuestion newQuestion = (MultiChoiceMultiAnswerQuestion) question;
 					ArrayList<String> questionWhole = (ArrayList<String>) newQuestion.question;
 					out.println(questionWhole.get(0));
-					out.println("<ol>");
+					out.println("<ul>");
 					for(int i = 1; i < questionWhole.size(); i++) {
 						out.println("<li>" + i + ". " + questionWhole.get(i) + "</li>");
 					}
-					out.println("</ol>");
+					out.println("</ul>");
 				}
 				session.setAttribute("question_type", type);
 				

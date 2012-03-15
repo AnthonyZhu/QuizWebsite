@@ -98,7 +98,7 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 		ArrayList<Integer> indexList = new ArrayList<Integer>();
 		ArrayList<String> questionList = (ArrayList<String>) question;
 		ArrayList<String> answerList = (ArrayList<String>) answer;
-		for (int i = 0; i < questionList.size(); i++) 
+		for (int i = 1; i < questionList.size(); i++) 
 			for (int j = 0; j < answerList.size(); j++) {
 				if (answerList.get(j).equals(questionList.get(i))) {
 					indexList.add(new Integer(i));
@@ -112,6 +112,8 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 	@SuppressWarnings("unchecked")
 	@Override
 	public double getScore(Object userAnswer) {
+		if (userAnswer == null)
+			return 0;
 		ArrayList<String> ans = (ArrayList<String>) userAnswer;
 		ArrayList<String> trueAns = (ArrayList<String>) answer;
 		ArrayList<String> ques = (ArrayList<String>) question;		
@@ -138,7 +140,9 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 		ArrayList<String> questionList = new ArrayList<String>();
 		for (int i = 0; i < root.childList.size(); i++) {
 			XMLElement elem = root.childList.get(i);
-			if (elem.name.equals("query-list")) {
+			if (elem.name.equals("query")) {
+				questionList.add(elem.content);
+			} else if (elem.name.equals("query-list")) {
 				for (int j = 0; j < elem.childList.size(); j++) {
 					XMLElement subElem = elem.childList.get(j);
 					if (!subElem.name.equals("query")) 

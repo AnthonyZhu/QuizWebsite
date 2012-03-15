@@ -32,6 +32,12 @@ public class DBConnection {
 		return thisCon;
 	}
 	
+	public static Connection getCon() {
+		if (con == null)
+			con = initConnection();
+		return con;			
+	}
+	
 	public static void resetDatabase() {
 		try {
 			Statement stmt = con.createStatement();

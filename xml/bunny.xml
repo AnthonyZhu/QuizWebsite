@@ -23,7 +23,7 @@
 </question>
 
 <question type="picture-response">
-  <image-location>http://upload.wikimedia.org/wikipedia/en/b/b9/Bugs_Bunny_Pose.PNG</image-location>
+  <image-location>http://justinradams.com/images/Bugs_Bunny_Pose.PNG</image-location>
   <answer-list>
     <answer preferred="preferred">Bugs Bunny</answer>
 	<answer>Bugs</answer>
@@ -60,7 +60,7 @@
 </question>
 
 <question type="multi-choice-multi-answer-question">
-  <query>Please choose the ones that are FALSE.</query>
+  <query>Please choose the ones that are TRUE.</query>
   <query-list> 
     <query answer="yes">This is a correct answer about Bunny.</query>
 	<query>This is a wrong answer about Bunny.</query>
