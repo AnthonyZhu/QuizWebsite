@@ -40,6 +40,7 @@
 		$('#contentFrame').attr('src', 'homepage/home_moreAnnouncements.jsp');
 	};
 	
+	/**
 	global.sendNotePopup = function() {
 		session = request.getSession();
 		User user = (User)session.getAttribute("user");
@@ -56,6 +57,7 @@
 		popup.document.writeln("<span class='error' style='display:none'>empty note!</span>");
 		popup.document.writeln("</div>");
 	};
+	**/
 	
 })(window);
 

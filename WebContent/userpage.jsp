@@ -46,20 +46,25 @@
 			<%
 			if(homeUser.userID == visitUserID){
 			}else{
-				//out.println("<button type=\"submit\" name=\"addAsFriend\">Send Friend Request</button>" +
-					//"<button type=\"submit\" name=\"addAsFriend\">Challenge</button>" +
-						//"<button type=\"submit\" name=\"addAsFriend\">Send Note</button>");
-				out.println("<jsp:include page=\"/sendFriendRequestButton.jsp\"></jsp:include>");
-
+				if(homeUser.isFriend(visitUser) == 0){
+					out.println("<form action=\"/QuizWebsite/AddFriendServlet\" method=\"post\">");
+					out.println("<input type=\"hidden\" name=\"sender\" value=\"" + homeUser.userID + "\">");
+					out.println("<input type=\"hidden\" name=\"receiver\" value=\"" + visitUserID + "\">");
+					out.println("<input type=\"submit\" id=\"submit_btn\" value=\"Add as friend\">");
+					out.println("</form>");
+				}
 			}
 			%>
+			<!--  
 			<span style="float:right">
-
 			<jsp:include page="/sendFriendRequestButton.jsp"></jsp:include>
 			<jsp:include page="/sendChallengeButton.jsp"></jsp:include>
 			</span>
-			</span><img src="/QuizWebsite/images/user.png" style="float: left" width="150" height="150">
-			<h1><%=visitUser.username%></h1>
+			-->
+			
+			</span>
+			<img src="/QuizWebsite/images/user.png" style="float: left" width="150" height="150">
+			<h1><%= visitUser.username %></h1>
 			<span class="dominant_text">
 			<% 
 				if(visitUser.getFriendList() == null){
@@ -92,7 +97,7 @@
 				out.println(visitUser.getQuizHistory().size()); 
 			}
 			%>
-			taken</span>
+			</span>taken
 			<br /><hr /><br />
 			<jsp:include page="/sendNoteButton.jsp"></jsp:include>
 		</div>
