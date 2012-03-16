@@ -46,8 +46,9 @@ public class PracticeAchievement extends Achievement {
 		this.type = PRACTICE_TYPE;
 	}
 
-	public static void updateAchievement(User user) {
+	public static ArrayList<Achievement> updateAchievement(User user) {
 		ArrayList<Achievement> records = AchievementRecord.getAchievementsByUserID(user.userID, PRACTICE_TYPE);
+		ArrayList<Achievement> newAchievements = new ArrayList<Achievement>();
 		for (int i = 0; i < getAllAchievements().size(); i++) {
 			Achievement achievement = (Achievement) getAllAchievements().get(i);
 			boolean found = false;
@@ -60,7 +61,9 @@ public class PracticeAchievement extends Achievement {
 			if (user.practiceNumber >= achievement.threshold) {
 				AchievementRecord record = new AchievementRecord(user, achievement);
 				record.addRecordToDB();
+				newAchievements.add(achievement);
 			}			
 		}
+		return newAchievements;
 	}
 }

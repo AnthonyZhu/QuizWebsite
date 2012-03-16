@@ -110,12 +110,12 @@ public class MultiAnswerQuestion extends Question {
 		ArrayList<String> trueAns = (ArrayList<String>) answer;
 		int matches = 0;		
 		if (isOrdered) {
-			for (int i = 0; i < ans.size(); i++) {
+			for (int i = 0; i < Math.min(ans.size(), trueAns.size()); i++) {
 				if (ans.get(i).equals(trueAns.get(i)))
 					matches++;
 			}
 		} else {
-			for (int i = 0; i < ans.size(); i++) {
+			for (int i = 0; i < Math.min(ans.size(), trueAns.size()); i++) {
 				for (int j = 0; j < trueAns.size(); j++) {
 					if (ans.get(i).equals(trueAns.get(j))) {
 						matches++;

@@ -162,7 +162,7 @@ public class MatchingQuestion extends Question {
 		}
 		int N = questionList.size() / 2;
 		for (int i = 0; i < answerIndex.size(); i++)
-			answerList.add(questionList.get(N-1 + answerIndex.get(i).intValue()));
+			answerList.add(questionList.get(N + answerIndex.get(i).intValue()));
 		question = questionList;
 		answer = answerList;
 		return new MatchingQuestion(quizID, position, question, answer, score);		

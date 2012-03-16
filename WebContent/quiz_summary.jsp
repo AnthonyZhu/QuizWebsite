@@ -74,7 +74,7 @@
 		<div class="two_column_left">
 			<p><%
 			String description = quiz.description;
-			out.println("Description of quiz is: " + description);
+			out.println("Description: " + description);
 			%></p>
 		</div>
 		<div class="two_column_right">
@@ -155,7 +155,7 @@
 				out.println("No one has taken this quiz yet.");
 			}else{
 				QuizTakenRecord pastHistory = quizHistory.get(0);
-				out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + pastHistory.user.userID + "\">"+ pastHistory.user.username + "</a>" + " took this question. Score: " + pastHistory.score + " in " + Math.round(pastHistory.timeSpan/60000.0*100)/100.0 + " mins");
+				out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + pastHistory.user.userID + "\">"+ pastHistory.user.username + "</a>" + " has taken this quiz. Score: " + pastHistory.score + " in " + Math.round(pastHistory.timeSpan/60000.0*100)/100.0 + " mins");
 			}
 			%>
 			

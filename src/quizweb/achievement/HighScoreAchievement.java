@@ -47,8 +47,9 @@ public class HighScoreAchievement extends Achievement {
 		this.type = HIGHSCORE_TYPE;
 	}	
 
-	public static void updateAchievement(User user) {
+	public static ArrayList<Achievement> updateAchievement(User user) {
 		ArrayList<Achievement> records = AchievementRecord.getAchievementsByUserID(user.userID, HIGHSCORE_TYPE);
+		ArrayList<Achievement> newAchievements = new ArrayList<Achievement>();
 		for (int i = 0; i < getAllAchievements().size(); i++) {
 			Achievement achievement = getAllAchievements().get(i);
 			boolean found = false;
@@ -61,7 +62,9 @@ public class HighScoreAchievement extends Achievement {
 			if (user.highScoreNumber >= achievement.threshold) {
 				AchievementRecord record = new AchievementRecord(user, achievement);
 				record.addRecordToDB();
+				newAchievements.add(achievement);
 			}			
 		}
+		return newAchievements;
 	}
 }

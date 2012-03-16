@@ -71,7 +71,7 @@
 				<hr >
 				<span class="quiz_title">
 				<%
-				out.println("The question is: ");
+				out.println("<span class=\"dominant_text\">Q:</span> ");
 				Question question = (Question) session.getAttribute("question");
 				int type = -1;
 				if (question instanceof ResponseQuestion) {

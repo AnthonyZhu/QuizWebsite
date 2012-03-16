@@ -35,13 +35,9 @@
 
 <body>
 <div class="container" >
-<<<<<<< HEAD
-	<jsp:include page="/modules/head.jsp" />
-=======
 	<div class="header">
 		<h1><a href="homepage/homepage.jsp">toQuiz.me</a></h1>
 	</div>
->>>>>>> 837bbcebff7e0f923fb1e5ff866e4e931732de7e
 	
 	<div class="content-container">
 		<div class="two_column_left">

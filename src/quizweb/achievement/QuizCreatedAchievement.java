@@ -46,8 +46,9 @@ public class QuizCreatedAchievement extends Achievement {
 		this.type = QUIZ_CREATED_TYPE;
 	}	
 
-	public static void updateAchievement(User user) {
+	public static ArrayList<Achievement> updateAchievement(User user) {
 		ArrayList<Achievement> records = AchievementRecord.getAchievementsByUserID(user.userID, QUIZ_CREATED_TYPE);
+		ArrayList<Achievement> newAchievements = new ArrayList<Achievement>();
 		int totalCreatedQuiz = QuizCreatedRecord.getCreatedQuizByUserID(user.userID).size(); // TODO can be simplified using COUNT in database
 		for (int i = 0; i < getAllAchievements().size(); i++) {
 			Achievement achievement = getAllAchievements().get(i);
@@ -61,8 +62,10 @@ public class QuizCreatedAchievement extends Achievement {
 			if (totalCreatedQuiz >= achievement.threshold) {
 				AchievementRecord record = new AchievementRecord(user, achievement);
 				record.addRecordToDB();
+				newAchievements.add(achievement);
 			}			
 		}
+		return newAchievements;
 	}
 
 }

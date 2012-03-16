@@ -26,14 +26,12 @@ public class StartQuiz extends HttpServlet {
      */
     public StartQuiz() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -42,6 +40,9 @@ public class StartQuiz extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int quizID = Integer.parseInt(request.getParameter("quizID"));
 		HttpSession session = request.getSession();
+		// TODO ERROR JACK set parameter ispractice and isfeedback 
+		session.setAttribute("ispractice", true);
+		session.setAttribute("isfeedback", false);
 		
 		int position = 0;
 		Quiz quiz = Quiz.getQuizByQuizID(quizID);

@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import quizweb.*;
 import quizweb.question.*;
-import quizweb.record.QuizTakenRecord;
 
 /**
  * Servlet implementation class TakingQuizServlet
@@ -99,24 +97,10 @@ public class TakingQuizServlet extends HttpServlet {
 		}
 		
 		// The quiz is over
-		if (position > questions.size()) {
-//			RequestDispatcher dispatch = request.getRequestDispatcher("quiz_over.jsp");
-//			dispatch.forward(request, response);
-			Quiz quiz = (Quiz) session.getAttribute("quiz");
-			User homeUser = (User) session.getAttribute("homeUser");
-			long startTime = (Long) session.getAttribute("start_time");
-			long endTime = new Date().getTime();
-			long duration = endTime - startTime;
-			long min = duration / 60000;
-			long sec = (duration % 60000) / 1000;
-		
-			String result = new String("For Quiz:" + quiz.name + ", your score is ");
-			result = result + quiz.getScore(userAnswers) + "/" + quiz.getTotalScore() + ";";
-			if (duration > 3600000)
-				result = result + " Time taken: More than 1 hour";
-			else 
-				result = result + " Time taken: " + min + " mins and " + sec + " secs"; 			
-			
+		if (position >= questions.size()) {
+			session.setAttribute("is_quiz_result_stored", false);
+			RequestDispatcher dispatch = request.getRequestDispatcher("quiz_over.jsp");
+			dispatch.forward(request, response);			
 			return;
 		} 		
 		
