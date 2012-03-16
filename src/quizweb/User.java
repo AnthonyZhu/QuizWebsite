@@ -218,13 +218,50 @@ public class User {
 		}			
 	}
 	
+	
+	public static int getTotalUsers() {
+		int totalUsers = 0;
+		try {
+			String statement = new String("SELECT COUNT(userid) FROM " + DBTable);
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+				totalUsers = rs.getInt("COUNT(userid)");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return totalUsers;
+	}
+	
 	public static void removeUser(User user) {
 		user.isDead = true;
 		user.updateCurrentUser();
 	}
 	
+	public static void unremoveUser(User user) {
+		user.isDead = false;
+		user.updateCurrentUser();
+	}	
+	
+	public static void blockUser(User user) {
+		user.isBlocked = true;
+		user.updateCurrentUser();
+	}
+	
+	public static void unblockUser(User user) {
+		user.isBlocked = false;
+		user.updateCurrentUser();
+	}	
+	
+	
 	public static void promoteUser(User user) {
 		user.permission = IS_ADMIN;
+		user.updateCurrentUser();
+	}
+	
+	public static void unpromoteUser(User user) {
+		user.permission = IS_NORMAL;
 		user.updateCurrentUser();
 	}	
 	
@@ -321,15 +358,6 @@ public class User {
 			quiz.updateCurrentQuiz();
 	}
 	
-	/**
-	 * Check if two users are the same user
-	 * @param other
-	 * @return
-	 */
-	public boolean equals(User other) {
-		return userID == other.userID;
-	}
-	
 	public String getUserStringWithURL(boolean isNewpage) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<a class=\"link-style-dominant\" href=\"/QuizWebsite/userpage.jsp?id=");
@@ -368,4 +396,8 @@ public class User {
 		}
 		return new User(username, password, url, permission);
 	}
+
+	public boolean equals(User other) {
+		return userID == other.userID;
+	}	
 }

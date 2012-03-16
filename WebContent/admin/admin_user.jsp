@@ -11,12 +11,54 @@
 </head>
 <body>
 	<% 
-	String username = request.getParameter("keyword");
-	User user = User.getUserByUsername(username);
+	User homeUser = (User) session.getAttribute("user");
+	if (request.getParameterMap().containsKey("keyword")) {
+		out.println("<div>");
+		String username = request.getParameter("keyword");
+		User user = User.getUserByUsername(username);
+		if (user == null) {
+			out.println("User " + username + " not found!");
+		} else {
+			out.println("<table class=\"adminTable\">");
+			out.println("<tr><td>Id</td><td>Username</td><td>Status</td></tr>");
+			String status;
+			if (user.permission == User.IS_ADMIN)
+				status = "Admin";
+			else if (user.isDead)
+				status = "Dead";			
+			else if (user.isBlocked)
+				status = "Blocked";
+			else 
+				status = "Normal";
+			out.println("<tr><td>" + user.userID + "</td><td>" + user.getUserStringWithURL(true) + "</td><td>" + status + "</td></tr>");
+			out.println("</table>");			
+			out.println("</div>");
+			out.println("<div>");
+			out.println("<form action=\"/QuizWebsite/ModifyUserServlet\" method=\"post\">");
+			out.println("<input type=\"hidden\" name=\"admin_userid\" value=\"" + homeUser.userID + "\">");
+			out.println("<input type=\"hidden\" name=\"removed_userid\" value=\"" + user.userID + "\">");
+			if (user.isDead) {
+				out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Unremove User\">");
+			} else { 
+				out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Remove User\">");
+				if (user.isBlocked) {
+					out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Unblock User\">");
+				} else {
+					out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Block User\">");
+					if (!(user.permission == User.IS_ADMIN)) 
+						out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Promote User\">");
+					else
+						out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Unpromote User\">");
+				}
+			}
+				
+			out.println("</form>");
+		}
+	}
+
+	
+	out.println("</div>");
 	%>
-	<table class="adminTable">
-		<tr><td>Id</td><td>Username</td><td>Type</td></tr>
-		<tr><td><% out.print(user.userID); %></td><td><% out.print(user.username); %></td><td><% out.print(user.permission);%></td></tr>
-	</table>
+	
 </body>
 </html>

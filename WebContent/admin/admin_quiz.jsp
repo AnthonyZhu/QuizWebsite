@@ -8,5 +8,9 @@
 </head>
 <body>
 	show quiz
+	
+	<% String username = request.getParameter("keyword");
+	out.println(username); %>
+	
 </body>
 </html>

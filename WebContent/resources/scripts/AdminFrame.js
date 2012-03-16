@@ -9,7 +9,7 @@
 	};
 	
 	global.showAdminQuiz = function()  {
-		$('#searchArea').hide();
+		$('#searchArea').show();
 		$('#createAncmt').hide();
 		$('#adminFrame').attr('src', 'admin_quiz.jsp');
 	};
@@ -23,7 +23,12 @@
 	};
 	
 	global.search = function() {
-		$('#adminFrame').attr('src', 'admin_user.jsp?keyword=' + $('#inputBox').val());
+		if ($('#adminFrame').attr('src').indexOf('admin_user.jsp') > 0)
+			$('#adminFrame').attr('src', 'admin_user.jsp?keyword=' + $('#inputBox').val());
+		else if ($('#adminFrame').attr('src').indexOf('admin_quiz.jsp') > 0)
+			$('#adminFrame').attr('src', 'admin_quiz.jsp?keyword=' + $('#inputBox').val());
+		else 
+			$('#adminFrame').attr('src', 'admin_user.jsp?keyword=' + $('#inputBox').val());
 	};
 })(window);
 

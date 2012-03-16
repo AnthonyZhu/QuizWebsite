@@ -63,6 +63,21 @@ public class QuizTakenRecord extends Record {
 		}		
 	}
 	
+	public static int getTotalQuizTakenRecord() {
+		int totalRecords = 0;
+		try {
+			String statement = new String("SELECT COUNT(id) FROM " + DBTable);
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+				totalRecords = rs.getInt("COUNT(id)");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return totalRecords;
+	}
+	
 	
 	public static ArrayList<QuizTakenRecord> getQuizHistoryByUserID(int userID) {
 		ArrayList<QuizTakenRecord> records = new ArrayList<QuizTakenRecord>();
@@ -140,25 +155,6 @@ public class QuizTakenRecord extends Record {
 		}
 		return null;
 	}
-	
-//	public void quizEnd(ArrayList<Object> userAnswers) {
-//		long curTime = new Date().getTime();
-//		timeSpan = curTime - quizStartTime;
-//		score = quiz.getScore(userAnswers);
-//		// Check if it is a practice
-//		if (isPractice) {
-//			user.practiceNumber++;
-//			user.updateCurrentUser();
-//			PracticeAchievement.updateAchievement(user);
-//		}
-//		// Check if it is a highscore
-//		if (score >= quiz.getBestScore()) {
-//			user.highScoreNumber++;
-//			user.updateCurrentUser();
-//			HighScoreAchievement.updateAchievement(user);
-//		}
-//		QuizTakenAchievement.updateAchievement(user);
-//	}
 	
 	public static Record getQuizTakenRecordByXMLElem(XMLElement root) {
 		User user = null;

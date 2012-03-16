@@ -47,6 +47,22 @@ public class QuizCreatedRecord extends Record {
 		}		
 	}	
 	
+	public static int getTotalQuizCreatedRecord() {
+		int totalRecords = 0;
+		try {
+			String statement = new String("SELECT COUNT(id) FROM " + DBTable);
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+				totalRecords = rs.getInt("COUNT(id)");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return totalRecords;
+	}
+	
+	
 	
 	public static ArrayList<QuizCreatedRecord> getCreatedQuizByUserID(int userID) {
 		ArrayList<QuizCreatedRecord> records = new ArrayList<QuizCreatedRecord>();

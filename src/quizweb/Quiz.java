@@ -135,6 +135,22 @@ public class Quiz {
 		return null;		
 	}
 	
+	public static int getTotalQuiz() {
+		int totalQuiz = 0;
+		try {
+			String statement = new String("SELECT COUNT(qid) FROM " + DBTable);
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+				totalQuiz = rs.getInt("COUNT(qid)");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return totalQuiz;
+		
+	}
+	
 	// Update current quiz record in database;
 	public void updateCurrentQuiz() {
 		try {

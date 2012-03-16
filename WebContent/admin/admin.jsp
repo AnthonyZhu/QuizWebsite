@@ -14,7 +14,11 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>Administration</title>
-	
+	<%
+		if (session.getAttribute("user") == null) {
+			session.setAttribute("user", User.getUserByUserID(1));
+		}
+	%>
 	<link rel="stylesheet" href="../resources/css/main.css" type="text/css" />
 	<link rel="stylesheet" href="../resources/css/admin_layout.css" type="text/css" />
 </head>
@@ -47,7 +51,7 @@
 					<input type="submit" id="createButton" value="Create" />
 				</form>
 			</div>
-			<iframe id="adminFrame" class="adminFrame" frameborder="0" src=""></iframe>
+			<iframe id="adminFrame" class="adminFrame" frameborder="0" width="800" height="800" src="admin_stats.jsp"></iframe>
 		</div>
 		
 		<div class="footer">

@@ -45,6 +45,21 @@ public class AchievementRecord extends Record {
 			e.printStackTrace();
 		}		
 	}
+	
+	public static int getTotalAchievementRecord() {
+		int totalRecords = 0;
+		try {
+			String statement = new String("SELECT COUNT(id) FROM " + DBTable);
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+				totalRecords = rs.getInt("COUNT(id)");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return totalRecords;
+	}	
 
 	public static ArrayList<Achievement> getAchievementsByUserID(int userID, int type) {
 		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
