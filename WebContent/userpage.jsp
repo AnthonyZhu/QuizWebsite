@@ -12,15 +12,17 @@
 <%@ page import="servlet.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+	<%
+		int visitUserID = Integer.parseInt(request.getParameter("id"));
+		User visitUser = User.getUserByUserID(visitUserID);
+		User homeUser = (User) session.getAttribute("user");
+	%>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title><%
-	int visitUserID = Integer.parseInt(request.getParameter("id"));
-	User visitUser = User.getUserByUserID(visitUserID);
-	out.println(visitUser.username);
+	<title>
+		<%=visitUser.username%>
+	</title>
 	
-	User homeUser = (User) session.getAttribute("user");
-	%></title>
 	<meta name="Description" content="A smart quiz website" />
 	<meta name="robots" content="all, index, follow" />
 	<meta name="distribution" content="global" />
@@ -34,14 +36,9 @@
 </head>
 
 <body>
+
 <div class="container" >
-<<<<<<< HEAD
 	<jsp:include page="/modules/head.jsp" />
-=======
-	<div class="header">
-		<h1><a href="homepage/homepage.jsp">toQuiz.me</a></h1>
-	</div>
->>>>>>> 837bbcebff7e0f923fb1e5ff866e4e931732de7e
 	
 	<div class="content-container">
 		<div class="two_column_left">
@@ -49,25 +46,29 @@
 			<%
 			if(homeUser.userID == visitUserID){
 			}else{
-			
 				//out.println("<button type=\"submit\" name=\"addAsFriend\">Send Friend Request</button>" +
-					//	"<button type=\"submit\" name=\"addAsFriend\">Challenge</button>" +
+					//"<button type=\"submit\" name=\"addAsFriend\">Challenge</button>" +
 						//"<button type=\"submit\" name=\"addAsFriend\">Send Note</button>");
-				out.println("<jsp:include page=\"/sendFriendRequestButton.jsp\"/>");
+				out.println("<jsp:include page=\"/sendFriendRequestButton.jsp\"></jsp:include>");
 
 			}
 			%>
+			<span style="float:right">
+
+			<jsp:include page="/sendFriendRequestButton.jsp"></jsp:include>
+			<jsp:include page="/sendChallengeButton.jsp"></jsp:include>
 			</span>
+			</span><img src="/QuizWebsite/images/user.png" style="float: left" width="150" height="150">
 			<h1><%=visitUser.username%></h1>
 			<span class="dominant_text">
 			<% 
-			if(visitUser.getFriendList() == null){
-				out.println("0");
-			}else if(visitUser.getFriendList().size() == 0){
-				out.println("0");
-			}else{
-				out.println(visitUser.getFriendList().size()); 
-			}
+				if(visitUser.getFriendList() == null){
+					out.println("0");
+				}else if(visitUser.getFriendList().size() == 0){
+					out.println("0");
+				}else{
+					out.println(visitUser.getFriendList().size()); 
+				}
 			%>
 			</span> friends | 
 			<span class="dominant_text">
@@ -80,7 +81,7 @@
 				out.println(visitUser.getCreatedQuiz().size()); 
 			}
 			%>
-			</span> quiz created | 
+			</span> created | 
 			<span class="dominant_text">
 			<% 
 			if(visitUser.getQuizHistory() == null){
@@ -91,10 +92,12 @@
 				out.println(visitUser.getQuizHistory().size()); 
 			}
 			%>
-			</span> quizzes taken</p>
+			taken</span>
+			<br /><hr /><br />
+			<jsp:include page="/sendNoteButton.jsp"></jsp:include>
 		</div>
 		<div class="two_column_right">
-			<h2>Achievement</h2>
+			<h2>Achievements</h2>
 			<p><ul>
 			<%
 			if(AchievementRecord.getAchievementsByUserID(visitUserID,0) == null){
@@ -104,7 +107,7 @@
 			}else{
 				if(AchievementRecord.getAchievementsByUserID(visitUserID,0).size()<=10){
 					for(int i=0;i<AchievementRecord.getAchievementsByUserID(visitUserID,0).size();i++){
-						out.println("<li>" + AchievementRecord.getAchievementsByUserID(visitUserID,0).get(i).name + "</li>");
+						out.println("<li><img src=\"/QuizWebsite/images/check.png\" style=\"float: left\" width=\"16\" height=\"16\">" + AchievementRecord.getAchievementsByUserID(visitUserID,0).get(i).name + "</li>");
 					}
 				}else{
 					for(int i=0;i<=10;i++){
@@ -126,7 +129,7 @@
 		</div>
 		<div class="two_column_left">
 			<h2>Quizzes Created</h2>
-			<p><ul><%
+			<ul><%
 			if(QuizCreatedRecord.getCreatedQuizByUserID(visitUserID) == null){
 				out.println("This user hasn't created any quiz so far");
 			}else if(QuizCreatedRecord.getCreatedQuizByUserID(visitUserID).size() == 0){
@@ -142,11 +145,11 @@
 					}
 				}
 			}
-			%></ul></p>
+			%></ul>
 		</div>
 		<div class="two_column_left">
 			<h2>Quizzes Taken</h2>
-			<p><ul><% 
+			<ul><% 
 			if(QuizTakenRecord.getQuizHistoryByUserID(visitUserID) == null){
 				out.println("This user hasn't taken any quiz so far");
 			}else if(QuizTakenRecord.getQuizHistoryByUserID(visitUserID).size() == 0){
@@ -162,7 +165,7 @@
 					}
 				}
 			}
-			%></ul></p>
+			%></ul>
 		</div>
 		
 

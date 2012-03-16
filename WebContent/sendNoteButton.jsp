@@ -7,22 +7,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="resources/scripts/sendNote.js"></script>
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/quiz.css" type="text/css" />
+	
 </head>
 <body>
 	<% 
-	session = request.getSession();
-	User user = (User)session.getAttribute("user");
+		session = request.getSession();
+		User user = (User)session.getAttribute("user");
 	%>
 	<div id="note_form">
 	<form name="note" action="">
-		<textarea id="note"></textarea>
-		<input type="hidden" id="sender" value="<%out.print(user.userID);%>"/>
+		<p style="float:right"><input type="submit" id="note_btn" value="Leave a note"/><p>
+		<br />
+		<div><textarea id="note" class="small" style="width:75%; float:right"></textarea></div>
+		<input type="hidden" id="sender" value=<%=user.userID%>/>
 		<!--
 		<input type="hidden" id="receiver" value="<%//out.print(senderID); %>"/>
 		-->
-		<input type="submit" id="note_btn" value="send note"/>
+		
 	</form>
-	<span class="error" style="display:none"> empty note!</span>
+	<span class="error" style="display:none"> Empty note!</span>
 	</div>
 </body>
 </html>

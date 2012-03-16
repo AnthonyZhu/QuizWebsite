@@ -17,7 +17,7 @@
 	<form name="friend_request" action="">
 		<input type="hidden" id="sender" value="1"/>
 		<input type="hidden" id="receiver" value="2"/>
-		<input type="submit" id="submit_btn" value="add as friend"/>
+		<input type="submit" id="submit_btn" value="Add as friend"/>
 	</form>
 	</div>
 </body>

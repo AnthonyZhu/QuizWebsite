@@ -2,12 +2,14 @@
 
 .two_column_left{
 	float: left;
-	width: 655px;
-	padding: 20px 20px 20px 20px;
-	margin-top:0;
-	margin-bottom: 5px;
+	width: 615px;
+	padding: 20px 40px 20px 40px;
+	margin-top:5px;
+	margin-bottom: 0;
 	/*background: #d9ebf5;*/
 	background-color:#fff;
+	-webkit-border-radius:15px;-moz-border-radius:15px;border-radius:15px;
+	display:block;
 }
 
 
@@ -18,10 +20,10 @@
 }
 
 .two_column_right{
+	
 	float: right;
-	width: 260px;
-	padding: 20px 20px 20px 20px;	
+	width: 220px;
+	padding: 50px 40px 20px 40px;	
 	margin-bottom: 5px;
 	margin-top:0;
-	/*background: #c8c8c8;*/
 }
