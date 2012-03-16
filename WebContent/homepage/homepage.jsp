@@ -118,7 +118,7 @@
 				<ol>
 				<%
 					int maxRecentQuizNumber = 5;
-					quizList = Quiz.getRecentQuiz();
+				    quizList = Quiz.getRecentQuiz();
 					for (int i = 0; i < Math.min(quizList.size(), maxRecentQuizNumber); i++) {
 						Quiz quiz = quizList.get(i);
 						out.println("<li>" + quiz.getQuizStringWithURL(false) + "</li>");

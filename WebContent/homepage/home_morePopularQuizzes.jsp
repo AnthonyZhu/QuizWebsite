@@ -20,7 +20,15 @@
 	<div class="three_column_content">
 		<h2 class="title_style_minor">More Popular Quizzes</h2>
 		<br /><br />
-		<!-- insert here -->
+		<ol>
+		<%
+		ArrayList<Quiz> quizList = Quiz.getPopularQuiz();
+		for(int i = 0; i <quizList.size(); i++){
+			Quiz quiz = quizList.get(i);
+			out.println("<li>" + quiz.getQuizStringWithURL(false) + "</li>");
+	    }				
+		%>
+		</ol>
 	</div>
 </body>
 </html>
