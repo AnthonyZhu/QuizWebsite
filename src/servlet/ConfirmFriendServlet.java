@@ -42,24 +42,20 @@ public class ConfirmFriendServlet extends HttpServlet {
 		int receiverID = Integer.parseInt(request.getParameter("receiverID"));
 		String confirm = request.getParameter("confirm_btn");
 		String reject = request.getParameter("reject_btn");
-		
-		if (confirm != null){
-			if (confirm.equals("confirm")){
+		if(confirm != null){
+			if (confirm.equals("Confirm")){
 				User.getUserByUserID(sendID).addFriend(User.getUserByUserID(receiverID));
-				RequestDispatcher dispatch = request.getRequestDispatcher("homepage/homepage.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher("homepage/home_friendRequests.jsp");
 				dispatch.forward(request, response);
 			}
 		}
-		if (reject != null){
-			if(reject.equals("reject")){
+		if(reject != null){
+			if(reject.equals("Reject")){
 				FriendRequestMessage.rejectFriendRequest(sendID, receiverID);
-				RequestDispatcher dispatch = request.getRequestDispatcher("homepage/homepage.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher("homepage/home_friendRequests.jsp");
 				dispatch.forward(request, response);
 			}
 		}
-		RequestDispatcher dispatch = request.getRequestDispatcher("homepage/homepage.jsp");
-		dispatch.forward(request, response);
-		
 		
 		// TODO Auto-generated method stub
 	}
