@@ -90,7 +90,8 @@ public class FriendRequestMessage extends Message {
 				FriendRequestMessage fm = new FriendRequestMessage(
 						rs.getInt("mid"), rs.getInt("uid1"), rs.getInt("uid2"), 
 						rs.getTimestamp("time"), rs.getBoolean("isConfirmed"), rs.getBoolean("isRejected"));
-				FriendRequestMessageQueue.add(fm); 
+				if (!fm.isConfirmed && !fm.isRejected)
+					FriendRequestMessageQueue.add(fm); 
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();

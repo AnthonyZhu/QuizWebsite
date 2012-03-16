@@ -30,12 +30,12 @@
 			out.println("<div id='" + friendRequest.fromUser + "'>");
 			out.println("<li>" + senderName + "</li>");
 			out.println("<p id='confirm_msg'></p>");
-			out.println("<form name='friend_confirm' action=''>");
-			out.println("<input type='hidden' id='senderName' value='" + senderName + "'/>");
-			out.println("<input type='hidden' id='senderID' value='" + friendRequest.fromUser + "'/>");
-			out.println("<input type='hidden' id='receiverID' value='" + homeUser.userID + "'/>");
-			out.println("<input type='submit' id='confirm_btn' value='confirm'/>");
-			out.println("<input type='submit' id='reject_btn' value='reject'/>");
+			out.println("<form name='friend_confirm' action='/QuizWebsite/ConfirmFriendServlet'>");
+			out.println("<input type='hidden' name='senderName' value='" + senderName + "'/>");
+			out.println("<input type='hidden' name='senderID' value='" + friendRequest.fromUser + "'/>");
+			out.println("<input type='hidden' name='receiverID' value='" + homeUser.userID + "'/>");
+			out.println("<input type='submit' name='confirm_btn' value='confirm'/>");
+			out.println("<input type='submit' name='reject_btn' value='reject'/>");
 			out.println("</form>");
 			out.println("</div>");
 		}
