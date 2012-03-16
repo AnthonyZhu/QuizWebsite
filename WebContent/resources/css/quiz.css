@@ -60,3 +60,19 @@ input.btTxt{padding:0 7px;width:auto;overflow:visible}
 .highlight_background {
 	background-color: rgb(255,247,192);
 }
+
+
+.correct{
+	color: green;
+	font-size:18px;
+}
+
+.wrong{
+	color: red;
+	font-size:18px;
+}
+
+.answer{
+	font-family: "Courier New", Arial;
+	font-size:18px;
+}
