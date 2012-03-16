@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<quiz random="false" one-page="false" feedback-mode="true" practice-mode="true">
+<title>Simple Quiz</title>
+<category>Test</category>
+<description>An simple quiz for testing.</description>
+<author>mit</author>
+
+<question type="question-response">
+  <query>The answer for this question is "a"?</query>
+  <answer>a</answer>
+</question>
+
+<question type="fill-in-blank">
+  <blank-query><pre>The </pre><blank /><post> should be filled with letter "a"</post></blank-query>
+  <answer>a</answer>
+</question>
+
+<question type="multiple-choice">
+  <query>Which of the following statements is false</query>
+  <option>Aztec mythology includes a rabbit pantheon.</option>
+  <option>In Japanese folklore, rabbits live on the moon.</option>
+  <option answer="answer">In Stanford tradition, rubbing the nose of a rabbit guarantees an A on the CS108 class project</option>
+</question>
+
+</quiz>
