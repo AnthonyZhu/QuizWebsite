@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import quizweb.User;
+import quizweb.message.FriendRequestMessage;
 
 /**
  * Servlet implementation class ConfirmFriendServlet
@@ -42,16 +43,16 @@ public class ConfirmFriendServlet extends HttpServlet {
 		String confirm = request.getParameter("confirm_btn");
 		String reject = request.getParameter("reject_btn");
 		
-		if(confirm != null){
-			if(confirm.equals("confirm")){
+		if (confirm != null){
+			if (confirm.equals("confirm")){
 				User.getUserByUserID(sendID).addFriend(User.getUserByUserID(receiverID));
 				RequestDispatcher dispatch = request.getRequestDispatcher("homepage/homepage.jsp");
 				dispatch.forward(request, response);
 			}
 		}
-		if(reject != null){
+		if (reject != null){
 			if(reject.equals("reject")){
-				
+				FriendRequestMessage.rejectFriendRequest(sendID, receiverID);
 			}
 		}
 		
