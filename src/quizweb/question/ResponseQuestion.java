@@ -112,7 +112,7 @@ public class ResponseQuestion extends Question {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<span class=\"dominant_text\">" + position + ".</span><br /><br />\n");
 		sb.append("<span class=\"quiz_title\">\n");
-		sb.append("<span class=\"dominant_text\">Response Question (" + score + " points):</span>\n");
+		sb.append("<span class=\"dominant_text\">Response Question (" + score + " points):</span><br /><br />\n");
 		sb.append(questionStr + "\n");
 		sb.append("</span><br /><br />\n");
 		sb.append("<p>Please answer below: </p>\n");

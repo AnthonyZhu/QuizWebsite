@@ -49,9 +49,13 @@
 		<ul>
 		<%
 		ArrayList<Object> userAnswers = new ArrayList<Object>();
-		String userAnswer1 = "Temp";
+		String userAnswer1 = "Leporidae";
 		userAnswers.add(userAnswer1);
-		for (int i = 0; i < 1; i++) {
+		String userAnswer2 = "Watershi";
+		userAnswers.add(userAnswer2);
+		int choice3 = 2;
+		userAnswers.add(((ArrayList<String>)questions.get(2).question).get(choice3));
+		for (int i = 0; i < 3; i++) {
 			Question question = questions.get(i);
 			out.println("<li id=\"foli1\" class=\"highlight\"><br />");		
 			out.println(question.displayQuestion(i+1));
