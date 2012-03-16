@@ -1,13 +1,6 @@
 @CHARSET "UTF-8";
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>CSS Star Rating System</title>
-<style type="text/css">
-/* star rating code - use lists because its more semantic */
+/* star rate code - use lists because its more semantic */
 /* No javascript required */
 /* all the stars are contained in one matrix to solve rollover problems with delay */
 /* the background position is just shifted to reveal the correct image. */
@@ -28,11 +21,11 @@
 /* O O O O O - (0 -160px)*/
 
 
-/* the default rating is placed as a background image in the ul */
+/* the default rate is placed as a background image in the ul */
 /* use the background position according to the table above to display the required images*/
 
 
-.rating{
+ul.rate {
 	width:80px;
 	height:16px;
 	margin:0 0 20px 0;
@@ -50,14 +43,15 @@
 .threestar {background-position:0 -48px}
 .fourstar {background-position:0 -64px}
 .fivestar {background-position:0 -80px}
-ul.rating li {
+
+ul.rate li {
 	cursor: pointer;
  /*ie5 mac doesn't like it if the list is floated\*/
 	float:left;
 	/* end hide*/
 	text-indent:-999em;
 }
-ul.rating li a {
+ul.rate li{
 	position:absolute;
 	left:0;
 	top:0;
@@ -66,12 +60,12 @@ ul.rating li a {
 	text-decoration:none;
 	z-index: 200;
 }
-ul.rating li.one a {left:0}
-ul.rating li.two a {left:16px;}
-ul.rating li.three a {left:32px;}
-ul.rating li.four a {left:48px;}
-ul.rating li.five a {left:64px;}
-ul.rating li a:hover {
+ul.rate li.one a {left:0}
+ul.rate li.two a {left:16px;}
+ul.rate li.three a {left:32px;}
+ul.rate li.four a {left:48px;}
+ul.rate li.five a {left:64px;}
+ul.rate li a:hover {
 	z-index:2;
 	width:80px;
 	height:16px;
@@ -79,10 +73,10 @@ ul.rating li a:hover {
 	left:0;	
 	background: url(images/star-matrix.gif) no-repeat 0 0
 }
-ul.rating li.one a:hover {background-position:0 -96px;}
-ul.rating li.two a:hover {background-position:0 -112px;}
-ul.rating li.three a:hover {background-position:0 -128px}
-ul.rating li.four a:hover {background-position:0 -144px}
-ul.rating li.five a:hover {background-position:0 -160px}
+ul.rate li.one a:hover {background-position:0 -96px;}
+ul.rate li.two a:hover {background-position:0 -112px;}
+ul.rate li.three a:hover {background-position:0 -128px;}
+ul.rate li.four a:hover {background-position:0 -144px;}
+ul.rate li.five a:hover {background-position:0 -160px;}
 
 
