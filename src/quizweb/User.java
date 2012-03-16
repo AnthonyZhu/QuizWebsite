@@ -329,6 +329,13 @@ public class User {
 	public boolean equals(User other) {
 		return userID == other.userID;
 	}
+	
+	public String getUserStringWithURL() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=");
+		sb.append(userID + "\">" + username + "</a>");
+		return sb.toString();
+	}
 
 	public static User getUserByXMLElem(XMLElement root) {
 		String username = new String("Username Not Specified");

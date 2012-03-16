@@ -307,6 +307,13 @@ public class Quiz {
 		}
 		return -1;
 	}
+	
+	public String getQuizStringWithURL() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=");
+		sb.append(quizID + "\">" + name + "</a>");
+		return sb.toString();
+	}
 
 
 	public static Quiz getQuizByXMLElem(XMLElement root, ArrayList<XMLElement> questionElems) {
