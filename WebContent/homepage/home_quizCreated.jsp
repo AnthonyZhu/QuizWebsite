@@ -30,7 +30,7 @@
 		out.println("<ul>");
 		for(int i=0;i<createdRecord.size();i++){
 			out.println("<li><img src=\"/QuizWebsite/images/check.png\" style=\"float: left\" width=\"16\" height=\"16\">"+
-					"&#160;<a target=\"_blank\" href=\"\\QuizWebsite\\quiz_summary.jsp?id=" + createdRecord.get(i).quiz.quizID + "\">" + createdRecord.get(i).quiz.name + "</a></li>");
+					"&#160;<a target=\"_blank\" class=\"link-style-dominant\" href=\"\\QuizWebsite\\quiz_summary.jsp?id=" + createdRecord.get(i).quiz.quizID + "\">" + createdRecord.get(i).quiz.name + "</a></li>");
 		}
 		out.println("</ul>");
 	}
