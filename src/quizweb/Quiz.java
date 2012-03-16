@@ -310,7 +310,7 @@ public class Quiz {
 	
 	public String getQuizStringWithURL() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("<a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=");
+		sb.append("<a class=\"link-style-dominant\" href=\"/QuizWebsite/quiz_summary.jsp?id=");
 		sb.append(quizID + "\">" + name + "</a>");
 		return sb.toString();
 	}

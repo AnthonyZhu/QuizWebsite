@@ -332,7 +332,7 @@ public class User {
 	
 	public String getUserStringWithURL() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=");
+		sb.append("<a class=\"link-style-dominant\" href=\"/QuizWebsite/userpage.jsp?id=");
 		sb.append(userID + "\">" + username + "</a>");
 		return sb.toString();
 	}

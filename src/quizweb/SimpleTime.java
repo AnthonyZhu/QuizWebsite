@@ -70,6 +70,6 @@ public class SimpleTime {
 			retStr = monthStr[oldDate.getMonth()] + "." + " " + oldDate.getDate();
 			break;
 		}
-		return String.format("%-20s", retStr);
+		return String.format("%-10s", retStr).replace(" ", "&nbsp;");
 	}
 }
