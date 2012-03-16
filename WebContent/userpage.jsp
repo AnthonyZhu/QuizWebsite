@@ -46,11 +46,13 @@
 			<%
 			if(homeUser.userID == visitUserID){
 			}else{
-				out.println("<form action=\"AddFriendServlet\" method=\"post\">");
-				out.println("<input type=\"hidden\" name=\"sender\" value=\"" + homeUser.userID + "\">");
-				out.println("<input type=\"hidden\" name=\"receiver\" value=\"" + visitUserID + "\">");
-				out.println("<input type=\"submit\" id=\"submit_btn\" value=\"Add as friend\">");
-				out.println("</form>");
+				if(homeUser.isFriend(visitUser) == 0){
+					out.println("<form action=\"/QuizWebsite/AddFriendServlet\" method=\"post\">");
+					out.println("<input type=\"hidden\" name=\"sender\" value=\"" + homeUser.userID + "\">");
+					out.println("<input type=\"hidden\" name=\"receiver\" value=\"" + visitUserID + "\">");
+					out.println("<input type=\"submit\" id=\"submit_btn\" value=\"Add as friend\">");
+					out.println("</form>");
+				}
 			}
 			%>
 			<!--  
