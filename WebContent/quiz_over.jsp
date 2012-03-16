@@ -60,6 +60,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 	
 	<link rel="stylesheet" href="resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="resources/css/rating.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/two_column_layout.css" type="text/css" />
 	
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
@@ -85,9 +86,14 @@
 			out.println("You spent <span class=\"dominant_text\">" + min + "</span> Minutes and <span class=\"dominant_text\">" + sec + "</span> seconds on this quiz.");
 			%>
 			<br />
-			<%
-			out.println("TODO : Add ratings HERE");
-			%></p>
+			</p>
+			<ul class="rating nostar">
+				<li class="one"><a href="#" title="1 Star">1</a></li>
+				<li class="two"><a href="#" title="2 Stars">2</a></li>
+				<li class="three"><a href="#" title="3 Stars">3</a></li>
+				<li class="four"><a href="#" title="4 Stars">4</a></li>
+				<li class="five"><a href="#" title="5 Stars">5</a></li>
+			</ul>
 		</div>
 
 		<div class="two_column_right">

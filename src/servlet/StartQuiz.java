@@ -41,7 +41,7 @@ public class StartQuiz extends HttpServlet {
 		int quizID = Integer.parseInt(request.getParameter("quizID"));
 		HttpSession session = request.getSession();
 		// TODO ERROR JACK set parameter ispractice and isfeedback 
-		session.setAttribute("ispractice", true);
+		session.setAttribute("ispractice", false);
 		session.setAttribute("isfeedback", false);
 		
 		int position = 0;
