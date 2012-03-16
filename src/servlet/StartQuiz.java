@@ -63,6 +63,9 @@ public class StartQuiz extends HttpServlet {
 				indices.set(j, temp);
 			}
 		}
+		//DEBUG
+		quiz.isOnepage = false;
+		
 		position++;
 		session.setAttribute("quiz", quiz);
 		session.setAttribute("position", position);
@@ -70,14 +73,6 @@ public class StartQuiz extends HttpServlet {
 		session.setAttribute("indices", indices);
 		session.setAttribute("userAnswers", userAnswers);
 		session.setAttribute("start_time", new Date().getTime());
-		
-		int index = indices.get(0).intValue();
-		Question question = questions.get(index);
-		Object userAnswer = userAnswers.get(index);
-		
-		session.setAttribute("index", index);
-		session.setAttribute("question", question);
-		session.setAttribute("userAnswer", userAnswer);
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("take_quiz.jsp");
 		dispatch.forward(request, response);

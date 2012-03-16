@@ -46,10 +46,12 @@ public class TakingQuizServlet extends HttpServlet {
 		ArrayList<Object> userAnswers = (ArrayList<Object>) session.getAttribute("userAnswers");
 		ArrayList<Integer> indices = (ArrayList<Integer>) session.getAttribute("indices");		
 		// Record last question
-		if (position >= 1) {
-			int lastIndex = indices.get(position-1);
-			String answerEntry = request.getParameter("user_answer");
-			int type = (Integer) session.getAttribute("question_type");
+		for (int idx = 1; idx <= questions.size(); idx++) {
+			if (!request.getParameterMap().containsKey("user_answer" + idx))
+				continue;
+			int lastIndex = indices.get(idx-1);
+			String answerEntry = request.getParameter("user_answer" + idx);
+			int type = (Integer) session.getAttribute("question_type" + idx);
 			if (type == Question.TYPE_RESPONSE || type == Question.TYPE_BLANK || type == Question.TYPE_PICTURE) {
 				userAnswers.set(lastIndex, answerEntry);
 			} else if (type == Question.TYPE_MULTIANSWER) {
@@ -104,13 +106,13 @@ public class TakingQuizServlet extends HttpServlet {
 			return;
 		} 		
 		
-		int index = indices.get(position).intValue();
-		Question question = questions.get(index);
-		Object userAnswer = userAnswers.get(index);
-		
-		session.setAttribute("index", index);
-		session.setAttribute("question", question);
-		session.setAttribute("userAnswer", userAnswer);
+//		int index = indices.get(position).intValue();
+//		Question question = questions.get(index);
+//		Object userAnswer = userAnswers.get(index);
+//		
+//		session.setAttribute("index", index);
+//		session.setAttribute("question", question);
+//		session.setAttribute("userAnswer", userAnswer);
 		session.setAttribute("userAnswers", userAnswers);
 		
 		position += 1;

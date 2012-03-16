@@ -137,15 +137,15 @@
 			ArrayList<QuizTakenRecord> topRecords= quiz.getAllTopRecord();
 			if(topRecords == null){
 				out.println("<li>No one has taken it yet.</li>");
-			}else if(topRecords.size() == 0){
+			} else if(topRecords.size() == 0){
 				out.println("<li>No one has taken it yet.</li>");
-			}else{
+			} else {
 				if(topRecords.size()<=3){
 					for(int i=0;i<topRecords.size();i++){
 						User oneUser = topRecords.get(i).user;
 						out.println("<li>" + (i+1) + ": <a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a></li>");
 					}
-				}else{
+				} else {
 					for(int i=0;i<3;i++){
 						User oneUser = topRecords.get(i).user;
 						out.println("<li>" + (i+1) + ": <a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a></li>");
@@ -159,17 +159,17 @@
 			<h2>My Statistics</h2>
 			<p><%
 			ArrayList<QuizTakenRecord> records = QuizTakenRecord.getQuizHistoryByQuizIDUserID(quiz.quizID,homeUser.userID);
-			if(records != null){
-				if(records.size() != 0){
+			if (records != null){
+				if (records.size() != 0){
 					QuizSummary mySummary = quiz.getQuizSummary(homeUser);
 					out.println("<ul>");
 					out.println("<li>My average score: " + Math.round(mySummary.averageScore*100)/100.0 + ". Average time: " + Math.round(mySummary.averageTimespan/60000*100)/100.0 + " mins</li>");
 					out.println("<li>My best score: " + Math.round(100*mySummary.bestScore)/100.0 + ". My fastest time: " + Math.round(100*mySummary.bestTimespan/60000)/100.0 + " mins</li>");
 					out.println("</ul>");
-				}else{
+				} else {
 					out.println("I have not taken this quiz yet");
 				}
-			}else{
+			} else {
 				out.println("I have not taken this quiz yet");
 			}
 			%></p>

@@ -126,7 +126,7 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 				}
 			}
 		}
-		return score * (ques.size() - ans.size() - trueAns.size() + 2*matches) / ques.size();
+		return score * ((ques.size()-1) - ans.size() - trueAns.size() + 2*matches) / (ques.size()-1);
 	}
 
 	public static MultiChoiceMultiAnswerQuestion getMultiChoiceMultiAnswerQuestionByXMLElem(
