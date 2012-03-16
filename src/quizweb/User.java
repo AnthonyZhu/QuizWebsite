@@ -330,10 +330,14 @@ public class User {
 		return userID == other.userID;
 	}
 	
-	public String getUserStringWithURL() {
+	public String getUserStringWithURL(boolean isNewpage) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<a class=\"link-style-dominant\" href=\"/QuizWebsite/userpage.jsp?id=");
-		sb.append(userID + "\">" + username + "</a>");
+		sb.append(userID + "\"");
+		if (isNewpage) {
+			sb.append("target=\"_blank\"");
+		}
+		sb.append(">" + username + "</a>");
 		return sb.toString();
 	}
 

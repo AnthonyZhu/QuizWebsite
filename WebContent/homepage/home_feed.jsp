@@ -27,15 +27,15 @@
 			Record record = newsfeeds.get(i);
 			if (record instanceof AchievementRecord) {
 				AchievementRecord achievementRecord = (AchievementRecord) record; 
-				out.println(SimpleTime.getTime(record.timestamp) + " " + record.user.getUserStringWithURL() + " achieved <span class=\"dominant_text\">" + achievementRecord.achievement.name + "</span>");
+				out.println(SimpleTime.getTime(record.timestamp) + " " + record.user.getUserStringWithURL(true) + " achieved <span class=\"dominant_text\">" + achievementRecord.achievement.name + "</span>");
 			} else if (record instanceof QuizTakenRecord) {
 				QuizTakenRecord quizTakenRecord = (QuizTakenRecord) record;
 				long min = quizTakenRecord.timeSpan / 60000;
 				long sec = (quizTakenRecord.timeSpan % 60000) / 1000;
-				out.println(SimpleTime.getTime(record.timestamp) + " " + record.user.getUserStringWithURL() + " scored <span class=\"dominant_text\">" + quizTakenRecord.score + "</span> on quiz <span class=\"dominant_text\">" + quizTakenRecord.quiz.getQuizStringWithURL() + "</span>" );
+				out.println(SimpleTime.getTime(record.timestamp) + " " + record.user.getUserStringWithURL(true) + " scored <span class=\"dominant_text\">" + quizTakenRecord.score + "</span> on quiz <span class=\"dominant_text\">" + quizTakenRecord.quiz.getQuizStringWithURL(true) + "</span>" );
 			} else if (record instanceof QuizCreatedRecord) {
 				QuizCreatedRecord quizCreatedRecord = (QuizCreatedRecord) record;
-				out.println(SimpleTime.getTime(record.timestamp) + " " + record.user.getUserStringWithURL() + " created quiz : <span class=\"dominant_text\">" + quizCreatedRecord.quiz.getQuizStringWithURL() + "</span>");
+				out.println(SimpleTime.getTime(record.timestamp) + " " + record.user.getUserStringWithURL(true) + " created quiz : <span class=\"dominant_text\">" + quizCreatedRecord.quiz.getQuizStringWithURL(true) + "</span>");
 			}
 			out.println("</p>");
 		}

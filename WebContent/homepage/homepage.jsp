@@ -104,7 +104,7 @@
 					ArrayList<Quiz> quizList = Quiz.getPopularQuiz();
 					for (int i = 0; i < Math.min(quizList.size(), maxPopularQuizNumber); i++) {
 						Quiz quiz = quizList.get(i);
-						out.println("<li><a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=" + quiz.quizID + "\">" + quiz.name + "</a></li>");
+						out.println("<li>" + quiz.getQuizStringWithURL(false) + "</li>");
 					}				
 				%>
 				</ol>
@@ -121,7 +121,7 @@
 					quizList = Quiz.getRecentQuiz();
 					for (int i = 0; i < Math.min(quizList.size(), maxRecentQuizNumber); i++) {
 						Quiz quiz = quizList.get(i);
-						out.println("<li><a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=" + quiz.quizID + "\">" + quiz.name + "</a></li>");
+						out.println("<li>" + quiz.getQuizStringWithURL(false) + "</li>");
 					}
 				
 				%>

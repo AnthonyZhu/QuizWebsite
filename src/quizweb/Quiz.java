@@ -308,10 +308,14 @@ public class Quiz {
 		return -1;
 	}
 	
-	public String getQuizStringWithURL() {
+	public String getQuizStringWithURL(boolean isNewpage) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<a class=\"link-style-dominant\" href=\"/QuizWebsite/quiz_summary.jsp?id=");
-		sb.append(quizID + "\">" + name + "</a>");
+		sb.append(quizID + "\"");
+		if (isNewpage) {
+			sb.append("target=\"_blank\"");
+		}
+		sb.append(">" + name + "</a>");
 		return sb.toString();
 	}
 
