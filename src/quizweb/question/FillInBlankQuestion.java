@@ -146,7 +146,7 @@ public class FillInBlankQuestion extends Question {
 			sb.append("<img class=\"small\" src=\"images/right.png\"></p><br /><br />");
 		} else {
 			sb.append("<span class=\"wrong answer\">" + userAnswerStr + "&#160;&#160;</span>");
-			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span>");
+			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span></p><br />\n");
 			sb.append("<p class=\"answer\">Correct answer :  <span class=\"correct answer\">");
 			for (int i = 0; i < answerList.size(); i++) {
 				sb.append(answerList.get(i));

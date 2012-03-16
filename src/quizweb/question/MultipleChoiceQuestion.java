@@ -115,6 +115,7 @@ public class MultipleChoiceQuestion extends Question {
 		return 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String displayQuestion(int position) {
 		ArrayList<String> questionList = (ArrayList<String>) question;
@@ -134,15 +135,8 @@ public class MultipleChoiceQuestion extends Question {
 				sb.append("No\" tabindex=\"3\" />");
 			}
 			sb.append(i + ". " + questionList.get(i));
-			if (i < questionList.size() - 1)
-				sb.append("<br />\n");
-			else 
-				sb.append("\n");
+			sb.append("<br /><br />\n");
 		}
-//		<form>
-//		<input type="radio" name="sex" value="male" /> Male<br />
-//		<input type="radio" name="sex" value="female" /> Female
-//		</form>		
 		sb.append("</span></div>\n");
 		return sb.toString();
 	}
@@ -167,10 +161,7 @@ public class MultipleChoiceQuestion extends Question {
 			sb.append("<input id=\"Field" + position + "_" + i + "\" name=\"user_answer" + position + "\" type=\"radio\" class=\"field radio\" value=\"");
 			sb.append("No\" tabindex=\"3\" />");
 			sb.append(i + ". " + questionList.get(i));
-			if (i < questionList.size() - 1)
-				sb.append("<br />\n");
-			else 
-				sb.append("\n");
+			sb.append("<br /><br />\n");
 		}
 		sb.append("<p class=\"answer\">Your answer is :\n");
 		if (correct) {
@@ -178,7 +169,7 @@ public class MultipleChoiceQuestion extends Question {
 			sb.append("<img class=\"small\" src=\"images/right.png\"></p><br /><br />");
 		} else {
 			sb.append("<span class=\"wrong answer\">" + userAnswerStr + "&#160;&#160;</span>");
-			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span>");
+			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span></p><br />\n");
 			sb.append("<p class=\"answer\">Correct answer :  <span class=\"correct answer\">");
 			sb.append(answerStr);
 			sb.append("</span></p>\n");
