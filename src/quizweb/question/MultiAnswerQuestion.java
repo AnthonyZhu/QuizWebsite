@@ -16,8 +16,8 @@ public class MultiAnswerQuestion extends Question {
 //	ArrayList<String>	answer;
 //	ArrayList<String>	userAnswer;
 	static final String DBTable = "multiple_answer_question";
-	int answerNumber;
-	boolean isOrdered;
+	public int answerNumber;
+	public boolean isOrdered;
 	
 	public MultiAnswerQuestion(int quizID, int position, Object question, Object answer, double score, int answerNumber, boolean isOrdered) {
 		super(quizID, position, question, answer, score);
@@ -131,7 +131,7 @@ public class MultiAnswerQuestion extends Question {
 	public String displayQuestion(int position) {
 		String questionStr = (String) question;
 		StringBuilder sb = new StringBuilder();
-		sb.append("<span class=\"dominant_text\">" + position + ".</span><br /><br />\n");
+		sb.append("<span class=\"dominant_text\">" + position + ".</span>\n");
 		sb.append("<span class=\"quiz_title\">\n");
 		sb.append("<span class=\"dominant_text\">Multi-Answer Question (" + score + " points):</span><br /><br />\n");
 		sb.append(questionStr + "\n");

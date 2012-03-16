@@ -121,7 +121,7 @@ public class MultipleChoiceQuestion extends Question {
 		ArrayList<String> questionList = (ArrayList<String>) question;
 		String questionStr = questionList.get(0);
 		StringBuilder sb = new StringBuilder();
-		sb.append("<span class=\"dominant_text\">" + position + ".</span><br /><br />\n");
+		sb.append("<span class=\"dominant_text\">" + position + ".</span>\n");
 		sb.append("<span class=\"quiz_title\">\n");
 		sb.append("<span class=\"dominant_text\">Multiple Choice Question (" + score + " points):</span><br /><br />\n");
 		sb.append(questionStr + "\n");
@@ -129,11 +129,7 @@ public class MultipleChoiceQuestion extends Question {
 		sb.append("<div><span>\n");
 		for (int i = 1; i < questionList.size(); i++) {
 			sb.append("<input id=\"Field" + position + "_" + i + "\" name=\"user_answer" + position + "\" type=\"radio\" class=\"field radio\" value=\"");
-			if (i == 1) {
-				sb.append("Yes\" tabindex=\"3\" checked=\"checked\"  />");
-			} else {
-				sb.append("No\" tabindex=\"3\" />");
-			}
+			sb.append(questionList.get(i) + "\" tabindex=\"3\" />");
 			sb.append(i + ". " + questionList.get(i));
 			sb.append("<br /><br />\n");
 		}

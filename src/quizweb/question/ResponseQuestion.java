@@ -110,7 +110,7 @@ public class ResponseQuestion extends Question {
 	public String displayQuestion(int position) {
 		String questionStr = (String) question;
 		StringBuilder sb = new StringBuilder();
-		sb.append("<span class=\"dominant_text\">" + position + ".</span><br /><br />\n");
+		sb.append("<span class=\"dominant_text\">" + position + ".</span>\n");
 		sb.append("<span class=\"quiz_title\">\n");
 		sb.append("<span class=\"dominant_text\">Response Question (" + score + " points):</span><br /><br />\n");
 		sb.append(questionStr + "\n");

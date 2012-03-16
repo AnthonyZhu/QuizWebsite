@@ -135,12 +135,13 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 		ArrayList<String> questionList = (ArrayList<String>) question;
 		String questionStr = questionList.get(0);		
 		StringBuilder sb = new StringBuilder();
-		sb.append("<span class=\"dominant_text\">" + position + ".</span><br /><br />\n");
+		sb.append("<span class=\"dominant_text\">" + position + ".</span>\n");
 		sb.append("<span class=\"quiz_title\">\n");
 		sb.append("<span class=\"dominant_text\">Multiple Choice Question (" + score + " points):</span><br /><br />\n");
 		sb.append(questionStr + "\n");
 		sb.append("</span><br /><br />\n");		
 		sb.append("<div>\n");
+		sb.append("<input type=\"hidden\" name=\"user_answer" + position + "_0" + "\" value=\"\" />\n");
 		for (int i = 1; i < questionList.size(); i++) {
 			sb.append("<input type=\"checkbox\" name=\"user_answer" + position + "_" + i + "\" value=\"" + questionList.get(i) + "\" />" + questionList.get(i) + "<br /><br />\n");
 		}
@@ -163,7 +164,11 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 		sb.append("<span class=\"quiz_title\">\n");
 		sb.append(questionStr + "\n");
 		sb.append("</span><br /><br />\n");
-		
+		sb.append("<div>\n");
+		for (int i = 1; i < questionList.size(); i++) {
+			sb.append("<input type=\"checkbox\" />" + questionList.get(i) + "<br /><br />\n");
+		}
+		sb.append("</div>\n");
 		sb.append("<p class=\"answer\">Your answer is :<br /><br />\n");
 		if (correct) {
 			sb.append("<span class=\"correct answer\">\n");

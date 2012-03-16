@@ -134,7 +134,7 @@ public class MatchingQuestion extends Question {
 		ArrayList<String> questionList = (ArrayList<String>) question;
 		String questionStr = questionList.get(0);
 		StringBuilder sb = new StringBuilder();
-		sb.append("<span class=\"dominant_text\">" + position + ".</span><br /><br />\n");
+		sb.append("<span class=\"dominant_text\">" + position + ".</span>\n");
 		sb.append("<span class=\"quiz_title\">\n");
 		sb.append("<span class=\"dominant_text\">Matching Question (" + score + " points):</span><br /><br />\n");
 		sb.append(questionStr + "\n");
@@ -143,7 +143,7 @@ public class MatchingQuestion extends Question {
 		for (int i = 1; i < questionList.size()/2+1; i++) {
 			sb.append("<p>\n");
 			sb.append(questionList.get(i) + "&nbsp;&nbsp;&nbsp;\n");
-			sb.append("<select name=\"user_answer" + position + "\">\n");
+			sb.append("<select name=\"user_answer" + position + "_" + i + "\">\n");
 			for (int j = questionList.size()/2+1; j < questionList.size(); j++) {
 				sb.append("<option value=\"" + questionList.get(j) + "\">" + questionList.get(j) + "</option>\n");
 			}			

@@ -113,7 +113,7 @@ public class FillInBlankQuestion extends Question {
 		ArrayList<String> questionList = (ArrayList<String>) question;
 		String questionStr = questionList.get(0) + "_____________" + questionList.get(1);
 		StringBuilder sb = new StringBuilder();
-		sb.append("<span class=\"dominant_text\">" + position + ".</span><br /><br />\n");
+		sb.append("<span class=\"dominant_text\">" + position + ".</span>\n");
 		sb.append("<span class=\"quiz_title\">\n");
 		sb.append("<span class=\"dominant_text\">Fill-In-Blank Question (" + score + " points):</span><br /><br />\n");
 		sb.append(questionStr + "\n");
