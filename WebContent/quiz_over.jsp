@@ -23,7 +23,10 @@
 		out.println("Quiz Result of " + quizName);
 		QuizSummary summary = quiz.getQuizSummary();
 		
+		
+		ArrayList<Question> questions = (ArrayList<Question>) session.getAttribute("questions");
 		ArrayList<Object> userAnswers = (ArrayList<Object>) session.getAttribute("userAnswers");
+		ArrayList<Integer> indices = (ArrayList<Integer>) session.getAttribute("indices");
 		boolean isFeedback = (Boolean) session.getAttribute("isfeedback");
 		boolean isPractice = (Boolean) session.getAttribute("ispractice");			
 		long startTime = (Long) session.getAttribute("start_time");
@@ -62,6 +65,7 @@
 	
 	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
 	<link rel="stylesheet" href="/QuizWebsite/resources/css/rating.css" />
+	<link href="resources/css/quiz.css" rel="stylesheet">
 	<link rel="stylesheet" href="/QuizWebsite/resources/css/two_column_layout.css" type="text/css" />
 	
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
@@ -141,6 +145,18 @@
 			}
 			%>
 			</p>
+		</div>
+		
+		<div class="two_column_left">
+			<h2>Quiz Feedback</h2>
+			<p><ul><%
+				for (int pos = 1; pos <= questions.size(); pos++) {
+					int index = indices.get(pos-1);
+					out.println("<li id=\"foli1\" class=\"highlight\"><br />");
+					out.println(questions.get(index).displayQuestionWithAnswer(pos, userAnswers.get(index)));
+					out.println("</li>");
+				}
+			%></ul></p>
 		</div>
 		
 		<div class="two_column_left">

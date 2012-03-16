@@ -16,8 +16,8 @@ public class MultiAnswerQuestion extends Question {
 //	ArrayList<String>	answer;
 //	ArrayList<String>	userAnswer;
 	static final String DBTable = "multiple_answer_question";
-	int answerNumber;
-	boolean isOrdered;
+	public int answerNumber;
+	public boolean isOrdered;
 	
 	public MultiAnswerQuestion(int quizID, int position, Object question, Object answer, double score, int answerNumber, boolean isOrdered) {
 		super(quizID, position, question, answer, score);
@@ -127,6 +127,63 @@ public class MultiAnswerQuestion extends Question {
 		return score * matches / answerNumber;		
 	}
 
+	@Override
+	public String displayQuestion(int position) {
+		String questionStr = (String) question;
+		StringBuilder sb = new StringBuilder();
+		sb.append("<span class=\"dominant_text\">" + position + ".</span>\n");
+		sb.append("<span class=\"quiz_title\">\n");
+		sb.append("<span class=\"dominant_text\">Multi-Answer Question (" + score + " points):</span><br /><br />\n");
+		sb.append(questionStr + "\n");
+		sb.append("</span><br /><br />\n");
+		sb.append("<p>Please answer below: </p>\n");
+		sb.append("<div>");
+		for (int i = 0; i < answerNumber; i++) {
+			sb.append("<input id=\"Field1\" name=\"user_answer" + position + "_" + (i+1) + "\" type=\"text\" class=\"field text large\" value=\"\" maxlength=\"50\" tabindex=\"1\" onkeyup=\"validateRange(2, 'character');\" />");
+		}
+		sb.append("</div>");
+		return sb.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public String displayQuestionWithAnswer(int position, Object userAnswer) {
+		String questionStr = (String) question;
+		ArrayList<String> answerList = (ArrayList<String>) answer;
+		ArrayList<String> userAnswerList = (ArrayList<String>) userAnswer;
+		boolean correct = false;
+		if (getScore(userAnswer) == score)
+			correct = true;
+		StringBuilder sb = new StringBuilder();
+		sb.append("<span class=\"dominant_text\">Feedback for Question " + position + " (Score: " + Math.round(getScore(userAnswer)*100)/100.0 + "/" + Math.round(score*100)/100.0 + ")" + ":</span><br /><br />\n");
+		sb.append("<span class=\"quiz_title\">\n");
+		sb.append(questionStr + "\n");
+		sb.append("</span><br /><br />\n");
+		sb.append("<p class=\"answer\">Your answer is :<br /><br />\n");
+		if (correct) {
+			sb.append("<span class=\"correct answer\">\n");
+			for (int i = 0; i < userAnswerList.size(); i++) {
+				sb.append(userAnswerList.get(i) + "<br /><br />");
+			}
+			sb.append("&#160;&#160;</span>\n");
+			sb.append("<img class=\"small\" src=\"images/right.png\"></p><br /><br />");
+		} else {
+			sb.append("<span class=\"wrong answer\">\n");
+			for (int i = 0; i < userAnswerList.size(); i++) {
+				sb.append(userAnswerList.get(i) + "<br /><br />");
+			}
+			sb.append("&#160;&#160;</span>\n");
+			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span></p><br />\n");
+			sb.append("<p class=\"answer\">Correct answer :  <br /><br/><span class=\"correct answer\">");
+			for (int i = 0; i < answerList.size(); i++) {
+				sb.append(answerList.get(i) + "<br /><br />");
+			}
+			sb.append("</span></p>\n");
+		}
+		return sb.toString();
+	}	
+	
+	
 	public static MultiAnswerQuestion getMultiAnswerQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
 		int quizID = quiz.quizID;
 		int position = pos;

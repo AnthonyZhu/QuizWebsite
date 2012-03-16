@@ -113,7 +113,7 @@ public class FillInBlankQuestion extends Question {
 		ArrayList<String> questionList = (ArrayList<String>) question;
 		String questionStr = questionList.get(0) + "_____________" + questionList.get(1);
 		StringBuilder sb = new StringBuilder();
-		sb.append("<span class=\"dominant_text\">" + position + ".</span><br /><br />\n");
+		sb.append("<span class=\"dominant_text\">" + position + ".</span>\n");
 		sb.append("<span class=\"quiz_title\">\n");
 		sb.append("<span class=\"dominant_text\">Fill-In-Blank Question (" + score + " points):</span><br /><br />\n");
 		sb.append(questionStr + "\n");
@@ -136,7 +136,7 @@ public class FillInBlankQuestion extends Question {
 		if (getScore(userAnswer) == score)
 			correct = true;
 		StringBuilder sb = new StringBuilder();
-		sb.append("<span class=\"dominant_text\">Feedback for Question " + position + ":</span><br /><br />\n");
+		sb.append("<span class=\"dominant_text\">Feedback for Question " + position + " (Score: " + Math.round(getScore(userAnswer)*100)/100.0 + "/" + Math.round(score*100)/100.0 + ")" + ":</span><br /><br />\n");
 		sb.append("<span class=\"quiz_title\">\n");
 		sb.append(questionStr + "\n");
 		sb.append("</span><br /><br />\n");
@@ -146,7 +146,7 @@ public class FillInBlankQuestion extends Question {
 			sb.append("<img class=\"small\" src=\"images/right.png\"></p><br /><br />");
 		} else {
 			sb.append("<span class=\"wrong answer\">" + userAnswerStr + "&#160;&#160;</span>");
-			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span>");
+			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span></p><br />\n");
 			sb.append("<p class=\"answer\">Correct answer :  <span class=\"correct answer\">");
 			for (int i = 0; i < answerList.size(); i++) {
 				sb.append(answerList.get(i));

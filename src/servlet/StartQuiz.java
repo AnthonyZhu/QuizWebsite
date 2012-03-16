@@ -42,7 +42,7 @@ public class StartQuiz extends HttpServlet {
 		HttpSession session = request.getSession();
 		// TODO ERROR JACK set parameter ispractice and isfeedback 
 		session.setAttribute("ispractice", false);
-		session.setAttribute("isfeedback", false);
+		session.setAttribute("isfeedback", true);
 		
 		int position = 0;
 		Quiz quiz = Quiz.getQuizByQuizID(quizID);
@@ -72,8 +72,12 @@ public class StartQuiz extends HttpServlet {
 			session.setAttribute("correct_count", correctCount);
 			session.setAttribute("total_correct_count", 0);
 		}
+		boolean isFeedBack = (Boolean) session.getAttribute("isfeedback");
+		if (isFeedBack) {
+			session.setAttribute("feedback_position", -1);
+		}
 		//DEBUG
-		quiz.isOnepage = true;
+		quiz.isOnepage = false;
 		
 		position++;
 		session.setAttribute("quiz", quiz);

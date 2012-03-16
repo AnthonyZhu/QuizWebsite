@@ -128,6 +128,70 @@ public class MultiChoiceMultiAnswerQuestion extends Question {
 		}
 		return score * ((ques.size()-1) - ans.size() - trueAns.size() + 2*matches) / (ques.size()-1);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public String displayQuestion(int position) {
+		ArrayList<String> questionList = (ArrayList<String>) question;
+		String questionStr = questionList.get(0);		
+		StringBuilder sb = new StringBuilder();
+		sb.append("<span class=\"dominant_text\">" + position + ".</span>\n");
+		sb.append("<span class=\"quiz_title\">\n");
+		sb.append("<span class=\"dominant_text\">Multiple Choice Question (" + score + " points):</span><br /><br />\n");
+		sb.append(questionStr + "\n");
+		sb.append("</span><br /><br />\n");		
+		sb.append("<div>\n");
+		sb.append("<input type=\"hidden\" name=\"user_answer" + position + "_0" + "\" value=\"\" />\n");
+		for (int i = 1; i < questionList.size(); i++) {
+			sb.append("<input type=\"checkbox\" name=\"user_answer" + position + "_" + i + "\" value=\"" + questionList.get(i) + "\" />" + questionList.get(i) + "<br /><br />\n");
+		}
+		sb.append("</div>\n");
+		return sb.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public String displayQuestionWithAnswer(int position, Object userAnswer) {
+		ArrayList<String> questionList = (ArrayList<String>) question;
+		String questionStr = questionList.get(0);
+		ArrayList<String> answerList = (ArrayList<String>) answer;
+		ArrayList<String> userAnswerList = (ArrayList<String>) userAnswer;
+		boolean correct = false;
+		if (getScore(userAnswer) == score)
+			correct = true;
+		StringBuilder sb = new StringBuilder();
+		sb.append("<span class=\"dominant_text\">Feedback for Question " + position + " (Score: " + Math.round(getScore(userAnswer)*100)/100.0 + "/" + Math.round(score*100)/100.0 + ")" + ":</span><br /><br />\n");
+		sb.append("<span class=\"quiz_title\">\n");
+		sb.append(questionStr + "\n");
+		sb.append("</span><br /><br />\n");
+		sb.append("<div>\n");
+		for (int i = 1; i < questionList.size(); i++) {
+			sb.append("<input type=\"checkbox\" />" + questionList.get(i) + "<br /><br />\n");
+		}
+		sb.append("</div>\n");
+		sb.append("<p class=\"answer\">Your answer is :<br /><br />\n");
+		if (correct) {
+			sb.append("<span class=\"correct answer\">\n");
+			for (int i = 0; i < userAnswerList.size(); i++) {
+				sb.append(userAnswerList.get(i) + "<br /><br />\n");
+			}
+			sb.append("&#160;&#160;</span>\n");
+			sb.append("<img class=\"small\" src=\"images/right.png\"></p><br /><br />\n");
+		} else {
+			sb.append("<span class=\"wrong answer\">\n");
+			for (int i = 0; i < userAnswerList.size(); i++) {
+				sb.append(userAnswerList.get(i) + "<br /><br />\n");
+			}
+			sb.append("&#160;&#160;</span>\n");
+			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span></p><br />\n");
+			sb.append("<p class=\"answer\">Correct answer :  <br /><br /><span class=\"correct answer\">");
+			for (int i = 0; i < answerList.size(); i++) {
+				sb.append(answerList.get(i) + "<br /><br />\n");
+			}
+			sb.append("</span></p>\n");
+		}
+		return sb.toString();
+	}	
 
 	public static MultiChoiceMultiAnswerQuestion getMultiChoiceMultiAnswerQuestionByXMLElem(
 			XMLElement root, Quiz quiz, int pos) {

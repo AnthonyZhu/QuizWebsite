@@ -49,13 +49,36 @@
 		<ul>
 		<%
 		ArrayList<Object> userAnswers = new ArrayList<Object>();
-		String userAnswer1 = "Leporidae";
+		String userAnswer1 = "Leporida";
 		userAnswers.add(userAnswer1);
 		String userAnswer2 = "Watershi";
 		userAnswers.add(userAnswer2);
 		int choice3 = 2;
 		userAnswers.add(((ArrayList<String>)questions.get(2).question).get(choice3));
-		for (int i = 0; i < 3; i++) {
+		
+		String userAnswer4 = "Bugs";
+		userAnswers.add(userAnswer4);
+		
+		int[] choice5 = {3,4,2,1};
+		ArrayList<String> userAnswer5 = new ArrayList<String>();
+		ArrayList<String> question5 = (ArrayList<String>) questions.get(4).question;
+		for (int i = 0; i < choice5.length; i++)
+			userAnswer5.add(question5.get(question5.size()/2 + choice5[i]));
+		userAnswers.add(userAnswer5);
+		
+		String[] strings6 = {"T", "U", "N"};
+		ArrayList<String> userAnswer6 = new ArrayList<String>();
+		Collections.addAll(userAnswer6, strings6);
+		userAnswers.add(userAnswer6);
+		
+		int[] choice7 = {1,2,3};
+		ArrayList<String> userAnswer7 = new ArrayList<String>();
+		ArrayList<String> question7 = (ArrayList<String>) questions.get(6).question;
+		for (int i = 0; i < choice7.length; i++)
+			userAnswer7.add(question7.get(choice7[i]));
+		userAnswers.add(userAnswer7);
+		
+		for (int i = 0; i < questions.size(); i++) {
 			Question question = questions.get(i);
 			out.println("<li id=\"foli1\" class=\"highlight\"><br />");		
 			out.println(question.displayQuestion(i+1));
