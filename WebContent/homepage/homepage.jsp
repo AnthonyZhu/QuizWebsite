@@ -8,6 +8,7 @@
 <%@ page import="quizweb.message.*"%>
 <%@ page import="quizweb.question.*"%>
 <%@ page import="quizweb.record.*"%>
+<%@ page import="java.util.*"%>
 <%@ page import="servlet.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -99,7 +100,12 @@
 				<hr />
 				<ol>
 				<%
-				
+					int maxPopularQuizNumber = 5;
+					ArrayList<Quiz> quizList = Quiz.getPopularQuiz();
+					for (int i = 0; i < Math.min(quizList.size(), maxPopularQuizNumber); i++) {
+						Quiz quiz = quizList.get(i);
+						out.println("<li><a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=" + quiz.quizID + "\">" + quiz.name + "</a></li>");
+					}				
 				%>
 				</ol>
 			</div>
@@ -111,6 +117,12 @@
 				<hr />
 				<ol>
 				<%
+					int maxRecentQuizNumber = 5;
+					quizList = Quiz.getRecentQuiz();
+					for (int i = 0; i < Math.min(quizList.size(), maxRecentQuizNumber); i++) {
+						Quiz quiz = quizList.get(i);
+						out.println("<li><a class=\"link-style-dominant\" href=\"quiz_summary.jsp?id=" + quiz.quizID + "\">" + quiz.name + "</a></li>");
+					}
 				
 				%>
 				</ol>

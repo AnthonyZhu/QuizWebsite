@@ -56,12 +56,15 @@ public class XMLReader {
 			} else if (elem.name.equals("announcement")) {
 				Announcement announcement = Announcement.getAnnouncementByXMLElem(elem);
 				announcement.addAnnouncementToDB();
+				//pause(2100);
 			} else if (elem.name.equals("record")) {
 				Record record = Record.getRecordByXMLElem(elem);
 				record.addRecordToDB();
+				//pause(1100);
 			} else if (elem.name.equals("message")) {
 				Message message = Message.getMessageByXMLElem(elem);
 				message.addMessageToDB();
+				//pause(1100);
 			} else if (elem.name.equals("friendship")) {
 				if (!elem.attributeMap.containsKey("user"))
 					System.out.println("Must contain user attribute");

@@ -195,6 +195,25 @@ public class Quiz {
 		return records;
 	}	
 	
+	public static ArrayList<Quiz> getRecentQuiz() {
+		ArrayList<QuizCreatedRecord> records = QuizCreatedRecord.getRecentQuizCreatedRecord();
+		ArrayList<Quiz> quizList = new ArrayList<Quiz>();
+		for (int i = 0; i < records.size(); i++) {
+			quizList.add(records.get(i).quiz);
+		}
+		return quizList;
+	}
+	
+	public static ArrayList<Quiz> getPopularQuiz() {
+		ArrayList<QuizCreatedRecord> records = QuizCreatedRecord.getRecentQuizCreatedRecord();
+		ArrayList<Quiz> quizList = new ArrayList<Quiz>();
+		for (int i = 0; i < records.size(); i++) {
+			quizList.add(records.get(i).quiz);
+		}
+		Collections.sort(quizList, new QuizSortByRating());
+		return quizList;		
+	}
+	
 	
 	// Summary statistics
 	public QuizSummary getQuizSummary() {

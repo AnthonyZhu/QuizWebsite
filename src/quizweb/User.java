@@ -49,7 +49,7 @@ public class User {
 	public static final String DBTable = "users";
 	public static final String FriendDBTable = "friendship";
 	
-	public ArrayList<User> getFriendList(){
+	public ArrayList<User> getFriendList() {
 		ArrayList<User> friendList = new ArrayList<User>();
 		try {
 			String statement = new String("SELECT * FROM " + FriendDBTable + " WHERE uid1 = ?");
@@ -66,6 +66,19 @@ public class User {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<Record> getNewsfeed() {
+		ArrayList<User> myfriends = getFriendList();
+		ArrayList<Record> newsFeeds = new ArrayList<Record>();
+		for (int i = 0; i < myfriends.size(); i++) {
+			User friend = myfriends.get(i);
+			newsFeeds.addAll(QuizTakenRecord.getQuizHistoryByUserID(friend.userID));
+			newsFeeds.addAll(QuizCreatedRecord.getCreatedQuizByUserID(friend.userID));
+			newsFeeds.addAll(AchievementRecord.getAchievementRecordByUserID(friend.userID));
+		}
+		Collections.sort(newsFeeds, new RecordSortByTime());
+		return newsFeeds;
 	}
 	
 	public ArrayList<QuizTakenRecord> getQuizHistory() {

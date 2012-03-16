@@ -3,6 +3,7 @@ package quizweb.record;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 
 import quizweb.*;
@@ -17,6 +18,13 @@ public class AchievementRecord extends Record {
 	public AchievementRecord(User user, Achievement achievement) {
 		this.user = user;
 		this.achievement = achievement;
+	}
+	
+	public AchievementRecord(int recordID, User user, Achievement achievement, Timestamp timestamp) {
+		this.recordID = recordID;
+		this.user = user;
+		this.achievement = achievement;
+		this.timestamp = timestamp;
 	}
 	
 	@Override
@@ -60,6 +68,29 @@ public class AchievementRecord extends Record {
 		}
 		return null;
 	}
+	
+	public static ArrayList<AchievementRecord> getAchievementRecordByUserID(int userID) {
+		ArrayList<AchievementRecord> records = new ArrayList<AchievementRecord>();
+		String statement = new String("SELECT * FROM " + DBTable + " WHERE userid = ?");
+		PreparedStatement stmt;
+		try {
+			stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, userID);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				User user = User.getUserByUserID(rs.getInt("userid"));
+				Achievement achievement = Achievement.getAchievementByID(rs.getInt("aid"));
+				AchievementRecord record = new AchievementRecord(rs.getInt("id"), user, achievement, rs.getTimestamp("time")); 
+				records.add(record);
+			}
+			rs.close();
+			Collections.sort(records, new RecordSortByTime());
+			return records;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	
 
 	public static Record getAchievementRecordByXMLElem(XMLElement root) {
 		User user = null;

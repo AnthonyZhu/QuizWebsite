@@ -70,6 +70,29 @@ public class QuizCreatedRecord extends Record {
 		}
 		return null;
 	}
+	
+	public static ArrayList<QuizCreatedRecord> getRecentQuizCreatedRecord() {
+		ArrayList<QuizCreatedRecord> records = new ArrayList<QuizCreatedRecord>();
+		String statement = new String("SELECT * FROM " + DBTable);
+		PreparedStatement stmt;
+		try {
+			stmt = DBConnection.con.prepareStatement(statement);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));
+				User user = User.getUserByUserID(rs.getInt("userid"));
+				QuizCreatedRecord record = new QuizCreatedRecord(rs.getInt("id"), quiz, user, rs.getTimestamp("time"));
+				records.add(record);
+			}
+			rs.close();
+			Collections.sort(records, new RecordSortByTime());
+			return records;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static Record getQuizCreatedRecordByXMLElem(XMLElement root) {
 		User user = null;
 		Quiz quiz = null;
