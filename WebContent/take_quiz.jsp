@@ -78,7 +78,8 @@
 					continue;
 				}
 			}
-			out.println("<li id=\"foli1\" class=\"highlight\"><br />");				
+			out.println("<li id=\"foli1\" class=\"highlight\"><br />");		
+			
 			out.println("<span class=\"dominant_text\">" + position + ".</span><br /><br />");
 			out.println("<span class=\"quiz_title\">");	
 			out.println("<span class=\"dominant_text\">Q:</span> ");
@@ -160,6 +161,7 @@
 			out.println("<div>");	
 			out.println("<input id=\"Field1\" name=\"user_answer" + position + "\" autofocus=\"autofocus\" type=\"text\" class=\"field text large\" value=\"\" maxlength=\"50\" tabindex=\"1\" onkeyup=\"validateRange(2, 'character');\" />");
 			out.println("</div>");
+			
 			out.println("</li>");
 			
 			out.println("<li style=\"float:right\">");

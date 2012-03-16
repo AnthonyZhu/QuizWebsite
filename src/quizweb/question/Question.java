@@ -43,6 +43,16 @@ public class Question {
 		System.out.println("THIS LINE SHOULD NEVER BE REACHED");		
 	}
 	
+	public String displayQuestion(int position) {
+		System.out.println("THIS LINE SHOULD NEVER BE REACHED");
+		return null;
+	}
+	
+	public String displayQuestionWithAnswer(int position, Object userAnswer) {
+		System.out.println("THIS LINE SHOULD NEVER BE REACHED");
+		return null;
+	}
+	
 	public static ArrayList<Question> getQuestionsByQuizID(int quizID) {
 		ArrayList<Question> questions = new ArrayList<Question>();
 		questions.addAll(ResponseQuestion.getQuestionsByQuizID(quizID));
@@ -88,7 +98,7 @@ public class Question {
 			retString = retString + strings.get(i);
 		}
 		return retString;		
-	}
+	}	
 
 	public static Question getQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
 		String type = root.attributeMap.get("type");		
@@ -132,5 +142,5 @@ public class Question {
 			questionList.add(elem.content);
 		}
 		return questionList;
-	}	
+	}
 }
