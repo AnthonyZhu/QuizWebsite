@@ -1,21 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="quizweb.*"%>
+<%@ page import="quizweb.accountmanagement.*"%>
+<%@ page import="quizweb.achievement.*"%>
+<%@ page import="quizweb.announcement.*"%>
+<%@ page import="quizweb.database.*"%>
+<%@ page import="quizweb.message.*"%>
+<%@ page import="quizweb.question.*"%>
+<%@ page import="quizweb.record.*"%>
+<%@ page import="servlet.*"%>
+<%@ page import="java.util.ArrayList"%>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" href="resources/css/main.css" type="text/css" />
-	<link rel="stylesheet" href="resources/css/three_column_layout.css" type="text/css" />
-	<title>More Popular Quizzes</title>
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/three_column_layout.css" type="text/css" />
 </head>
+
 <body>
-	<h4 class="title-style-minor">More Popular Quizzes</h4>
-	<hr />
-	<div class=".three_column_content">
-		<ul>
-			<li><!-- fetch and display --></li>
-		</ul>
+	<div class="three_column_content">
+		<h2 class="title_style_minor">More Popular Quizzes</h2>
+		<br /><br />
+		<!-- insert here -->
 	</div>
-		
 </body>
 </html>
