@@ -59,14 +59,15 @@
 				</ul>
 		</div>
 		
-		<div class="three_column_content">		
-			<iframe id="contentFrame" class="dynamicFrame" frameborder="0" src="homepage/home_feed.jsp"></iframe>
+		<div class="three_column_frame">		
+			<iframe id="contentFrame" class="dynamicFrame" frameborder="0" style="min-height:800px" src="\QuizWebsite\homepage\home_feed.jsp"></iframe>
 		</div>
 	
 		<div class="three_column_right">
 			<div class="right_block">
-				<h4 class="title-style-minor">Announcement</h4>
-				<hr />
+				<span style="float:left"><h4 class="title-style-minor">Announcement</h4></span>
+				<span><a class="link-style-dominant" style="float:right" onclick="showMoreAnnouncements()">+ More</a></span>
+				<br /><hr />
 				<ol>
 				<%
 				if(Announcement.allAnnouncements == null){
@@ -83,7 +84,6 @@
 				    }else{  
 				    	out.println("<li>" + Announcement.allAnnouncements.get(0).title + ": " + Announcement.allAnnouncements.get(0).content + "</li>");
 					    out.println("<li>" + Announcement.allAnnouncements.get(1).title + ": " + Announcement.allAnnouncements.get(1).content + "</li>");
-					    out.println("<hr ><a class=\"link-style-dominant\" onclick=\"showMoreAnnouncements()\">More Announcements</a>");
 				    }
 				}
 				%>

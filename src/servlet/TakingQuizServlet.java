@@ -44,12 +44,22 @@ public class TakingQuizServlet extends HttpServlet {
 		int position = (Integer) session.getAttribute("position");
 		ArrayList<Question> questions = (ArrayList<Question>) session.getAttribute("questions");
 		ArrayList<Object> userAnswers = (ArrayList<Object>) session.getAttribute("userAnswers");
-		ArrayList<Integer> indices = (ArrayList<Integer>) session.getAttribute("indices");		
+		ArrayList<Integer> indices = (ArrayList<Integer>) session.getAttribute("indices");
+		boolean isPractice = (Boolean) session.getAttribute("ispractice");
+		ArrayList<Integer> correctCount = null;
+		int totalCorrectCount = 0;
+		if (isPractice) {
+			correctCount = (ArrayList<Integer>) session.getAttribute("correct_count");
+			totalCorrectCount = (Integer) session.getAttribute("total_correct_count");
+		}		
+		
 		// Record last question
-		if (position >= 1) {
-			int lastIndex = indices.get(position-1);
-			String answerEntry = request.getParameter("user_answer");
-			int type = (Integer) session.getAttribute("question_type");
+		for (int idx = 1; idx <= questions.size(); idx++) {
+			if (!request.getParameterMap().containsKey("user_answer" + idx))
+				continue;
+			int lastIndex = indices.get(idx-1);
+			String answerEntry = request.getParameter("user_answer" + idx);
+			int type = (Integer) session.getAttribute("question_type" + idx);
 			if (type == Question.TYPE_RESPONSE || type == Question.TYPE_BLANK || type == Question.TYPE_PICTURE) {
 				userAnswers.set(lastIndex, answerEntry);
 			} else if (type == Question.TYPE_MULTIANSWER) {
@@ -94,23 +104,36 @@ public class TakingQuizServlet extends HttpServlet {
 				}	
 				userAnswers.set(lastIndex, answerList);
 			}
+			if (isPractice) {
+				if (questions.get(lastIndex).getScore(userAnswers.get(lastIndex)) == questions.get(lastIndex).score)  {
+					totalCorrectCount++;
+					correctCount.set(idx-1, new Integer(correctCount.get(idx-1).intValue()+1));
+				}
+			}
 		}
 		
+		if (isPractice) {
+			session.setAttribute("correct_count", correctCount);
+			session.setAttribute("total_correct_count", totalCorrectCount);
+		}
+				
 		// The quiz is over
-		if (position >= questions.size()) {
+		if (position >= questions.size() && !isPractice || totalCorrectCount >= 3 * questions.size()) {
 			session.setAttribute("is_quiz_result_stored", false);
 			RequestDispatcher dispatch = request.getRequestDispatcher("quiz_over.jsp");
 			dispatch.forward(request, response);			
 			return;
-		} 		
+		}
+		if (isPractice && position >= questions.size()) 
+			position = 0;
 		
-		int index = indices.get(position).intValue();
-		Question question = questions.get(index);
-		Object userAnswer = userAnswers.get(index);
-		
-		session.setAttribute("index", index);
-		session.setAttribute("question", question);
-		session.setAttribute("userAnswer", userAnswer);
+//		int index = indices.get(position).intValue();
+//		Question question = questions.get(index);
+//		Object userAnswer = userAnswers.get(index);
+//		
+//		session.setAttribute("index", index);
+//		session.setAttribute("question", question);
+//		session.setAttribute("userAnswer", userAnswer);
 		session.setAttribute("userAnswers", userAnswers);
 		
 		position += 1;

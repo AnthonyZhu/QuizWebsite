@@ -1,16 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="quizweb.*"%>
+<%@ page import="quizweb.accountmanagement.*"%>
+<%@ page import="quizweb.achievement.*"%>
+<%@ page import="quizweb.announcement.*"%>
+<%@ page import="quizweb.database.*"%>
 <%@ page import="quizweb.message.*"%>
+<%@ page import="quizweb.question.*"%>
+<%@ page import="quizweb.record.*"%>
+<%@ page import="servlet.*"%>
 <%@ page import="java.util.ArrayList"%>
-
-<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="resources/scripts/functions.js"></script>
-<script type="text/javascript" src="resources/scripts/sendFriendRequest.js"></script>
-
-<h4 class="title-style-minor">Friend Requests</h4>
-<hr />
-<div class=".three_column_content">
+<html>
+<head>
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/three_column_layout.css" type="text/css" />
+</head>
+<body>
+<div class="three_column_content">
+<h2 class="title_style_minor">Friend Requests</h2>
 	<%
 		User homeUser = (User) session.getAttribute("user");
 		out.println("<ul>");
@@ -35,4 +42,6 @@
 		out.println("</ul>");
 	%>
 </div>
+</body>
+</html>
 

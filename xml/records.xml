@@ -80,6 +80,11 @@
 	<quiz>Bunny Quiz</quiz>
 </record>
 
+<record type="quiz-created">
+	<user>mit</user>
+	<quiz>Simple Quiz</quiz>
+</record>
+
 <record type="achievement">
 	<user>stanford</user>
 	<achievement>Practice Makes Perfect</achievement>

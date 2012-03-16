@@ -160,6 +160,7 @@ public class XMLReader {
 		// Load quizzes
 		new XMLReader("./xml/bunny.xml");
 		new XMLReader("./xml/cities.xml");
+		new XMLReader("./xml/simple_quiz.xml");
 		// Load achievement
 		new XMLReader("./xml/achievements.xml");
 		// Load records

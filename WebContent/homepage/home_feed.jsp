@@ -9,12 +9,18 @@
 <%@ page import="quizweb.question.*"%>
 <%@ page import="quizweb.record.*"%>
 <%@ page import="servlet.*"%>
-<%@page import="java.util.ArrayList"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<h4 class="title-style-minor">News Feed</h4>
-<hr />
-<div class=".three_column_content">
+<%@ page import="java.util.ArrayList"%>
+<html>
+<head>
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/three_column_layout.css" type="text/css" />
+</head>
+<body>
+<div class="three_column_content">
+	<h2 class="title_style_minor">My News Feed</h2>
 	<%
 		
 	%>
 </div>	
+</body>
+</html>

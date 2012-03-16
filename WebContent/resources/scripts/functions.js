@@ -40,6 +40,7 @@
 		$('#contentFrame').attr('src', 'homepage/home_moreAnnouncements.jsp');
 	};
 	
+	
 	/**
 	global.sendNotePopup = function() {
 		session = request.getSession();
@@ -58,6 +59,7 @@
 		popup.document.writeln("</div>");
 	};
 	**/
+
 	
 })(window);
 
