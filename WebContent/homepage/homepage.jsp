@@ -58,7 +58,7 @@
 				<li>
                 <%
                 if(homeUser.permission == 1){
-                	out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/adminPage.jsp\">Admin</a>");
+                	out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/admin/admin.jsp\">Admin</a>");
                 }
 				%>
 				</li>
