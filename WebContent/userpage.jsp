@@ -53,6 +53,7 @@
 					out.println("<input type=\"submit\" id=\"submit_btn\" value=\"Add as friend\">");
 					out.println("</form>");
 				}
+				
 			}
 			%>
 			<!--  

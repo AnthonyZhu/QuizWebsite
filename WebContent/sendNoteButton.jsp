@@ -14,6 +14,7 @@
 	<% 
 		session = request.getSession();
 		User user = (User)session.getAttribute("user");
+		
 	%>
 	<div id="note_form">
 	<form name="note" action="">
@@ -21,10 +22,7 @@
 		<br />
 		<div><textarea id="note" class="small" style="width:75%; float:right"></textarea></div>
 		<input type="hidden" id="sender" value=<%=user.userID%>/>
-		<!--
-		<input type="hidden" id="receiver" value="<%//out.print(senderID); %>"/>
-		-->
-		
+		<!--<input type="hidden" id="receiver" value="<%//out.print(senderID); %>"/>-->
 	</form>
 	<span class="error" style="display:none"> Empty note!</span>
 	</div>
