@@ -29,9 +29,9 @@
 			if(!friendRequest.isPending())
 				continue;
 			String senderName = User.getUserByUserID(friendRequest.fromUser).username;
-			out.println("<ul><li><span><img src=\"/QuizWebsite/images/add.png\" style=\"float: left;margin-right:5px\" width=\"40\" height=\"40\"></span>");
-			out.println("<div id='" + friendRequest.fromUser + "'>");
-			out.println(senderName + "</li><ul>");
+			out.println("<ul><span><img src=\"/QuizWebsite/images/add.png\" style=\"float: left;margin-right:5px\" width=\"40\" height=\"40\"></span>");
+			out.println("<div><a class=\"link_style_dominant\" href=\"/QuizWebsite/userpage.jsp?id=" + friendRequest.fromUser + ">");
+			out.println(senderName + "<a><ul>");
 			out.println("<p id='confirm_msg'></p>");
 			out.println("<form name='friend_confirm' action='/QuizWebsite/ConfirmFriendServlet'>");
 			out.println("<input type='hidden' name='senderName' value='" + senderName + "'/>");

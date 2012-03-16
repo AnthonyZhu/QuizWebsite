@@ -12,32 +12,32 @@
 	};
 	
 	global.showNewsFeed = function() {
-		$('#contentFrame').attr('src', 'homepage/home_feed.jsp');
+		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_feed.jsp');
 	};
 	
 	
 	global.showNotes = function()  {
-		$('#contentFrame').attr('src', 'homepage/home_notes.jsp');
+		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_notes.jsp');
 	};
 	
 	global.showQuizTaken = function() {
-		$('#contentFrame').attr('src', 'homepage/home_quizTaken.jsp');
+		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_quizTaken.jsp');
 	};
 	
 	global.showQuizCreated = function() {
-		$('#contentFrame').attr('src', 'homepage/home_quizCreated.jsp');
+		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_quizCreated.jsp');
 	};
 	
 	global.showFriendRequests = function() {
-		$('#contentFrame').attr('src', 'homepage/home_friendRequests.jsp');
+		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_friendRequests.jsp');
 	};
 	
 	global.showChallenges = function() {
-		$('#contentFrame').attr('src', 'homepage/home_challenges.jsp');
+		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_challenges.jsp');
 	};
 	
 	global.showMoreAnnouncements = function() {
-		$('#contentFrame').attr('src', 'homepage/home_moreAnnouncements.jsp');
+		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_moreAnnouncements.jsp');
 	};
 	
 	
