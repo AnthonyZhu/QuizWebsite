@@ -15,9 +15,9 @@ public class ChallengeMessage extends Message {
 	
 	private static final String DBTable = "challenge";
 	private static final String content = "send you a quiz challenge.";
-	private int quizID;
-	private double bestScore;
-	private boolean isRead;
+	public int quizID;
+	public double bestScore;
+	public boolean isRead;
 	
 	public ChallengeMessage(int uid1, int uid2, int qID, double bestscore) {
 		super(uid1, uid2, content);
