@@ -139,7 +139,7 @@ public class MultiAnswerQuestion extends Question {
 		sb.append("<p>Please answer below: </p>\n");
 		sb.append("<div>");
 		for (int i = 0; i < answerNumber; i++) {
-			sb.append("<input id=\"Field1\" name=\"user_answer" + position + "_" + i + "\" type=\"text\" class=\"field text large\" value=\"\" maxlength=\"50\" tabindex=\"1\" onkeyup=\"validateRange(2, 'character');\" />");
+			sb.append("<input id=\"Field1\" name=\"user_answer" + position + "_" + (i+1) + "\" type=\"text\" class=\"field text large\" value=\"\" maxlength=\"50\" tabindex=\"1\" onkeyup=\"validateRange(2, 'character');\" />");
 		}
 		sb.append("</div>");
 		return sb.toString();
@@ -163,20 +163,20 @@ public class MultiAnswerQuestion extends Question {
 		if (correct) {
 			sb.append("<span class=\"correct answer\">\n");
 			for (int i = 0; i < userAnswerList.size(); i++) {
-				sb.append("<p>" + userAnswerList.get(i) + "<br /><br /></p>");
+				sb.append(userAnswerList.get(i) + "<br /><br />");
 			}
 			sb.append("&#160;&#160;</span>\n");
 			sb.append("<img class=\"small\" src=\"images/right.png\"></p><br /><br />");
 		} else {
 			sb.append("<span class=\"wrong answer\">\n");
 			for (int i = 0; i < userAnswerList.size(); i++) {
-				sb.append("<p>" + userAnswerList.get(i) + "<br /><br /></p>");
+				sb.append(userAnswerList.get(i) + "<br /><br />");
 			}
 			sb.append("&#160;&#160;</span>\n");
 			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span></p><br />\n");
 			sb.append("<p class=\"answer\">Correct answer :  <br /><br/><span class=\"correct answer\">");
 			for (int i = 0; i < answerList.size(); i++) {
-				sb.append("<p>" + answerList.get(i) + "<br /><br /></p>");
+				sb.append(answerList.get(i) + "<br /><br />");
 			}
 			sb.append("</span></p>\n");
 		}

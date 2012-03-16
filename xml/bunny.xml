@@ -16,7 +16,7 @@
 </question>
 
 <question type="multiple-choice">
-  <query>Which of the following statements is false</query>
+  <query>Which of the following statements is FALSE?</query>
   <option>Aztec mythology includes a rabbit pantheon.</option>
   <option>In Japanese folklore, rabbits live on the moon.</option>
   <option answer="answer">In Stanford tradition, rubbing the nose of a rabbit guarantees an A on the CS108 class project</option>
@@ -60,7 +60,7 @@
 </question>
 
 <question type="multi-choice-multi-answer-question">
-  <query>Please choose the ones that are TRUE.</query>
+  <query>Which of the following are correct?</query>
   <query-list> 
     <query answer="yes">This is a correct answer about Bunny.</query>
 	<query>This is a wrong answer about Bunny.</query>

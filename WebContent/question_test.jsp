@@ -71,7 +71,12 @@
 		Collections.addAll(userAnswer6, strings6);
 		userAnswers.add(userAnswer6);
 		
-		
+		int[] choice7 = {1,2,3};
+		ArrayList<String> userAnswer7 = new ArrayList<String>();
+		ArrayList<String> question7 = (ArrayList<String>) questions.get(6).question;
+		for (int i = 0; i < choice7.length; i++)
+			userAnswer7.add(question7.get(choice7[i]));
+		userAnswers.add(userAnswer7);
 		
 		for (int i = 0; i < questions.size(); i++) {
 			Question question = questions.get(i);
