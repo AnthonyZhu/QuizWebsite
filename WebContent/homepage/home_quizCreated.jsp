@@ -9,11 +9,16 @@
 <%@ page import="quizweb.question.*"%>
 <%@ page import="quizweb.record.*"%>
 <%@ page import="servlet.*"%>
-<%@page import="java.util.ArrayList"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<h4 class="title-style-minor">Quiz Created</h4>
-<hr />
-<div class=".three_column_content">
+<%@ page import="java.util.ArrayList"%>
+<html>
+<head>
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/three_column_layout.css" type="text/css" />
+</head>
+<body>
+<div class="three_column_content">
+	<h2 class="title_style_minor">Quizzes I Created</h2>
+		<br /><br />
 	<%
 	User homeUser = (User) session.getAttribute("user");
 	ArrayList<QuizCreatedRecord> createdRecord = QuizCreatedRecord.getCreatedQuizByUserID(homeUser.userID);
@@ -24,9 +29,12 @@
 	}else{
 		out.println("<ul>");
 		for(int i=0;i<createdRecord.size();i++){
-			out.println("<li><a href=\"quiz_summary.jsp?id=" + createdRecord.get(i).quiz.quizID + "\">" + createdRecord.get(i).quiz.name + "</a></li>");
+			out.println("<li><img src=\"/QuizWebsite/images/check.png\" style=\"float: left\" width=\"16\" height=\"16\">"+
+					"&#160;<a target=\"_blank\" href=\"\\QuizWebsite\\quiz_summary.jsp?id=" + createdRecord.get(i).quiz.quizID + "\">" + createdRecord.get(i).quiz.name + "</a></li>");
 		}
 		out.println("</ul>");
 	}
 	%>
-</div>	
+</div>
+</body>
+</html>	
