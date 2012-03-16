@@ -92,8 +92,8 @@
 				</ol>
 			</div>
 			<div class="right_block">
-				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMoreAnnouncements()">+ More</a></span>
-				<span style="float:left"><h4 class="title-style-minor">Most Popular</h4></span>
+				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMorePopularQuizzes()">+ More</a></span>
+				<span style="float:left"><h4 class="title-style-minor">Most Popular Quizzes</h4></span>
 				<br />
 				<br />
 				<hr />
@@ -104,8 +104,8 @@
 				</ol>
 			</div>
 			<div class="right_block">
-				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMoreAnnouncements()">+ More</a></span>
-				<span style="float:left"><h4 class="title-style-minor">Most Recent</h4></span>
+				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMoreRecentlyQuizzes()">+ More</a></span>
+				<span style="float:left"><h4 class="title-style-minor">Most Recent Quizzes</h4></span>
 				<br />
 				<br />
 				<hr />

@@ -40,6 +40,13 @@
 		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_moreAnnouncements.jsp');
 	};
 	
+	global.showMorePopularQuizzes = function() {
+		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_morePopularQuizzes.jsp');
+	};
+	
+	global.showMoreRecentlyQuizzes = function() {
+		$('#contentFrame').attr('src', 'http://localhost:8080/QuizWebsite/homepage/home_moreRecentlyQuizzes.jsp');
+	};
 	
 	/**
 	global.sendNotePopup = function() {
