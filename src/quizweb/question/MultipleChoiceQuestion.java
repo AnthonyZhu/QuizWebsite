@@ -115,6 +115,78 @@ public class MultipleChoiceQuestion extends Question {
 		return 0;
 	}
 
+	@Override
+	public String displayQuestion(int position) {
+		ArrayList<String> questionList = (ArrayList<String>) question;
+		String questionStr = questionList.get(0);
+		StringBuilder sb = new StringBuilder();
+		sb.append("<span class=\"dominant_text\">" + position + ".</span><br /><br />\n");
+		sb.append("<span class=\"quiz_title\">\n");
+		sb.append("<span class=\"dominant_text\">Multiple Choice Question (" + score + " points):</span><br /><br />\n");
+		sb.append(questionStr + "\n");
+		sb.append("</span><br /><br />\n");
+		sb.append("<div><span>\n");
+		for (int i = 1; i < questionList.size(); i++) {
+			sb.append("<input id=\"Field" + position + "_" + i + "\" name=\"user_answer" + position + "\" type=\"radio\" class=\"field radio\" value=\"");
+			if (i == 1) {
+				sb.append("Yes\" tabindex=\"3\" checked=\"checked\"  />");
+			} else {
+				sb.append("No\" tabindex=\"3\" />");
+			}
+			sb.append(i + ". " + questionList.get(i));
+			if (i < questionList.size() - 1)
+				sb.append("<br />\n");
+			else 
+				sb.append("\n");
+		}
+//		<form>
+//		<input type="radio" name="sex" value="male" /> Male<br />
+//		<input type="radio" name="sex" value="female" /> Female
+//		</form>		
+		sb.append("</span></div>\n");
+		return sb.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public String displayQuestionWithAnswer(int position, Object userAnswer) {
+		ArrayList<String> questionList = (ArrayList<String>) question;
+		String questionStr = questionList.get(0);
+		String answerStr = (String) answer;
+		String userAnswerStr = (String) userAnswer;
+		boolean correct = false;
+		if (getScore(userAnswer) == score)
+			correct = true;
+		StringBuilder sb = new StringBuilder();
+		sb.append("<span class=\"dominant_text\">Feedback for Question " + position + ":</span><br /><br />\n");
+		sb.append("<span class=\"quiz_title\">\n");
+		sb.append(questionStr + "\n");
+		sb.append("</span><br /><br />\n");
+		sb.append("<div><span>\n");
+		for (int i = 1; i < questionList.size(); i++) {
+			sb.append("<input id=\"Field" + position + "_" + i + "\" name=\"user_answer" + position + "\" type=\"radio\" class=\"field radio\" value=\"");
+			sb.append("No\" tabindex=\"3\" />");
+			sb.append(i + ". " + questionList.get(i));
+			if (i < questionList.size() - 1)
+				sb.append("<br />\n");
+			else 
+				sb.append("\n");
+		}
+		sb.append("<p class=\"answer\">Your answer is :\n");
+		if (correct) {
+			sb.append("<span class=\"correct answer\">" + userAnswerStr + "&#160;&#160;</span>");
+			sb.append("<img class=\"small\" src=\"images/right.png\"></p><br /><br />");
+		} else {
+			sb.append("<span class=\"wrong answer\">" + userAnswerStr + "&#160;&#160;</span>");
+			sb.append("<img class=\"small\" src=\"images/wrong.png\"><span class=\"wrong\">incorrect</span>");
+			sb.append("<p class=\"answer\">Correct answer :  <span class=\"correct answer\">");
+			sb.append(answerStr);
+			sb.append("</span></p>\n");
+		}
+		return sb.toString();
+	}	
+	
+	
 	public static MultipleChoiceQuestion getMultipleChoiceQuestionByXMLElem(XMLElement root, Quiz quiz, int pos) {
 		int quizID = quiz.quizID;
 		int position = pos;
