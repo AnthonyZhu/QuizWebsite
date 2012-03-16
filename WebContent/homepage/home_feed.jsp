@@ -18,6 +18,7 @@
 <body>
 <div class="three_column_content">
 	<h2 class="title_style_minor">My News Feed</h2>
+	<br >
 	<%
 		int maxDisplayNumber = 20;
 		User homeUser = (User) session.getAttribute("user");

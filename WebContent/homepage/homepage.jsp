@@ -55,6 +55,13 @@
 				out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/createQuiz/new_quiz_settings.jsp\">+ Create Quiz</a>");
 				%>
 				</li>
+				<li>
+                <%
+                if(homeUser.permission == 1){
+                	out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/adminPage.jsp\">Admin</a>");
+                }
+				%>
+				</li>
 				<br />
 				
 				</ul>
