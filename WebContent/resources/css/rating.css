@@ -30,6 +30,8 @@
 
 /* the default rating is placed as a background image in the ul */
 /* use the background position according to the table above to display the required images*/
+
+
 .rating{
 	width:80px;
 	height:16px;
@@ -40,6 +42,7 @@
 	position:relative;
 	background: url(http://localhost:8080/QuizWebsite/images/star-matrix.gif) no-repeat 0 0;
 }
+
 /* add these classes to the ul to effect the change to the correct number of stars */
 .nostar {background-position:0 0}
 .onestar {background-position:0 -16px}

@@ -54,6 +54,7 @@
 		}
 	%>
 	</title>
+	
 	<meta name="Description" content="A smart quiz website" />
 	<meta name="robots" content="all, index, follow" />
 	<meta name="distribution" content="global" />
@@ -66,13 +67,15 @@
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="resources/scripts/functions.js"></script>
 </head>
+
+
 <body>
 <div class="container" >
 <jsp:include page="/modules/head.jsp" />
 	
 	<div class="content-container">
 		<div class="two_column_left">
-			<span><img src="/QuizWebsite/images/quiz.png" style="float: left" width="150" height="150"></span>
+			<span><img src="/QuizWebsite/images/star.png" style="float: left" width="150" height="150"></span>
 			<span><h4>Congratulations! You have finished</h4></span>
 			<span><h1><%=quizName%></h1></span>
 			<br/>
@@ -83,11 +86,11 @@
 			%>
 			<br />
 			<%
-			out.println("You spent <span class=\"dominant_text\">" + min + "</span> Minutes and <span class=\"dominant_text\">" + sec + "</span> seconds on this quiz.");
+			out.println("You spent <span class=\"dominant_text\">" + min + "</span> minutes and <span class=\"dominant_text\">" + sec + "</span> seconds on this quiz.");
 			%>
 			<br />
 			</p>
-			<ul class="rating nostar">
+			<ul class="rating  nostar">
 				<li class="one"><a href="#" title="1 Star">1</a></li>
 				<li class="two"><a href="#" title="2 Stars">2</a></li>
 				<li class="three"><a href="#" title="3 Stars">3</a></li>
