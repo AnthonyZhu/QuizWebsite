@@ -46,7 +46,7 @@
 			<%
 			if(homeUser.userID == visitUserID){
 			}else{
-				out.println("<form action=\"addFriendServlet\" method=\"post\">");
+				out.println("<form action=\"AddFriendServlet\" method=\"post\">");
 				out.println("<input type=\"hidden\" name=\"sender\" value=\"" + homeUser.userID + "\">");
 				out.println("<input type=\"hidden\" name=\"receiver\" value=\"" + visitUserID + "\">");
 				out.println("<input type=\"submit\" id=\"submit_btn\" value=\"Add as friend\">");

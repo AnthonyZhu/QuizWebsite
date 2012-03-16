@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import quizweb.message.FriendRequestMessage;
 
 /**
- * Servlet implementation class addFriendServlet
+ * Servlet implementation class AddFriendServlet
  */
-@WebServlet("/addFriendServlet")
-public class addFriendServlet extends HttpServlet {
+@WebServlet("/AddFriendServlet")
+public class AddFriendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addFriendServlet() {
+    public AddFriendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +43,6 @@ public class addFriendServlet extends HttpServlet {
         friendAdding.addMessageToDB();
         RequestDispatcher dispatch = request.getRequestDispatcher("userpage.jsp?id=" + receiverID);
 		dispatch.forward(request, response);
-		
 		// TODO Auto-generated method stub
 	}
 
