@@ -30,7 +30,8 @@
 			out.println("<ul>");
 			for(int i=0;i<challengeMessages.size();i++){
 				ChallengeMessage challenge = challengeMessages.get(i);
-				out.println("<li>" + User.getUserByUserID(challenge.fromUser).username + " sent this challenge to you<br /></li>");
+				User oneUser = User.getUserByUserID(challenge.fromUser);
+				out.println("<li><a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a> sent this challenge to you: <a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/quiz_summary.jsp?id=" + challenge.quizID + "\">" + Quiz.getQuizByQuizID(challenge.quizID).name + "</a><br /></li>");
 			}
 			out.println("</ul>");
 		}
