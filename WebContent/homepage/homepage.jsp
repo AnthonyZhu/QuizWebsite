@@ -51,7 +51,7 @@
 				<br /> <br />
 				<li>
                 <%
-				out.println("<a class=\"link-style-dominant\" href=\"createQuiz/new_quiz_settings.jsp\">+ Create Quiz</a>");
+				out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/createQuiz/new_quiz_settings.jsp\">+ Create Quiz</a>");
 				%>
 				</li>
 				<br />

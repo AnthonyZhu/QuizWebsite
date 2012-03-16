@@ -20,20 +20,20 @@
 <h2 class="title_style_minor">Challenges From Friends</h2>
 		<br /><br />
 	<%
-	User homeUser = (User) session.getAttribute("user");
-	ArrayList<ChallengeMessage> challengeMessages = ChallengeMessage.getMessagesByUserID(homeUser.userID);
-	if(challengeMessages == null){
-		out.println("I don't have any challenge.");
-	}else if(challengeMessages.size() == 0){
-		out.println("I don't have any challenge.");
-	}else{
-		out.println("<ul>");
-		for(int i=0;i<challengeMessages.size();i++){
-			ChallengeMessage challenge = challengeMessages.get(i);
-			out.println("<li>" + User.getUserByUserID(challenge.fromUser).username + " sent this challenge to you</li>");
+		User homeUser = (User) session.getAttribute("user");
+		ArrayList<ChallengeMessage> challengeMessages = ChallengeMessage.getMessagesByUserID(homeUser.userID);
+		if(challengeMessages == null){
+			out.println("I don't have any challenge.");
+		}else if(challengeMessages.size() == 0){
+			out.println("I don't have any challenge.");
+		}else{
+			out.println("<ul>");
+			for(int i=0;i<challengeMessages.size();i++){
+				ChallengeMessage challenge = challengeMessages.get(i);
+				out.println("<li>" + User.getUserByUserID(challenge.fromUser).username + " sent this challenge to you</li>");
+			}
+			out.println("</ul>");
 		}
-		out.println("</ul>");
-	}
 	%>
 </div>	
 </body>
