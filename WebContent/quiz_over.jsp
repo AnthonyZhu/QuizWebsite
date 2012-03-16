@@ -37,19 +37,20 @@
 		boolean isQuizResultStored = (Boolean) session.getAttribute("is_quiz_result_stored");
 		ArrayList<Achievement> newAchievements = new ArrayList<Achievement>();
 		if (!isQuizResultStored) {
-			record.addRecordToDB();
-			session.setAttribute("is_quiz_result_stored", true);
 			if (isPractice) {
 				homeUser.practiceNumber++;
 				homeUser.updateCurrentUser();
-				newAchievements.addAll(PracticeAchievement.updateAchievement(homeUser));
-			}		
-			if (myScore >= quiz.getBestScore()) {
-				homeUser.highScoreNumber++;
-				homeUser.updateCurrentUser();
-				newAchievements.addAll(HighScoreAchievement.updateAchievement(homeUser));
+				newAchievements.addAll(PracticeAchievement.updateAchievement(homeUser));				
+			} else {
+				record.addRecordToDB();
+				session.setAttribute("is_quiz_result_stored", true);	
+				if (myScore >= quiz.getBestScore()) {
+					homeUser.highScoreNumber++;
+					homeUser.updateCurrentUser();
+					newAchievements.addAll(HighScoreAchievement.updateAchievement(homeUser));
+				}
+				newAchievements.addAll(QuizTakenAchievement.updateAchievement(homeUser));
 			}
-			newAchievements.addAll(QuizTakenAchievement.updateAchievement(homeUser));
 		}
 	%>
 	</title>

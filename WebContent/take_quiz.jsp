@@ -41,6 +41,10 @@
 			boolean isPractice = (Boolean) session.getAttribute("ispractice");
 			boolean isFeedback = (Boolean) session.getAttribute("isfeedback");
 			boolean isOnepage = quiz.isOnepage;
+			ArrayList<Integer> correctCount = null;;
+			if (isPractice) {
+				correctCount = (ArrayList<Integer>) session.getAttribute("correct_count");
+			}
 			String quizName = quiz.name;
 			out.println(quizName);
 		%></b> created by <a>
@@ -66,6 +70,14 @@
 		<ul>
 		<%
 		while (true) {
+			if (isPractice) {
+				if (correctCount.get(position-1).intValue() >= 3) {
+					if (position >= questions.size())
+						break;
+					position++;
+					continue;
+				}
+			}
 			out.println("<li id=\"foli1\" class=\"highlight\"><br />");				
 			out.println("<span class=\"dominant_text\">" + position + ".</span><br /><br />");
 			out.println("<span class=\"quiz_title\">");	
@@ -160,8 +172,8 @@
 					break;
 				position++;
 			}
-			session.setAttribute("position", position);
 		}
+		session.setAttribute("position", position);
 		%>
 			<li>
 				<!-- <span><input id="lastQuestion" name="lastQuestion" class="btTxt submit" type="submit" value="<<back"/></span> -->

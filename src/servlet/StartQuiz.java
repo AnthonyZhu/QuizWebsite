@@ -63,8 +63,17 @@ public class StartQuiz extends HttpServlet {
 				indices.set(j, temp);
 			}
 		}
+		
+		boolean isPractice = (Boolean) session.getAttribute("ispractice");
+		if (isPractice) {
+			ArrayList<Integer> correctCount = new ArrayList<Integer>();
+			for (int i = 0; i < questions.size(); i++)
+				correctCount.add(new Integer(0));
+			session.setAttribute("correct_count", correctCount);
+			session.setAttribute("total_correct_count", 0);
+		}
 		//DEBUG
-		quiz.isOnepage = false;
+		quiz.isOnepage = true;
 		
 		position++;
 		session.setAttribute("quiz", quiz);
