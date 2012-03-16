@@ -18,6 +18,8 @@
 <body>
 <div class="three_column_content">
 <h2 class="title_style_minor">Friend Requests</h2>
+	<br />
+	
 	<%
 		User homeUser = (User) session.getAttribute("user");
 		out.println("<ul>");
@@ -27,15 +29,16 @@
 			if(!friendRequest.isPending())
 				continue;
 			String senderName = User.getUserByUserID(friendRequest.fromUser).username;
-			out.println("<div id='" + friendRequest.fromUser + "'>");
-			out.println("<li>" + senderName + "</li>");
+			out.println("<span><img src=\"/QuizWebsite/images/add.png\" style=\"float: left;margin-right:5px\" width=\"40\" height=\"40\"></span>");
+			out.println("<div><a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/userpage.jsp?id=" + friendRequest.fromUser + "\">");
+			out.println(senderName + "</a>&#160;wants to add you as a friend");
 			out.println("<p id='confirm_msg'></p>");
 			out.println("<form name='friend_confirm' action='/QuizWebsite/ConfirmFriendServlet'>");
 			out.println("<input type='hidden' name='senderName' value='" + senderName + "'/>");
 			out.println("<input type='hidden' name='senderID' value='" + friendRequest.fromUser + "'/>");
 			out.println("<input type='hidden' name='receiverID' value='" + homeUser.userID + "'/>");
-			out.println("<input type='submit' name='confirm_btn' value='confirm'/>");
-			out.println("<input type='submit' name='reject_btn' value='reject'/>");
+			out.println("<input type='submit' name='confirm_btn' value='Confirm'/>");
+			out.println("<input type='submit' name='reject_btn' value='Reject'/>");
 			out.println("</form>");
 			out.println("</div>");
 		}

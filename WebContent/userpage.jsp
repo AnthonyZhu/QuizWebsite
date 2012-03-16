@@ -55,12 +55,6 @@
 				}
 			}
 			%>
-			<!--  
-			<span style="float:right">
-			<jsp:include page="/sendFriendRequestButton.jsp"></jsp:include>
-			<jsp:include page="/sendChallengeButton.jsp"></jsp:include>
-			</span>
-			-->
 			
 			</span>
 			<img src="/QuizWebsite/images/user.png" style="float: left" width="150" height="150">
@@ -99,7 +93,17 @@
 			%>
 			</span>taken
 			<br /><hr /><br />
-			<jsp:include page="/sendNoteButton.jsp"></jsp:include>
+			<%
+			if(homeUser.userID == visitUserID){
+			}else{
+				out.println("<form action=\"/QuizWebsite/SendNoteServlet\" method=\"post\">");
+				out.println("<input type=\"hidden\" name=\"sender\" value=\"" + homeUser.userID + "\">");
+				out.println("<input type=\"hidden\" name=\"receiver\" value=\"" + visitUserID + "\">");
+				out.println("<input type=\"text\" class=\"large\" name=\"note\">");
+				out.println("<input type=\"submit\" id=\"submit_btn\" value=\"Send a Note\">");
+				out.println("</form>");
+			}
+			%>
 		</div>
 		<div class="two_column_right">
 			<h2>Achievements</h2>
