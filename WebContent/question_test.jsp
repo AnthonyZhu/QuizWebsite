@@ -55,10 +55,25 @@
 		userAnswers.add(userAnswer2);
 		int choice3 = 2;
 		userAnswers.add(((ArrayList<String>)questions.get(2).question).get(choice3));
+		
 		String userAnswer4 = "Bugs";
 		userAnswers.add(userAnswer4);
 		
-		for (int i = 0; i < 4; i++) {
+		int[] choice5 = {3,4,2,1};
+		ArrayList<String> userAnswer5 = new ArrayList<String>();
+		ArrayList<String> question5 = (ArrayList<String>) questions.get(4).question;
+		for (int i = 0; i < choice5.length; i++)
+			userAnswer5.add(question5.get(question5.size()/2 + choice5[i]));
+		userAnswers.add(userAnswer5);
+		
+		String[] strings6 = {"T", "U", "N"};
+		ArrayList<String> userAnswer6 = new ArrayList<String>();
+		Collections.addAll(userAnswer6, strings6);
+		userAnswers.add(userAnswer6);
+		
+		
+		
+		for (int i = 0; i < questions.size(); i++) {
 			Question question = questions.get(i);
 			out.println("<li id=\"foli1\" class=\"highlight\"><br />");		
 			out.println(question.displayQuestion(i+1));
