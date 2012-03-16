@@ -7,7 +7,8 @@ yellow: #feff84
 *******************************************/
 
 html{
-	background-color:#d9ebf5;
+	background-color:#c8c8c8;
+
 	margin:0 0 0 0;
 	padding:0 0 0 0;
 }
@@ -39,7 +40,7 @@ html{
 	margin-top: 0;
 	margin-bottom:0;
 	position: center;
-	background-color: #666;
+	background-color: #007cb3;
 	height: 47px;
 	
 }
@@ -49,12 +50,13 @@ html{
 
 
 .footer{
+	margin-top:20px;
 	float:top;
 	clear:both;
-	background: #ccc;
-	text-align: right;
-	padding: 10px;
+	text-align: left;
+	padding: 30px 30px;
 	font-family: "Courier New", Arial;
+	font:white;
 	height: 1%;
 }
 
@@ -69,7 +71,7 @@ html{
 /**************Text Features****************/
 /*******************************************/
 h1,h2,h3,h4,h5,h6,body{
-	font-family: Arial, Cambria;
+	
 	margin-top:5px;
 	margin-left:0;
 	margin-right:0;
@@ -77,6 +79,14 @@ h1,h2,h3,h4,h5,h6,body{
 	color: #393939;
 }
 
+body{
+	font-family: Arial;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-family: Arial, Cambria;
+	
+}
 p{
 	margin-left:10px;
 	margin-bottom:1px;

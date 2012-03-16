@@ -27,26 +27,23 @@
 
 <body>
 <div class="container">
-	<div class="header">
-		<h1>toQuiz.Me</h1>
-	</div>
-	
+<jsp:include page="/modules/head.jsp" />
 	<form id="form1" action="TakingQuizServlet" name="form1" method="post" >
 
 	<div class="one_column">
 		You are taking the quiz <b>
 		<% 
-		int position = (Integer) session.getAttribute("position");
-		Quiz quiz = (Quiz) session.getAttribute("quiz");
-		ArrayList<Question> questions = (ArrayList<Question>) session.getAttribute("questions");
-		Object userAnswer = (Object) session.getAttribute("userAnswer");
-		
-		String quizName = quiz.name;
-		out.println(quizName);
+			int position = (Integer) session.getAttribute("position");
+			Quiz quiz = (Quiz) session.getAttribute("quiz");
+			ArrayList<Question> questions = (ArrayList<Question>) session.getAttribute("questions");
+			Object userAnswer = (Object) session.getAttribute("userAnswer");
+			
+			String quizName = quiz.name;
+			out.println(quizName);
 		%></b> created by <a>
 		<%
-		String creator = quiz.creator.username;
-		out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + quiz.creator.userID + "\">" + creator + "</a>");
+			String creator = quiz.creator.username;
+			out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + quiz.creator.userID + "\">" + creator + "</a>");
 		%></a>
 		<span style="float: right"> 
 			Time spent: <%
@@ -58,17 +55,18 @@
 				else {
 					long min = duration / 60000;
 					long sec = (duration % 60000) / 1000;
-					out.println(min + "min " + sec + "sec");
+					out.println(min + " min   " + sec + " sec");
 				}
 			%>
 		</span>
 		<hr />
 		<ul>
 			<li id="foli1" class="highlight">
-				<span><%
-			    out.println("This is No." + position + " question.");
+				<br />
+				<span class="dominant_text"><%
+			    out.println(position + ".");
 				%></span>
-				<hr >
+				<br /><br />
 				<span class="quiz_title">
 				<%
 				out.println("<span class=\"dominant_text\">Q:</span> ");
@@ -143,12 +141,13 @@
 				session.setAttribute("question_type", type);
 				
 				%></span>
+				<br /><br /><p>Please answer below:</p>
 				<div>
 					<input id="Field1" name="user_answer" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
 				</div>
 			</li>
 			<li style="float:right">
-				<% out.println(position); %> of <% out.println(questions.size()); %> questions
+				<% out.println(position); %> out of <% out.println(questions.size()); %> questions
 			</li>
 			<li>
 				<!-- <span><input id="lastQuestion" name="lastQuestion" class="btTxt submit" type="submit" value="<<back"/></span> -->
@@ -157,6 +156,7 @@
 		</ul>
 	</div>
 	</form>
+	<jsp:include page="/modules/foot.html" />
 </div><!--container-->
 	
 </body>

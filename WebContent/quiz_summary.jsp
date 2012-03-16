@@ -38,70 +38,43 @@
 </head>
 <body>
 <div class="container" >
-	<div class="header">
-		<h1><a href="homepage/homepage.jsp">toQuiz.me</a></h1>
-	</div>
+<jsp:include page="/modules/head.jsp" />
 	
 	<div class="content-container">
 		<div class="two_column_left">
-			<h1>
-			<%
-			out.println("Quiz Name: " + quizName);
-			%>
-			</h1>
-			<p>Creator: 
-			<%
-			String creator = quiz.creator.username;
-			out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + quiz.creator.userID + "\">" + creator + "</a>");
-			%>
-			<br>
-			<%
-		    out.println("Total score: " + summary.totalScore);
-			%>
-			<br>
-			<%
-			double rating = quiz.getQuizRating();
-			out.println("Quiz rating: " + rating);
-			%></p>
-		</div>
-		<!-- <div class="two_column_right">
-			
-		</div> -->
-
-	</div>
-	
-	<div class="content-container">
-		<div class="two_column_left">
-			<p><%
-			String description = quiz.description;
-			out.println("Description: " + description);
-			%></p>
-		</div>
-		<div class="two_column_right">
 			<form action="StartQuiz" method="post">
-			<input type="submit" value="Start Quiz"><br />
+			<input style="float:right" type="submit" value="Take quiz now!"><br />
 			<% 
 			out.println("<input name =\"quizID\" type=\"hidden\" value=\"" + quiz.quizID + "\">");
 			%>
 			</form>
-		</div>
-	</div>
-	
-	<div class="content-container">
-		<div class="two_column_left">
-			<h2>Quiz Summary</h2>
-			<p><span class="dominant_text">
-			<% out.println(summary.totalUser); %>
-			</span> users have taken this quiz</p>
-			<p>They spend an average of <span class="dominant_text">
-			<% out.println(Math.round(summary.averageTimespan/60000 * 100)/100.0 + " mins"); %>
-			</span> on the quiz</p>
-			<p>Average score is <span class="dominant_text">
-			<% out.println(Math.round(summary.averageScore*100)/100.0); %>
-			</span></p>
+			
+			<span><img src="/QuizWebsite/images/quiz.png" style="float: left" width="150" height="150"><h1><%=quizName%></h1></span>
+
+			<p>
+			<span>Creator: 
+			<%
+				String creator = quiz.creator.username;
+				out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + quiz.creator.userID + "\">" + creator + "</a>");
+			%> | 
+			</span>
+			
+			<span>Total points: <%=summary.totalScore%> | </span>
+			
+			<span><%
+				double rating = quiz.getQuizRating();
+				out.println("Quiz rating: " + rating);
+			%></span>
+			</p>
+			
+			<br /><hr /><br />
+			<p><%
+				String description = quiz.description;
+				out.println(description);
+			%></p>
 		</div>
 		<div class="two_column_right">
-			<h2>Top Three Performers</h2>
+			<h2>Top 3 Performers</h2>
 			<ul>
 			<%
 			ArrayList<QuizTakenRecord> topRecords= quiz.getAllTopRecord();
@@ -113,18 +86,30 @@
 				if(topRecords.size()<=3){
 					for(int i=0;i<topRecords.size();i++){
 						User oneUser = topRecords.get(i).user;
-						out.println("<li>" + (i+1) + ": <a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a></li>");
+						out.println("<li>" + (i+1) + ". <a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a></li>");
 					}
 				}else{
 					for(int i=0;i<3;i++){
 						User oneUser = topRecords.get(i).user;
-						out.println("<li>" + (i+1) + ": <a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a></li>");
+						out.println("<li>" + (i+1) + ". <a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a></li>");
 					}
 				}
 			}
 			%>
 			</ul>
 		</div>
+
+	</div>
+	
+	<div class="content-container">
+	
+		<div class="two_column_left">
+			<h2>Quiz Summary</h2>
+			<p><span class="dominant_text"><%=summary.totalUser%></span> users have taken this quiz</p>
+			<p>They spent an average of <span class="dominant_text"><%=Math.round(summary.averageTimespan/60000 * 100)/100.0%>minutes</span></p>
+			<p>Average score is <span class="dominant_text"><%=Math.round(summary.averageScore*100)/100.0 %></span></p>
+		</div>
+		
 		<div class="two_column_left">
 			<h2>My Statistics</h2>
 			<p><%
@@ -144,6 +129,7 @@
 			}
 			%></p>
 		</div>
+		
 		<div class="two_column_left">
 			<h2>Past Performances</h2>
 			<p>
@@ -155,7 +141,7 @@
 				out.println("No one has taken this quiz yet.");
 			}else{
 				QuizTakenRecord pastHistory = quizHistory.get(0);
-				out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + pastHistory.user.userID + "\">"+ pastHistory.user.username + "</a>" + " has taken this quiz. Score: " + pastHistory.score + " in " + Math.round(pastHistory.timeSpan/60000.0*100)/100.0 + " mins");
+				out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + pastHistory.user.userID + "\">"+ pastHistory.user.username + "</a>" + " scored " + pastHistory.score + " in " + Math.round(pastHistory.timeSpan/60000.0*100)/100.0 + " minutes");
 			}
 			%>
 			
@@ -165,9 +151,7 @@
 
 	</div>
 	
-	<div class="footer">
-			Copyright © toQuiz.me, 2012
-	</div>
+<jsp:include page="/modules/foot.html" />
 	
 </div>
 </body>

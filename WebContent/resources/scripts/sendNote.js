@@ -18,7 +18,7 @@ $(function() {
 				success: function(){
 					$('#note').hide();
 					$('.error').fadeOut(200).hide();
-					$('#note_btn').attr('value', 'node sent');
+					$('#note_btn').attr('value', 'Note sent');
 				}
 			});
 		}

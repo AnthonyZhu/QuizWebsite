@@ -31,18 +31,12 @@
 <body>
 <div class="container" >
 	<jsp:include page="/modules/head.jsp" />
+	<% User homeUser = (User) session.getAttribute("user"); %>
 	
 	<div class="top_container">
 		<div class="three_column_left">
 			<ul>
-				<li>	
-					<h4>
-					<% 
-						User homeUser = (User) session.getAttribute("user");
-			            out.println("Hi, " + homeUser.username);
-		            %>
-					</h4>
-				</li>
+				<h4><a class="link-style-dominant" href="userpage.jsp?id=<%=homeUser.userID%>" style="float:right">My Profile</a></h4><br /><br />
 				<h4 class="title_style_minor">FAVORITES</h4>
 				<li><a class="link-style-dominant" onclick="showNewsFeed()">News Feed</a></li>
 				<li><a class="link-style-dominant" onclick="showNotes()">Notes</a></li>
@@ -61,11 +55,7 @@
 				%>
 				</li>
 				<br />
-				<li>
-                <%
-				out.println("<a href=\"userpage.jsp?id=" + homeUser.userID + "\">My Profile</a>");
-				%>	
-				</li>
+				
 				</ul>
 		</div>
 		

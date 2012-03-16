@@ -6,10 +6,11 @@
 
 .one_column{
 	width: 800px;
-	padding: 20px 100px 20px 100px;
-	margin-top:0;
-	margin-bottom: 0px;
+	padding: 30px 100px 30px 100px;
+	margin-top:5px;
+	margin-bottom: 5px;
 	background: #fff;
+	-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;
 }
 
 form .quiz_title {
@@ -17,7 +18,7 @@ form .quiz_title {
 }
 
 input.app, select.app{width:80%}
-input.large,select.large{width:100%}
+input.large, select.large{width:100%}
 input.medium,select.medium{width:50%}
 input.small,select.small{width:25%}
 
@@ -41,7 +42,7 @@ input.text,input.search,textarea.textarea{
 	border-bottom:1px solid #ddd;
 }
 
-textarea.textarea{width:293px;min-width:100%;max-width:100%}
+textarea.textarea{min-width:100%;max-width:100%}
 textarea.small{height:5.5em}
 textarea.medium{height:10em}
 textarea.large{height:20em}
