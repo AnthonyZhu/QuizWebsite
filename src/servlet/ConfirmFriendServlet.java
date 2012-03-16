@@ -53,8 +53,12 @@ public class ConfirmFriendServlet extends HttpServlet {
 		if (reject != null){
 			if(reject.equals("reject")){
 				FriendRequestMessage.rejectFriendRequest(sendID, receiverID);
+				RequestDispatcher dispatch = request.getRequestDispatcher("homepage/homepage.jsp");
+				dispatch.forward(request, response);
 			}
 		}
+		RequestDispatcher dispatch = request.getRequestDispatcher("homepage/homepage.jsp");
+		dispatch.forward(request, response);
 		
 		
 		// TODO Auto-generated method stub
