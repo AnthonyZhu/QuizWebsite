@@ -31,6 +31,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 	
 	<link rel="stylesheet" href="resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="resources/css/quiz.css" type="text/css" />
 	<link rel="stylesheet" href="resources/css/two_column_layout.css" type="text/css" />
 	
 	<script type="text/javascript" src="resources/scripts/jquery-1.4.2.min.js"></script>

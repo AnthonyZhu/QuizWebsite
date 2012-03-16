@@ -67,26 +67,18 @@
 </head>
 <body>
 <div class="container" >
-	<div class="header">
-		<h1><a href="homepage/homepage.jsp">toQuiz.me</a></h1>
-	</div>
+<jsp:include page="/modules/head.jsp" />
 	
 	<div class="content-container">
 		<div class="two_column_left">
-			<h1>
-			<%
-			out.println("Quiz Result for " + quizName);
-			%>
-			</h1>
-			<p>Creator: 
-			<%
-			String creator = quiz.creator.username;
-			out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + quiz.creator.userID + "\">" + creator + "</a>");
-			%>
-			</p>
+			<span><img src="/QuizWebsite/images/quiz.png" style="float: left" width="150" height="150"></span>
+			<span><h4>Congratulations! You have finished</h4></span>
+			<span><h1><%=quizName%></h1></span>
+			<br/>
+			<hr/>
 			<p>
 			<%
-		    out.println("You get <span class=\"dominant_text\">" + Math.round(myScore*100)/100.0 + "</span> out of total <span class=\"dominant_text\">" + Math.round(totalScore*100)/100.0 + "</span>");
+		    out.println("You scored <span class=\"dominant_text\">" + Math.round(myScore*100)/100.0 + "</span> out of total <span class=\"dominant_text\">" + Math.round(totalScore*100)/100.0 + "</span>");
 			%>
 			<br />
 			<%
@@ -97,42 +89,9 @@
 			out.println("TODO : Add ratings HERE");
 			%></p>
 		</div>
-		<!-- <div class="two_column_right">
-			
-		</div> -->
 
-	</div>
-	
-	<div class="content-container">
-		<div class="two_column_left">
-			<p><%
-			String description = quiz.description;
-			out.println("Description: " + description);
-			%></p>
-		</div>
 		<div class="two_column_right">
-
-		</div>
-	</div>
-	
-	<div class="content-container">
-		<div class="two_column_left">
-			<h2>New Achievements</h2>
-			<p>
-			<%
-			if (newAchievements.size() == 0) {
-				out.println("You have no new achievement. Keep up your progress!");
-			} else {
-				out.println("Well Done! You have <span class=\"dominant_text\">" + newAchievements.size() + "</span> NEW Achievements!");
-				out.println("<br />");
-				for (int i = 0; i < newAchievements.size(); i++) 
-					out.println("<span class=\"dominant_text\">" + newAchievements.get(i).name + " : </span>  " + newAchievements.get(i).description + "<br />");					
-			}
-			%>
-			</p>
-		</div>
-		<div class="two_column_right">
-			<h2>Top Three Performers</h2>
+			<h2>Top 3 Performers</h2>
 			<ul>
 			<%
 			ArrayList<QuizTakenRecord> topRecords= quiz.getAllTopRecord();
@@ -156,6 +115,23 @@
 			%>
 			</ul>
 		</div>
+		
+		<div class="two_column_left">
+			<h2>New Achievements</h2>
+			<p>
+			<%
+			if (newAchievements.size() == 0) {
+				out.println("You have no new achievement. Keep up your progress!");
+			} else {
+				out.println("Well Done! You have <span class=\"dominant_text\">" + newAchievements.size() + "</span> NEW Achievements!");
+				out.println("<br />");
+				for (int i = 0; i < newAchievements.size(); i++) 
+					out.println("<span class=\"dominant_text\">" + newAchievements.get(i).name + " : </span>  " + newAchievements.get(i).description + "<br />");					
+			}
+			%>
+			</p>
+		</div>
+		
 		<div class="two_column_left">
 			<h2>My Statistics</h2>
 			<p><%
@@ -199,9 +175,7 @@
 
 	</div>
 	
-	<div class="footer">
-			Copyright © toQuiz.me, 2012
-	</div>
+<jsp:include page="/modules/foot.html" />
 	
 </div>
 </body>
