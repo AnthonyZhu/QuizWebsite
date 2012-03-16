@@ -36,7 +36,7 @@
 	<div class="top_container">
 		<div class="three_column_left">
 			<ul>
-				<h4><a class="link-style-dominant" href="userpage.jsp?id=<%=homeUser.userID%>" style="float:right">My Profile</a></h4><br /><br />
+				<h4><a class="link-style-dominant" href="/QuizWebsite/userpage.jsp?id=<%=homeUser.userID%>" style="float:right">My Profile</a></h4><br /><br />
 				<h4 class="title_style_minor">FAVORITES</h4>
 				<li><a class="link-style-dominant" onclick="showNewsFeed()">News Feed</a></li>
 				<li><a class="link-style-dominant" onclick="showNotes()">Notes</a></li>

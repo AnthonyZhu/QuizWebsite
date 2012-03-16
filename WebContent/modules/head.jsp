@@ -16,12 +16,10 @@
 <title>Insert title here</title>
 </head>
 <div class="header">
-	<img src="/QuizWebsite/images/toQuiz-logo-small.png" style="float: left;">
+    <% User homeUser = (User) session.getAttribute("user"); %>
+	<a href="\QuizWebsite\homepage\homepage.jsp" ><img src="/QuizWebsite/images/toQuiz-logo-small.png" style="float: left;"></a>
 	<h4 style="color:#ccc;float:right; clear:right; ">
-	<% 
-		User homeUser = (User) session.getAttribute("user");
-		out.println("Welcome, " + homeUser.username);
-	%>
+	<% out.println("Welcome, " + homeUser.username);%>
 	</h4>
 </div>
 </html>
