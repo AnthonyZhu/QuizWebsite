@@ -24,10 +24,12 @@
 		ArrayList<NoteMessage> allNotes = NoteMessage.getMessagesByUserID(homeUser.userID);
 		for(int i = 0; i < allNotes.size(); i++) {
 			NoteMessage note = allNotes.get(i);
-			out.println("<li>" + User.getUserByUserID(note.fromUser).username + "\t" + note.content+ "</li>");
-			out.println("<form name='note_reply' action=''>");
-			out.println("<input type='hidden' id='senderID' value='"+ note.fromUser +"'/>");
-			out.println("<input type='submit' id='sendNote' onclick='sendNotePopup()' value='reply'/>");
+			out.println("<li>" + User.getUserByUserID(note.fromUser).username + " said: \"" + note.content+ "\"</li>");
+			out.println("<form name=\"note_reply\" action=\"/QuizWebsite/ReplyNoteServlet\" method=\"post\">");
+			out.println("<input type=\"hidden\" name=\"senderID\" value=\""+ homeUser.userID +"\">");
+			out.println("<input type=\"hidden\" name=\"receiverID\" value=\""+ note.fromUser +"\">");
+			out.println("<input type=\"text\" class=\"large\" name=\"replyNote\">");
+			out.println("<input type=\"submit\" name=\"sendNote\" value=\"reply\">");
 			out.println("</form>");
 		}
 		out.println("</ul>");
