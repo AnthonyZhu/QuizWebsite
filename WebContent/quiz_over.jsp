@@ -125,7 +125,7 @@
 				out.println("Well Done! You have <span class=\"dominant_text\">" + newAchievements.size() + "</span> NEW Achievements!");
 				out.println("<br />");
 				for (int i = 0; i < newAchievements.size(); i++) 
-					out.println(newAchievements.get(i).name + " : " + newAchievements.get(i).description + "<br />");					
+					out.println("<span class=\"dominant_text\">" + newAchievements.get(i).name + " : </span>  " + newAchievements.get(i).description + "<br />");					
 			}
 			%>
 			</p>

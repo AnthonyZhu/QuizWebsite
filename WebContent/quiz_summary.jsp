@@ -106,7 +106,7 @@
 		<div class="two_column_left">
 			<h2>Quiz Summary</h2>
 			<p><span class="dominant_text"><%=summary.totalUser%></span> users have taken this quiz</p>
-			<p>They spent an average of <span class="dominant_text"><%=Math.round(summary.averageTimespan/60000 * 100)/100.0%>minutes</span></p>
+			<p>They spent an average of <span class="dominant_text"><%=Math.round(summary.averageTimespan/60000 * 100)/100.0%> minutes</span></p>
 			<p>Average score is <span class="dominant_text"><%=Math.round(summary.averageScore*100)/100.0 %></span></p>
 		</div>
 		
@@ -118,8 +118,8 @@
 				if(records.size() != 0){
 					QuizSummary mySummary = quiz.getQuizSummary(homeUser);
 					out.println("<ul>");
-					out.println("<li>My average score: " + Math.round(mySummary.averageScore*100)/100.0 + ". Average time: " + Math.round(mySummary.averageTimespan/60000*100)/100.0 + " mins</li>");
-					out.println("<li>My best score: " + Math.round(100*mySummary.bestScore)/100.0 + ". My fastest time: " + Math.round(100*mySummary.bestTimespan/60000)/100.0 + " mins</li>");
+					out.println("<li>My average score: " + Math.round(mySummary.averageScore*100)/100.0 + ". Average time: " + Math.round(mySummary.averageTimespan/60000*100)/100.0 + " minutes</li>");
+					out.println("<li>My best score: " + Math.round(100*mySummary.bestScore)/100.0 + ". My fastest time: " + Math.round(100*mySummary.bestTimespan/60000)/100.0 + " minutes</li>");
 					out.println("</ul>");
 				}else{
 					out.println("I have not taken this quiz yet");
@@ -135,13 +135,15 @@
 			<p>
 			<%
 			ArrayList<QuizTakenRecord> quizHistory = quiz.getAllHistory();
-			if(quizHistory == null){
+			if (quizHistory == null) {
 				out.println("No one has taken this quiz yet.");
-			}else if(quizHistory.size() == 0){
+			} else if (quizHistory.size() == 0) {
 				out.println("No one has taken this quiz yet.");
-			}else{
-				QuizTakenRecord pastHistory = quizHistory.get(0);
-				out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + pastHistory.user.userID + "\">"+ pastHistory.user.username + "</a>" + " scored " + pastHistory.score + " in " + Math.round(pastHistory.timeSpan/60000.0*100)/100.0 + " minutes");
+			} else {
+				for (int i = 0; i < Math.min(quizHistory.size(), 5); i++) {
+					QuizTakenRecord record = quizHistory.get(i);
+					out.println("<a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + record.user.userID + "\">"+ record.user.username + "</a>" + " scored " + record.score + " in " + Math.round(record.timeSpan/60000.0*100)/100.0 + " minutes <br />");
+				}
 			}
 			%>
 			
