@@ -46,14 +46,20 @@
 			<%
 			if(homeUser.userID == visitUserID){
 			}else{
-				out.println("<jsp:include page=\"/sendFriendRequestButton.jsp\"></jsp:include>");
+				out.println("<form action=\"addFriendServlet\" method=\"post\">");
+				out.println("<input type=\"hidden\" name=\"sender\" value=\"" + homeUser.userID + "\">");
+				out.println("<input type=\"hidden\" name=\"receiver\" value=\"" + visitUserID + "\">");
+				out.println("<input type=\"submit\" id=\"submit_btn\" value=\"Add as friend\">");
+				out.println("</form>");
 			}
 			%>
+			<!--  
 			<span style="float:right">
-
 			<jsp:include page="/sendFriendRequestButton.jsp"></jsp:include>
 			<jsp:include page="/sendChallengeButton.jsp"></jsp:include>
 			</span>
+			-->
+			
 			</span>
 			<img src="/QuizWebsite/images/user.png" style="float: left" width="150" height="150">
 			<h1><%= visitUser.username %></h1>
