@@ -61,13 +61,29 @@ html{
 	height: 1%;
 }
 
+.feed_block{
+	width:100%;
+	padding:5px;
+	clear:both;
+	float:left;
+	display:block;
+}
+
+.feed_container{
+	float:left;
+	width:85%;
+	height:40;
+	margin:2px;
+	padding:0;
+	border-bottom:1px solid #E3EEF8;
+}
 
 /*article,aside,figure,figure img,figcaption,hgroup,footer,header,nav,section,video,object,output{display:block}*/
 /*******************************************/
 /**************Text Features****************/
 /*******************************************/
 h1,h2,h3,h4,h5,h6,body{
-	
+	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
 	margin-top:5px;
 	margin-left:0;
 	margin-right:0;
@@ -76,13 +92,10 @@ h1,h2,h3,h4,h5,h6,body{
 }
 
 body{
-	font-family: Arial;
+	font-size:14px;
 }
 
-h1,h2,h3,h4,h5,h6{
-	font-family: Arial, Cambria;
-	
-}
+
 p{
 	margin-left:10px;
 	margin-bottom:1px;
@@ -92,6 +105,8 @@ p{
 a{
 	color: #393939;
 	text-decoration: none;
+	font-weight:bold;
+	font-size:105%;
 }
 
 a:hover {
@@ -119,15 +134,45 @@ a:hover {
 	font-family: "Arial Black", Arial;
 }
 
-ul{
+.blue{
+	color:#007cb3;
+}
+
+.name{
+	color:#007cb3;
+	font-weight:bold;
+}
+
+.stress{
+	font-weight:bold;
+	font-size:105%;
+}
+
+.desc{
+	color:#c8c8c8;	
+	font-size:90%;
+}
+
+
+
+ul,ol{
+	margin-top:0;
+	margin-bottom:10px;
 	margin:0;
-	padding:0;
+	padding: 0;
+}
+
+ul{
 	list-style-type:none;
 }
 
+
 li{
-	margin:0;
-	padding:6px 1% 9px 1%;
+	margin-top:0;
+	margin-left: 10px;
+	margin-bottom:0;
+	padding: 0;
+	padding:0 0 0 0;
 	clear:both;
 	background-color:transparent;
 	position:relative;
@@ -143,8 +188,8 @@ li{
 /*******************************************/
 hr {
 	color:#c8c8c8;
-	margin-top:5px;
-	margin-bottom:5px;
+	margin-top:10px;
+	margin-bottom:10px;
 	border-width:1px;
 	border-style:dashed;
 }
@@ -172,19 +217,24 @@ iframe.dynamicFrame {
 img.small{
 	width:16px;
 	height:16px;
+	float:left;
 }
 
 
 img.medium{
-	width:32px;
-	height:32px;
+	width:40;
+	height:40;
+	float:left;
+	margin-right:5px;
 }
 
 
 img.large{
 	width:150px;
 	height:150px;
+	float:left;
 }
+
 
 /*******************************************/
 /*************Button Features***************/

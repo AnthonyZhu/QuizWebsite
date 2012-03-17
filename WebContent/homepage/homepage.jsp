@@ -76,7 +76,6 @@
 				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMoreAnnouncements()">+ More</a></span>
 				<span style="float:left"><h4 class="title-style-minor">Announcement</h4></span>
 				<br />
-				<br />
 				<hr />
 				<ol>
 				<%
@@ -98,11 +97,12 @@
 				}
 				%>
 				</ol>
+					<br />
+				<br />
 			</div>
 			<div class="right_block">
 				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMorePopularQuizzes()">+ More</a></span>
 				<span style="float:left"><h4 class="title-style-minor">Most Popular Quizzes</h4></span>
-				<br />
 				<br />
 				<hr />
 				<ol>
@@ -115,11 +115,12 @@
 					}				
 				%>
 				</ol>
+				<br />
+				<br />
 			</div>
 			<div class="right_block">
 				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMoreRecentlyQuizzes()">+ More</a></span>
 				<span style="float:left"><h4 class="title-style-minor">Most Recent Quizzes</h4></span>
-				<br />
 				<br />
 				<hr />
 				<ol>
@@ -133,6 +134,7 @@
 				
 				%>
 				</ol>
+			
 			</div>
 		</div>
 	<jsp:include page="/modules/foot.html" />

@@ -13,6 +13,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href="/QuizWebsite/resources/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/QuizWebsite/resources/css/quiz.css" type="text/css" />
 	<link rel="stylesheet" href="/QuizWebsite/resources/css/three_column_layout.css" type="text/css" />
 </head>
 <body>
