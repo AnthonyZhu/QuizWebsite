@@ -53,10 +53,9 @@ public class ChallengeMessage extends Message {
 	public static ArrayList<ChallengeMessage> getMessagesByUserID(int userID) {
 		ArrayList<ChallengeMessage> ChallengMessageQueue = new ArrayList<ChallengeMessage>();
 		try {
-			String statement = new String("SELECT * FROM " + DBTable + " WHERE uid1 = ? OR uid2 = ?");
+			String statement = new String("SELECT * FROM " + DBTable + " WHERE uid2 = ?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, userID);
-			stmt.setInt(2, userID);
 			ResultSet rs = DBConnection.DBQuery(stmt);
 			rs.beforeFirst();
 			while(rs.next()) {
