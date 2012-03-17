@@ -144,7 +144,7 @@
 			</li>
 			
 			<li id="foli8" class="highlight">
-				<label class="quiz_title" id="title8" for="Field8">You can add tags to the quiz(separate by comma; 5 tags maximum)</label>
+				<label class="quiz_title" id="title8" for="Field8">You can add tags to the quiz(separate by comma ","; 5 tags maximum)</label>
 				<div>
 					<input id="Field8" name="Field8" type="text" class="field text large" value="" maxlength="255" tabindex="5" onkeyup="" />
 				</div>

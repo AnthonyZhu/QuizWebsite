@@ -57,6 +57,7 @@ public class QuizSettingServlet extends HttpServlet {
 		User homeUser = (User) session.getAttribute("user");
 		int userID = homeUser.userID;
 		String quizURL = "none URL";
+		session.setAttribute("quizTag", quizTag);
 		
 		if(quizName.equals("") || quizCategory.equals("") || quizDescription.equals("")){
 			RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_settings.jsp");
