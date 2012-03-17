@@ -45,6 +45,12 @@
 		<div class="two_column_left">
 			<form action="StartQuiz" method="post">
 			<input style="float:right" type="submit" value="Take quiz now!" />
+			<% 
+			out.println("<input name =\"quizID\" type=\"hidden\" value=\"" + quiz.quizID + "\">");
+			%>
+			</form>
+			
+			<form action="StartPractice" method="post">
 			<input style="float:right" type="submit" onclick="practiceMode()" value="Practice Mode" /><br />
 			<% 
 			out.println("<input name =\"quizID\" type=\"hidden\" value=\"" + quiz.quizID + "\">");
