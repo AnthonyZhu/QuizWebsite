@@ -28,12 +28,14 @@
 		}else if(takenRecord.size() == 0){
 			out.println("I haven't taken any quiz yet.");
 		}else{
-			out.println("<ul>");
 			for(int i=0;i<takenRecord.size();i++){
-				out.println("<li><img src=\"/QuizWebsite/images/check.png\" style=\"float: left\" width=\"16\" height=\"16\">"+
-				"&#160;<a target=\"_blank\" class=\"link-style-dominant\" href=\"\\QuizWebsite\\quiz_summary.jsp?id=" + takenRecord.get(i).quiz.quizID + "\">" + takenRecord.get(i).quiz.name + "</a></li>");
+				out.println("<div class=\"feed_block\">");
+				out.println("<div><img src=\"/QuizWebsite/images/star.png\" class=\"medium\"></div>");
+				out.println("<div class=\"feed_container\">I took the quiz" +
+				"&#160;<a target=\"_blank\" class=\"link-style-dominant\" href=\"\\QuizWebsite\\quiz_summary.jsp?id=" + takenRecord.get(i).quiz.quizID + "\">" + takenRecord.get(i).quiz.name + "</a></div>");
+				out.println("</div>");		
 			}
-			out.println("</ul>");
+			
 		}
 		%>
 	</div>	
