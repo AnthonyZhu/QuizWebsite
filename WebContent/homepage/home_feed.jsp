@@ -36,7 +36,7 @@
 				long min = quizTakenRecord.timeSpan / 60000;
 				long sec = (quizTakenRecord.timeSpan % 60000) / 1000;
 				out.println("<div><img src=\"/QuizWebsite/images/star.png\" class=\"medium\"></div>");
-				out.println("<div class=\"feed_container\"><span>"+record.user.getUserStringWithURL(true) + " scored <span class=\"stress\">" + quizTakenRecord.score + "</span> on quiz <span>" + quizTakenRecord.quiz.getQuizStringWithURL(true) + "</span><br />");
+				out.println("<div class=\"feed_container\"><span>"+record.user.getUserStringWithURL(true) + " scored <span class=\"stress\">" + quizTakenRecord.score + "</span> in <span>" + quizTakenRecord.quiz.getQuizStringWithURL(true) + "</span><br />");
 				out.println("<span class=\"desc\">" +SimpleTime.getTime(record.timestamp)+"</span></div>");
 			} else if (record instanceof QuizCreatedRecord) {
 				QuizCreatedRecord quizCreatedRecord = (QuizCreatedRecord) record;
