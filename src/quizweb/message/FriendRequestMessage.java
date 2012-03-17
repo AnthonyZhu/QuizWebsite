@@ -102,7 +102,7 @@ public class FriendRequestMessage extends Message {
 	public static int getUnreadCount(User user) {
 		int unreadCount = 0;
 		try {
-			String statement = new String("SELECT COUNT(mid) FROM " + DBTable + " WHERE uid2 = ? and isConfirmed = false and isRejeced = false");
+			String statement = new String("SELECT COUNT(mid) FROM " + DBTable + " WHERE uid2 = ? and isConfirmed = false and isRejected = false");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, user.userID);
 			ResultSet rs = stmt.executeQuery();
