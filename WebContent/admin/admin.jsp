@@ -37,18 +37,20 @@
 		</div>
 		
 		<div class="admin_area">
+		<br /><br /><br />
 			<div id="searchArea">
-				<span>Keyword </span>
+				
+				<p><span>Keyword </span>
 				<input type="text"  id="inputBox" onkeydown="if(event.keyCode==13) search()" />
-				<input type="submit" value="Search" onclick="search()"/>
+				<input type="submit" value="Search" onclick="search()"/></p>
 			</div>
 			<div id="createAncmt">
 				<form id="create_announcement" action="">
-					title: <input type="text" id="title" />
-					<textarea id="new_announcement" rows="10" cols="30"></textarea>
+					<p>title: <input type="text" id="title" /></p>
+					<p><textarea id="new_announcement" rows="10" cols="30"></textarea></p>
 					<span id="error1" style="display:none"> title cannot be empty.</span>
 					<span id="error2" style="display:none"> announcement cannot be empty.</span>
-					<input type="submit" id="createButton" value="Create" />
+					<p><input type="submit" id="createButton" value="Create" /></p>
 				</form>
 			</div>
 			<iframe id="adminFrame" class="adminFrame" frameborder="0" width="800" height="800" src="admin_stats.jsp"></iframe>
