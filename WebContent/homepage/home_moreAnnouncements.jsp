@@ -23,7 +23,6 @@
 		<ol>
 		<% 
 		for(int i=0;i<Announcement.allAnnouncements.size();i++){
-			
 			out.println("<li>" + Announcement.allAnnouncements.get(i).title + " | published at " + Announcement.allAnnouncements.get(i).timestamp + "<br /> \"" + Announcement.allAnnouncements.get(i).content + "\"</li>");
 		}
 		%>

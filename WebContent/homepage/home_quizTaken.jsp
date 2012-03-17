@@ -18,7 +18,7 @@
 <body>
 <div class="three_column_content">
 		<h2 class="title_style_minor">Quizzes I Took</h2>
-		<br /><br />
+		<br />
 		<%
 	
 		User homeUser = (User) session.getAttribute("user");

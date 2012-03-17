@@ -59,15 +59,16 @@
 				out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/createQuiz/new_quiz_settings.jsp\">+ Create Quiz</a>");
 				%>
 				</li>
+				<hr />
+				<br />
 				<li>
                 <%
                 if (homeUser.permission == User.IS_ADMIN){
-                	out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/admin/admin.jsp\">Admin</a>");
+                	out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/admin/admin.jsp\">Admin Login</a>");
                 }
 				%>
 				</li>
 				<br />
-				
 				</ul>
 		</div>
 		
@@ -77,7 +78,7 @@
 	
 		<div class="three_column_right">
 			<div class="right_block">
-				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMoreAnnouncements()">+ More</a></span>
+				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMoreAnnouncements()">+More</a></span>
 				<span style="float:left"><h4 class="title-style-minor">Announcement</h4></span>
 				<br />
 				<hr />
@@ -105,7 +106,7 @@
 				<br />
 			</div>
 			<div class="right_block">
-				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMorePopularQuizzes()">+ More</a></span>
+				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMorePopularQuizzes()">+More</a></span>
 				<span style="float:left"><h4 class="title-style-minor">Most Popular Quizzes</h4></span>
 				<br />
 				<hr />
@@ -123,7 +124,7 @@
 				<br />
 			</div>
 			<div class="right_block">
-				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMoreRecentlyQuizzes()">+ More</a></span>
+				<span><a class="link-style-dominant" style="float:right;margin-top:5px;margin-bottom:1px" onclick="showMoreRecentlyQuizzes()">+More</a></span>
 				<span style="float:left"><h4 class="title-style-minor">Most Recent Quizzes</h4></span>
 				<br />
 				<hr />
