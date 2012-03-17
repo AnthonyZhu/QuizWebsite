@@ -403,10 +403,10 @@ public class Quiz {
 	}
 
 
-	public static Quiz getQuizByXMLElem(XMLElement root, ArrayList<XMLElement> questionElems) {
+	public static Quiz getQuizByXMLElem(XMLElement root, ArrayList<XMLElement> questionElems, ArrayList<String> tagList) {
 		String name = new String("Quiz Name Missing");
 		String description = new String("Quiz Description Missing");
-		String category = new String("Uncategorized");
+		String category = new String("Uncategorized"); 
 		int userID = -1;
 		boolean isRandom = false;
 		boolean isOnepage = false;
@@ -435,6 +435,8 @@ public class Quiz {
 					userID = user.userID;
 			} else if (elem.name.equals("question")) {
 				questionElems.add(elem);
+			} else if (elem.name.equals("tag")) {
+				tagList.add(elem.content);
 			} else {
 				System.out.println("Unknown Quiz XML field " + elem.name);
 			}
@@ -443,7 +445,7 @@ public class Quiz {
 		if (userID == -1) {
 			System.out.println("Author for quiz " + name + " must be specified!");
 		}
-		Quiz quiz = new Quiz(name, quizURL, description, category, userID, isRandom, isOnepage, opFeedback, opPractice);		
+		Quiz quiz = new Quiz(name, quizURL, description, category, userID, isRandom, isOnepage, opFeedback, opPractice);
 		return quiz;
 	}
 

@@ -40,8 +40,10 @@ public class XMLReader {
 			XMLElement elem = root.childList.get(i);
 			if (elem.name.equals("quiz")) {
 				ArrayList<XMLElement> questionElems = new ArrayList<XMLElement>();
-				Quiz quiz = Quiz.getQuizByXMLElem(elem, questionElems);
-				quiz.addQuizToDB();		
+				ArrayList<String> tagList = new ArrayList<String>();
+				Quiz quiz = Quiz.getQuizByXMLElem(elem, questionElems, tagList);
+				quiz.addQuizToDB();
+				quiz.addTags(tagList);
 				for (int j = 0; j < questionElems.size(); j++) {
 					XMLElement questionElem = questionElems.get(j);
 					Question question = Question.getQuestionByXMLElem(questionElem, quiz, j);

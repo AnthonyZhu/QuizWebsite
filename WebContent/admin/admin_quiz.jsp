@@ -47,23 +47,20 @@
 				
 				out.println("<tr><td>" + curQuiz.quizID + "</td><td>" + curQuiz.getQuizStringWithURL(true) + "</td><td>" + curQuiz.category + "</td>");
 				out.println("<td>" + curQuiz.creator.getUserStringWithURL(true) + "</td><td>" + random + "</td><td>" + onepage + "</td><td>" + feedback + "</td><td>" + practice + "</td></tr>");
-				out.println("</table>");			
-				out.println("</div>");
-				out.println("<div>");
-				out.println("<form action=\"/QuizWebsite/ModifyQuizServlet\" method=\"post\">");
+
+				out.println("<p><form action=\"/QuizWebsite/ModifyQuizServlet\" method=\"post\">");
 				out.println("<input type=\"hidden\" name=\"target_quizid\" value=\"" + curQuiz.quizID + "\">");
 				out.println("<input type=\"hidden\" name=\"source_userid\" value=\"" + homeUser.userID + "\">");
 				out.println("<input type=\"hidden\" name=\"keyword\" value=\"" + keyword + "\">");
 				out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Delete Quiz\">");
 				out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Edit Quiz\">");
 				out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Clear Quiz History\">");
-				out.println("</form>");
+				out.println("</form></p>");
 			}
+			out.println("</table>");
 		}
+		out.println("</div>");
 	}
-
-	
-	out.println("</div>");
 	%>
 	
 	
