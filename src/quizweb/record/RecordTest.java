@@ -41,9 +41,6 @@ public class RecordTest {
 		userAnswer.add(new String("Hong Kong"));
 		userAnswer.add(new String("Stanford, California"));
 		assertEquals(quiz.getScore(userAnswer), 60, 1e-6);
-		
-		ArrayList<Achievement> achievements = facebook.getAchievements();
-		assertEquals(achievements.size(), 2);
-	}
+}
 
 }

@@ -86,7 +86,7 @@ public class QuestionTest {
 				assertEquals(question.getScore(ArrayToList(userAnswerArray2)), 5, 1e-6);
 				assertEquals(question.getScore(ArrayToList(userAnswerArray3)), 5, 1e-6);					
 			} else if (question instanceof MultiChoiceMultiAnswerQuestion) {
-				assertEquals(((ArrayList<String>)question.question).size(), 5);
+				assertEquals(((ArrayList<String>)question.question).size(), 6);
 				assertEquals(((ArrayList<String>)question.answer).size(), 2);
 				String[] userAnswerArray1 = {"This is a correct answer about Bunny.", "This is another correct answer about Bunny."};
 				String[] userAnswerArray2 = {"This is a correct answer about Bunny.", "This is another correct answer about Bunny.", "This is a wrong answer about Bunny."};

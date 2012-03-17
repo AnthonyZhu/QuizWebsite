@@ -103,7 +103,7 @@ public class MatchingQuestion extends Question {
 		for (int j = 0; j < answerList.size(); j++) 
 			for (int i = N+1; i < questionList.size(); i++) {
 				if (answerList.get(j).equals(questionList.get(i))) {
-					indexList.add(new Integer(i-N+1));
+					indexList.add(new Integer(i-N));
 					break;
 				}				
 			}
