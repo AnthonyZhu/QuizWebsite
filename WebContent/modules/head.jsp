@@ -17,7 +17,10 @@
 <div class="header">
     <% User homeUser = (User) session.getAttribute("user"); %>
 	<a href="http://localhost:8080/QuizWebsite/homepage/homepage.jsp" ><img src="/QuizWebsite/images/toQuiz-logo-small.png" style="float: left;"></a>
-	<h4 style="color:#ccc;float:right; clear:right; ">
+	<form action="/QuizWebsite/LogoutServlet" method="post">
+		<input type="submit" style="float:right; clear:right" value="logout"/>
+	</form>
+	<h4 style="color:#ccc;float:right">
 	<% out.println("Welcome, " + homeUser.username);%>
 	</h4>
 </div>
