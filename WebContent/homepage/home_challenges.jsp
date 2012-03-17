@@ -27,14 +27,15 @@
 		}else if(challengeMessages.size() == 0){
 			out.println("I don't have any challenges.");
 		}else{
-			out.println("<ul>");
+			out.println("<div class=\"feed_block\">");
+			out.println("<div><img src=\"/QuizWebsite/images/challenge.png\" class=\"medium\"></div>");
 			for(int i=0;i<challengeMessages.size();i++){
 				ChallengeMessage challenge = challengeMessages.get(i);
 				User oneUser = User.getUserByUserID(challenge.fromUser);
-				out.println("<li><a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + "</a> sent this challenge to you: <a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/quiz_summary.jsp?id=" + challenge.quizID + "\">" + Quiz.getQuizByQuizID(challenge.quizID).name + "</a><br /></li>");
-				challenge.readMessage();
-			}
-			out.println("</ul>");
+				out.println("<div class=\"feed_container\"><a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + 
+						"</a> sent a challenge to you in <a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/quiz_summary.jsp?id=" + 
+						challenge.quizID + "\">" + Quiz.getQuizByQuizID(challenge.quizID).name + "</a><br />");			}
+			out.println("</div></div>");
 		}
 	%>
 </div>	

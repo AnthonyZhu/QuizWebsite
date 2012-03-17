@@ -116,11 +116,11 @@
 			}else{
 				if(AchievementRecord.getAchievementsByUserID(visitUserID,0).size()<=10){
 					for(int i=0;i<AchievementRecord.getAchievementsByUserID(visitUserID,0).size();i++){
-						out.println("<li><img src=\"/QuizWebsite/images/check.png\" style=\"float: left\" width=\"16\" height=\"16\">" + AchievementRecord.getAchievementsByUserID(visitUserID,0).get(i).name + "</li>");
+						out.println("<li>" + AchievementRecord.getAchievementsByUserID(visitUserID,0).get(i).name + "</li>");
 					}
 				}else{
 					for(int i=0;i<=10;i++){
-						out.println("<li>" + AchievementRecord.getAchievementsByUserID(visitUserID,0).get(i).name + "</li>");
+						out.println("<li>"+ AchievementRecord.getAchievementsByUserID(visitUserID,0).get(i).name + "</li>");
 					}
 				}
 			}
@@ -128,13 +128,9 @@
 			</ul></p>
 			
 		</div>
-	</div>
 	
-	
-	<div class="content-container">
-		
 		<div class="two_column_right">
-			<h2>Friend List</h2>
+			<h2>Friends</h2>
 			<p><ul>
 			<%
 			if(visitUser.getFriendList() == null){

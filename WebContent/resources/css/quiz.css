@@ -13,6 +13,11 @@
 	-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;
 }
 
+.one_column li{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
 form .quiz_title {
 	font-weight:bold;
 }

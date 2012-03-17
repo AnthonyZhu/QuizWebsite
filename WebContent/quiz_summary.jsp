@@ -67,11 +67,11 @@
 			%> | 
 			</span>
 			
-			<span>Total points: <%=summary.totalScore%> | </span>
+			<span>Total points: </span><span class="stress"><%=summary.totalScore%>  </span>
 			
 			<span><%
 				double rating = quiz.getQuizRating();
-				out.println("Quiz rating: " + rating);
+				out.println(" | Quiz rating: </span><span class=\"stress\">" + rating);
 			%></span>
 			</p>
 			
@@ -95,7 +95,7 @@
 			</p>
 			<br />
 			<hr /><br />
-			<p><%
+			<p class="desc"><%
 				String description = quiz.description;
 				out.println(description);
 			%></p>

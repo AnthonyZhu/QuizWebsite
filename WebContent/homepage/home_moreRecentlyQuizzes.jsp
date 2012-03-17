@@ -23,9 +23,11 @@
 		<ol>
 		<%
 		ArrayList<Quiz> quizList = Quiz.getRecentQuiz();
-		for (int i = 0; i <quizList.size(); i++) {		
+		for(int i = 0; i <quizList.size(); i++) {		
 			Quiz quiz = quizList.get(i);
-			out.println("<li>" + quiz.getQuizStringWithURL(false) + "</li>");
+			out.println("<div class=\"feed_block\">");
+			out.println("<div><img src=\"/QuizWebsite/images/quiz.png\" class=\"medium\"></div>");
+			out.println("<div class=\"feed_container\"><span>" + quiz.getQuizStringWithURL(false) + "</span><br /></div></div>");
 		}	
 	    %>
 	    </ol>

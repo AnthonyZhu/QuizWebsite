@@ -13,10 +13,15 @@
 }
 
 
-.two_column_left ul{
+.two_column_left ol,ul{
 	margin-top:0;
 	margin-bottom:10px;
 	padding: 0;
+}
+
+.two_column_left{
+	margin-top:5px;
+	margin-bottom:5px;
 }
 
 .two_column_right{
@@ -27,3 +32,4 @@
 	margin-bottom: 5px;
 	margin-top:0;
 }
+

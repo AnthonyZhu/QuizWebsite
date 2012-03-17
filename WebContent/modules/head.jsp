@@ -15,9 +15,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <div class="header">
-    <% User homeUser = (User) session.getAttribute("user"); %>
+	<% User homeUser = (User) session.getAttribute("user"); %>
 	<a href="http://localhost:8080/QuizWebsite/homepage/homepage.jsp" ><img src="/QuizWebsite/images/toQuiz-logo-small.png" style="float: left;"></a>
-	<h4 style="color:#ccc;float:right; clear:right; ">
+	<form action="/QuizWebsite/LogoutServlet" method="post">
+		<button style="float:right; clear:right">logout</button>
+	</form>
+	<h4 style="color:#ccc;float:right">
 	<% out.println("Welcome, " + homeUser.username);%>
 	</h4>
 </div>

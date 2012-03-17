@@ -23,9 +23,11 @@
 		<ol>
 		<% 
 		for(int i=0;i<Announcement.allAnnouncements.size();i++){
-			
-			out.println("<li>" + Announcement.allAnnouncements.get(i).title + " | published at " + Announcement.allAnnouncements.get(i).timestamp + "<br /> \"" + Announcement.allAnnouncements.get(i).content + "\"</li>");
-		}
+			out.println("<div class=\"feed_block\">");
+			out.println("<div><img src=\"/QuizWebsite/images/announcement.png\" class=\"medium\"></div>");
+			out.println("<div class=\"feed_container\"><span>" + Announcement.allAnnouncements.get(i).title + ": <span class=\"stress\">" + Announcement.allAnnouncements.get(i).content + "</span><br />");
+			out.println("<span class=\"desc\">" +SimpleTime.getTime(Announcement.allAnnouncements.get(i).timestamp)+"</span></div></div>");
+	    }
 		%>
 		</ol>
 	</div>
