@@ -75,7 +75,26 @@
 			%></span>
 			</p>
 			
-			<br /><hr /><br />
+			<p>
+			<span>Tag:</span>
+			<span><% 
+			ArrayList<String> tags = quiz.getTags();
+			if(tags == null){
+				out.println("No tag.");
+			}else if(tags.size() == 0){
+				out.println("No tag.");
+			}else{
+				for(int i=0;i<tags.size();i++){
+					out.print(tags.get(i));
+					if(i<tags.size()-1){
+						out.println(", ");
+					}
+				}
+			}
+			%></span>
+			</p>
+			<br />
+			<hr /><br />
 			<p><%
 				String description = quiz.description;
 				out.println(description);
