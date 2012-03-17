@@ -27,9 +27,12 @@
 		for(int i = 0; i < allFriendRequest.size(); i++) {
 			FriendRequestMessage friendRequest = allFriendRequest.get(i);
 			if (homeUser.isFriend(User.getUserByUserID(friendRequest.fromUser)) == User.IS_FRIEND) {
+				FriendRequestMessage.removeRequest(friendRequest);
 			} else {
-				if(!friendRequest.isPending())
+				if(!friendRequest.isPending()) {
+					FriendRequestMessage.removeRequest(friendRequest);
 					continue;
+				}
 				String senderName = User.getUserByUserID(friendRequest.fromUser).username;
 				out.println("<span><img src=\"/QuizWebsite/images/add.png\" style=\"float: left;margin-right:5px\" width=\"40\" height=\"40\"></span>");
 				out.println("<div><a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/userpage.jsp?id=" + friendRequest.fromUser + "\">");

@@ -52,6 +52,18 @@ public class FriendRequestMessage extends Message {
 		}
 	}
 	
+	public static void removeRequest(FriendRequestMessage friendRequest) {
+		try {
+			String statement = new String("DELETE FROM " + DBTable + " WHERE uid1 = ? and uid2 = ?");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, friendRequest.fromUser);
+			stmt.setInt(2, friendRequest.toUser);
+			DBConnection.DBUpdate(stmt);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}		
+	}
+	
 	public static void rejectFriendRequest(int senderID, int receiverID) {
 		try {
 			String statement = new String("UPDATE " + DBTable + " SET isRejected = true " +
