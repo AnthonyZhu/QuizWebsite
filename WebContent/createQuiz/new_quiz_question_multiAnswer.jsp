@@ -31,7 +31,7 @@
 <div class="container">
 <jsp:include page="/modules/head.jsp" />
 	
-	<form id="form1" name="form1" action="QuizCreationServlet" method="post">
+	<form id="form1" name="form1" action="/QuizWebsite/QuizCreationServlet" method="post">
     <%
     Quiz newQuiz = (Quiz) session.getAttribute("newQuiz");
     %>
@@ -39,9 +39,9 @@
 		<%
 		String creatorName = newQuiz.creator.username;
 		String quizName = newQuiz.name;
-		Integer posistion = (Integer) session.getAttribute("questionPosistion");
+		Integer position = (Integer) session.getAttribute("questionPosition");
 		String questionType = (String) session.getAttribute("QuestionType"); 
-		out.println("<h2>Please add question No." + posistion + " to \"" + quizName + "\"</h2>");
+		out.println("<h2>Please add question No." + position + " to \"" + quizName + "\"</h2>");
 		out.println("<h3>This question is \"" + questionType + "\" type</h2>");
 		
 		%>
@@ -49,7 +49,7 @@
          
         <ul>
 			<li class="highlight">
-				<label class="quiz_title" >Please input question text below:</label>
+				<label class="quiz_title" >Please input question text below:<sup>*</sup></label>
 				<div>
 					<textarea id="questionText" name="Field1" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
 					<label for="Field1">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp;</label>
@@ -57,7 +57,7 @@
 				</div>
 			</li>
 			<li class="highlight">
-				<label class="quiz_title">Please input your sample answer below: (use comma "," at the end of each answer to specify one answer)</label>
+				<label class="quiz_title">Please input your sample answer below: (use comma "," at the end of each answer to specify one answer)<sup>*</sup></label>
 				<div>
 					<textarea id="questionAnswer" name="Field2" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
 					<label for="Field2">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp;</label>
@@ -65,13 +65,13 @@
 			</li>
 			<li class="highlight">
 				<div>
-				    <label class="quiz_title">How many right questions need for full credit</label>
+				    <label class="quiz_title">How many right questions need for full credit (should be numeric)<sup>*</sup></label>
 					<input id="answerNum" name="Field3" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
 				</div>
 			</li>
 			<li id="foli3" class="highlight">
 				<fieldset>
-				 	<legend id="title3" class="quiz_title">Should all answers be in order?</legend>
+				 	<legend id="title3" class="quiz_title">Should all answers be in order?<sup>*</sup></legend>
 					<div>
 						<span>
 							<input id="Field4_0" name="Field4" type="radio" class="field radio" value="Yes" tabindex="3" checked="checked"  />
@@ -89,7 +89,7 @@
         <ul>
            <li>
 				<div>
-				    <label class="quiz_title">Question Score</label>
+				    <label class="quiz_title">Question Score (should be numeric)<sup>*</sup></label>
 					<input id="score" name="score" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
 				</div>
 		  </li>
