@@ -239,7 +239,7 @@ img.large{
 /*************Button Features***************/
 /*******************************************/
 
-submit button {
+submit, button {
 	border-top: 1px solid #96d1f8;
    	background: #65a9d7;
    	background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));

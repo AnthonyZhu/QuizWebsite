@@ -29,7 +29,7 @@
 						<br />
 						Password: <br /><input type="password" class="large" name="password"><br />
 						<br />
-						<input type="submit" value="Login"><br />
+						<button>Login</button><br />
 					</form>
 				</li>
 				
@@ -51,7 +51,7 @@
 						<br />
 						Password: <br /><input type="text" class="large" name="password"><br />
 						<br />
-						<input type="submit" value="Create"><br />
+						<button>Create</button><br />
 					</form>
 				</li>
 			</ul>
