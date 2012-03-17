@@ -13,7 +13,7 @@
 }
 
 
-.two_column_left ul{
+.two_column_left ol,ul{
 	margin-top:0;
 	margin-bottom:10px;
 	padding: 0;
