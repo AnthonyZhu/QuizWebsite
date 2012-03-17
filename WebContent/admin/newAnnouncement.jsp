@@ -5,4 +5,5 @@
 	String title = request.getParameter("title");
 	String annoucement = request.getParameter("announcement");
 	Announcement announce = new Announcement(title, annoucement);
+	announce.addAnnouncementToDB();
 	%>
