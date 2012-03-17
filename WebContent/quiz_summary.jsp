@@ -44,7 +44,8 @@
 	<div class="content-container">
 		<div class="two_column_left">
 			<form action="StartQuiz" method="post">
-			<input style="float:right" type="submit" value="Take quiz now!"><br />
+			<input style="float:right" type="submit" value="Take quiz now!" />
+			<input style="float:right" type="submit" onclick="practiceMode()" value="Practice Mode" /><br />
 			<% 
 			out.println("<input name =\"quizID\" type=\"hidden\" value=\"" + quiz.quizID + "\">");
 			%>

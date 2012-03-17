@@ -65,9 +65,7 @@
 		popup.document.writeln("<span class='error' style='display:none'>empty note!</span>");
 		popup.document.writeln("</div>");
 	};
-	**/
-
-	
+	**/	
 })(window);
 
 
