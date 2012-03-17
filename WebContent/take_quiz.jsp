@@ -113,11 +113,15 @@
 			session.setAttribute("feedback_position", feedbackPosition);
 		}
 		%>
-			<li>
+
 				<!-- <span><input id="lastQuestion" name="lastQuestion" class="btTxt submit" type="submit" value="<<back"/></span> -->
-				<span style="float:right"><input id="nextQuestion" name="nextQuestion" class="btTxt submit" type="submit" value="<% if (position >= questions.size()) {out.println("Submit Quiz");} else out.println("next>>"); %>"/></span>
-			</li>
 		</ul>
+					<br />
+								<br />
+								<br />
+		<span style="float:right"><input id="nextQuestion" name="nextQuestion" class="btTxt submit" type="submit" value="<% if (position >= questions.size()) {out.println("Submit Quiz");} else out.println("next>>"); %>"/></span>
+		<br />
+								<br />
 	</div>
 	</form>
 	<jsp:include page="/modules/foot.html" />
