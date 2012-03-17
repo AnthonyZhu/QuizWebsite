@@ -33,18 +33,22 @@
 <div class="container" >
 	<jsp:include page="/modules/head.jsp" />
 	<% User homeUser = (User) session.getAttribute("user"); %>
-	
+	<%
+		int unreadNotes = NoteMessage.getUnreadCount(homeUser);
+		int unreadChallenges = ChallengeMessage.getUnreadCount(homeUser);
+		int unreadRequests = FriendRequestMessage.getUnreadCount(homeUser);
+	%>
 	<div class="top_container">
 		<div class="three_column_left">
 			<ul>
 				<h4><a class="link-style-dominant" href="/QuizWebsite/userpage.jsp?id=<%=homeUser.userID%>" style="float:right">My Profile</a></h4><br /><br />
 				<h4 class="title_style_minor">FAVORITES</h4>
 				<li><a class="link-style-dominant" onclick="showNewsFeed()">News Feed</a></li>
-				<li><a class="link-style-dominant" onclick="showNotes()">Notes</a></li>
+				<li><a class="link-style-dominant" onclick="showNotes()">Notes<% if (unreadNotes > 0) out.println("(" + unreadNotes + ")");%></a></li>
 				<br />
 				<h4 class="title_style_minor">NOTIFICATIONS</h4>
-				<li><a class="link-style-dominant" onclick="showFriendRequests()">Friend Requests</a></li>
-				<li><a class="link-style-dominant" onclick="showChallenges()">Challenges</a></li>
+				<li><a class="link-style-dominant" onclick="showFriendRequests()">Friend Requests<% if (unreadRequests > 0) out.println("(" + unreadRequests + ")");%></a></li>
+				<li><a class="link-style-dominant" onclick="showChallenges()">Challenges<% if (unreadChallenges > 0) out.println("(" + unreadChallenges + ")");%></a></li>
 				<br />
 				<h4 class="title_style_minor">MY QUIZZES</h4>
 				<li><a class="link-style-dominant" onclick="showQuizTaken()">Took</a></li>
@@ -57,7 +61,7 @@
 				</li>
 				<li>
                 <%
-                if(homeUser.permission == 1){
+                if (homeUser.permission == User.IS_ADMIN){
                 	out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/admin/admin.jsp\">Admin</a>");
                 }
 				%>

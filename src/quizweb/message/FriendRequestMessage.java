@@ -98,6 +98,23 @@ public class FriendRequestMessage extends Message {
 		}
 		return FriendRequestMessageQueue;
 	}
+	
+	public static int getUnreadCount(User user) {
+		int unreadCount = 0;
+		try {
+			String statement = new String("SELECT COUNT(mid) FROM " + DBTable + " WHERE uid2 = ? and isConfirmed = false and isRejeced = false");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, user.userID);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+				unreadCount = rs.getInt("COUNT(mid)");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return unreadCount;		
+	}
+
 
 	public static Message getFriendRequestByXMLElem(XMLElement root) {
 		User toUser = null;

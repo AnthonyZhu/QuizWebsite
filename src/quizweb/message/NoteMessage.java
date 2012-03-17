@@ -60,6 +60,23 @@ public class NoteMessage extends Message {
 		}
 		return noteMessageQueue;
 	}
+	
+	public static int getUnreadCount(User user) {
+		int unreadCount = 0;
+		try {
+			String statement = new String("SELECT COUNT(mid) FROM " + DBTable + " WHERE uid2 = ? and isRead = false");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, user.userID);			
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+				unreadCount = rs.getInt("COUNT(mid)");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return unreadCount;		
+	}
+	
 
 	public static Message getNoteMessageByXMLElem(XMLElement root) {
 		User toUser = null;
