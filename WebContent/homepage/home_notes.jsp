@@ -38,6 +38,7 @@
 					out.println("<input class=\"large\" type=\"text\" class=\"large\" name=\"replyNote\"><br />");
 					out.println("<input type=\"submit\" name=\"sendNote\" value=\"reply\">");
 					out.println("</form></div></div>");
+					note.readMessage();
 				}
 			}else{
 				out.println("I don't have any note yet.");

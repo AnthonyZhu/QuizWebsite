@@ -23,7 +23,7 @@ public class FriendRequestMessage extends Message {
 	}
 	
 	public FriendRequestMessage(int id, int uid1, int uid2, Timestamp time, boolean isconfirmed, boolean isrejected) {
-		super(uid1, uid2, new String());
+		super(id, uid1, uid2, new String(), time);
 		isConfirmed = isconfirmed;
 		isRejected = isrejected;
 	}
