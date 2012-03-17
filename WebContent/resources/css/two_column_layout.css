@@ -19,6 +19,11 @@
 	padding: 0;
 }
 
+.two_column_left{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
 .two_column_right{
 	
 	float: right;
@@ -27,3 +32,4 @@
 	margin-bottom: 5px;
 	margin-top:0;
 }
+
