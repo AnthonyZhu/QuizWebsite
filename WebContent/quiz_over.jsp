@@ -82,6 +82,7 @@
 			<span><img src="/QuizWebsite/images/star.png" style="float: left" width="150" height="150"></span>
 			<span><h4>Congratulations! You have finished</h4></span>
 			<span><h1><%=quizName%></h1></span>
+			<!--  
 			Rate this quiz:
 			<ul class="rate  nostar" style="float:right">
 				<li class="one"><a href="#" title="1 Star">1</a></li>
@@ -90,6 +91,7 @@
 				<li class="four"><a href="#" title="4 Stars">4</a></li>
 				<li class="five"><a href="#" title="5 Stars">5</a></li>
 			</ul>
+			-->
 			<br/>
 			<hr/>
 			<p>
