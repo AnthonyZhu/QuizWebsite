@@ -24,7 +24,7 @@
 <div class="container">
 	<jsp:include page="/modules/head.jsp" />
 	
-	<form id="form1" name="form1" action="QuestionTypeServlet" method="post">
+	<form id="form1" name="form1" action="/QuizWebsite/QuestionTypeServlet" method="post">
     <%
     Quiz newQuiz = (Quiz) session.getAttribute("newQuiz");
     %>
@@ -32,13 +32,13 @@
 		<%
 		String creatorName = newQuiz.creator.username;
 		String quizName = newQuiz.name;
-		Integer posistion = (Integer)session.getAttribute("questionPosistion");
-		out.println("<h2>Please choose a type for question No." + posistion + " of \"" + quizName + "\"</h2>");
+		Integer position = (Integer)session.getAttribute("questionPosition");
+		out.println("<h2>Please choose a type for question No." + position + " of \"" + quizName + "\"</h2>");
 		%>
 		<hr />
 		<ul>
 			<li id="foli7" class="highlight">
-				<label class="quiz_title" id="title7" for="Field7">Please choose a question type</label>
+				<label class="quiz_title" id="title7" for="Field7">Please choose a question type<sup>*</sup></label>
 				<div>
 					<select id="newQuestionType" name="newQuestionType" onchange="showQuestionFrame()" class="field select medium"> 
 						<option value="" selected="selected"></option>

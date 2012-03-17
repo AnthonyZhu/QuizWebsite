@@ -37,29 +37,33 @@ public class QuestionTypeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String questionType = request.getParameter("newQuestionType");
-		HttpSession session = request.getSession();
-		session.setAttribute("QuestionType", questionType);
-		String pageString = "new_quiz_question";
 		
-		if(questionType.equals("Question-Response")){
-			pageString = "createQuiz/new_quiz_question.jsp";
-		}else if(questionType.equals("Fill in the Blank")){
-			pageString = "createQuiz/new_quiz_question_fillInBlank.jsp";
-		}else if(questionType.equals("Multiple Choice")){
-			pageString = "createQuiz/new_quiz_question_multiChoice.jsp";
-		}else if(questionType.equals("Picture-Response Questions")){
-			pageString = "createQuiz/new_quiz_question_picture.jsp";
-		}else if(questionType.equals("Multiple-Answer Questions")){
-			pageString = "createQuiz/new_quiz_question_multiAnswer.jsp";
-		}else if(questionType.equals("Multiple Choice with Multiple Answers")){
-			pageString = "createQuiz/new_quiz_question_multiChoiceAndAnswer.jsp";
-		}else if(questionType.equals("Matching")){
-			pageString = "createQuiz/new_quiz_question_matching.jsp";
+		if(questionType.equals("")){
+			RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/chooseQuestionType.jsp");
+			dispatch.forward(request, response);
+		}else{
+			HttpSession session = request.getSession();
+			session.setAttribute("QuestionType", questionType);
+			String pageString = "new_quiz_question";
+			
+			if(questionType.equals("Question-Response")){
+				pageString = "createQuiz/new_quiz_question.jsp";
+			}else if(questionType.equals("Fill in the Blank")){
+				pageString = "createQuiz/new_quiz_question_fillInBlank.jsp";
+			}else if(questionType.equals("Multiple Choice")){
+				pageString = "createQuiz/new_quiz_question_multiChoice.jsp";
+			}else if(questionType.equals("Picture-Response Questions")){
+				pageString = "createQuiz/new_quiz_question_picture.jsp";
+			}else if(questionType.equals("Multiple-Answer Questions")){
+				pageString = "createQuiz/new_quiz_question_multiAnswer.jsp";
+			}else if(questionType.equals("Multiple Choice with Multiple Answers")){
+				pageString = "createQuiz/new_quiz_question_multiChoiceAndAnswer.jsp";
+			}else if(questionType.equals("Matching")){
+				pageString = "createQuiz/new_quiz_question_matching.jsp";
+			}
+			
+			RequestDispatcher dispatch = request.getRequestDispatcher(pageString);
+			dispatch.forward(request, response);
 		}
-		
-		RequestDispatcher dispatch = request.getRequestDispatcher(pageString);
-		dispatch.forward(request, response);
-		// TODO Auto-generated method stub
 	}
-
 }

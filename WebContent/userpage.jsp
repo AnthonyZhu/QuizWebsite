@@ -126,6 +126,7 @@
 			}
 			%>
 			</ul></p>
+			
 		</div>
 	</div>
 	
@@ -133,7 +134,21 @@
 	<div class="content-container">
 		
 		<div class="two_column_right">
-			<h2></h2>
+			<h2>Friend List</h2>
+			<p><ul>
+			<%
+			if(visitUser.getFriendList() == null){
+				out.println("I don't have any friend yet.");
+			}else if(visitUser.getFriendList().size() == 0){
+				out.println("I don't have any friend yet.");
+			}else{
+				for(int i=0;i<visitUser.getFriendList().size();i++){
+					User friend = visitUser.getFriendList().get(i);
+					out.println("<li><a class=\"link-style-dominant\" href=\"userpage.jsp?id=" + friend.userID + "\">" + friend.username + "</a></li>");
+				}
+			}
+			%>
+			</ul></p>
 			
 		</div>
 		<div class="two_column_left">

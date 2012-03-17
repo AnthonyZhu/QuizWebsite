@@ -55,6 +55,13 @@
 				out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/createQuiz/new_quiz_settings.jsp\">+ Create Quiz</a>");
 				%>
 				</li>
+				<li>
+                <%
+                if(homeUser.permission == 1){
+                	out.println("<a class=\"link-style-dominant\" href=\"http://localhost:8080/QuizWebsite/admin/admin.jsp\">Admin</a>");
+                }
+				%>
+				</li>
 				<br />
 				
 				</ul>
@@ -118,7 +125,7 @@
 				<ol>
 				<%
 					int maxRecentQuizNumber = 5;
-					quizList = Quiz.getRecentQuiz();
+				    quizList = Quiz.getRecentQuiz();
 					for (int i = 0; i < Math.min(quizList.size(), maxRecentQuizNumber); i++) {
 						Quiz quiz = quizList.get(i);
 						out.println("<li>" + quiz.getQuizStringWithURL(false) + "</li>");

@@ -19,17 +19,14 @@
 <div class="three_column_content">
 <h2 class="title_style_minor">Friend Requests</h2>
 	<br />
-	
+	<ul>
 	<%
 		User homeUser = (User) session.getAttribute("user");
-		out.println("<ul>");
 		ArrayList<FriendRequestMessage> allFriendRequest = FriendRequestMessage.getMessagesByUserID(homeUser.userID);
 		for(int i = 0; i < allFriendRequest.size(); i++) {
 			FriendRequestMessage friendRequest = allFriendRequest.get(i);
 			if(homeUser.isFriend(User.getUserByUserID(friendRequest.fromUser))==1){
-				
 			}else{
-				
 			if(!friendRequest.isPending())
 				continue;
 			String senderName = User.getUserByUserID(friendRequest.fromUser).username;
@@ -47,8 +44,8 @@
 			out.println("</div>");
 			}
 		}
-		out.println("</ul>");
 	%>
+	</ul>
 </div>
 </body>
 </html>

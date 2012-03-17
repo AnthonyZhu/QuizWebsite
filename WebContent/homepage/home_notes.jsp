@@ -18,22 +18,31 @@
 <body>
 <div class="three_column_content">
 <h2 class="title_style_minor">Notes</h2>
+<br >
+<ul>
 	<%
 		User homeUser = (User) session.getAttribute("user");
-		out.println("<ul>");
 		ArrayList<NoteMessage> allNotes = NoteMessage.getMessagesByUserID(homeUser.userID);
-		for(int i = 0; i < allNotes.size(); i++) {
-			NoteMessage note = allNotes.get(i);
-			out.println("<li>" + User.getUserByUserID(note.fromUser).username + " said: \"" + note.content+ "\"</li>");
-			out.println("<form name=\"note_reply\" action=\"/QuizWebsite/ReplyNoteServlet\" method=\"post\">");
-			out.println("<input type=\"hidden\" name=\"senderID\" value=\""+ homeUser.userID +"\">");
-			out.println("<input type=\"hidden\" name=\"receiverID\" value=\""+ note.fromUser +"\">");
-			out.println("<input type=\"text\" class=\"large\" name=\"replyNote\">");
-			out.println("<input type=\"submit\" name=\"sendNote\" value=\"reply\">");
-			out.println("</form>");
+		if(allNotes != null){
+			if(allNotes.size() != 0){
+				for(int i = 0; i < allNotes.size(); i++) {
+					NoteMessage note = allNotes.get(i);
+					out.println("<li>" + User.getUserByUserID(note.fromUser).username + " said: \"" + note.content+ "\"</li>");
+					out.println("<form name=\"note_reply\" action=\"/QuizWebsite/ReplyNoteServlet\" method=\"post\">");
+					out.println("<input type=\"hidden\" name=\"senderID\" value=\""+ homeUser.userID +"\">");
+					out.println("<input type=\"hidden\" name=\"receiverID\" value=\""+ note.fromUser +"\">");
+					out.println("<input type=\"text\" class=\"large\" name=\"replyNote\">");
+					out.println("<input type=\"submit\" name=\"sendNote\" value=\"reply\">");
+					out.println("</form>");
+				}
+			}else{
+				out.println("I don't have any note.");
+			}
+		}else{
+			out.println("I don't have any note.");
 		}
-		out.println("</ul>");
 	%>
+	</ul>
 </div>	
 </body>
 </html>

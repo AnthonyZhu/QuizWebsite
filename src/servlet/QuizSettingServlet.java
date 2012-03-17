@@ -45,6 +45,7 @@ public class QuizSettingServlet extends HttpServlet {
 		String quizOrder = request.getParameter("Field4");
 		boolean isRandom;
 		String quizPaging = request.getParameter("Field5");
+		boolean isOnePage;
 		String quizCorrection = request.getParameter("Field6");
 		boolean opFeedback;
 		String quizPractice = request.getParameter("Field7");
@@ -55,37 +56,45 @@ public class QuizSettingServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User homeUser = (User) session.getAttribute("user");
 		int userID = homeUser.userID;
-
-		String quizURL = "";
+		String quizURL = "none URL";
 		
-		if(quizOrder.equals("Allow randomization")){
-			isRandom = true;
+		if(quizName.equals("") || quizCategory.equals("") || quizDescription.equals("")){
+			RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_settings.jsp");
+			dispatch.forward(request, response);
+			
 		}else{
-			isRandom = false;
+			if(quizOrder.equals("Yes")){
+				isRandom = true;
+			}else{
+				isRandom = false;
+			}
+			
+			if(quizCorrection.equals("Yes")){
+				opFeedback = true;
+			}else{
+				opFeedback = false;
+			}
+			
+			if(quizPractice.equals("Yes")){
+				opPractice = true;
+			}else{
+				opPractice = false;
+			}
+			
+			if(quizPaging.equals("Yes")){
+				isOnePage = true;
+			}else{
+				isOnePage = false;
+			}
+			
+			Quiz newQuiz = new Quiz(quizName,quizURL,quizDescription,quizCategory,userID,isRandom,isOnePage,opFeedback,opPractice);
+			newQuiz.addQuizToDB();
+			QuizCreatedRecord record = new QuizCreatedRecord(newQuiz, homeUser);
+			record.addRecordToDB();
+			session.setAttribute("newQuiz", newQuiz);
+			session.setAttribute("questionPosition", 1);
+			RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/chooseQuestionType.jsp");
+			dispatch.forward(request, response);
 		}
-		
-		if(quizCorrection.equals("Yes")){
-			opFeedback = true;
-		}else{
-			opFeedback = false;
-		}
-		
-		if(quizPractice.equals("Yes")){
-			opPractice = true;
-		}else{
-			opPractice = false;
-		}
-		
-		// TODO isOnepage to be added 
-		boolean isOnepage = false;
-		Quiz newQuiz = new Quiz(quizName,quizURL,quizDescription,quizCategory,userID,isRandom,isOnepage,opFeedback,opPractice);
-		newQuiz.addQuizToDB();
-		QuizCreatedRecord record = new QuizCreatedRecord(newQuiz, homeUser);
-		record.addRecordToDB();
-		session.setAttribute("newQuiz", newQuiz);
-		session.setAttribute("questionPosistion", 1);
-		RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/chooseQuestionType.jsp");
-		dispatch.forward(request, response);
 	}
-
 }

@@ -20,7 +20,14 @@
 	<div class="three_column_content">
 		<h2 class="title_style_minor">More Announcements</h2>
 		<br /><br />
-		<!-- insert here -->
+		<ol>
+		<% 
+		for(int i=0;i<Announcement.allAnnouncements.size();i++){
+			
+			out.println("<li>" + Announcement.allAnnouncements.get(i).title + " | published at " + Announcement.allAnnouncements.get(i).timestamp + "<br /> \"" + Announcement.allAnnouncements.get(i).content + "\"</li>");
+		}
+		%>
+		</ol>
 	</div>
 </body>
 </html>

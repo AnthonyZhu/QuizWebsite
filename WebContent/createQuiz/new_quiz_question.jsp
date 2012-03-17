@@ -39,11 +39,10 @@
 		<%
 		String creatorName = newQuiz.creator.username;
 		String quizName = newQuiz.name;
-		Integer posistion = (Integer) session.getAttribute("questionPosistion");
+		Integer position = (Integer) session.getAttribute("questionPosition");
 		String questionType = (String) session.getAttribute("QuestionType"); 
-		out.println("<h2>Please add question No." + posistion + " to \"" + quizName + "\"</h2>");
+		out.println("<h2>Please add question No." + position + " to \"" + quizName + "\"</h2>");
 		out.println("<h3>This question is \"" + questionType + "\" type</h2>");
-		
 		%>
 		<hr />
          

@@ -18,7 +18,7 @@
 <body>
 <div class="three_column_content">
 <h2 class="title_style_minor">Challenges From Friends</h2>
-		<br /><br />
+		<br />
 	<%
 		User homeUser = (User) session.getAttribute("user");
 		ArrayList<ChallengeMessage> challengeMessages = ChallengeMessage.getMessagesByUserID(homeUser.userID);

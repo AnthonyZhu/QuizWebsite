@@ -27,28 +27,27 @@
 <body>
 <div class="container">
 	<jsp:include page="/modules/head.jsp" />
-	<form id="form1" action="../QuizSettingServlet" name="form1" method="post" >
+	<form id="form1" action="/QuizWebsite/QuizSettingServlet" name="form1" method="post" >
 
 	<div class="one_column">
-		<h2>
-			Please complete settings of your new quiz:
-		</h2>
+		<h2>Please complete settings of your new quiz: </h2>
+		<h5>* means info required</h5>
 		<hr />
 		<ul>
-			<li id="foli1" class="highlight"><span class="quiz_title">Quiz Name</span>
+			<li id="foli1" class="highlight"><span class="quiz_title">Quiz Name<sup>*</sup></span>
 				<div>
 					<input id="Field1" name="Field1" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
 				</div>
 			</li>
 			
-			<li id="foli9" class="highlight"><span class="quiz_title">Quiz Description</span>
+			<li id="foli9" class="highlight"><span class="quiz_title">Quiz Description<sup>*</sup></span>
 				<div>
 					<input id="Field9" name="Field9" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
 				</div>
 			</li>
 			
 			<li id="foli2" class="highlight">
-				<span id="title2"class="quiz_title">Quiz Category</span>
+				<span id="title2"class="quiz_title">Quiz Category<sup>*</sup></span>
 				<div>
 					<select id="Field2" name="Field2" class="field select medium" tabindex="2"> 
 						<option value="" selected="selected"></option>
@@ -79,15 +78,15 @@
 			
 			<li id="foli4" class="highlight">
 				<fieldset>
-					<legend id="title4" class="quiz_title">Question order</legend>
+					<legend id="title4" class="quiz_title">Question order<sup>*</sup></legend>
 					<div>
 						
 						<span>
-							<input id="Field4_0" name="Field4" type="radio" class="field radio" value="Allow randomization" tabindex="1" checked="checked"  />
+							<input id="Field4_0" name="Field4" type="radio" class="field radio" value="Yes" tabindex="1" checked="checked"  />
 							<label class="choice" for="Field4_0" >Allow randomization</label>
 						</span>
 						<span>
-							<input id="Field4_1" name="Field4" type="radio" class="field radio" value="Set" tabindex="2" />
+							<input id="Field4_1" name="Field4" type="radio" class="field radio" value="No" tabindex="2" />
 							<label class="choice" for="Field4_1" >Set</label>
 						</span>
 					</div>
@@ -95,15 +94,15 @@
 			</li>
 			
 			<li id="foli5" class="highlight">
-				<fieldset><legend id="title5" class="quiz_title">Paging</legend>
+				<fieldset><legend id="title5" class="quiz_title">Paging<sup>*</sup></legend>
 					<div>
 						
 						<span>
-							<input id="Field5_0" name="Field5" type="radio" class="field radio" value="Show all questions on one page" tabindex="3" checked="checked"  />
+							<input id="Field5_0" name="Field5" type="radio" class="field radio" value="Yes" tabindex="3" checked="checked"  />
 							<label class="choice" for="Field5_0" >Show all questions on one page</label>
 						</span>
 						<span>
-							<input id="Field5_1" name="Field5" type="radio" class="field radio" value="One page for each question" tabindex="4" />
+							<input id="Field5_1" name="Field5" type="radio" class="field radio" value="No" tabindex="4" />
 							<label class="choice" for="Field5_1" >One page for each question</label>
 						</span>
 					</div>
@@ -112,7 +111,7 @@
 			
 			<li id="foli6" class="highlight">
 				<fieldset>
-				 	<legend id="title6" class="quiz_title">Immediate correction?</legend>
+				 	<legend id="title6" class="quiz_title">Immediate correction?<sup>*</sup></legend>
 					<div>
 						
 						<span>
@@ -129,7 +128,7 @@
 			
 			<li id="foli7" class="highlight">
 				<fieldset>
-				 	<legend id="title7" class="quiz_title">Allow practice mode?</legend>
+				 	<legend id="title7" class="quiz_title">Allow practice mode?<sup>*</sup></legend>
 					<div>
 						
 						<span>
