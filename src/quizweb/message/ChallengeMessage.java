@@ -53,10 +53,9 @@ public class ChallengeMessage extends Message {
 	public static ArrayList<ChallengeMessage> getMessagesByUserID(int userID) {
 		ArrayList<ChallengeMessage> ChallengMessageQueue = new ArrayList<ChallengeMessage>();
 		try {
-			String statement = new String("SELECT * FROM " + DBTable +" WHERE uid1 = ? OR uid2 = ?");
+			String statement = new String("SELECT * FROM " + DBTable + " WHERE uid2 = ?");
 			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
 			stmt.setInt(1, userID);
-			stmt.setInt(2, userID);
 			ResultSet rs = DBConnection.DBQuery(stmt);
 			rs.beforeFirst();
 			while(rs.next()) {
@@ -70,6 +69,22 @@ public class ChallengeMessage extends Message {
 			e1.printStackTrace();
 		}
 		return ChallengMessageQueue;
+	}
+	
+	public static int getUnreadCount(User user) {
+		int unreadCount = 0;
+		try {
+			String statement = new String("SELECT COUNT(mid) FROM " + DBTable + " WHERE uid2 = ? and isRead = false");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, user.userID);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+				unreadCount = rs.getInt("COUNT(mid)");
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return unreadCount;		
 	}
 
 	public static Message getChallengeMessageByXMLElem(XMLElement root) {

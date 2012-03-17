@@ -31,7 +31,7 @@
 <div class="container">
 	<jsp:include page="/modules/head.jsp" />
 	
-	<form id="form1" name="form1" action="QuizCreationServlet" method="post">
+	<form id="form1" name="form1" action="/QuizWebsite/QuizCreationServlet" method="post">
     <%
     Quiz newQuiz = (Quiz) session.getAttribute("newQuiz");
     %>
@@ -39,9 +39,9 @@
 		<%
 		String creatorName = newQuiz.creator.username;
 		String quizName = newQuiz.name;
-		Integer posistion = (Integer) session.getAttribute("questionPosistion");
+		Integer position = (Integer) session.getAttribute("questionPosition");
 		String questionType = (String) session.getAttribute("QuestionType"); 
-		out.println("<h2>Please add question No." + posistion + " to \"" + quizName + "\"</h2>");
+		out.println("<h2>Please add question No." + position + " to \"" + quizName + "\"</h2>");
 		out.println("<h3>This question is \"" + questionType + "\" type</h2>");
 		
 		%>
@@ -49,7 +49,7 @@
          
         <ul>
 			<li class="highlight">
-				<label class="quiz_title" >Please input question text below, and replace blank with _:</label>
+				<label class="quiz_title" >Please input question text below, and replace blank with _:<sup>*</sup></label>
 				<div>
 					<textarea id="questionText" name="Field1" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
 					<label for="Field1">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp;</label>
@@ -57,7 +57,7 @@
 				</div>
 			</li>
 			<li class="highlight">
-				<label class="quiz_title">Please input answer (words to be filled in the blank) below:</label>
+				<label class="quiz_title">Please input answer (words to be filled in the blank) below:<sup>*</sup></label>
 				<div>
 					<textarea id="questionAnswer" name="Field2" class="field textarea small" rows="10" cols="50" tabindex="7" onkeyup="validateRange(8, 'character');"></textarea>
 					<label for="Field2">Must be between <var id="rangeMinMsg8">10</var> and <var id="rangeMaxMsg8">500</var> characters.&nbsp;&nbsp;&nbsp;</label>
@@ -68,7 +68,7 @@
         <ul>
            <li>
 				<div>
-				    <label class="quiz_title">Question Score</label>
+				    <label class="quiz_title">Question Score (should be numeric)<sup>*</sup></label>
 					<input id="score" name="score" type="text" class="field text large" value="" maxlength="50" tabindex="1" onkeyup="validateRange(2, 'character');" />
 				</div>
 		  </li>

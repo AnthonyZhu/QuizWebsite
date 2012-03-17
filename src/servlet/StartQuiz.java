@@ -40,12 +40,13 @@ public class StartQuiz extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int quizID = Integer.parseInt(request.getParameter("quizID"));
 		HttpSession session = request.getSession();
-		// TODO ERROR JACK set parameter ispractice and isfeedback 
-		session.setAttribute("ispractice", false);
-		session.setAttribute("isfeedback", true);
 		
 		int position = 0;
 		Quiz quiz = Quiz.getQuizByQuizID(quizID);
+		// TODO ERROR JACK set parameter ispractice and isfeedback 
+		session.setAttribute("ispractice", false);
+		session.setAttribute("isfeedback", quiz.opFeedback);		
+
 		ArrayList<Question> questions = quiz.getQuestions();
 		ArrayList<Integer> indices = new ArrayList<Integer>();	
 		ArrayList<Object> userAnswers = new ArrayList<Object>();
@@ -76,8 +77,6 @@ public class StartQuiz extends HttpServlet {
 		if (isFeedBack) {
 			session.setAttribute("feedback_position", -1);
 		}
-		//DEBUG
-		quiz.isOnepage = false;
 		
 		position++;
 		session.setAttribute("quiz", quiz);

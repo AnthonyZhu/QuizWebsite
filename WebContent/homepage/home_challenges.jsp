@@ -23,9 +23,9 @@
 		User homeUser = (User) session.getAttribute("user");
 		ArrayList<ChallengeMessage> challengeMessages = ChallengeMessage.getMessagesByUserID(homeUser.userID);
 		if(challengeMessages == null){
-			out.println("I don't have any challenge.");
+			out.println("I don't have any challenges.");
 		}else if(challengeMessages.size() == 0){
-			out.println("I don't have any challenge.");
+			out.println("I don't have any challenges.");
 		}else{
 			out.println("<ul>");
 			for(int i=0;i<challengeMessages.size();i++){
