@@ -180,6 +180,25 @@ public class Quiz {
 		}				
 	}
 	
+	public ArrayList<String> getTags() {
+		ArrayList<String> tagList = new ArrayList<String>();
+		String statement = new String("SELECT * FROM " + TagDBTable + " WHERE qid = ?");
+		PreparedStatement stmt;
+		try {
+			stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, quizID);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String tag = rs.getString("tag");
+				tagList.add(tag);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tagList;		
+	}	
+	
 	public static int getTotalQuiz() {
 		int totalQuiz = 0;
 		try {
