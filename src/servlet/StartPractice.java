@@ -44,11 +44,11 @@ public class StartPractice extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int quizID = Integer.parseInt(request.getParameter("quizID"));
 		HttpSession session = request.getSession();
-		session.setAttribute("ispractice", true);
-		session.setAttribute("isfeedback", true);
-		
 		int position = 0;
 		Quiz quiz = Quiz.getQuizByQuizID(quizID);
+		session.setAttribute("ispractice", true);
+		session.setAttribute("isfeedback", quiz.opFeedback);		
+		
 		ArrayList<Question> questions = quiz.getQuestions();
 		ArrayList<Integer> indices = new ArrayList<Integer>();	
 		ArrayList<Object> userAnswers = new ArrayList<Object>();
