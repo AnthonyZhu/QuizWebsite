@@ -250,6 +250,13 @@ public class QuizCreationServlet extends HttpServlet {
 		if(flag == true){
 			if(submit != null){
 				if(submit.equals("Save and Finish")){
+					String quizTag = (String) session.getAttribute("quizTag");
+					String[] quizTagStr = quizTag.split(",");
+					ArrayList<String> quizTagList = new ArrayList<String>();
+					for(int i=0;i<quizTagStr.length;i++){
+						quizTagList.add(quizTagStr[i]);
+					}
+					newQuiz.addTags(quizTagList);
 					RequestDispatcher dispatch = request.getRequestDispatcher("quiz_summary.jsp?id=" + quizID);
 					dispatch.forward(request, response);
 			    }
