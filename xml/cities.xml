@@ -3,6 +3,8 @@
 <title>Cities</title>
 <description>See how well you recognize these famous cities.</description>
 <author>microsoft</author>
+<tag>hard</tag>
+<tag>medium</tag>
 
 <question type="picture-response">
   <image-location>http://upload.wikimedia.org/wikipedia/commons/4/48/TE-Collage_London.png</image-location>

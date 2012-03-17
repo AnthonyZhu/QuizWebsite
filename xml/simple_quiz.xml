@@ -4,6 +4,9 @@
 <category>Test</category>
 <description>An simple quiz for testing.</description>
 <author>mit</author>
+<tag>easy</tag>
+<tag>medium</tag>
+<tag>hard</tag>
 
 <question type="question-response">
   <query>The answer for this question is "a"?</query>

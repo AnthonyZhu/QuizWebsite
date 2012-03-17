@@ -132,4 +132,14 @@ public class QuizCreatedRecord extends Record {
 		}
 		return new QuizCreatedRecord(quiz, user);
 	}
+	public static void deleteQuizCreatedHistory(Quiz quiz) {
+		try {
+			String statement = new String("DELETE FROM " + DBTable + " WHERE qid=?");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, quiz.quizID);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
 }

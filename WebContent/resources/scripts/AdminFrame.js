@@ -23,9 +23,9 @@
 	};
 	
 	global.search = function() {
-		if ($('#adminFrame').attr('src').indexOf('admin_user.jsp') > 0)
+		if ($('#adminFrame').attr('src').indexOf('admin_user.jsp') >= 0)
 			$('#adminFrame').attr('src', 'admin_user.jsp?keyword=' + $('#inputBox').val());
-		else if ($('#adminFrame').attr('src').indexOf('admin_quiz.jsp') > 0)
+		else if ($('#adminFrame').attr('src').indexOf('admin_quiz.jsp') >= 0)
 			$('#adminFrame').attr('src', 'admin_quiz.jsp?keyword=' + $('#inputBox').val());
 		else 
 			$('#adminFrame').attr('src', 'admin_user.jsp?keyword=' + $('#inputBox').val());

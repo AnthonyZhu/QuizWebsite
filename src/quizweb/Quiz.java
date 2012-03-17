@@ -26,6 +26,7 @@ public class Quiz {
 	public double totalRating;
 	
 	public static final String DBTable = "quiz";
+	public static final String TagDBTable = "tags";
 	
 	// Creation constructor
 	public Quiz(String name, String quizURL, String description, String category,
@@ -135,6 +136,50 @@ public class Quiz {
 		return null;		
 	}
 	
+	public static ArrayList<Quiz> getQuizListByTag(String tagString) {
+		ArrayList<Quiz> quizList = new ArrayList<Quiz>();
+		if (tagString.trim().isEmpty())
+			return quizList;
+		String statement = new String("SELECT * FROM " + TagDBTable + " WHERE tag = ?");
+		PreparedStatement stmt;
+		try {
+			stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setString(1, tagString);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Quiz quiz = Quiz.getQuizByQuizID(rs.getInt("qid"));
+				quizList.add(quiz);			
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quizList;
+	}
+	
+	public void addTags(ArrayList<String> tagStrings) {
+		if (tagStrings == null)
+			return;
+		for (int i = 0; i < tagStrings.size(); i++)
+			addTag(tagStrings.get(i));
+	}
+	
+	public void addTag(String tagString) {
+		if (tagString == null) 
+			return;
+		try {
+			String statement = new String("INSERT INTO " + TagDBTable 
+					+ " (qid, tag)" 
+					+ " VALUES (?, ?)");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, quizID);
+			stmt.setString(2, tagString);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}				
+	}
+	
 	public static int getTotalQuiz() {
 		int totalQuiz = 0;
 		try {
@@ -148,7 +193,29 @@ public class Quiz {
 			e.printStackTrace();
 		}		
 		return totalQuiz;
-		
+	}
+	
+	public static void deleteQuiz(Quiz quiz) {
+		// delete from quiz
+		try {
+			String statement = new String("DELETE FROM " + DBTable + " WHERE qid=?");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, quiz.quizID);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// delete from tag
+		try {
+			String statement = new String("DELETE FROM " + TagDBTable + " WHERE qid=?");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, quiz.quizID);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		QuizTakenRecord.deleteQuizTakenHistory(quiz);
+		QuizCreatedRecord.deleteQuizCreatedHistory(quiz);		
 	}
 	
 	// Update current quiz record in database;

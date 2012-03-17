@@ -51,7 +51,6 @@
 						out.println("<input type=\"submit\" id=\"submit_btn\" name=\"submit_btn\" value=\"Unpromote User\">");
 				}
 			}
-				
 			out.println("</form>");
 		}
 	}
