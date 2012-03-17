@@ -337,8 +337,6 @@ public class User {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// if the user has sent a friend request previously, return pending_friend
-		// TODO JACK
 		// otherwise return not_friend
 		return NOT_FRIEND;
 	}

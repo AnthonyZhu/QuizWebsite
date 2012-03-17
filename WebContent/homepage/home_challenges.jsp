@@ -22,7 +22,7 @@
 	<%
 		User homeUser = (User) session.getAttribute("user");
 		ArrayList<ChallengeMessage> challengeMessages = ChallengeMessage.getMessagesByUserID(homeUser.userID);
-		if(challengeMessages == null){
+		if (challengeMessages == null){
 			out.println("I don't have any challenges.");
 		}else if(challengeMessages.size() == 0){
 			out.println("I don't have any challenges.");
@@ -34,8 +34,7 @@
 				User oneUser = User.getUserByUserID(challenge.fromUser);
 				out.println("<div class=\"feed_container\"><a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/userpage.jsp?id=" + oneUser.userID + "\">" + oneUser.username + 
 						"</a> sent a challenge to you in <a target=\"_blank\" class=\"link-style-dominant\" href=\"/QuizWebsite/quiz_summary.jsp?id=" + 
-						challenge.quizID + "\">" + Quiz.getQuizByQuizID(challenge.quizID).name + "</a><br />");
-			}
+						challenge.quizID + "\">" + Quiz.getQuizByQuizID(challenge.quizID).name + "</a><br />");			}
 			out.println("</div></div>");
 		}
 	%>

@@ -115,6 +115,9 @@
 		%>
 
 				<!-- <span><input id="lastQuestion" name="lastQuestion" class="btTxt submit" type="submit" value="<<back"/></span> -->
+			<li>
+				<span style="float:right"><input id="nextQuestion" name="nextQuestion" class="btTxt submit" type="submit" value="<% if (position >= questions.size()) {out.println("Submit Quiz");} else out.println("next>>"); %>"/></span>
+			</li>
 		</ul>
 					<br />
 								<br />

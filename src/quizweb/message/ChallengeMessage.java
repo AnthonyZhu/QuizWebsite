@@ -86,6 +86,19 @@ public class ChallengeMessage extends Message {
 		}		
 		return unreadCount;		
 	}
+	
+	public void readMessage() {
+		try {
+			String statement = new String("UPDATE " + DBTable + " SET "
+					+ "isRead = true"
+					+ " WHERE mid=?");
+			PreparedStatement stmt = DBConnection.con.prepareStatement(statement);
+			stmt.setInt(1, messageID);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
 
 	public static Message getChallengeMessageByXMLElem(XMLElement root) {
 		User toUser = null;

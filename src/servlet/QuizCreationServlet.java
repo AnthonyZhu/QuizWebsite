@@ -62,37 +62,42 @@ public class QuizCreationServlet extends HttpServlet {
 		
 		if(questionType.equals("Question-Response")){
 			String scoreStr = request.getParameter("score");
+			if (scoreStr.trim().isEmpty())
+				scoreStr = "10.0";
 			String content = request.getParameter("Field1");
 			String answer = request.getParameter("Field2");
 			
-			if(scoreStr.equals("") || content.equals("") || answer.equals("")){
+			if (content.trim().isEmpty() || answer.trim().isEmpty()) {
 				flag = false;
 				RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question.jsp");
-				dispatch.forward(request, response);
-				
-			}else{
+				dispatch.forward(request, response);				
+			} else {
 				double score = Double.parseDouble(scoreStr);
 				ArrayList<String> answerList = new ArrayList<String>();
 				String[] answerSplit = answer.split(",");
-			    for(int i=0;i<answerSplit.length;i++){
-			    	answerList.add(answerSplit[i]);
+			    for (int i=0; i<answerSplit.length; i++){
+			    	if (!answerSplit[i].trim().isEmpty())
+			    		answerList.add(answerSplit[i].trim());
 			    }
-				ResponseQuestion newQuestion = new ResponseQuestion(quizID,position,content,answerList,score);
+				ResponseQuestion newQuestion = new ResponseQuestion(quizID, position, content, answerList, score);
 				newQuestion.addQustionToDB();
-			}
-			
-		}else if(questionType.equals("Fill in the Blank")){
+			}			
+		} else if (questionType.equals("Fill in the Blank")) {
 			String scoreStr = request.getParameter("score");
+			if (scoreStr.trim().isEmpty())
+				scoreStr = "10.0";			
 			String content = request.getParameter("Field1");
 			String answer = request.getParameter("Field2");
 			
-			if(scoreStr.equals("") || content.equals("") || answer.equals("")){
+			if (content.trim().isEmpty() || answer.trim().isEmpty()) {
 				flag = false;
 				RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_fillInBlank.jsp");
 				dispatch.forward(request, response);
 				
-			}else{
+			} else {
 				double score = Double.parseDouble(scoreStr);
+				if (scoreStr.trim().isEmpty())
+					scoreStr = "10.0";				
 				ArrayList<String> contentList = new ArrayList<String>();
 				String[] contentSplit = content.split("_");
 			    for(int i=0;i<contentSplit.length;i++){
@@ -100,150 +105,193 @@ public class QuizCreationServlet extends HttpServlet {
 			    }
 				ArrayList<String> answerList = new ArrayList<String>();
 				String[] answerSplit = answer.split(",");
-			    for(int i=0;i<answerSplit.length;i++){
-			    	answerList.add(answerSplit[i]);
+			    for (int i=0; i<answerSplit.length; i++){
+			    	if (!answerSplit[i].trim().isEmpty())
+			    		answerList.add(answerSplit[i].trim());
 			    }
 				
 				FillInBlankQuestion newQuestion = new FillInBlankQuestion(quizID,position,contentList,answerList,score);
 				newQuestion.addQustionToDB();
 			}
 			
-		}else if(questionType.equals("Multiple Choice")){
+		} else if (questionType.equals("Multiple Choice")){
 			String scoreStr = request.getParameter("score");
+			if (scoreStr.trim().isEmpty())
+				scoreStr = "10.0";			
 			String content = request.getParameter("Field1");
 			String choice = request.getParameter("Field2");
 			String answer = request.getParameter("Field3");
 			
-			if(scoreStr.equals("") || content.equals("") || choice.equals("") || answer.equals("")){
+			if (content.trim().isEmpty() || answer.trim().isEmpty() || choice.trim().isEmpty()) {
 				flag = false;
 				RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_multiChoice.jsp");
-				dispatch.forward(request, response);
-				
-			}else{
+				dispatch.forward(request, response);				
+			} else {
 				double score = Double.parseDouble(scoreStr);
 				ArrayList<String> contentList = new ArrayList<String>();
 				contentList.add(content);
 				String[] contentSplit = choice.split(";");
-			    for(int i=0;i<contentSplit.length;i++){
-			    	contentList.add(contentSplit[i]);
+			    for(int i=0; i < contentSplit.length; i++){
+			    	if (!contentSplit[i].trim().isEmpty())
+			    		contentList.add(contentSplit[i].trim());
 			    }
-				
+			    try {
+			    	answer = contentList.get(Integer.parseInt(answer.trim()));
+			    } catch (NumberFormatException e) {
+					flag = false;
+					RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_multiChoice.jsp");
+					dispatch.forward(request, response);
+			    }
 				MultipleChoiceQuestion newQuestion = new MultipleChoiceQuestion(quizID,position,contentList,answer,score);
 				newQuestion.addQustionToDB();
 			}
 			
-		}else if(questionType.equals("Picture-Response Questions")){
+		} else if (questionType.equals("Picture-Response Questions")){
 			String scoreStr = request.getParameter("score");
+			if (scoreStr.trim().isEmpty())
+				scoreStr = "10.0";			
 			String content = request.getParameter("Field1");
 			String answer = request.getParameter("Field2");
 			String URL = request.getParameter("Field3");
 			
-			if(scoreStr.equals("") || content.equals("") || URL.equals("") || answer.equals("")){
+			if (answer.trim().isEmpty() || URL.trim().isEmpty()) {
 				flag = false;
 				RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_picture.jsp");
-				dispatch.forward(request, response);
-				
-			}else{
+				dispatch.forward(request, response);	
+			} else {
 				double score = Double.parseDouble(scoreStr);
 				ArrayList<String> answerList = new ArrayList<String>();
 				String[] answerSplit = answer.split(",");
-			    for(int i=0;i<answerSplit.length;i++){
-			    	answerList.add(answerSplit[i]);
+			    for (int i=0; i<answerSplit.length; i++){
+			    	if (!answerSplit[i].trim().isEmpty())
+			    		answerList.add(answerSplit[i].trim());
 			    }
-			    
 			    PictureQuestion newQuestion = new PictureQuestion(quizID,position,content,answerList,score,URL);
 			    newQuestion.addQustionToDB();
 			}
 		    
 		}else if(questionType.equals("Multiple-Answer Questions")){
 			String scoreStr = request.getParameter("score");
+			if (scoreStr.trim().isEmpty())
+				scoreStr = "10.0";			
 			String content = request.getParameter("Field1");
 			String answer = request.getParameter("Field2");
 			String answerNumStr = request.getParameter("Field3");
 			String order = request.getParameter("Field4");
 			
-			if(scoreStr.equals("") || content.equals("") || order.equals("") || answer.equals("") || answerNumStr.equals("")){
+			if (content.trim().isEmpty() || order.trim().isEmpty() || answer.trim().isEmpty() || answerNumStr.trim().isEmpty()) {
 				flag = false;
 				RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_multiAnswer.jsp");
-				dispatch.forward(request, response);
-				
+				dispatch.forward(request, response);	
 			}else{
-				double score = Double.parseDouble(scoreStr);
-				int answerNum = Integer.parseInt(answerNumStr);
-				boolean isOrder;
-				if(order.equals("yes")){
-					isOrder = true;
-				}else{
-					isOrder = false;
-				}
-				ArrayList<String> answerList = new ArrayList<String>();
-				String[] answerSplit = answer.split(",");
-			    for(int i=0;i<answerSplit.length;i++){
-			    	answerList.add(answerSplit[i]);
+				try {
+					double score = Double.parseDouble(scoreStr);
+					int answerNum = Integer.parseInt(answerNumStr);
+					boolean isOrder;
+					if(order.equals("yes")){
+						isOrder = true;
+					}else{
+						isOrder = false;
+					}
+					ArrayList<String> answerList = new ArrayList<String>();
+					String[] answerSplit = answer.split(",");
+					for (int i=0; i<answerSplit.length; i++){
+				    	if (!answerSplit[i].trim().isEmpty())
+				    		answerList.add(answerSplit[i].trim());
+				    }
+					MultiAnswerQuestion newQuestion = new MultiAnswerQuestion(quizID,position,content,answerList,score,answerNum,isOrder);
+					newQuestion.addQustionToDB();
+			    } catch (NumberFormatException e) {
+					flag = false;
+					RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_multiAnswer.jsp");
+					dispatch.forward(request, response);
 			    }
-			    
-				MultiAnswerQuestion newQuestion = new MultiAnswerQuestion(quizID,position,content,answerList,score,answerNum,isOrder);
-				newQuestion.addQustionToDB();
 			}
 			
-		}else if(questionType.equals("Multiple Choice with Multiple Answers")){
+		} else if(questionType.equals("Multiple Choice with Multiple Answers")){
 			String scoreStr = request.getParameter("score");
+			if (scoreStr.trim().isEmpty())
+				scoreStr = "10.0";			
 			String content = request.getParameter("Field1");
 			String choice = request.getParameter("Field2");
 			String answer = request.getParameter("Field3");
 			
-			if(scoreStr.equals("") || content.equals("") || choice.equals("") || answer.equals("")){
+			if (content.trim().isEmpty() || choice.trim().isEmpty()) {
 				flag = false;
 				RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_multiChoiceAndAnswer.jsp");
-				dispatch.forward(request, response);
-				
-			}else{
-				double score = Double.parseDouble(scoreStr);
-				ArrayList<String> contentList = new ArrayList<String>();
-				contentList.add(content);
-				String[] contentSplit = choice.split(";");
-			    for(int i=0;i<contentSplit.length;i++){
-			    	contentList.add(contentSplit[i]);
+				dispatch.forward(request, response);				
+			} else {
+				try {
+					double score = Double.parseDouble(scoreStr);
+					ArrayList<String> contentList = new ArrayList<String>();
+					contentList.add(content);
+					String[] contentSplit = choice.split(";");
+				    for (int i=0;i<contentSplit.length;i++){
+				    	if (!contentSplit[i].trim().isEmpty())
+				    		contentList.add(contentSplit[i].trim());
+				    }
+					
+				    ArrayList<String> answerList = new ArrayList<String>();
+					String[] answerSplit = answer.split(",");
+					for (int i=0; i<answerSplit.length; i++) {
+				    	if (!answerSplit[i].trim().isEmpty()) {
+				    		int index = Integer.parseInt(answerSplit[i].trim());
+				    		if (index < 1 || index > contentList.size() - 1)
+				    			continue;
+				    		answerList.add(contentList.get(index));
+				    	}
+					}
+				    MultiChoiceMultiAnswerQuestion newQuestion = new MultiChoiceMultiAnswerQuestion(quizID,position,contentList,answerList,score);
+				    newQuestion.addQustionToDB();
+			    } catch (NumberFormatException e) {
+					flag = false;
+					RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_multiChoiceAndAnswer.jsp");
+					dispatch.forward(request, response);							    	
 			    }
-				
-			    ArrayList<String> answerList = new ArrayList<String>();
-				String[] answerSplit = answer.split(",");
-			    for(int i=0;i<answerSplit.length;i++){
-			    	answerList.add(answerSplit[i]);
-			    }
-			    
-			    MultiChoiceMultiAnswerQuestion newQuestion = new MultiChoiceMultiAnswerQuestion(quizID,position,contentList,answerList,score);
-			    newQuestion.addQustionToDB();
 			}
 		    
 		}else if(questionType.equals("Matching")){
 			String scoreStr = request.getParameter("score");
+			if (scoreStr.trim().isEmpty())
+				scoreStr = "10.0";			
 			String content = request.getParameter("Field1");
 			String choice = request.getParameter("Field2");
 			String answer = request.getParameter("Field3");
 			
-			if(scoreStr.equals("") || content.equals("") || choice.equals("") || answer.equals("")){
+			if (content.trim().isEmpty() || choice.trim().isEmpty() || answer.trim().isEmpty()) {
 				flag = false;
 				RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_matching.jsp");
-				dispatch.forward(request, response);
-				
-			}else{
-				double score = Double.parseDouble(scoreStr);
-				ArrayList<String> contentList = new ArrayList<String>();
-				contentList.add(content);
-				String[] contentSplit = choice.split(";");
-			    for(int i=0;i<contentSplit.length;i++){
-			    	contentList.add(contentSplit[i]);
-			    }
-				
-			    ArrayList<String> answerList = new ArrayList<String>();
-				String[] answerSplit = answer.split(",");
-			    for(int i=0;i<answerSplit.length;i++){
-			    	answerList.add(answerSplit[i]);
-			    }
-			    
-			    MatchingQuestion newQuestion = new MatchingQuestion(quizID,position,contentList,answerList,score);
-			    newQuestion.addQustionToDB();
+				dispatch.forward(request, response);			
+			} else {
+				try {
+					double score = Double.parseDouble(scoreStr);
+					ArrayList<String> contentList = new ArrayList<String>();
+					contentList.add(content);
+					String[] contentSplit = choice.split(";");
+				    for(int i=0;i<contentSplit.length;i++) {
+				    	if (!contentSplit[i].trim().isEmpty()) 
+				    		contentList.add(contentSplit[i].trim());
+				    }
+					
+				    ArrayList<String> answerList = new ArrayList<String>();
+					String[] answerSplit = answer.split(",");
+				    for(int i=0;i<answerSplit.length;i++) {
+				    	if (!answerSplit[i].trim().isEmpty()) {
+				    		int index = Integer.parseInt(answerSplit[i].trim());
+				    		int N = contentList.size() / 2;
+				    		if (index < 1 || index > N)
+				    			continue;
+				    		answerList.add(contentList.get(index + N));
+				    	}
+				    }
+				    
+				    MatchingQuestion newQuestion = new MatchingQuestion(quizID,position,contentList,answerList,score);
+				    newQuestion.addQustionToDB();
+				} catch (NumberFormatException e) {
+					flag = false;
+					RequestDispatcher dispatch = request.getRequestDispatcher("createQuiz/new_quiz_question_matching.jsp");
+					dispatch.forward(request, response);								
+				}
 			}
 		}
 		
